@@ -20,14 +20,19 @@
 
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function PaymentSuccess() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const paymentId = searchParams.get("payment_intent");
+
+
+  function PaymentSuccessContent() {
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const paymentId = searchParams.get("payment_intent");
+
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
@@ -78,3 +83,12 @@ export default function PaymentSuccess() {
         </p>
       </div>
       </div>)}
+
+export default function PaymentSuccess() {
+  return (
+    <Suspense fallback={<div className="text-center mt-10 text-gray-500">Loading...</div>}>
+      <PaymentSuccessContent />
+    </Suspense>
+  );
+
+}
