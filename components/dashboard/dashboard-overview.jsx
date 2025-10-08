@@ -442,9 +442,20 @@ export function DashboardOverview() {
                   {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
                 </td>
                 <td className="py-2 px-3 text-gray-700 break-words">
-                  {typeof value === "object"
-                    ? JSON.stringify(value, null, 2)
-                    : String(value)}
+                  {typeof value === "object" ? (
+                    JSON.stringify(value, null, 2)
+                  ) : typeof value === "string" && value.startsWith("http") ? (
+                    <a
+                      href={value}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline hover:text-blue-800"
+                    >
+                      {value.split("/").pop()}
+                    </a>
+                  ) : (
+                    String(value)
+                  )}
                 </td>
               </tr>
             ))}

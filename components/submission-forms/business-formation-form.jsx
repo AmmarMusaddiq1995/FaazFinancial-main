@@ -76,6 +76,62 @@ const US_STATES = [
   "Wyoming",
 ];
 
+const priceTableForLLC = {
+  Wyoming: { normal:380, express: 450},
+  Texas: { normal: 585, express: 655},
+  Alabama: { normal: 500, express: 570},
+  Alaska: { normal: 550, express: 620},
+  Arizona: { normal: 350, express: 420},
+  Arkansas: { normal: 350, express: 420},
+  California: { normal: 365, express: 435},
+  Colorado: { normal: 330, express: 400},
+  Connecticut: { normal: 415, express: 485},
+  Delaware: { normal: 500, express: 570},
+  Florida: { normal: 380, express: 450},
+  Georgia: { normal: 380, express: 450},
+  Hawaii: { normal: 350, express: 420},
+  Idaho: { normal: 385, express: 455},
+  Illinois: { normal: 450, express: 520},
+  Indiana: { normal: 400, express: 470},
+  Iowa: { normal: 350, express: 420},
+  Kansas: { normal: 450, express: 520},
+  Kentucky: { normal: 330, express: 400},
+  Louisiana: { normal: 400, express: 470},
+  Maine: { normal: 475, express: 545},
+  Maryland: { normal: 400, express: 470},
+  Massachusetts: { normal: 800, express: 870},
+  Michigan: { normal: 350, express: 420},
+  Minnesota: { normal: 450, express: 520},
+  Mississippi: { normal: 350, express: 420},
+  Missouri: { normal: 350, express: 420},
+  Montana: { normal: 330, express: 400},
+  Nebraska: { normal: 400, express: 470},
+  Nevada: { normal: 500, express: 570},
+  NewHampshire: { normal: 400, express: 470},
+  NewJersey: { normal: 430, express: 500},
+  NewMexico: { normal: 330, express: 400},
+  NewYork:{ normal: 500, express: 570},
+  NorthCarolina:{ normal: 430, express: 500},
+  NorthDakota:{ normal: 415, express: 485},
+  Ohio: { normal: 380, express: 450},
+  Oklahoma: { normal: 400, express: 470},
+  Oregon: { normal: 385, express: 455},
+  Pennsylvania: { normal: 430, express: 500},
+  RhodeIsland: { normal: 450, express: 520},
+  SouthCarolina: { normal: 400, express: 470},
+  SouthDakota: { normal: 450, express: 520},
+  Tennessee: { normal: 600, express: 670},
+  Texas: { normal: 585, express: 655},
+  Utah: { normal: 450, express: 520},
+  Vermont: { normal: 415, express: 485},
+  Virginia: { normal: 400, express: 470},
+  Washington: { normal: 500, express: 570},
+  WestVirginia: { normal: 450, express: 520},
+  Wisconsin: { normal: 430, express: 500},
+  Wyoming: { normal: 380, express: 450},
+  
+}
+
 export function BusinessFormationForm() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -121,6 +177,15 @@ export function BusinessFormationForm() {
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
+  const [price, setPrice] = useState(0);
+
+  useEffect(()=>{
+    if(formData.state && formData.packageType){
+      const statePrice = priceTableForLLC[formData.state] || priceTableForLLC.Default;
+      const selectedPrice = statePrice[formData.packageType];
+      setPrice(selectedPrice);
+    }
+  }, [formData.state, formData.packageType]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -166,6 +231,9 @@ export function BusinessFormationForm() {
       const submissionData = {
         ...formData,
         members,
+        price,
+        payment_status: "pending",
+        payment_id: "",
       };
 
       console.log(
@@ -179,6 +247,9 @@ export function BusinessFormationForm() {
           service_name: "LLC Formation",
           form_data: submissionData,
           status: "pending",
+          payment_status: "pending",
+          amount: price,
+          payment_id: "",
         },
       ]);
 
@@ -490,6 +561,33 @@ export function BusinessFormationForm() {
                 </SelectContent>
               </Select>
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="packageType">Select Package Type</Label>
+                <Select
+                  value={formData.packageType}
+                   onValueChange={(value) =>
+                   setFormData({ ...formData, packageType: value })
+                 }
+                 required
+                >
+               <SelectTrigger className="border-gray-300">
+                <SelectValue placeholder="Select package type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="normal">Normal</SelectItem>
+                 <SelectItem value="express">Express</SelectItem>
+              </SelectContent>
+              </Select>
+          </div>
+
+{price > 0 && (
+  <div className="mt-4 text-center">
+    <p className="text-lg font-semibold">
+      Estimated Service Price: <span className="text-blue-600">${price}</span>
+    </p>
+  </div>
+)}
 
             <div className="space-y-2">
               <Label htmlFor="zipCode">Zip Code</Label>

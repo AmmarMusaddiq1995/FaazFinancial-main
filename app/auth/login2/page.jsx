@@ -29,7 +29,7 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    debugger;
+    
     try {
       await login({ email, password });
       toast.success("Login successful!");

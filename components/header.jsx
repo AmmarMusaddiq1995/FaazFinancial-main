@@ -168,13 +168,13 @@ export function Header() {
                     COMPLIANCE SERVICES
                   </h3>
                   <ul className="space-y-1">
-                    <MenuItem href="/start-business?serviceType=ein">
+                    <MenuItem href="/services/ein-services">
                       EIN Services
                     </MenuItem>
-                    <MenuItem href="/services/compliance">
+                    <MenuItem href="/start-business?serviceType=boi">
                       BOI Filing Services
                     </MenuItem>
-                    <MenuItem href="/start-business?serviceType=itin">
+                    <MenuItem href="/services/itin-services">
                       ITIN Services
                     </MenuItem>
                     <MenuItem href="/services/ein">

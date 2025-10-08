@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
+import { Footer } from "../footer";
 
 export function ItinApplicationForm() {
   const [loading, setLoading] = useState(false);
@@ -54,7 +55,7 @@ export function ItinApplicationForm() {
   }, [user]);
 
   const handleFileUpload = async (e, type) => {
-    debugger;
+    
 
     let fileUrl = null;
     const fileName = `${userPersonalId}/${type}/${Date.now()}-${
@@ -117,6 +118,10 @@ export function ItinApplicationForm() {
           service_name: "ITIN Application",
           form_data: submissionData,
           status: "pending",
+          payment_status: "pending",
+          amount:"400"
+
+
         },
       ]);
 
@@ -324,6 +329,10 @@ export function ItinApplicationForm() {
           </form>
         </CardContent>
       </Card>
+<div className="mt-10">
+<Footer />
+</div>
+      
     </>
   );
 }

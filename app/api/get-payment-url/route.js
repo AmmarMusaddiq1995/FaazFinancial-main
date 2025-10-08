@@ -23,8 +23,13 @@ export async function POST(req) {
       },
     ],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`, // app k siblin folder bny hoga
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-cancel`,
+    payment_intent_data: {
+      metadata: {
+        form_id,
+      },
+    },
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/successfully-paid`, // app k siblin folder bny hoga
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-failed`,
   });
 
   return new Response(JSON.stringify({ url: session.url }), {

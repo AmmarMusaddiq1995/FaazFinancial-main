@@ -4,8 +4,10 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function FormSubmissionSuccessPage() {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [latestSubmission, setLatestSubmission] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ export default function FormSubmissionSuccessPage() {
     };
 
     fetchLatestSubmission();
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -51,21 +53,12 @@ export default function FormSubmissionSuccessPage() {
           🎉 Form Submitted Successfully!
         </h1>
 
-        {latestSubmission ? (
-          <div className="bg-gray-100 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-semibold mb-2">
-              Latest Submission Details
-            </h2>
-
-            <pre className="bg-white p-3 rounded border overflow-x-auto text-sm">
-              {JSON.stringify(latestSubmission.form_data, null, 2)}
-            </pre>
-          </div>
-        ) : (
-          <p>No submissions found for your account.</p>
-        )}
+        <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 cursor-pointer" onClick={() => router.push("/dashboard")}>Go to Dashboard</button>
       </div>
+      
+
       <Footer />
+      
     </div>
   );
 }

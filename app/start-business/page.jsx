@@ -41,7 +41,7 @@ import { Suspense } from "react";
               Let's get your business formation started with our simple process
             </p>
 
-            <select
+            {/* <select
               className="border p-2 rounded mb-6"
               value={selectedService}
               onChange={(e) => setSelectedService(e.target.value)}
@@ -53,15 +53,18 @@ import { Suspense } from "react";
               <option value="corp">Corporation Formation</option>
               <option value="ein">EIN Services</option>
               <option value="itin">ITIN Application</option>
-            </select>
+            </select> */}
           </div>
 
-          <div className="mt-6">
+          {/* <div className="mt-6">
             {selectedService ? (
               serviceComponents[selectedService]
             ) : (
               <BusinessFormationForm />
             )}
+          </div> */}
+          <div className="mt-10 mb-10">
+            <BusinessFormationForm />
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export function DashboardOverview2({ user, profile }) {
         // Step 2: Fetch forms for that user
         const { data, error } = await supabase
           .from("form_submissions")
-          .select("service_name, status, created_at, form_data , id")
+          .select("service_name, status, created_at, form_data , id , payment_status , amount , payment_id")
           .eq("user_id", cUser.id)
           .order("created_at", { ascending: false });
 
@@ -115,9 +115,20 @@ export function DashboardOverview2({ user, profile }) {
                   {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
                 </td>
                 <td className="py-2 px-3 text-gray-700 break-words">
-                  {typeof value === "object"
-                    ? JSON.stringify(value, null, 2)
-                    : String(value)}
+                  {typeof value === "object" ? (
+                    JSON.stringify(value, null, 2)
+                  ) : typeof value === "string" && value.startsWith("http") ? (
+                    <a
+                      href={value}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline hover:text-blue-800"
+                    >
+                      {value.split("/").pop()}
+                    </a>
+                  ) : (
+                    String(value)
+                  )}
                 </td>
               </tr>
             ))}
@@ -132,7 +143,7 @@ export function DashboardOverview2({ user, profile }) {
     try {
       const response = await axios.post("/api/get-payment-url", {
         form_id: form.id,
-        amount: 25,
+        amount: form.amount,
       });
       console.log(response);
       window.location.href = response.data.url;
@@ -142,7 +153,7 @@ export function DashboardOverview2({ user, profile }) {
   };
 
   return (
-    <div className="p-6 space-y-6">
+     <div className="p-6 space-y-6">
       {/* Welcome Section */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">
@@ -177,6 +188,14 @@ export function DashboardOverview2({ user, profile }) {
                   Submitted on: {new Date(form.created_at).toLocaleString()}
                 </p>
 
+               
+
+                {form.payment_status === "succeeded" && (
+                  <p className="text-sm text-green-500">
+                    Payment Status: Paid
+                  </p>
+                )}
+
                 {/* View Details Modal */}
                 <Dialog>
                   <DialogTrigger asChild>
@@ -184,13 +203,15 @@ export function DashboardOverview2({ user, profile }) {
                       View Details
                     </Button>
                   </DialogTrigger>
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => handlePay(form)}
-                  >
-                    Pay
-                  </Button>
+                  {form.payment_status === "pending" && (
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => handlePay(form)}
+                    >
+                      Pay
+                    </Button>
+                  )}
                   <DialogContent className="max-w-3xl w-full max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle>{form.service_name}</DialogTitle>

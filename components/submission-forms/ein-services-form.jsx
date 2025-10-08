@@ -412,6 +412,10 @@ export function EinServicesForm() {
               />
             </div>
           </div>
+
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? "Submitting..." : "Start Business Formation"}
+          </Button>
         </form>
       </CardContent>
     </Card>
