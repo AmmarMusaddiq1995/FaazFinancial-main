@@ -31,6 +31,10 @@ import {
 } from "@/components/ui/select";
 
 export function EinServicesForm() {
+
+  
+
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     CompanyName: "",
@@ -74,6 +78,20 @@ export function EinServicesForm() {
     fetchUserData();
   }, [user]);
 
+
+  const [price, setPrice] = useState(0);
+  useEffect(()=>{
+    if(formData.packageType === "normal"){
+      const selectedPrice = 40;
+      setPrice(selectedPrice);
+    } else if(formData.packageType === "express"){
+      const selectedPrice = 75;
+      setPrice(selectedPrice);
+    }
+  }, [formData.packageType]);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -94,6 +112,9 @@ export function EinServicesForm() {
 
       const submissionData = {
         ...formData,
+        price,
+        payment_status: "pending",
+        payment_id: "",
       };
 
       console.log(
@@ -107,6 +128,9 @@ export function EinServicesForm() {
           service_name: "EIN Services",
           form_data: submissionData,
           status: "pending",
+          payment_status: "pending",
+          amount: price,
+          payment_id: "",
         },
       ]);
 
@@ -411,6 +435,27 @@ export function EinServicesForm() {
                 required
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="packageType">Select Package Type</Label>
+                <Select
+                  value={formData.packageType}
+                   onValueChange={(value) =>
+                   setFormData({ ...formData, packageType: value })
+                 }
+                 required
+                >
+               <SelectTrigger className="border-gray-300">
+                <SelectValue placeholder="Select package type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="normal">Normal</SelectItem>
+                 <SelectItem value="express">Express</SelectItem>
+              </SelectContent>
+              </Select>
+          </div>
+
+          
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>

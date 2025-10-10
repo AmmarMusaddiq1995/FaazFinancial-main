@@ -46,19 +46,23 @@ export default function FormSubmissionSuccessPage() {
   }, [user]);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="p-8 max-w-3xl mx-auto">
+  
+      <main className="flex-grow p-8 max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold mb-6 text-green-600">
           🎉 Form Submitted Successfully!
         </h1>
-
-        <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 cursor-pointer" onClick={() => router.push("/dashboard")}>Go to Dashboard</button>
-      </div>
-      
-
+  
+        <button
+          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 cursor-pointer"
+          onClick={() => router.push("/dashboard")}
+        >
+          Go to Dashboard
+        </button>
+      </main>
+  
       <Footer />
-      
     </div>
   );
 }

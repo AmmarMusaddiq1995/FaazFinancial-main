@@ -267,7 +267,7 @@ export function ItinApplicationForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="file">Upload your passport</Label>
+                <Label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">Upload your passport</Label>
                 <input
                   type="file"
                   id="passport"
@@ -276,7 +276,7 @@ export function ItinApplicationForm() {
                   }}
                   required
                   placeholder="Scan of your passport copy"
-                  className="border-gray-300"
+                  className="border-gray-300 cursor-pointer"
                 />
               </div>
 
@@ -290,7 +290,7 @@ export function ItinApplicationForm() {
                   }}
                   optional
                   placeholder="Only if you have a USA visa"
-                  className="border-gray-300"
+                  className="border-gray-300 cursor-pointer"
                 />
               </div>
 
@@ -303,7 +303,7 @@ export function ItinApplicationForm() {
                     handleFileUpload(e, "einLetter");
                   }}
                   required
-                  className="border-gray-300"
+                  className="border-gray-300 cursor-pointer"
                 />
               </div>
 
@@ -318,7 +318,7 @@ export function ItinApplicationForm() {
                     handleFileUpload(e, "certificateOfFormation");
                   }}
                   required
-                  className="border-gray-300"
+                  className="border-gray-300 cursor-pointer"
                 />
               </div>
             </div>

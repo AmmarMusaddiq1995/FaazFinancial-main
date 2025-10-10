@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 // import { Button } from "@/components/ui/button";
-import { Building2, FileText, AlertCircle, Plus } from "lucide-react";
+import { Building2, FileText, AlertCircle, Plus, Download } from "lucide-react";
 import Link from "next/link";
 import { useAuthContext } from "@/context/AppContext";
 import { supabase } from "@/lib/supabaseClient";
@@ -44,7 +44,7 @@ export function DashboardOverview2({ user, profile }) {
         // Step 2: Fetch forms for that user
         const { data, error } = await supabase
           .from("form_submissions")
-          .select("service_name, status, created_at, form_data , id , payment_status , amount , payment_id")
+          .select("service_name, status, created_at, form_data , id , payment_status , amount , payment_id, admin_uploaded_file, admin_uploaded_at")
           .eq("user_id", cUser.id)
           .order("created_at", { ascending: false });
 
@@ -72,11 +72,11 @@ export function DashboardOverview2({ user, profile }) {
   // Helper for badge color
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
-      case "approved":
+      case "completed":
         return "bg-green-100 text-green-700 border-green-300";
-      case "pending":
+      case "in-progress":
         return "bg-yellow-100 text-yellow-700 border-yellow-300";
-      case "rejected":
+      case "pending":
         return "bg-red-100 text-red-700 border-red-300";
       default:
         return "bg-gray-100 text-gray-700 border-gray-300";
@@ -147,6 +147,10 @@ export function DashboardOverview2({ user, profile }) {
       });
       console.log(response);
       window.location.href = response.data.url;
+      const updatedStatus = await supabase.from("form_submissions").update({
+        status: "in-progress",
+      }).eq("id", form.id);
+      console.log(updatedStatus);
     } catch (error) {
       console.error(error);
     }
@@ -178,11 +182,21 @@ export function DashboardOverview2({ user, profile }) {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Badge
-                  className={`${getStatusColor(form.status)} border px-3 py-1`}
-                >
-                  {form.status || "Pending"}
-                </Badge>
+                {(() => {
+                  const displayStatus =
+                    (form.status || "").toLowerCase() === "completed"
+                      ? "completed"
+                      : form.payment_status === "succeeded"
+                      ? "in-progress"
+                      : "pending";
+                  return (
+                    <Badge
+                      className={`${getStatusColor(displayStatus)} border px-3 py-1`}
+                    >
+                      {displayStatus.replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </Badge>
+                  );
+                })()}
 
                 <p className="text-sm text-gray-500">
                   Submitted on: {new Date(form.created_at).toLocaleString()}
@@ -224,6 +238,41 @@ export function DashboardOverview2({ user, profile }) {
                     <div className="mt-4">
                       {renderFormDataTable(form.form_data)}
                     </div>
+
+                    {/* Admin Uploaded File Section */}
+                    {form.admin_uploaded_file && (
+                      <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
+                          <FileText className="mr-2 h-5 w-5" />
+                          Your Document is Ready!
+                        </h3>
+                        
+                        <div className="p-3 bg-white border border-green-200 rounded-md">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <FileText className="mr-2 h-5 w-5 text-green-600" />
+                              <div>
+                                <p className="text-sm font-medium text-gray-800">
+                                  Document Available
+                                </p>
+                                <p className="text-xs text-gray-500">
+                                  Uploaded on: {new Date(form.admin_uploaded_at).toLocaleString()}
+                                </p>
+                              </div>
+                            </div>
+                            <a
+                              href={form.admin_uploaded_file}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+                            >
+                              <Download className="mr-1 h-3 w-3" />
+                              Download
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </DialogContent>
                 </Dialog>
               </CardContent>
@@ -272,15 +321,7 @@ export function DashboardOverview2({ user, profile }) {
                   <span>Get Support</span>
                 </Button>
               </Link>
-              {/* <Link href="/dashboard/settings">
-                <Button
-                  variant="outline"
-                  className="w-full h-auto p-4 flex flex-col items-center space-y-2 bg-transparent"
-                >
-                  <Building2 className="h-6 w-6" />
-                  <span>Account Settings</span>
-                </Button>
-              </Link> */}
+             
             </div>
           </CardContent>
         </Card>

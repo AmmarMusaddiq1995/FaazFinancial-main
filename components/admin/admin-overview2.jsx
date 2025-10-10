@@ -583,7 +583,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { Clock, CheckCircle, Loader2 } from "lucide-react";
+import { Clock, CheckCircle, Loader2, Upload, FileText, Download } from "lucide-react";
 import LoadingSpinner from "../LoadingSpinner";
 
 export function AdminOverview2() {
@@ -593,6 +593,8 @@ export function AdminOverview2() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState({});
 
   const [counts, setCounts] = useState({
     pending: 0,
@@ -604,8 +606,26 @@ export function AdminOverview2() {
     try {
       const { data, error } = await supabase
         .from("form_submissions")
-        .select("*")
+        .select(`
+          id,
+          created_at,
+          user_id,
+          service_name,
+          form_data,
+          status,
+          payment_status,
+          amount,
+          admin_uploaded_file,
+          admin_uploaded_at,
+          user_data (
+          first_name,
+          last_name,
+          email
+          )
+        `)
         .order("created_at", { ascending: false });
+
+        console.log("data in admin overview 2:", data);
 
       if (error) throw error;
 
@@ -624,6 +644,70 @@ export function AdminOverview2() {
     const inProgress = data.filter((s) => s.status === "in-progress").length;
     const completed = data.filter((s) => s.status === "completed").length;
     setCounts({ pending, inProgress, completed });
+  };
+
+  const handleFileUpload = async (formId, userId, file) => {
+    if (!file) return;
+    
+    setUploadingFile(true);
+    try {
+      // Create a unique filename with form_id and timestamp
+      const fileName = `admin-uploads/${formId}/${Date.now()}-${file.name}`;
+      
+      // Upload file to Supabase storage
+      const { error: uploadError } = await supabase.storage
+        .from("uploads")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        console.error("Error uploading file:", uploadError);
+        alert("Failed to upload file. Please try again.");
+        return;
+      }
+
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage
+        .from("uploads")
+        .getPublicUrl(fileName);
+
+      const fileUrl = publicUrlData.publicUrl;
+
+      // Update form_submissions table with the uploaded file URL
+      const { error: updateError } = await supabase
+        .from("form_submissions")
+        .update({
+          admin_uploaded_file: fileUrl,
+          admin_uploaded_at: new Date().toISOString()
+        })
+        .eq("id", formId);
+
+      if (updateError) {
+        console.error("Error updating form submission:", updateError);
+        alert("File uploaded but failed to update record. Please refresh and try again.");
+        return;
+      }
+
+      // Update local state
+      setUploadedFiles(prev => ({
+        ...prev,
+        [formId]: {
+          url: fileUrl,
+          name: file.name,
+          uploadedAt: new Date().toISOString()
+        }
+      }));
+
+      alert("File uploaded successfully!");
+      
+      // Refresh the data
+      fetchFormSubmissions();
+      
+    } catch (error) {
+      console.error("Error in file upload:", error);
+      alert("An error occurred while uploading the file.");
+    } finally {
+      setUploadingFile(false);
+    }
   };
 
   useEffect(() => {
@@ -658,6 +742,8 @@ export function AdminOverview2() {
         return "bg-yellow-500 text-white";
       case "pending":
         return "bg-gray-400 text-white";
+      case "succeeded":
+        return "bg-green-500 text-white";
       default:
         return "bg-gray-300 text-gray-800";
     }
@@ -673,6 +759,20 @@ export function AdminOverview2() {
         No form submissions found.
       </p>
     );
+  }
+
+
+  const handleMarkStatusAsCompleted = async (id) => {
+    try {
+      const { data, error } = await supabase
+        .from("form_submissions")
+        .update({ status: "completed" })
+        .eq("id", id);
+
+        console.log("data in handleMarkStatusAsCompleted:", data);
+    } catch (error) {
+      console.error("Error marking status as completed:", error);
+    }
   }
 
   return (
@@ -758,11 +858,15 @@ export function AdminOverview2() {
           <table className="min-w-full text-sm text-left border-collapse">
             <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
               <tr>
-                <th className="px-4 py-3 border-b">ID</th>
+                <th className="px-4 py-3 border-b">Form ID</th>
+                <th className="px-4 py-3 border-b">User Name</th>
+                <th className="px-4 py-3 border-b">User Email</th>
                 <th className="px-4 py-3 border-b">Created At</th>
                 <th className="px-4 py-3 border-b">User ID</th>
                 <th className="px-4 py-3 border-b">Service Name</th>
-                <th className="px-4 py-3 border-b">Status</th>
+                <th className="px-4 py-3 border-b">Form Status</th>
+                <th className="px-4 py-3 border-b">Payment Status</th>
+                <th className="px-4 py-3 border-b">Amount</th>
                 <th className="px-4 py-3 border-b text-center">Actions</th>
               </tr>
             </thead>
@@ -772,15 +876,54 @@ export function AdminOverview2() {
                   key={submission.id}
                   className="border-b hover:bg-gray-50 transition-all"
                 >
-                  <td className="px-4 py-3 font-medium text-gray-800">
-                    {submission.id}
+                  <td className="px-4 py-3 font-medium text-gray-800 relative group cursor-pointer">
+                     {submission.id ? (
+                     <>
+                      <span>
+                         {`${submission.id.slice(0, 3)}***${submission.id.slice(-3)}`}
+                       </span>
+                      <span
+                        onClick={() => navigator.clipboard.writeText(submission.id)}
+                         className="absolute bottom-full mb-1 left-3/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap"
+                       >
+                         {submission.id}
+                      <span className="ml-2 text-gray-300">(Click to copy)</span>
+                       </span>
+                     </>
+                     ) : (
+                     "N/A"
+                       )}
                   </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {submission.user_data.first_name} {submission.user_data.last_name}
+                  </td>
+
+                  <td className="px-4 py-3 text-gray-600">
+                    {submission.user_data.email} 
+                  </td>
+
                   <td className="px-4 py-3 text-gray-600">
                     {new Date(submission.created_at).toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-gray-600">
-                    {submission.user_id}
+                  <td className="px-4 py-3 font-medium text-gray-800 relative group cursor-pointer">
+                     {submission.user_id ? (
+                     <>
+                      <span>
+                         {`${submission.user_id.slice(0, 3)}***${submission.user_id.slice(-3)}`}
+                       </span>
+                      <span
+                        onClick={() => navigator.clipboard.writeText(submission.user_id)}
+                         className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap"
+                       >
+                         {submission.user_id}
+                      <span className="ml-2 text-gray-300">(Click to copy)</span>
+                       </span>
+                     </>
+                     ) : (
+                     "N/A"
+                       )}
                   </td>
+
                   <td className="px-4 py-3 font-medium text-gray-700 capitalize">
                     {submission.service_name}
                   </td>
@@ -789,6 +932,16 @@ export function AdminOverview2() {
                       {submission.status}
                     </Badge>
                   </td>
+                  <td className="px-4 py-3">
+                  <Badge className={getStatusColor(submission.payment_status)}>
+                      {submission.payment_status}
+                    </Badge>
+                   
+                  </td>
+                  <td className="px-4 py-3">
+                    {submission.amount}
+                  </td>
+                 
                   <td className="px-4 py-3 text-center">
                     <Button
                       size="sm"
@@ -821,7 +974,85 @@ export function AdminOverview2() {
               </DialogDescription>
             </DialogHeader>
 
-            <div className="mt-4 overflow-y-auto max-h-[60vh] bg-gray-50 p-4 rounded-md">
+            {/* File Upload Section for Succeeded Payments */}
+            {selectedSubmission.payment_status === "succeeded" && (
+              <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+                  <Upload className="mr-2 h-5 w-5" />
+                  Admin File Upload
+                </h3>
+                
+                {/* File Upload Input */}
+                <div className="mb-4">
+                  <input
+                    type="file"
+                    id={`file-upload-${selectedSubmission.id}`}
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        handleFileUpload(selectedSubmission.id, selectedSubmission.user_id, file);
+                      }
+                    }}
+                    disabled={uploadingFile}
+                  />
+                  <label
+                    htmlFor={`file-upload-${selectedSubmission.id}`}
+                    className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${
+                      uploadingFile 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
+                    } transition-colors`}
+                  >
+                    {uploadingFile ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Upload File
+                      </>
+                    )}
+
+                  </label>
+
+                 
+                </div>
+                <button onClick={() => handleMarkStatusAsCompleted(selectedSubmission.id)} className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded-md text-white px-4 py-2 mb-4">Mark status as completed</button>
+
+                {/* Display uploaded file if exists */}
+                {selectedSubmission.admin_uploaded_file && (
+                  <div className="p-3 bg-white border border-green-200 rounded-md">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <FileText className="mr-2 h-5 w-5 text-green-600" />
+                        <div>
+                          <p className="text-sm font-medium text-gray-800">
+                            Uploaded File
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Uploaded on: {new Date(selectedSubmission.admin_uploaded_at).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={selectedSubmission.admin_uploaded_file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 transition-colors"
+                      >
+                        <Download className="mr-1 h-3 w-3" />
+                        Download
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="mt-4 overflow-y-auto max-h-[40vh] bg-gray-50 p-4 rounded-md">
               <table className="w-full text-sm border border-gray-200 rounded-lg">
                 <tbody>
                   {selectedSubmission.form_data &&

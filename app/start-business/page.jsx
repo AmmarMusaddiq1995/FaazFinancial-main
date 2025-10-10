@@ -41,28 +41,10 @@ import { Suspense } from "react";
               Let's get your business formation started with our simple process
             </p>
 
-            {/* <select
-              className="border p-2 rounded mb-6"
-              value={selectedService}
-              onChange={(e) => setSelectedService(e.target.value)}
-            >
-              <option value="" disabled>
-                Select a service
-              </option>
-              <option value="llc">LLC Formation</option>
-              <option value="corp">Corporation Formation</option>
-              <option value="ein">EIN Services</option>
-              <option value="itin">ITIN Application</option>
-            </select> */}
+           
           </div>
 
-          {/* <div className="mt-6">
-            {selectedService ? (
-              serviceComponents[selectedService]
-            ) : (
-              <BusinessFormationForm />
-            )}
-          </div> */}
+         
           <div className="mt-10 mb-10">
             <BusinessFormationForm />
           </div>

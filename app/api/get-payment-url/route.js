@@ -24,11 +24,9 @@ export async function POST(req) {
     ],
     mode: "payment",
     payment_intent_data: {
-      metadata: {
-        form_id,
-      },
+      metadata: { form_id},
     },
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/successfully-paid`, // app k siblin folder bny hoga
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/successfully-paid?amount=${amount}`, // app k siblin folder bny hoga
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-failed`,
   });
 
