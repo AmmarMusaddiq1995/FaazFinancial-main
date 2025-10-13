@@ -171,19 +171,19 @@ export function Header() {
                     <MenuItem href="/services/ein-services">
                       EIN Services
                     </MenuItem>
-                    <MenuItem href="/start-business?serviceType=boi">
+                    <MenuItem href="/services/boi-filing-services">
                       BOI Filing Services
                     </MenuItem>
                     <MenuItem href="/services/itin-services">
                       ITIN Services
                     </MenuItem>
-                    <MenuItem href="/services/ein">
+                    <MenuItem href="/services/sales-and-usetax-registration">
                       Sales & Use Tax Registration
                     </MenuItem>
                     <MenuItem href="/services/business-license">
                       Annual Company State Filing
                     </MenuItem>
-                    <MenuItem href="/services/templates">
+                    <MenuItem href="/services/ein-closing-services">
                       EIN Closing Services
                     </MenuItem>
                     <MenuItem href="/services/registered-agent">
@@ -477,7 +477,7 @@ export function Header() {
                         LLC Formation
                       </Link>
                       <Link
-                        href="/services/corporation-formation"
+                        href="/services/corp-formation-2"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Corp. Formation
@@ -533,13 +533,13 @@ export function Header() {
                         Annual Company State Filing
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/services/ein-closing-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         EIN Closing Services
                       </Link>
                       <Link
-                        href="/services/registered-agent"
+                        href="/services/ein-closing-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Registered Agent Services

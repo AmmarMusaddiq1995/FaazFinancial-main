@@ -21,7 +21,7 @@ export default function CorporationFormationPage() {
               Incorporate your business for maximum growth potential, investor
               appeal, and tax advantages.
             </p>
-            <Link href="/start-business">
+            <Link href="/services/corp-formation-2">
               <Button size="lg" className="text-lg px-8 py-6">
                 Start Your Corporation
               </Button>

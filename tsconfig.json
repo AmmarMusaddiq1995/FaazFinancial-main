@@ -34,11 +34,11 @@
     "app/admin/page.jsx",
     "components/admin/admin-layout.jsx",
     "components/dashboard/dashboard-layout.jsx",
-    "components/submission-forms/business-formation-form.jsx",
+    "components/submission-forms/llc-formation-form.jsx",
     "app/api/business-formation/route.js",
     "app/start-business/page.jsx",
     "components/dashboard/dashboard-overview.jsx",
     "components/admin/admin-overview.jsx"
-, "app/layout.jsx", "app/page.jsx"  ],
+, "app/layout.jsx", "app/page.jsx", "app/dashboard/documents/page.jsx"  ],
   "exclude": ["node_modules"]
 }

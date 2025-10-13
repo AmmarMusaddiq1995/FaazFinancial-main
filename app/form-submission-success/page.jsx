@@ -1,68 +1,63 @@
+
+
 "use client";
 
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { supabase } from "@/lib/supabaseClient";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function FormSubmissionSuccessPage() {
-  const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [latestSubmission, setLatestSubmission] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchLatestSubmission = async () => {
-      setLoading(true);
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (userError) {
-        console.error("Error fetching user:", userError);
-        setLoading(false);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("form_submissions")
-        .select("*")
-        .eq("user_id", user?.id)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (error) {
-        console.error("Error fetching latest submission:", error);
-      } else {
-        setLatestSubmission(data);
-      }
-      setLoading(false);
-    };
-
-    fetchLatestSubmission();
-  }, [user]);
+export default function FormSubmissionSuccess() {
+ 
+const router = useRouter();
 
   return (
+
     <div className="flex flex-col min-h-screen">
       <Header />
-  
-      <main className="flex-grow p-8 max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-green-600">
-          🎉 Form Submitted Successfully!
+
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl border border-green-100 text-center"
+      >
+        <div className="flex justify-center mb-6">
+          <div className="bg-green-100 p-4 rounded-full">
+            <CheckCircle2 className="h-16 w-16 text-green-600" />
+          </div>
+        </div>
+
+        <h1 className="text-3xl font-bold text-green-700 mb-3">
+          Form Submitted Successfully 🎉
         </h1>
-  
-        <button
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 cursor-pointer"
+        <p className="text-gray-600 mb-6">
+          Thank you for providing your details. 
+        </p>
+
+        <Button
           onClick={() => router.push("/dashboard")}
+          className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg shadow-md hover:shadow-lg transition-all"
         >
-          Go to Dashboard
-        </button>
-      </main>
-  
-      <Footer />
+          Proceed To Payment
+        </Button>
+
+        <p className="text-sm text-gray-500 mt-6">
+          Need help?{" "}
+          <a href="/contact" className="text-green-600 hover:underline">
+            Contact Support
+          </a>
+        </p>
+      </motion.div>
+    </div>
+    <Footer />
     </div>
   );
 }
+

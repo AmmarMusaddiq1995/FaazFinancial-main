@@ -91,6 +91,76 @@ export function DashboardOverview2({ user, profile }) {
       );
     }
 
+    const renderValueCell = (value) => {
+      if (Array.isArray(value)) {
+        // If array of primitives
+        if (value.every((v) => typeof v !== "object" || v === null)) {
+          return <span>{value.join(", ")}</span>;
+        }
+        // Array of objects (e.g., Members)
+        const allKeys = Array.from(
+          value.reduce((set, item) => {
+            if (item && typeof item === "object") {
+              Object.keys(item).forEach((k) => set.add(k));
+            }
+            return set;
+          }, new Set())
+        );
+        if (allKeys.length === 0) {
+          return <span>-</span>;
+        }
+        return (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-xs border border-gray-200 rounded">
+              <thead className="bg-gray-50">
+                <tr>
+                  {allKeys.map((k) => (
+                    <th key={k} className="px-2 py-1 text-left font-medium text-gray-700 border-b capitalize">
+                      {k.replace(/_/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2")}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {value.map((row, idx) => (
+                  <tr key={idx} className="border-b last:border-0">
+                    {allKeys.map((k) => (
+                      <td key={k} className="px-2 py-1 text-gray-700 align-top break-words">
+                        {row && typeof row[k] === "object"
+                          ? JSON.stringify(row[k])
+                          : row && row[k] !== undefined && row[k] !== null
+                          ? String(row[k])
+                          : "-"}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+
+      if (typeof value === "object" && value !== null) {
+        return <pre className="text-xs bg-gray-50 rounded p-2 overflow-x-auto">{JSON.stringify(value, null, 2)}</pre>;
+      }
+
+      if (typeof value === "string" && value.startsWith("http")) {
+        return (
+          <a
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            {value.split("/").pop()}
+          </a>
+        );
+      }
+
+      return <span>{String(value)}</span>;
+    };
+
     return (
       <div className="overflow-x-auto">
         <table className="w-full text-sm border border-gray-200 rounded-lg">
@@ -115,20 +185,7 @@ export function DashboardOverview2({ user, profile }) {
                   {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
                 </td>
                 <td className="py-2 px-3 text-gray-700 break-words">
-                  {typeof value === "object" ? (
-                    JSON.stringify(value, null, 2)
-                  ) : typeof value === "string" && value.startsWith("http") ? (
-                    <a
-                      href={value}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline hover:text-blue-800"
-                    >
-                      {value.split("/").pop()}
-                    </a>
-                  ) : (
-                    String(value)
-                  )}
+                  {renderValueCell(value)}
                 </td>
               </tr>
             ))}

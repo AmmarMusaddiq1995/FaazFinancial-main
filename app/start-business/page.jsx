@@ -1,7 +1,7 @@
 "use client";
 
-import { BusinessFormationForm } from "@/components/submission-forms/business-formation-form";
-import { CorporationFormationForm } from "@/components/submission-forms/corporation-formation";
+import { BusinessFormationForm } from "@/components/submission-forms/llc-formation-form";
+import { CorporationFormationForm } from "@/components/submission-forms/c-corporation-formation";
 import { EinServicesForm } from "@/components/submission-forms/ein-services-form";
 import { ItinApplicationForm } from "@/components/submission-forms/itin-application-form";
 import { Header } from "@/components/header";
