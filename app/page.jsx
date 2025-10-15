@@ -13,6 +13,7 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroSection />
+        <p>Testing 123</p>
         <ServicesSection />
         <PricingSection />
         <CTASection />
