@@ -12,8 +12,7 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <HeroSection />
-        <p>Testing 123</p>
+        <HeroSection />      
         <ServicesSection />
         <PricingSection />
         <CTASection />
