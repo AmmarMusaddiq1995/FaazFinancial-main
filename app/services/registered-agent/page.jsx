@@ -1,19 +1,24 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Check, MapPin, Clock, Shield } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Check, MapPin, Clock, Shield } from "lucide-react";
+import Link from "next/link";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 export default function RegisteredAgentPage() {
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Registered Agent Services</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
+            Registered Agent Services
+          </h1>
           <p className="text-xl text-muted-foreground mb-8 text-pretty">
             Professional registered agent service to keep your business compliant and your personal address private.
           </p>
-          <Link href="/start-business">
+          <Link href="/submission-forms/registered-agent-services-form">
             <Button size="lg" className="text-lg px-8 py-6">
               Get Registered Agent
             </Button>
@@ -24,7 +29,9 @@ export default function RegisteredAgentPage() {
       {/* Features Section */}
       <section className="py-16 px-4 bg-muted/50">
         <div className="container max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Why You Need a Registered Agent</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Why You Need a Registered Agent
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card>
               <CardHeader>
@@ -32,7 +39,9 @@ export default function RegisteredAgentPage() {
                 <CardTitle>Privacy Protection</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">Keep your personal address private from public records.</p>
+                <p className="text-muted-foreground">
+                  Keep your personal address private from public records.
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -41,7 +50,9 @@ export default function RegisteredAgentPage() {
                 <CardTitle>Business Hours</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">Available during business hours to receive important documents.</p>
+                <p className="text-muted-foreground">
+                  Available during business hours to receive important documents.
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -50,7 +61,9 @@ export default function RegisteredAgentPage() {
                 <CardTitle>State Compliance</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">Meet state requirements for registered agent services.</p>
+                <p className="text-muted-foreground">
+                  Meet state requirements for registered agent services.
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -59,12 +72,15 @@ export default function RegisteredAgentPage() {
                 <CardTitle>Document Handling</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">Professional handling of legal and tax documents.</p>
+                <p className="text-muted-foreground">
+                  Professional handling of legal and tax documents.
+                </p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
+      <Footer />
     </div>
-  )
+  );
 }

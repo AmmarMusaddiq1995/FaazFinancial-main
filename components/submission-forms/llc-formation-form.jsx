@@ -247,59 +247,7 @@ export function BusinessFormationForm() {
     fetchUserData();
   }, [user]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-
-  //   try {
-  //     const {
-  //       data: { user },
-  //       error: userError,
-  //     } = await supabase.auth.getUser();
-
-  //     console.log("userPersonalId :", userPersonalId);
-  //     console.log("user :", user);
-
-  //     if (!user || userError) {
-  //       alert("Please login to submit business formation", userError);
-  //       return;
-  //     }
-
-  //     const submissionData = {
-  //       ...formData,
-  //       members,
-  //       price,
-  //       payment_status: "pending",
-  //       payment_id: "",
-  //     };
-
-  //     console.log(
-  //       "submissionData inserting into form_submissions",
-  //       submissionData
-  //     );
-
-  //     const { error } = await supabase.from("form_submissions").insert([
-  //       {
-  //         user_id: userPersonalId,
-  //         service_name: "LLC Formation",
-  //         form_data: submissionData,
-  //         status: "pending",
-  //         payment_status: "pending",
-  //         amount: price,
-  //         payment_id: "",
-  //       },
-  //     ]);
-
-  //     console.log("form_submissions inserted successfully");
-
-  //     router.push("/form-submission-success");
-  //   } catch (err) {
-  //     console.error("Error submitting form:", err);
-  //     alert("Something went wrong.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -696,9 +644,11 @@ export function BusinessFormationForm() {
                                 <li key={f}>{f}</li>
                               ))}
                             </ul>
+                            <ul className="list-disc ml-4 space-y-1">
                             {formData.state && (
                               <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForLLC[formData.state]?.normal ?? "—"}</p>
                             )}
+                            </ul>
                           </div>
                         </TooltipContent>
                       </Tooltip>

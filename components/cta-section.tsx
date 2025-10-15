@@ -11,7 +11,7 @@ export function CTASection() {
   };
   return (
     <section className="py-20 bg-slate-900 text-white">
-      <div className="container px-4 text-center">
+      <div className="container px-4 text-center mx-auto">
         <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-balance">
           LLC Formation in 3 Simple Steps
         </h2>

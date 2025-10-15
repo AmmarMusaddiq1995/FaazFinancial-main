@@ -585,6 +585,7 @@ import {
 } from "@/components/ui/select";
 import { Clock, CheckCircle, Loader2, Upload, FileText, Download } from "lucide-react";
 import LoadingSpinner from "../LoadingSpinner";
+import { toast } from "react-hot-toast";
 
 export function AdminOverview2() {
   const [formSubmissionsData, setFormSubmissionsData] = useState([]);
@@ -595,6 +596,8 @@ export function AdminOverview2() {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [uploadingFile, setUploadingFile] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState({});
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [counts, setCounts] = useState({
     pending: 0,
@@ -646,68 +649,108 @@ export function AdminOverview2() {
     setCounts({ pending, inProgress, completed });
   };
 
-  const handleFileUpload = async (formId, userId, file) => {
-    if (!file) return;
+  const handleFileUpload = async (formId, userId, files) => {
+    if (!files || files.length === 0) return;
     
     setUploadingFile(true);
     try {
-      // Create a unique filename with form_id and timestamp
-      const fileName = `admin-uploads/${formId}/${Date.now()}-${file.name}`;
+      const uploadedFileUrls = [];
       
-      // Upload file to Supabase storage
-      const { error: uploadError } = await supabase.storage
-        .from("uploads")
-        .upload(fileName, file);
+      // Upload each file
+      for (const file of files) {
+        // Create a unique filename with form_id and timestamp
+        const fileName = `admin-uploads/${formId}/${Date.now()}-${file.name}`;
+        
+        // Upload file to Supabase storage
+        const { error: uploadError } = await supabase.storage
+          .from("uploads")
+          .upload(fileName, file);
 
-      if (uploadError) {
-        console.error("Error uploading file:", uploadError);
-        alert("Failed to upload file. Please try again.");
+        if (uploadError) {
+          console.error("Error uploading file:", uploadError);
+          alert(`Failed to upload ${file.name}. Please try again.`);
+          continue;
+        }
+
+        // Get public URL
+        const { data: publicUrlData } = supabase.storage
+          .from("uploads")
+          .getPublicUrl(fileName);
+
+        uploadedFileUrls.push({
+          url: publicUrlData.publicUrl,
+          name: file.name,
+          uploadedAt: new Date().toISOString()
+        });
+      }
+
+      if (uploadedFileUrls.length === 0) {
+        alert("No files were uploaded successfully.");
         return;
       }
 
-      // Get public URL
-      const { data: publicUrlData } = supabase.storage
-        .from("uploads")
-        .getPublicUrl(fileName);
-
-      const fileUrl = publicUrlData.publicUrl;
-
-      // Update form_submissions table with the uploaded file URL
+      // Update form_submissions table with the uploaded file URLs (store as JSON array)
       const { error: updateError } = await supabase
         .from("form_submissions")
         .update({
-          admin_uploaded_file: fileUrl,
+          admin_uploaded_file: JSON.stringify(uploadedFileUrls),
           admin_uploaded_at: new Date().toISOString()
         })
         .eq("id", formId);
 
       if (updateError) {
         console.error("Error updating form submission:", updateError);
-        alert("File uploaded but failed to update record. Please refresh and try again.");
+        alert("Files uploaded but failed to update record. Please refresh and try again.");
         return;
       }
 
       // Update local state
       setUploadedFiles(prev => ({
         ...prev,
-        [formId]: {
-          url: fileUrl,
-          name: file.name,
-          uploadedAt: new Date().toISOString()
-        }
+        [formId]: uploadedFileUrls
       }));
 
-      alert("File uploaded successfully!");
+      alert(`${uploadedFileUrls.length} file(s) uploaded successfully!`);
+      
+      // Clear selected files
+      setSelectedFiles([]);
       
       // Refresh the data
       fetchFormSubmissions();
       
     } catch (error) {
       console.error("Error in file upload:", error);
-      alert("An error occurred while uploading the file.");
+      alert("An error occurred while uploading the files.");
     } finally {
       setUploadingFile(false);
     }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    setSelectedFiles(prev => [...prev, ...files]);
+  };
+
+  const handleFileSelect = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(prev => [...prev, ...files]);
+  };
+
+  const removeFile = (index) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   useEffect(() => {
@@ -749,6 +792,81 @@ export function AdminOverview2() {
     }
   };
 
+  const toTitleCase = (text) =>
+    String(text)
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const renderHumanReadable = (value, keyName) => {
+    // Normalize specific fields like members to arrays of objects for table view
+    if (keyName === "members" && value && typeof value === "object" && !Array.isArray(value)) {
+      value = [value];
+    }
+    if (Array.isArray(value)) {
+      if (value.length > 0 && typeof value[0] === "object" && value[0] !== null) {
+        const headerKeys = Array.from(new Set(value.flatMap((row) => Object.keys(row || {}))));
+        return (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-xs border border-gray-200 rounded-md">
+              <thead className="bg-gray-100">
+                <tr>
+                  {headerKeys.map((h) => (
+                    <th key={h} className="px-2 py-1 text-left border-b">
+                      {toTitleCase(h)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {value.map((row, idx) => (
+                  <tr key={idx} className="border-b last:border-0">
+                    {headerKeys.map((h) => (
+                      <td key={h} className="px-2 py-1 align-top">
+                        {row && typeof row[h] === "object"
+                          ? JSON.stringify(row[h])
+                          : String(row?.[h] ?? "")}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      return <span>{value.map(String).join(", ")}</span>;
+    }
+
+    if (value && typeof value === "object") {
+      return (
+        <div className="space-y-1">
+          {Object.entries(value).map(([k, v]) => (
+            <div key={k}>
+              <span className="font-medium">{toTitleCase(k)}: </span>
+              <span>{typeof v === "object" ? JSON.stringify(v) : String(v)}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (typeof value === "string" && value.startsWith("http")) {
+      const fileName = value.split("/").pop();
+      return (
+        <a
+          href={value}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline hover:text-blue-800"
+        >
+          {fileName}
+        </a>
+      );
+    }
+
+    return <span>{String(value)}</span>;
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -768,6 +886,8 @@ export function AdminOverview2() {
         .from("form_submissions")
         .update({ status: "completed" })
         .eq("id", id);
+
+        toast.success("Status marked as completed");
 
         console.log("data in handleMarkStatusAsCompleted:", data);
     } catch (error) {
@@ -963,7 +1083,7 @@ export function AdminOverview2() {
           open={!!selectedSubmission}
           onOpenChange={setSelectedSubmission}
         >
-          <DialogContent className="max-w-3xl w-full max-h-[85vh] overflow-hidden">
+          <DialogContent className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-lg font-semibold">
                 {selectedSubmission.service_name}
@@ -982,71 +1102,167 @@ export function AdminOverview2() {
                   Admin File Upload
                 </h3>
                 
-                {/* File Upload Input */}
+                {/* Drag and Drop File Upload Area */}
                 <div className="mb-4">
-                  <input
-                    type="file"
-                    id={`file-upload-${selectedSubmission.id}`}
-                    className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        handleFileUpload(selectedSubmission.id, selectedSubmission.user_id, file);
-                      }
-                    }}
-                    disabled={uploadingFile}
-                  />
-                  <label
-                    htmlFor={`file-upload-${selectedSubmission.id}`}
-                    className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${
-                      uploadingFile 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
-                    } transition-colors`}
+                  <div
+                    className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+                      isDragOver
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-300 hover:border-gray-400'
+                    }`}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
                   >
-                    {uploadingFile ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Uploading...
-                      </>
-                    ) : (
-                      <>
-                        <Upload className="mr-2 h-4 w-4" />
-                        Upload File
-                      </>
-                    )}
+                    <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                    <p className="text-lg font-medium text-gray-700 mb-2">
+                      Drag and drop files here, or click to select
+                    </p>
+                    <p className="text-sm text-gray-500 mb-4">
+                      You can upload multiple files at once
+                    </p>
+                    
+                    <input
+                      type="file"
+                      id={`file-upload-${selectedSubmission.id}`}
+                      className="hidden"
+                      multiple
+                      onChange={handleFileSelect}
+                      disabled={uploadingFile}
+                    />
+                    <label
+                      htmlFor={`file-upload-${selectedSubmission.id}`}
+                      className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${
+                        uploadingFile 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
+                      } transition-colors`}
+                    >
+                      {uploadingFile ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="mr-2 h-4 w-4" />
+                          Select Files
+                        </>
+                      )}
+                    </label>
+                  </div>
 
-                  </label>
-
-                 
+                  {/* Selected Files Preview */}
+                  {selectedFiles.length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">
+                        Selected Files ({selectedFiles.length}):
+                      </h4>
+                      <div className="space-y-2">
+                        {selectedFiles.map((file, index) => (
+                          <div key={index} className="flex items-center justify-between bg-gray-100 rounded-md p-2">
+                            <div className="flex items-center">
+                              <FileText className="mr-2 h-4 w-4 text-gray-500" />
+                              <span className="text-sm text-gray-700">{file.name}</span>
+                              <span className="text-xs text-gray-500 ml-2">
+                                ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                              </span>
+                            </div>
+                            <button
+                              onClick={() => removeFile(index)}
+                              className="text-red-500 hover:text-red-700 text-sm"
+                              disabled={uploadingFile}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <button
+                        onClick={() => handleFileUpload(selectedSubmission.id, selectedSubmission.user_id, selectedFiles)}
+                        disabled={uploadingFile || selectedFiles.length === 0}
+                        className={`mt-3 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${
+                          uploadingFile || selectedFiles.length === 0
+                            ? 'bg-gray-400 cursor-not-allowed' 
+                            : 'bg-green-600 hover:bg-green-700 cursor-pointer'
+                        } transition-colors`}
+                      >
+                        {uploadingFile ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Uploading {selectedFiles.length} file(s)...
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="mr-2 h-4 w-4" />
+                            Upload {selectedFiles.length} file(s)
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <button onClick={() => handleMarkStatusAsCompleted(selectedSubmission.id)} className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded-md text-white px-4 py-2 mb-4">Mark status as completed</button>
 
-                {/* Display uploaded file if exists */}
+                {/* Display uploaded files if exist */}
                 {selectedSubmission.admin_uploaded_file && (
                   <div className="p-3 bg-white border border-green-200 rounded-md">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <FileText className="mr-2 h-5 w-5 text-green-600" />
-                        <div>
-                          <p className="text-sm font-medium text-gray-800">
-                            Uploaded File
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            Uploaded on: {new Date(selectedSubmission.admin_uploaded_at).toLocaleString()}
-                          </p>
-                        </div>
-                      </div>
-                      <a
-                        href={selectedSubmission.admin_uploaded_file}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 transition-colors"
-                      >
-                        <Download className="mr-1 h-3 w-3" />
-                        Download
-                      </a>
-                    </div>
+                    <h4 className="text-sm font-medium text-gray-800 mb-3">
+                      Uploaded Files
+                    </h4>
+                    <p className="text-xs text-gray-500 mb-3">
+                      Uploaded on: {new Date(selectedSubmission.admin_uploaded_at).toLocaleString()}
+                    </p>
+                    
+                    {(() => {
+                      try {
+                        // Try to parse as JSON array (new format)
+                        const files = JSON.parse(selectedSubmission.admin_uploaded_file);
+                        if (Array.isArray(files)) {
+                          return (
+                            <div className="space-y-2">
+                              {files.map((file, index) => (
+                                <div key={index} className="flex items-center justify-between bg-gray-50 rounded-md p-2">
+                                  <div className="flex items-center">
+                                    <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                    <span className="text-sm text-gray-700">{file.name}</span>
+                                  </div>
+                                  <a
+                                    href={file.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 transition-colors"
+                                  >
+                                    <Download className="mr-1 h-3 w-3" />
+                                    Download
+                                  </a>
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        }
+                      } catch (e) {
+                        // Fallback for old single file format
+                        return (
+                          <div className="flex items-center justify-between bg-gray-50 rounded-md p-2">
+                            <div className="flex items-center">
+                              <FileText className="mr-2 h-4 w-4 text-green-600" />
+                              <span className="text-sm text-gray-700">Uploaded File</span>
+                            </div>
+                            <a
+                              href={selectedSubmission.admin_uploaded_file}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 transition-colors"
+                            >
+                              <Download className="mr-1 h-3 w-3" />
+                              Download
+                            </a>
+                          </div>
+                        );
+                      }
+                    })()}
                   </div>
                 )}
               </div>
@@ -1069,22 +1285,7 @@ export function AdminOverview2() {
                           </td> */}
 
                           <td className="py-2 px-3 text-gray-700 break-words w-2/3">
-                            {typeof value === "object" ? (
-                              JSON.stringify(value, null, 2)
-                            ) : typeof value === "string" &&
-                              value.startsWith("http") ? (
-                              <a
-                                href={value}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 underline hover:text-blue-800"
-                              >
-                                {value.split("/").pop()}{" "}
-                                {/* show file name only */}
-                              </a>
-                            ) : (
-                              String(value)
-                            )}
+                            {renderHumanReadable(value, key)}
                           </td>
                         </tr>
                       )

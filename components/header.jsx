@@ -24,6 +24,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 // Helper component for menu items
 const MenuItem = ({ href, children, truncate = false }) => (
@@ -111,12 +112,14 @@ export function Header() {
       <div className="container flex h-20 items-center justify-between px-4 gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 min-w-0">
-          <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">FFG</span>
-          </div>
+          <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center"> 
+             <span className="text-white font-bold text-sm">FFG</span>
+           
+          </div> 
           <span className="font-bold text-sm text-black whitespace-nowrap hidden xl:inline">
             FAAZ Financial Group LLC
           </span>
+         
         </Link>
 
         {/* Desktop Navigation */}
@@ -156,7 +159,7 @@ export function Header() {
                     <MenuItem href="/start-business?serviceType=corp">
                       Compare Formation Plans
                     </MenuItem>
-                    <MenuItem href="/pricing">
+                    <MenuItem href="/services/dba-trademark-registration">
                       DBA/Trademark Registration
                     </MenuItem>
                   </ul>
@@ -180,7 +183,7 @@ export function Header() {
                     <MenuItem href="/services/sales-and-usetax-registration">
                       Sales & Use Tax Registration
                     </MenuItem>
-                    <MenuItem href="/services/business-license">
+                    <MenuItem href="/services/annual-company-state-filing">
                       Annual Company State Filing
                     </MenuItem>
                     <MenuItem href="/services/ein-closing-services">
@@ -189,16 +192,16 @@ export function Header() {
                     <MenuItem href="/services/registered-agent">
                       Registered Agent Services
                     </MenuItem>
-                    <MenuItem href="/services/templates">
+                    <MenuItem href="/services/company-dissolution">
                       Company Dissolution(State Fee Vary)
                     </MenuItem>
-                    <MenuItem href="/services/templates">
+                    <MenuItem href="/services/company-revival">
                       Company Revival (State Fee vary)
                     </MenuItem>
-                    <MenuItem href="/services/templates">
+                    <MenuItem href="/services/address-change-services">
                       Address Change Services
                     </MenuItem>
-                    <MenuItem href="/services/templates" truncate>
+                    <MenuItem href="/services/filing-articles-of-amendments" truncate>
                       Filing Articles Of Amendments(State fee excluded)
                     </MenuItem>
                     <MenuItem href="/services/templates">
@@ -227,19 +230,19 @@ export function Header() {
                     Accounting/Bookkeeping Taxes
                   </h3>
                   <ul className="space-y-1">
-                    <MenuItem href="/services/bookkeeping" truncate>
+                    <MenuItem href="/services/pro-bookkeeping-services(small-business)" truncate>
                       Pro-BookKeeping Services (Small Business)
                     </MenuItem>
-                    <MenuItem href="/services/business-banking" truncate>
+                    <MenuItem href="/services/pro-bookkeeping-services(medium-business)" truncate>
                       Pro-BookKeeping Services (Medium Business)
                     </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
+                    <MenuItem href="/services/pro-bookkeeping-services(large-business)" truncate>
                       Pro-Bookkeeping Services (Large Business)
                     </MenuItem>
-                    <MenuItem href="/services/tax-filing">
+                    <MenuItem href="/services/full-year-reconciliation-services">
                       Full-Year Reconciliation Services
                     </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
+                    <MenuItem href="/services/setting-up-new-books-in-QBO" truncate>
                       Setting Up New Books In QBO/Xero Or Any ERP (charges
                       varies based on nature of work)
                     </MenuItem>
@@ -276,7 +279,7 @@ export function Header() {
                     UK FORMATION & COMPLIANCE SERVICES
                   </h3>
                   <ul className="space-y-1">
-                    <MenuItem href="/services/website-builder">
+                    <MenuItem href="/services/uk-ltd-formation">
                       UK LTD Formation
                     </MenuItem>
                     <MenuItem href="/services/domain-registration" truncate>
@@ -489,7 +492,7 @@ export function Header() {
                         Compare Formation Plans
                       </Link>
                       <Link
-                        href="/pricing"
+                        href="/services/dba-trademark-registration"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         DBA/Trademark Registration
@@ -545,25 +548,25 @@ export function Header() {
                         Registered Agent Services
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/services/company-dissolution"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Company Dissolution(State Fee Vary)
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/services/company-revival"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Company Revival (State Fee vary)
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/services/address-change-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Address Change Services
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/services/filing-articles-of-amendments"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Filing Articles Of Amendments(State fee excluded)
@@ -608,31 +611,31 @@ export function Header() {
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
-                        href="/services/bookkeeping"
+                        href="/services/pro-bookkeeping-services(small-business)"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Pro-BookKeeping Services (Small Business)
                       </Link>
                       <Link
-                        href="/services/business-banking"
+                        href="/services/pro-bookkeeping-services(medium-business)"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Pro-BookKeeping Services (Medium Business)
                       </Link>
                       <Link
-                        href="/services/tax-filing"
+                        href="/services/pro-bookkeeping-services(large-business)"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Pro-Bookkeeping Services (Large Business)
                       </Link>
                       <Link
-                        href="/services/tax-filing"
+                        href="/services/full-year-reconciliation-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Full-Year Reconciliation Services
                       </Link>
                       <Link
-                        href="/services/tax-filing"
+                        href="/services/setting-up-new-books-in-QBO"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Setting Up New Books In QBO/Xero Or Any ERP
@@ -694,7 +697,7 @@ export function Header() {
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
-                        href="/services/website-builder"
+                        href="/services/uk-ltd-formation"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         UK LTD Formation

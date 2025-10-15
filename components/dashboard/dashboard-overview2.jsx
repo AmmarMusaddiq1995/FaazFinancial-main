@@ -52,13 +52,32 @@ export function DashboardOverview2({ user, profile }) {
 
         // ✅ Safely parse form_data (works if already object or JSON string)
         const parsedData =
-          data?.map((form) => ({
-            ...form,
-            form_data:
-              typeof form.form_data === "string"
-                ? JSON.parse(form.form_data)
-                : form.form_data,
-          })) || [];
+          data?.map((form) => {
+            let parsedFormData = form.form_data;
+            if (typeof parsedFormData === "string") {
+              try {
+                parsedFormData = JSON.parse(parsedFormData);
+              } catch (_) {
+                // leave as is if not valid JSON
+              }
+            }
+
+            let parsedAdminUploads = form.admin_uploaded_file;
+            if (typeof parsedAdminUploads === "string") {
+              try {
+                const maybeJson = JSON.parse(parsedAdminUploads);
+                parsedAdminUploads = maybeJson;
+              } catch (_) {
+                // keep legacy single URL string
+              }
+            }
+
+            return {
+              ...form,
+              form_data: parsedFormData,
+              admin_uploaded_file: parsedAdminUploads,
+            };
+          }) || [];
 
         setUserForms(parsedData);
       } catch (err) {
@@ -301,32 +320,61 @@ export function DashboardOverview2({ user, profile }) {
                       <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                         <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
                           <FileText className="mr-2 h-5 w-5" />
-                          Your Document is Ready!
+                          Your Document{Array.isArray(form.admin_uploaded_file) && form.admin_uploaded_file.length > 1 ? "s are" : " is"} Ready!
                         </h3>
-                        
-                        <div className="p-3 bg-white border border-green-200 rounded-md">
+
+                        <div className="p-3 bg-white border border-green-200 rounded-md space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <FileText className="mr-2 h-5 w-5 text-green-600" />
                               <div>
                                 <p className="text-sm font-medium text-gray-800">
-                                  Document Available
+                                  {Array.isArray(form.admin_uploaded_file) ? "Documents Available" : "Document Available"}
                                 </p>
                                 <p className="text-xs text-gray-500">
                                   Uploaded on: {new Date(form.admin_uploaded_at).toLocaleString()}
                                 </p>
                               </div>
                             </div>
-                            <a
-                              href={form.admin_uploaded_file}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
-                            >
-                              <Download className="mr-1 h-3 w-3" />
-                              Download
-                            </a>
                           </div>
+
+                          {Array.isArray(form.admin_uploaded_file) ? (
+                            <div className="space-y-2">
+                              {form.admin_uploaded_file.map((file, idx) => (
+                                <div key={idx} className="flex items-center justify-between bg-gray-50 rounded-md p-2">
+                                  <div className="flex items-center">
+                                    <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                    <span className="text-sm text-gray-700">{file.name || `File ${idx + 1}`}</span>
+                                  </div>
+                                  <a
+                                    href={file.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+                                  >
+                                    <Download className="mr-1 h-3 w-3" />
+                                    Download
+                                  </a>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-between bg-gray-50 rounded-md p-2">
+                              <div className="flex items-center">
+                                <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                <span className="text-sm text-gray-700">Uploaded File</span>
+                              </div>
+                              <a
+                                href={form.admin_uploaded_file}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+                              >
+                                <Download className="mr-1 h-3 w-3" />
+                                Download
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}

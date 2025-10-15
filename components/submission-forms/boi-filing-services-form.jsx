@@ -315,7 +315,7 @@ export function BoiFilingServicesForm() {
                     })
                   }
                   className="border-gray-300"
-                  required
+                  optional
                 />
               </div>
 
@@ -331,7 +331,7 @@ export function BoiFilingServicesForm() {
                     })
                   }
                   className="border-gray-300"
-                  required
+                  optional
                 />
               </div>
 
