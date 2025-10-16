@@ -487,7 +487,7 @@ export function Header() {
                         LLC Formation
                       </Link>
                       <Link
-                        href="/services/corp-formation-2"
+                        href="/services/corporation-formation"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Corp. Formation
@@ -513,31 +513,31 @@ export function Header() {
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
-                        href="/services/registered-agent"
+                        href="/services/ein-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         EIN Services
                       </Link>
                       <Link
-                        href="/services/compliance"
+                        href="/services/boi-filing-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         BOI Filing Services
                       </Link>
                       <Link
-                        href="/services/boi-filing"
+                        href="/services/itin-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         ITIN Services
                       </Link>
                       <Link
-                        href="/services/ein"
+                        href="/services/sales-and-usetax-registration"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Sales & Use Tax Registration
                       </Link>
                       <Link
-                        href="/services/business-license"
+                        href="/services/annual-company-state-filing"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Annual Company State Filing
@@ -549,7 +549,7 @@ export function Header() {
                         EIN Closing Services
                       </Link>
                       <Link
-                        href="/services/ein-closing-services"
+                        href="/services/registered-agent"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Registered Agent Services
