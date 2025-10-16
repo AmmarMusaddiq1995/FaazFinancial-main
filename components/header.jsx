@@ -448,7 +448,14 @@ export function Header() {
           variant="ghost"
           size="icon"
           className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          // onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => { setIsMenuOpen(!isMenuOpen); 
+            if (isMenuOpen) {
+              document.body.style.overflow = "hidden";
+            } else {
+              document.body.style.overflow = "auto";
+            }
+          }}
         >
           {isMenuOpen ? (
             <X className="h-6 w-6" />
@@ -461,13 +468,13 @@ export function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden border-t bg-background">
-          <div className="container px-4 py-4 space-y-4">
-            <Accordion type="single" collapsible className="w-full">
+          <div className="container px-4 py-4 space-y-4 ">
+            <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="services">
-                <AccordionTrigger className="text-sm">
+                <AccordionTrigger className="text-sm ">
                   Services & Pricing
                 </AccordionTrigger>
-                <AccordionContent className="space-y-4">
+                <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="space-y-2">
                     <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
                       Formation Services
