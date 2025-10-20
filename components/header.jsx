@@ -143,7 +143,7 @@ export function Header() {
             </button>
 
             {activeDropdown === "products" && (
-              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-y-auto">
+              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 overflow-y-auto">
                 {/* Column 1: FORMATION SERVICES */}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-gray-700 mb-13 text-sm uppercase tracking-wide">
@@ -275,34 +275,32 @@ export function Header() {
 
                 {/* Column 4: UK FORMATION & COMPLIANCE SERVICES */}
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide">
+                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
                     UK FORMATION & COMPLIANCE SERVICES
                   </h3>
                   <ul className="space-y-1">
                     <MenuItem href="/services/uk-ltd-formation">
                       UK LTD Formation
                     </MenuItem>
-                    <MenuItem href="/services/domain-registration" truncate>
+                    <MenuItem href="/services/simple-corp-tax-return-ct600" truncate>
                       Simple Corporation Tax Return Filing (CT600)
                     </MenuItem>
-                    <MenuItem href="/services/business-email" truncate>
+                    <MenuItem href="/services/complex-corp-tax-return-ct600" truncate>
                       Advance Corporation Tax Return Filing (CT600)
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    <MenuItem href="/services/registering-client-for-selfassessment">
                       Registering Client For Selfassessment
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit" truncate>
+                    <MenuItem href="/services/simple-self-assessment-filing" truncate>
                       Simple Self Assessment (SA100) Filing
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit" truncate>
+                    <MenuItem href="/services/advance-self-assessment-filing" truncate>
                       Advance Self Assessment (SA100) Filing
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit" truncate>
-                      Simple Annual Corporation Accounts Preparation
+                    <MenuItem href="/services/annual-accounts-preparation" truncate>
+                      Annual Corporation Tax Accounts Preparation
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit" truncate>
-                      Complex Annual Corporation Tax Accounts Prepartion
-                    </MenuItem>
+                    
                     <MenuItem href="/services/logo-kit">
                       Dormant Accounts Filing
                     </MenuItem>
@@ -318,22 +316,22 @@ export function Header() {
                     <MenuItem href="/services/logo-kit">
                       Confirmation Statement Filing
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    <MenuItem href="/services/vat-registration-services">
                       VAT Registeration
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    <MenuItem href="/services/vat-return-filing-services">
                       VAT Return Filing
                     </MenuItem>
                     <MenuItem href="/services/logo-kit">
                       Tax Planning & Consulation On Zoom
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit" truncate>
+                    <MenuItem href="/services/tax-budgeting-services" truncate>
                       Tax Budgeting & Taxation In Investment Appraisal
                     </MenuItem>
                     <MenuItem href="/services/logo-kit">
                       Company Registration
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    <MenuItem href="/services/initial-compliance-after-formation">
                       Initial Compliance After Formation
                     </MenuItem>
                   </ul>
@@ -710,47 +708,42 @@ export function Header() {
                         UK LTD Formation
                       </Link>
                       <Link
-                        href="/services/domain-registration"
+                        href="/services/simple-corp-tax-return-ct600"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Simple Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
-                        href="/services/business-email"
+                        href="/services/complex-corp-tax-return-ct600"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Advance Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/registering-client-for-selfassessment"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Registering Client For Selfassessment
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/simple-self-assessment-filing"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Simple Self Assessment (SA100) Filing
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/advance-self-assessment-filing"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Advance Self Assessment (SA100) Filing
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/annual-accounts-preparation"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
-                        Simple Annual Corporation Accounts Preparation
+                        Annual Corporation Tax Accounts Preparation
                       </Link>
-                      <Link
-                        href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
-                      >
-                        Complex Annual Corporation Tax Accounts Prepartion
-                      </Link>
+                     
                       <Link
                         href="/services/logo-kit"
                         className="block text-sm text-gray-600 hover:text-green-600"
@@ -782,13 +775,13 @@ export function Header() {
                         Confirmation Statement Filing
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/vat-registration-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         VAT Registeration
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/vat-return-filing-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         VAT Return Filing
@@ -812,7 +805,7 @@ export function Header() {
                         Company Registration
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/initial-compliance-after-formation"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Initial Compliance After Formation
