@@ -22,9 +22,9 @@ export default function RegisterSelfAssessmentPage() {
             file tax returns, manage income reporting, and stay compliant with
             HMRC requirements.
           </p>
-          <Link href="/submission-forms/register-client-self-assessment-form">
+          <Link href="/submission-forms/register-client-for-self-assessment-form">
             <Button size="lg" className="text-lg px-8 py-6">
-              Register for Self Assessment
+              Register Client for Self Assessment
             </Button>
           </Link>
         </div>

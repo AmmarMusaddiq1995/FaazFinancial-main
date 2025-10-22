@@ -21,7 +21,7 @@ export default function AdvanceSA100FilingPage() {
             We handle multiple income sources, foreign earnings, property income,
             and capital gains to ensure full HMRC compliance and peace of mind.
           </p>
-          <Link href="/submission-forms/advance-sa100-filing-form">
+          <Link href="/submission-forms/simple-sa100-filing-form">
             <Button size="lg" className="text-lg px-8 py-6">
               File Your Advance SA100
             </Button>

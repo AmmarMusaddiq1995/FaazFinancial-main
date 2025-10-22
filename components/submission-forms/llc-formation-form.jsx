@@ -169,14 +169,14 @@ const PACKAGE_EXCLUDED = [
   "Website/Domains",
 ];
 
-export function BusinessFormationForm() {
+export function BusinessFormationForm({ pricingData }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     desiredCompanyName: "",
     alternativeCompanyName: "",
     businessName: "",
     businessType: "",
-    state: "",
+    state: pricingData?.state || "",
     address: "",
     ownerInfo: "",
     firstName: "",
@@ -199,6 +199,7 @@ export function BusinessFormationForm() {
     businessType: "",
     businessWebsite: "",
     businessEmail: "",
+    packageType: pricingData?.packageType || "",
   });
   const [members, setMembers] = useState([
     {
@@ -214,15 +215,19 @@ export function BusinessFormationForm() {
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(pricingData?.price ? parseInt(pricingData.price) : 0);
 
   useEffect(()=>{
-    if(formData.state && formData.packageType){
+    // If pricing data is provided from URL, use it directly
+    if (pricingData?.price) {
+      setPrice(parseInt(pricingData.price));
+    } else if(formData.state && formData.packageType){
+      // Fallback to calculating price from form data
       const statePrice = priceTableForLLC[formData.state] || priceTableForLLC.Default;
       const selectedPrice = statePrice[formData.packageType];
       setPrice(selectedPrice);
     }
-  }, [formData.state, formData.packageType]);
+  }, [formData.state, formData.packageType, pricingData]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -273,6 +278,7 @@ export function BusinessFormationForm() {
         price,
         payment_status: "pending",
         payment_id: "",
+        pricingData: pricingData, // Include the original pricing data
       };
 
       console.log(
@@ -318,6 +324,17 @@ export function BusinessFormationForm() {
         <CardDescription className="text-center">
           Fill out the form below to begin your LLC formation process
         </CardDescription>
+        {pricingData?.price && (
+          <div className="mt-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
+            <p className="text-sm text-center">
+              <span className="font-semibold">Selected Package:</span> {pricingData.planName} - ${pricingData.price}
+              <br />
+              <span className="text-xs text-muted-foreground">
+                {pricingData.packageType === 'normal' ? 'Normal (14 business days)' : 'Express (7 business days)'} • {pricingData.state}
+              </span>
+            </p>
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">

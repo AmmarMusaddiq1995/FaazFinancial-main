@@ -18,7 +18,7 @@ export function HeroSection() {
       <div className="relative container px-4 py-20 lg:py-32">
         <div className="max-w-2xl">
           <div className="mb-6">
-            <span className="inline-block bg-primary/20 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block bg-primary/20 text-primary-foreground px-3 py-1 rounded-full text-md font-medium mb-4">
               EVERYTHING YOU NEED. ALL IN ONE PLACE.
             </span>
           </div>
@@ -29,7 +29,7 @@ export function HeroSection() {
 
           <p className="text-xl lg:text-2xl text-gray-300 mb-8 text-pretty">
             Start and protect your business with worry-free services and expert
-            support. Starting at $0 + state fees.
+            support. 
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">

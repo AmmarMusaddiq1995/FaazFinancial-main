@@ -39,6 +39,6 @@
     "app/start-business/page.jsx",
     "components/dashboard/dashboard-overview.jsx",
     "components/admin/admin-overview.jsx"
-, "app/layout.jsx", "app/page.jsx", "app/dashboard/documents/page.jsx", "app/services/registered-agent/page.jsx"  ],
+, "app/layout.jsx", "app/page.jsx", "app/dashboard/documents/page.jsx", "app/services/registered-agent/page.jsx", "components/pricing-section.jsx"  ],
   "exclude": ["node_modules"]
 }

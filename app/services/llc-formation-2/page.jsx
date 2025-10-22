@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,8 +12,33 @@ import { Check, Shield, Clock, FileText } from "lucide-react";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { BusinessFormationForm } from "@/components/submission-forms/llc-formation-form";
+import { useSearchParams } from "next/navigation";
 
 export default function LLCFormationPage() {
+  const searchParams = useSearchParams();
+  
+  // Extract pricing data from URL parameters
+  const pricingData = {
+    packageType: searchParams.get('packageType') || 'normal',
+    state: searchParams.get('state') || 'Alabama',
+    serviceType: searchParams.get('serviceType') || 'LLC Formation',
+    planName: searchParams.get('planName') || 'Starter',
+    price: searchParams.get('price') || '0'
+  };
+
+  // If pricing data is provided, show the form instead of the landing page
+  if (pricingData.price !== '0') {
+    return (
+      <div>
+        <Header />
+        <div className="mt-10 mb-10">
+          <BusinessFormationForm pricingData={pricingData} />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div>
       <Header />

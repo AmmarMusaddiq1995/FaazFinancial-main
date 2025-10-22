@@ -23,16 +23,17 @@ import { Calendar } from "@/components/ui/calendar";
 
 
 
-export function RegisteringForSelfAssessmentPage() {
+export function SimpleAndAdvanceSelfAssessmentForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
-    
+    packageType: "",
     governmentGatewayId: "",
-    governmentPassword: "",
+    governmentGatewayPassword: "",
     incomes: [],
     
   });
+  
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
@@ -59,16 +60,16 @@ export function RegisteringForSelfAssessmentPage() {
     fetchUserData();
   }, [user]);
 
-  // const [price, setPrice] = useState(0);
-  // useEffect(()=>{
-  //   if(formData.packageType === "normal"){
-  //     const selectedPrice = 25;
-  //     setPrice(selectedPrice);
-  //   } else if(formData.packageType === "express"){
-  //     const selectedPrice = 35;
-  //     setPrice(selectedPrice);
-  //   }
-  // }, [formData.packageType]);
+  const [price, setPrice] = useState(0);
+  useEffect(()=>{
+    if(formData.packageType === "simple"){
+      const selectedPrice = 80.50;
+      setPrice(selectedPrice);
+    } else if(formData.packageType === "advance"){
+      const selectedPrice = 147.50;
+      setPrice(selectedPrice);
+    }
+  }, [formData.packageType]);
 
 
   const handleSubmit = async (e) => {
@@ -76,6 +77,25 @@ export function RegisteringForSelfAssessmentPage() {
     setLoading(true);
 
     try {
+      // Validate required fields
+      if (!formData.packageType) {
+        alert("Please select a package type");
+        setLoading(false);
+        return;
+      }
+
+      if (!formData.governmentGatewayId || !formData.governmentGatewayPassword) {
+        alert("Please fill in all required fields");
+        setLoading(false);
+        return;
+      }
+
+      if (!userPersonalId) {
+        alert("User data is still loading. Please wait a moment and try again.");
+        setLoading(false);
+        return;
+      }
+
       const {
         data: { user },
         error: userError,
@@ -85,7 +105,8 @@ export function RegisteringForSelfAssessmentPage() {
       console.log("user :", user);
 
       if (!user || userError) {
-        alert("Please login to submit business formation", userError);
+        alert("Please login to submit the form");
+        setLoading(false);
         return;
       }
 
@@ -98,29 +119,37 @@ export function RegisteringForSelfAssessmentPage() {
         submissionData
       );
 
-      const { error } = await supabase.from("form_submissions").insert([
+      const { data: insertedForm, error } = await supabase.from("form_submissions").insert([
         {
           user_id: userPersonalId,
-          service_name: "Self Assessment Registeration (SA100)",
+          service_name: "Simple and Advance Self Assessment",
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount: 80.50
-
-
+          amount: Math.round(price), 
+          payment_id: "",
         },
-      ]);
+      ]).select().single();
+
+      if (error) {
+        console.error("Error inserting form_submissions:", error);
+        alert(`Failed to save form data: ${error.message}`);
+        setLoading(false);
+        return;
+      }
 
       console.log("form_submissions inserted successfully");
+      console.log("insertedForm id:", insertedForm?.id);
 
       router.push("/form-submission-success");
     } catch (err) {
       console.error("Error submitting form:", err);
-      alert("Something went wrong.");
+      alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+
 
   const toggleIncome = (income) => {
     setFormData((prev) => {
@@ -139,23 +168,48 @@ export function RegisteringForSelfAssessmentPage() {
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
-            Start Your Simple Self Assessment Registeration
+            Start Self Assessment Tax Return
           </CardTitle>
           <CardDescription className="text-center">
-            Fill out the form below to begin your Self Assessment Registeration process
+            Fill out the form below to begin your Self Assessment Tax Return process
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4 border rounded-md p-4">
-              
+
+
+
+            <div className="space-y-2">
+              <Label htmlFor="packageType">Select Package Type</Label>
+                <Select
+                  value={formData.packageType}
+                   onValueChange={(value) =>
+                   setFormData({ ...formData, packageType: value })
+                 }
+                 required
+                >
+               <SelectTrigger className="border-gray-300">
+                <SelectValue placeholder="Select type of self assessment tax return" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="simple">
+                  <div className="flex items-center justify-between gap-3">
+                    <span>Simple self assessment tax return</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="advance">
+                    <div className="flex items-center justify-between gap-3">
+                      <span>Advance self assessment tax return</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              </div>
               
          
 
-           
-
-
-          <div className="space-y-2">
+              <div className="space-y-2">
                 <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
                 <Input
                   id="governmentGatewayId"
@@ -243,10 +297,16 @@ export function RegisteringForSelfAssessmentPage() {
                 </div>
               </div>
 
+
+             
+
+      
+
+              
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Submitting..." : "Start Simple Self Assessment Registeration"}
+              {loading ? "Submitting..." : "Start Self Assessment Tax Return"}
             </Button>
           </form>
         </CardContent>

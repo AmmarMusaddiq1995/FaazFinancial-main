@@ -146,7 +146,7 @@ export function Header() {
               <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 overflow-y-auto">
                 {/* Column 1: FORMATION SERVICES */}
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-13 text-sm uppercase tracking-wide">
+                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
                     FORMATION SERVICES
                   </h3>
                   <ul className="space-y-1">
@@ -227,17 +227,17 @@ export function Header() {
                 {/* Column 3: ACCOUNTING & BOOKKEEPING TAXES */}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    Accounting/Bookkeeping Taxes
+                    Bookkeeping & Taxes
                   </h3>
                   <ul className="space-y-1">
                     <MenuItem href="/services/pro-bookkeeping-services(small-business)" truncate>
-                      Pro-BookKeeping Services (Small Business)
+                      SMB Bookkeeping
                     </MenuItem>
                     <MenuItem href="/services/pro-bookkeeping-services(medium-business)" truncate>
-                      Pro-BookKeeping Services (Medium Business)
+                      SME Bookkeeping
                     </MenuItem>
                     <MenuItem href="/services/pro-bookkeeping-services(large-business)" truncate>
-                      Pro-Bookkeeping Services (Large Business)
+                      Full Scale Bookkeeping
                     </MenuItem>
                     <MenuItem href="/services/full-year-reconciliation-services">
                       Full-Year Reconciliation Services
@@ -268,7 +268,7 @@ export function Header() {
                       Tax Filing Individual ( Non Resident) With ITIN
                     </MenuItem>
                     <MenuItem href="/services/tax-filing" truncate>
-                      Company Tax Filing Vary Based On The Volume Of Business
+                      Company Tax Filing
                     </MenuItem>
                   </ul>
                 </div>
@@ -276,17 +276,17 @@ export function Header() {
                 {/* Column 4: UK FORMATION & COMPLIANCE SERVICES */}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    UK FORMATION & COMPLIANCE SERVICES
+                    UK FORMATION SERVICES
                   </h3>
                   <ul className="space-y-1">
                     <MenuItem href="/services/uk-ltd-formation">
                       UK LTD Formation
                     </MenuItem>
                     <MenuItem href="/services/simple-corp-tax-return-ct600" truncate>
-                      Simple Corporation Tax Return Filing (CT600)
+                      Simple Corporation Tax 
                     </MenuItem>
                     <MenuItem href="/services/complex-corp-tax-return-ct600" truncate>
-                      Advance Corporation Tax Return Filing (CT600)
+                      Advance Corporation Tax 
                     </MenuItem>
                     <MenuItem href="/services/registering-client-for-selfassessment">
                       Registering Client For Selfassessment
@@ -313,7 +313,7 @@ export function Header() {
                     <MenuItem href="/services/logo-kit">
                       Full Statutory Accounts Filing
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    <MenuItem href="/services/confirmation-statement-filing-services">
                       Confirmation Statement Filing
                     </MenuItem>
                     <MenuItem href="/services/vat-registration-services">
@@ -769,7 +769,7 @@ export function Header() {
                         Full Statutory Accounts Filing
                       </Link>
                       <Link
-                        href="/services/logo-kit"
+                        href="/services/confirmation-statement-filing-services"
                         className="block text-sm text-gray-600 hover:text-green-600"
                       >
                         Confirmation Statement Filing

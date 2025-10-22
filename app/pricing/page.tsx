@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check, X } from "lucide-react"
+import { PricingSection } from "@/components/pricing-section"
+import Link from "next/link"
 
 export default function PricingPage() {
   const plans = [
@@ -97,8 +99,10 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Pricing Plans */}
-        <section className="py-20">
+        <PricingSection />
+
+        Pricing Plans
+        {/* <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
@@ -140,10 +144,10 @@ export default function PricingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Add-on Services */}
-        <section className="py-20 bg-gray-50">
+        {/* <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Add-on Services</h2>
@@ -167,10 +171,10 @@ export default function PricingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* State Fees */}
-        <section className="py-20">
+        {/* <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-16">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">State Filing Fees</h2>
@@ -208,7 +212,7 @@ export default function PricingPage() {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="bg-gray-900 text-white py-20">
@@ -218,16 +222,12 @@ export default function PricingPage() {
               Join thousands of entrepreneurs who chose FaazFinancialGroup for their formation needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/services/llc-formation-2">
               <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
                 Start Your LLC Today
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
-              >
-                Compare All Features
-              </Button>
+              </Link>
+             
             </div>
           </div>
         </section>

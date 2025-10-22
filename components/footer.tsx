@@ -25,14 +25,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link
-                  href="/services"
-                  className="hover:text-white transition-colors"
-                >
-                  All Services
-                </Link>
-              </li>
+            
               <li>
                 <Link
                   href="/pricing"
@@ -43,7 +36,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/services/llc-formation"
+                  href="/services/llc-formation-2"
                   className="hover:text-white transition-colors"
                 >
                   LLC Formation

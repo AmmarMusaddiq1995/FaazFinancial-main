@@ -1,3 +1,6 @@
+"use client"
+
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -5,8 +8,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Calendar, User, ArrowRight, Search } from "lucide-react"
+import { supabase } from "@/lib/supabaseClient"
+import { useEffect, useState } from "react"
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState<any[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+
   const featuredPost = {
     title: "The Complete Guide to Starting an LLC in 2024",
     excerpt:
@@ -18,7 +26,7 @@ export default function BlogPage() {
     image: "business formation guide with documents and laptop",
   }
 
-  const blogPosts = [
+  const staticPosts = [
     {
       title: "Delaware vs. Nevada: Which State is Best for Your LLC?",
       excerpt:
@@ -90,6 +98,40 @@ export default function BlogPage() {
     "Banking & Finance",
     "Business Services",
   ]
+
+  useEffect(() => {
+    let isMounted = true
+    const load = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("id, category, title, description, author, posted_at, image_url")
+          .order("posted_at", { ascending: false })
+        if (error) throw error
+        if (isMounted) setPosts(data || [])
+      } catch (e) {
+        setPosts([])
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+    load()
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const blogPosts = (posts && posts.length > 0)
+    ? posts.map((p) => ({
+        title: p.title,
+        excerpt: p.description,
+        author: p.author,
+        date: p.posted_at ? new Date(p.posted_at).toLocaleDateString() : "",
+        readTime: "",
+        category: p.category,
+        image: p.image_url || "abstract-geometric-shapes",
+      }))
+    : staticPosts
 
   return (
     <div className="min-h-screen">
@@ -226,7 +268,7 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter Signup */}
-        <section className="py-20">
+        {/* <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Stay Updated</h2>
@@ -240,7 +282,7 @@ export default function BlogPage() {
               <p className="text-sm text-gray-500 mt-4">No spam. Unsubscribe at any time.</p>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </div>

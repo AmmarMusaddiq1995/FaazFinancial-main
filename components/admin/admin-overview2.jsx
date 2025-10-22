@@ -887,11 +887,21 @@ export function AdminOverview2() {
         .update({ status: "completed" })
         .eq("id", id);
 
-        toast.success("Status marked as completed");
+      if (error) {
+        console.error("Error updating status:", error);
+        toast.error("Failed to update status");
+        return;
+      }
 
-        console.log("data in handleMarkStatusAsCompleted:", data);
+      toast.success("Status marked as completed");
+      
+      // Refresh the data to show updated status
+      await fetchFormSubmissions();
+      
+      console.log("data in handleMarkStatusAsCompleted:", data);
     } catch (error) {
       console.error("Error marking status as completed:", error);
+      toast.error("An error occurred while updating status");
     }
   }
 
