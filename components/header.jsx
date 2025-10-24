@@ -107,18 +107,21 @@ export function Header() {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
+  // bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60
+
   return (
-    <header className="sticky top-0 z-50 w-full h-20 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full h-20  bg-black ">
       <div className="container flex h-20 items-center justify-between px-4 gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 min-w-0">
-          <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center"> 
+          {/* <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center"> 
              <span className="text-white font-bold text-sm">FFG</span>
            
           </div> 
           <span className="font-bold text-sm text-black whitespace-nowrap hidden xl:inline">
             FAAZ Financial Group LLC
-          </span>
+          </span> */}
+          <Image src="/faaz_logo4.png" alt="Faaz Financial Group" width={250} height={150} className=" object-contain" />
          
         </Link>
 
@@ -134,11 +137,11 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap">Services & Pricing</span>
+              <span className="whitespace-nowrap text-white">Services & Pricing</span>
               {activeDropdown === "products" ? (
-                <ChevronUp className="h-4 w-4" />
+                <ChevronUp className="h-4 w-4 text-white" />
               ) : (
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4 text-white" />
               )}
             </button>
 
@@ -350,7 +353,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap">Learning Center</span>
+              <span className="whitespace-nowrap text-white">Learning Center</span>
             </button>
           </div>
 
@@ -364,19 +367,36 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white">Get To Know Us</span>
               {activeDropdown === "about" ? (
-                <ChevronUp className="h-4 w-4" />
+                <ChevronUp className="h-4 w-4 text-white" />
               ) : (
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4 text-white" />
               )}
             </button>
 
             {activeDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-4">
+              <div 
+                className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-4 z-50"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <ul className="space-y-1">
-                  <MenuItem href="/about">About Us</MenuItem>
-                  <MenuItem href="/contact">Contact Us</MenuItem>
+                  <li>
+                    <Link
+                      href="/about"
+                      className="text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md px-2 py-1 block transition-all duration-200"
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md px-2 py-1 block transition-all duration-200"
+                    >
+                      Contact Us
+                    </Link>
+                  </li>
                 </ul>
               </div>
             )}
@@ -385,18 +405,18 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center space-x-2.5 lg:space-x-3 xl:space-x-4 min-w-0">
-          <button className="p-2 text-gray-600 hover:text-green-600 transition-colors hidden xl:inline-flex">
+          {/* <button className="p-2 text-gray-600 hover:text-green-600 transition-colors hidden xl:inline-flex">
             <Search className="h-5 w-5" />
-          </button>
-          <span className="text-sm text-gray-600 flex items-center space-x-1 whitespace-nowrap hidden xl:inline-flex">
-            <Phone className="h-4 w-4" />
+          </button> */}
+          <span className="text-sm text-white flex items-center space-x-1 whitespace-nowrap hidden xl:inline-flex">
+            <Phone className="h-4 w-4 text-white" />
             <span>+1 307-400-1963</span>
           </span>
 
           <div className="flex items-center gap-3 lg:gap-4">
             {session ? (
               <>
-                <span className="text-gray-700 max-w-[160px] lg:max-w-[200px] truncate hidden xl:inline">
+                <span className="text-white max-w-[160px] lg:max-w-[200px] truncate hidden xl:inline">
                   {session.user?.email || "User"}
                 </span>
                 <Button size="sm" onClick={handleLogout}>
@@ -888,7 +908,7 @@ export function Header() {
       {/* Click outside to close dropdowns */}
       {activeDropdown && (
         <div
-          className="fixed inset-0 z-40"
+          className="fixed inset-0 z-30"
           onClick={() => setActiveDropdown(null)}
         />
       )}

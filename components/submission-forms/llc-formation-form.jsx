@@ -191,10 +191,10 @@ export function BusinessFormationForm({ pricingData }) {
     addressLocal: "",
     city: "",
     zipCode: "",
-    q1: "",
-    q2: "",
-    q3: "",
-    q4: "",
+    doYouWantRegisteredAgent: "",
+    doYouNeedUniqueBusinessAddress: "",
+    doYouWantToUseYourOwnAddress: "",
+    doYouWantAnonymousLLCOrOnMemberName: "",
     description: "",
     businessType: "",
     businessWebsite: "",
@@ -218,16 +218,21 @@ export function BusinessFormationForm({ pricingData }) {
   const [price, setPrice] = useState(pricingData?.price ? parseInt(pricingData.price) : 0);
 
   useEffect(()=>{
+    let basePrice = 0;
+    
     // If pricing data is provided from URL, use it directly
     if (pricingData?.price) {
-      setPrice(parseInt(pricingData.price));
+      basePrice = parseInt(pricingData.price);
     } else if(formData.state && formData.packageType){
       // Fallback to calculating price from form data
       const statePrice = priceTableForLLC[formData.state] || priceTableForLLC.Default;
-      const selectedPrice = statePrice[formData.packageType];
-      setPrice(selectedPrice);
+      basePrice = statePrice[formData.packageType];
     }
-  }, [formData.state, formData.packageType, pricingData]);
+    
+    // Add $65 if user wants unique business address
+    const additionalAmount = formData.doYouNeedUniqueBusinessAddress === "Yes" ? 65 : 0;
+    setPrice(basePrice + additionalAmount);
+  }, [formData.state, formData.packageType, formData.doYouNeedUniqueBusinessAddress, pricingData]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -324,6 +329,7 @@ export function BusinessFormationForm({ pricingData }) {
         <CardDescription className="text-center">
           Fill out the form below to begin your LLC formation process
         </CardDescription>
+
         {pricingData?.price && (
           <div className="mt-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
             <p className="text-sm text-center">
@@ -335,6 +341,7 @@ export function BusinessFormationForm({ pricingData }) {
             </p>
           </div>
         )}
+        
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -709,13 +716,45 @@ export function BusinessFormationForm({ pricingData }) {
               </Select>
           </div>
 
-{/* {price > 0 && (
-  <div className="mt-4 text-center">
-    <p className="text-lg font-semibold">
-      Estimated Service Price: <span className="text-blue-600">${price}</span>
-    </p>
-  </div>
-)} */}
+          {price > 0 && (
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg border">
+              <div className="text-center">
+                <p className="text-lg font-semibold mb-2">Service Price Breakdown</p>
+                <div className="space-y-1 text-sm">
+                  {pricingData?.price ? (
+                    <div className="flex justify-between">
+                      <span>Base Package ({pricingData.planName}):</span>
+                      <span>${pricingData.price}</span>
+                    </div>
+                  ) : formData.state && formData.packageType ? (
+                    <div className="flex justify-between">
+                      <span>Base Package ({formData.packageType} - {formData.state}):</span>
+                      <span>${priceTableForLLC[formData.state]?.[formData.packageType] || 0}</span>
+                    </div>
+                  ) : null}
+                  {formData.doYouNeedUniqueBusinessAddress === "Yes" && (
+                    <div className="flex justify-between">
+                      <span>Unique Business Address:</span>
+                      <span>$65</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span>Subtotal:</span>
+                    <span>${price}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Card Processing Fee (3%):</span>
+                    <span>${(price * 0.03).toFixed(2)}</span>
+                  </div>
+                  <hr className="my-2" />
+                  <div className="flex justify-between font-semibold text-lg">
+                    <span>Total:</span>
+                    <span className="text-blue-600">${(price * 1.03).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
             <div className="space-y-2">
               <Label htmlFor="zipCode">Zip Code</Label>
@@ -741,11 +780,11 @@ export function BusinessFormationForm({ pricingData }) {
 
           <div className="space-y-4 border rounded-md p-4">
             <div className="space-y-2">
-              <Label htmlFor="q1">Do you want to use a registered agent?</Label>
+              <Label htmlFor="doYouWantRegisteredAgent">Do you want to use a registered agent?</Label>
               <Select
-                value={formData.q1}
+                value={formData.doYouWantRegisteredAgent}
                 onValueChange={(value) =>
-                  setFormData({ ...formData, q1: value })
+                  setFormData({ ...formData, doYouWantRegisteredAgent: value })
                 }
                 required
               >
@@ -760,13 +799,13 @@ export function BusinessFormationForm({ pricingData }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="q2">
+              <Label htmlFor="doYouNeedUniqueBusinessAddress">
                 Do you need Unique business address?(additional cost 65$ yearly)
               </Label>
               <Select
-                value={formData.q2}
+                value={formData.doYouNeedUniqueBusinessAddress}
                 onValueChange={(value) =>
-                  setFormData({ ...formData, q2: value })
+                  setFormData({ ...formData, doYouNeedUniqueBusinessAddress: value })
                 }
                 required
               >
@@ -781,11 +820,11 @@ export function BusinessFormationForm({ pricingData }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="q3">Do you want to use your own address?</Label>
+              <Label htmlFor="doYouWantToUseYourOwnAddress">Do you want to use your own address?</Label>
               <Select
-                value={formData.q3}
+                value={formData.doYouWantToUseYourOwnAddress}
                 onValueChange={(value) =>
-                  setFormData({ ...formData, q3: value })
+                  setFormData({ ...formData, doYouWantToUseYourOwnAddress: value })
                 }
                 required
               >
@@ -800,13 +839,13 @@ export function BusinessFormationForm({ pricingData }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="q4">
+              <Label htmlFor="doYouWantAnonymousLLCOrOnMemberName">
                 Do you want Anonymous LLC or on Member Name?
               </Label>
               <Select
-                value={formData.q4}
+                value={formData.doYouWantAnonymousLLCOrOnMemberName}
                 onValueChange={(value) =>
-                  setFormData({ ...formData, q4: value })
+                  setFormData({ ...formData, doYouWantAnonymousLLCOrOnMemberName: value })
                 }
                 required
               >

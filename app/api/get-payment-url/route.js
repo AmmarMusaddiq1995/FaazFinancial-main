@@ -5,6 +5,7 @@ console.log(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const { amount, form_id } = await req.json();
+  const totalAmountWithTax  = amount + (amount * 0.03);
 
   console.log(amount, form_id);
 
@@ -17,7 +18,7 @@ export async function POST(req) {
           product_data: {
             name: "Custom Payment",
           },
-          unit_amount: amount * 100, // convert $50 → 5000 cents
+          unit_amount: totalAmountWithTax * 100, // convert $50 → 5000 cents
         },
         quantity: 1,
       },

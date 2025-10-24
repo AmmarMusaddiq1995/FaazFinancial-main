@@ -27,6 +27,7 @@ import {
   Bell,
 } from "lucide-react";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export function DashboardLayout({ children, user, profileData }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,36 +46,36 @@ export function DashboardLayout({ children, user, profileData }) {
 
   const navigation = [
     { name: "Overview", href: "/dashboard", icon: Home, current: true },
-    {
-      name: "My Businesses",
-      href: "/dashboard/businesses",
-      icon: Building2,
-      current: false,
-    },
-    {
-      name: "Documents",
-      href: "/dashboard/documents",
-      icon: FileText,
-      current: false,
-    },
-    {
-      name: "Billing",
-      href: "/dashboard/billing",
-      icon: CreditCard,
-      current: false,
-    },
-    {
-      name: "Settings",
-      href: "/dashboard/settings",
-      icon: Settings,
-      current: false,
-    },
-    {
-      name: "Support",
-      href: "/dashboard/support",
-      icon: HelpCircle,
-      current: false,
-    },
+    // {
+    //   name: "My Businesses",
+    //   href: "/dashboard/businesses",
+    //   icon: Building2,
+    //   current: false,
+    // },
+    // {
+    //   name: "Documents",
+    //   href: "/dashboard/documents",
+    //   icon: FileText,
+    //   current: false,
+    // },
+    // {
+    //   name: "Billing",
+    //   href: "/dashboard/billing",
+    //   icon: CreditCard,
+    //   current: false,
+    // },
+    // {
+    //   name: "Settings",
+    //   href: "/dashboard/settings",
+    //   icon: Settings,
+    //   current: false,
+    // },
+    // {
+    //   name: "Support",
+    //   href: "/dashboard/support",
+    //   icon: HelpCircle,
+    //   current: false,
+    // },
   ];
 
   const userInitials = profileData
@@ -96,10 +97,14 @@ export function DashboardLayout({ children, user, profileData }) {
         <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white">
           <div className="flex h-16 items-center justify-between px-4 border-b">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-cyan-600 flex items-center justify-center">
+              {/* <div className="h-8 w-8 rounded-full bg-cyan-600 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">FFG</span>
               </div>
-              <span className="font-bold text-xl">FaazFinancialGroup</span>
+              <span className="font-bold text-xl">FaazFinancialGroup</span> */}
+
+              <div>
+                <Image src="/faaz_logo4.png" alt="Faaz Financial Group" width={250} height={150} className=" object-contain" />
+              </div>
             </Link>
             <Button
               variant="ghost"
@@ -133,10 +138,12 @@ export function DashboardLayout({ children, user, profileData }) {
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200">
           <div className="flex h-16 items-center px-4 border-b">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-cyan-600 flex items-center justify-center">
+              {/* <div className="h-8 w-8 rounded-full bg-cyan-600 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">FFG</span>
               </div>
-              <span className="font-bold text-xl">FaazFinancialGroup</span>
+              <span className="font-bold text-xl">FaazFinancialGroup</span> */}
+
+              <Image src="/faaz_logo3.png" alt="Faaz Financial Group" width={250} height={150} className=" object-contain" />
             </Link>
           </div>
           <nav className="flex-1 px-4 py-4 space-y-2">
