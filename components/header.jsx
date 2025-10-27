@@ -125,7 +125,6 @@ export function Header() {
          
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8 min-w-0 whitespace-nowrap">
           {/* Products & Pricing Dropdown */}
           <div className="relative">
@@ -137,7 +136,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white">Services & Pricing</span>
+              <span className="whitespace-nowrap text-white">Services And Pricing</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
