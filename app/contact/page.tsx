@@ -53,7 +53,7 @@ export default function ContactPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-cyan-50 to-blue-50 py-20">
+        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
@@ -74,9 +74,9 @@ export default function ContactPage() {
               {contactInfo.map((info, index) => (
                 <Card key={index} className="text-center">
                   <CardContent className="pt-6">
-                    <info.icon className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+                    <info.icon className="h-12 w-12 text-primary mx-auto mb-4" />
                     <h3 className="text-lg font-semibold mb-2">{info.title}</h3>
-                    <p className="text-cyan-600 font-medium mb-1">
+                    <p className="text-primary font-medium mb-1">
                       {info.details}
                     </p>
                     <p className="text-sm text-gray-600">{info.description}</p>
@@ -103,8 +103,8 @@ export default function ContactPage() {
 
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
-                      <div className="bg-cyan-100 p-2 rounded-lg">
-                        <Phone className="h-5 w-5 text-cyan-600" />
+                      <div className="bg-primary/10 p-2 rounded-lg">
+                        <Phone className="h-5 w-5 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold">Quick Response</h4>
@@ -115,8 +115,8 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="bg-cyan-100 p-2 rounded-lg">
-                        <Mail className="h-5 w-5 text-cyan-600" />
+                      <div className="bg-primary/10 p-2 rounded-lg">
+                        <Mail className="h-5 w-5 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold">Expert Guidance</h4>
@@ -207,7 +207,7 @@ export default function ContactPage() {
 
                       <Button
                         type="submit"
-                        className="w-full bg-cyan-600 hover:bg-cyan-700"
+                        className="w-full bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground px-8 py-4 text-lg"
                       >
                         Send Message
                       </Button>
