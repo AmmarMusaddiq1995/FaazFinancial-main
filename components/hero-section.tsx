@@ -62,13 +62,13 @@ export function HeroSection() {
 
       {/* Feature Icons */}
       <div className="relative bg-primary/10 ">
-        <div className="container px-4 py-8">
+        <div className="container mx-auto  px-4 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-primary text-xl">📋</span>
+              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+                <span className="text-primary text-3xl">📋</span>
               </div>
-              <span className="text-sm text-gray-300">
+              <span className="text-md font-medium text-gray-300">
                 Formation and Compliance
               </span>
             </div>
@@ -79,26 +79,26 @@ export function HeroSection() {
               <span className="text-sm text-gray-300">Website and Domain</span>
             </div> */}
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-primary text-xl">📊</span>
+              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+                <span className="text-primary text-3xl">📊</span>
               </div>
-              <span className="text-sm text-gray-300">
+              <span className="text-md font-medium text-gray-300">
                 Banking and Bookkeeping
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-primary text-xl">💡</span>
+              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+                <span className="text-primary text-3xl">💡</span>
               </div>
-              <span className="text-sm text-gray-300">
+              <span className="text-md font-medium text-gray-300">
                 Tax Advice and Filing
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-primary text-xl">🎯</span>
+              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+                <span className="text-primary text-3xl">🎯</span>
               </div>
-              <span className="text-sm text-gray-300">
+              <span className="text-md font-medium text-gray-300">
                 Expert Customer Support
               </span>
             </div>

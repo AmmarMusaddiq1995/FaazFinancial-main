@@ -287,13 +287,14 @@ export default function AboutPage() {
         {/* Stats Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-center items-center mx-auto">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                <div key={index} className="text-center bg-primary/20 w-40 h-40 rounded-full mx-auto" >
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2 flex flex-col items-center justify-center h-full">
                     {stat.number}
+                    <span className="text-gray-600 font-medium text-sm">{stat.label}</span>
                   </div>
-                  <div className="text-gray-600">{stat.label}</div>
+                  {/* <div className="text-gray-600 flex items-center justify-center h-full">{stat.label}</div> */}
                 </div>
               ))}
             </div>
