@@ -171,7 +171,7 @@ export function SettingsView({ user, profile }: SettingsViewProps) {
                 className={`p-3 rounded-md text-sm ${
                   message.includes("Error")
                     ? "bg-red-50 text-red-600 border border-red-200"
-                    : "bg-green-50 text-green-600 border border-green-200"
+                    : "bg-orange-50 text-orange-600 border border-orange-200"
                 }`}
               >
                 {message}

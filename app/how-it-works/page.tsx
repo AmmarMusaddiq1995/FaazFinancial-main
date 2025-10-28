@@ -128,7 +128,7 @@ export default function HowItWorksPage() {
                           <ul className="space-y-2">
                             {step.details.map((detail, detailIndex) => (
                               <li key={detailIndex} className="flex items-start gap-2">
-                                <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                                 <span className="text-sm text-gray-600">{detail}</span>
                               </li>
                             ))}
@@ -239,7 +239,7 @@ export default function HowItWorksPage() {
                         "Formation confirmation and tracking",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                           <span className="text-gray-600">{item}</span>
                         </li>
                       ))}
@@ -259,7 +259,7 @@ export default function HowItWorksPage() {
                         "Business growth resources",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                           <span className="text-gray-600">{item}</span>
                         </li>
                       ))}

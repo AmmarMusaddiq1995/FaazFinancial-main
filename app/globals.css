@@ -11,21 +11,21 @@
   --card-foreground: #4b5563;
   --popover: #ffffff;
   --popover-foreground: #4b5563;
-  --primary: #0891b2;
+  --primary: #f97316;
   --primary-foreground: #ffffff;
-  --secondary: #ec4899;
+  --secondary: #f97316;
   --secondary-foreground: #ffffff;
   --muted: #f9fafb;
   --muted-foreground: #4b5563;
-  --accent: #ec4899;
+  --accent: #f97316;
   --accent-foreground: #ffffff;
   --destructive: #be123c;
   --destructive-foreground: #ffffff;
   --border: #e5e7eb;
   --input: #ffffff;
-  --ring: rgba(8, 145, 178, 0.5);
-  --chart-1: #0891b2;
-  --chart-2: #ec4899;
+  --ring: rgba(249, 115, 22, 0.5);
+  --chart-1: #f97316;
+  --chart-2: #f97316;
   --chart-3: #f97316;
   --chart-4: #be123c;
   --chart-5: #4b5563;
@@ -34,10 +34,10 @@
   --sidebar-foreground: #4b5563;
   --sidebar-primary: #ffffff;
   --sidebar-primary-foreground: #4b5563;
-  --sidebar-accent: #ec4899;
+  --sidebar-accent: #f97316;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: rgba(8, 145, 178, 0.5);
+  --sidebar-ring: rgba(249, 115, 22, 0.5);
 }
 
 .dark {
@@ -47,32 +47,32 @@
   --card-foreground: #f1f5f9;
   --popover: #1e293b;
   --popover-foreground: #f1f5f9;
-  --primary: #0891b2;
+  --primary: #f97316;
   --primary-foreground: #ffffff;
-  --secondary: #ec4899;
+  --secondary: #f97316;
   --secondary-foreground: #ffffff;
   --muted: #334155;
   --muted-foreground: #94a3b8;
-  --accent: #ec4899;
+  --accent: #f97316;
   --accent-foreground: #ffffff;
   --destructive: #be123c;
   --destructive-foreground: #ffffff;
   --border: #334155;
   --input: #1e293b;
-  --ring: rgba(8, 145, 178, 0.5);
-  --chart-1: #0891b2;
-  --chart-2: #ec4899;
+  --ring: rgba(249, 115, 22, 0.5);
+  --chart-1: #f97316;
+  --chart-2: #f97316;
   --chart-3: #f97316;
   --chart-4: #be123c;
   --chart-5: #94a3b8;
   --sidebar: #1e293b;
   --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #0891b2;
+  --sidebar-primary: #f97316;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ec4899;
+  --sidebar-accent: #f97316;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #334155;
-  --sidebar-ring: rgba(8, 145, 178, 0.5);
+  --sidebar-ring: rgba(249, 115, 22, 0.5);
 }
 
 @theme inline {

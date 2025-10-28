@@ -26,10 +26,10 @@ export default function SignUpSuccessPage() {
 
         <Card className="shadow-lg text-center">
           <CardHeader>
-            <div className="mx-auto mb-4 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+            <div className="mx-auto mb-4 w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
+              <CheckCircle className="h-8 w-8 text-orange-600" />
             </div>
-            <CardTitle className="text-2xl text-green-600">
+            <CardTitle className="text-2xl text-orange-600">
               Account Created Successfully!
             </CardTitle>
             {/* <CardDescription>

@@ -122,7 +122,7 @@
 //       value: stats.totalBusinesses.toLocaleString(),
 //       description: "Business formations",
 //       icon: Building2,
-//       color: "text-green-600",
+//       color: "text-orange-600",
 //     },
 //     {
 //       title: "Monthly Revenue",
@@ -1235,7 +1235,7 @@ export function AdminOverview2() {
                               {files.map((file, index) => (
                                 <div key={index} className="flex items-center justify-between bg-gray-50 rounded-md p-2">
                                   <div className="flex items-center">
-                                    <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                    <FileText className="mr-2 h-4 w-4 text-orange-600" />
                                     <span className="text-sm text-gray-700">{file.name}</span>
                                   </div>
                                   <a
@@ -1257,7 +1257,7 @@ export function AdminOverview2() {
                         return (
                           <div className="flex items-center justify-between bg-gray-50 rounded-md p-2">
                             <div className="flex items-center">
-                              <FileText className="mr-2 h-4 w-4 text-green-600" />
+                              <FileText className="mr-2 h-4 w-4 text-orange-600" />
                               <span className="text-sm text-gray-700">Uploaded File</span>
                             </div>
                             <a

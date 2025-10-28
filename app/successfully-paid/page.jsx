@@ -38,8 +38,8 @@
 //     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
 //       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
 //         <div className="flex justify-center mb-6">
-//           <div className="bg-green-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-green-600" />
+//           <div className="bg-orange-100 p-4 rounded-full">
+//             <CheckCircle className="h-16 w-16 text-orange-600" />
 //           </div>
 //         </div>
 
@@ -60,11 +60,11 @@
 //           </div>
 //           <div className="flex justify-between text-gray-700 mb-2">
 //             <span className="font-medium">Amount:</span>
-//             <span className="text-green-600 font-semibold">$299.00</span>
+//             <span className="text-orange-600 font-semibold">$299.00</span>
 //           </div>
 //           <div className="flex justify-between text-gray-700">
 //             <span className="font-medium">Status:</span>
-//             <span className="text-green-600 font-semibold">Paid</span>
+//             <span className="text-orange-600 font-semibold">Paid</span>
 //           </div>
 //         </div>
 
@@ -77,7 +77,7 @@
 
 //         <p className="text-sm text-gray-500 mt-6">
 //           Having trouble?{" "}
-//           <a href="/contact" className="text-green-600 hover:underline">
+//           <a href="/contact" className="text-orange-600 hover:underline">
 //             Contact Support
 //           </a>
 //         </p>
@@ -109,8 +109,8 @@
 //     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
 //       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
 //         <div className="flex justify-center mb-6">
-//           <div className="bg-green-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-green-600" />
+//           <div className="bg-orange-100 p-4 rounded-full">
+//             <CheckCircle className="h-16 w-16 text-orange-600" />
 //           </div>
 //         </div>
 
@@ -131,11 +131,11 @@
 //           </div>
 //           <div className="flex justify-between text-gray-700 mb-2">
 //             <span className="font-medium">Amount:</span>
-//             <span className="text-green-600 font-semibold">$299.00</span>
+//             <span className="text-orange-600 font-semibold">$299.00</span>
 //           </div>
 //           <div className="flex justify-between text-gray-700">
 //             <span className="font-medium">Status:</span>
-//             <span className="text-green-600 font-semibold">Paid</span>
+//             <span className="text-orange-600 font-semibold">Paid</span>
 //           </div>
 //         </div>
 
@@ -148,7 +148,7 @@
 
 //         <p className="text-sm text-gray-500 mt-6">
 //           Having trouble?{" "}
-//           <a href="/contact" className="text-green-600 hover:underline">
+//           <a href="/contact" className="text-orange-600 hover:underline">
 //             Contact Support
 //           </a>
 //         </p>
@@ -191,8 +191,8 @@ function PaymentSuccessContent() {
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
         <div className="flex justify-center mb-6">
-          <div className="bg-green-100 p-4 rounded-full">
-            <CheckCircle className="h-16 w-16 text-green-600" />
+          <div className="bg-orange-100 p-4 rounded-full">
+            <CheckCircle className="h-16 w-16 text-orange-600" />
           </div>
         </div>
 
@@ -213,11 +213,11 @@ function PaymentSuccessContent() {
           </div> */}
           <div className="flex justify-between text-gray-700 mb-2">
             <span className="font-medium">Amount:</span>
-            <span className="text-green-600 font-semibold">${amount}</span>
+            <span className="text-orange-600 font-semibold">${amount}</span>
           </div>
           <div className="flex justify-between text-gray-700">
             <span className="font-medium">Status:</span>
-            <span className="text-green-600 font-semibold">Paid</span>
+            <span className="text-orange-600 font-semibold">Paid</span>
           </div>
         </div>
 
@@ -230,7 +230,7 @@ function PaymentSuccessContent() {
 
         <p className="text-sm text-gray-500 mt-6">
           Having trouble?{" "}
-          <a href="/contact" className="text-green-600 hover:underline">
+          <a href="/contact" className="text-orange-600 hover:underline">
             Contact Support
           </a>
         </p>
@@ -356,8 +356,8 @@ export const fetchCache = "force-no-store";
 //     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
 //       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
 //         <div className="flex justify-center mb-6">
-//           <div className="bg-green-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-green-600" />
+//           <div className="bg-orange-100 p-4 rounded-full">
+//             <CheckCircle className="h-16 w-16 text-orange-600" />
 //           </div>
 //         </div>
 
@@ -378,7 +378,7 @@ export const fetchCache = "force-no-store";
 //           </div>
 //           <div className="flex justify-between text-gray-700 mb-2">
 //             <span className="font-medium">Amount:</span>
-//             <span className="text-green-600 font-semibold">
+//             <span className="text-orange-600 font-semibold">
 //               ${paymentData?.amount || "299.00"}
 //             </span>
 //           </div>
@@ -388,7 +388,7 @@ export const fetchCache = "force-no-store";
 //           </div>
 //           <div className="flex justify-between text-gray-700">
 //             <span className="font-medium">Status:</span>
-//             <span className="text-green-600 font-semibold">
+//             <span className="text-orange-600 font-semibold">
 //               {paymentData?.payment_status || "Paid"}
 //             </span>
 //           </div>
@@ -403,7 +403,7 @@ export const fetchCache = "force-no-store";
 
 //         <p className="text-sm text-gray-500 mt-6">
 //           Having trouble?{" "}
-//           <a href="/contact" className="text-green-600 hover:underline">
+//           <a href="/contact" className="text-orange-600 hover:underline">
 //             Contact Support
 //           </a>
 //         </p>
@@ -478,7 +478,7 @@ export const fetchCache = "force-no-store";
 //   if (status === "loading") {
 //     return (
 //       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50">
-//         <Loader2 className="h-10 w-10 text-green-600 animate-spin mb-4" />
+//         <Loader2 className="h-10 w-10 text-orange-600 animate-spin mb-4" />
 //         <p className="text-gray-600 text-lg">Verifying your payment...</p>
 //       </div>
 //     );
@@ -505,8 +505,8 @@ export const fetchCache = "force-no-store";
 //       <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
 //         <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
 //           <div className="flex justify-center mb-6">
-//             <div className="bg-green-100 p-4 rounded-full">
-//               <CheckCircle className="h-16 w-16 text-green-600" />
+//             <div className="bg-orange-100 p-4 rounded-full">
+//               <CheckCircle className="h-16 w-16 text-orange-600" />
 //             </div>
 //           </div>
 
@@ -526,13 +526,13 @@ export const fetchCache = "force-no-store";
 //             </div>
 //             <div className="flex justify-between text-gray-700 mb-2">
 //               <span className="font-medium">Amount:</span>
-//               <span className="text-green-600 font-semibold">
+//               <span className="text-orange-600 font-semibold">
 //                 ${paymentData.amount || "0.00"}
 //               </span>
 //             </div>
 //             <div className="flex justify-between text-gray-700">
 //               <span className="font-medium">Status:</span>
-//               <span className="text-green-600 font-semibold">
+//               <span className="text-orange-600 font-semibold">
 //                 {paymentData.payment_status || "Paid"}
 //               </span>
 //             </div>
@@ -547,7 +547,7 @@ export const fetchCache = "force-no-store";
 
 //           <p className="text-sm text-gray-500 mt-6">
 //             Having trouble?{" "}
-//             <a href="/contact" className="text-green-600 hover:underline">
+//             <a href="/contact" className="text-orange-600 hover:underline">
 //               Contact Support
 //             </a>
 //           </p>

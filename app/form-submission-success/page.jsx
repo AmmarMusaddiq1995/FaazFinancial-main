@@ -29,8 +29,8 @@ const router = useRouter();
         className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl border border-green-100 text-center"
       >
         <div className="flex justify-center mb-6">
-          <div className="bg-green-100 p-4 rounded-full">
-            <CheckCircle2 className="h-16 w-16 text-green-600" />
+          <div className="bg-orange-100 p-4 rounded-full">
+            <CheckCircle2 className="h-16 w-16 text-orange-600" />
           </div>
         </div>
 
@@ -50,7 +50,7 @@ const router = useRouter();
 
         <p className="text-sm text-gray-500 mt-6">
           Need help?{" "}
-          <a href="/contact" className="text-green-600 hover:underline">
+          <a href="/contact" className="text-orange-600 hover:underline">
             Contact Support
           </a>
         </p>

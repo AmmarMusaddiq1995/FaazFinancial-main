@@ -326,7 +326,7 @@ export function DashboardOverview2({ user, profile }) {
                         <div className="p-3 bg-white border border-green-200 rounded-md space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                              <FileText className="mr-2 h-5 w-5 text-green-600" />
+                              <FileText className="mr-2 h-5 w-5 text-orange-600" />
                               <div>
                                 <p className="text-sm font-medium text-gray-800">
                                   {Array.isArray(form.admin_uploaded_file) ? "Documents Available" : "Document Available"}
@@ -343,7 +343,7 @@ export function DashboardOverview2({ user, profile }) {
                               {form.admin_uploaded_file.map((file, idx) => (
                                 <div key={idx} className="flex items-center justify-between bg-gray-50 rounded-md p-2">
                                   <div className="flex items-center">
-                                    <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                    <FileText className="mr-2 h-4 w-4 text-orange-600" />
                                     <span className="text-sm text-gray-700">{file.name || `File ${idx + 1}`}</span>
                                   </div>
                                   <a
@@ -361,7 +361,7 @@ export function DashboardOverview2({ user, profile }) {
                           ) : (
                             <div className="flex items-center justify-between bg-gray-50 rounded-md p-2">
                               <div className="flex items-center">
-                                <FileText className="mr-2 h-4 w-4 text-green-600" />
+                                <FileText className="mr-2 h-4 w-4 text-orange-600" />
                                 <span className="text-sm text-gray-700">Uploaded File</span>
                               </div>
                               <a

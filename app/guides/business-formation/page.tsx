@@ -101,15 +101,15 @@ export default function BusinessFormationGuidePage() {
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Personal asset protection</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Tax flexibility</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Simple management structure</span>
                   </li>
                 </ul>
@@ -129,15 +129,15 @@ export default function BusinessFormationGuidePage() {
                 </p>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Maximum liability protection</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Easier to raise capital</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-orange-500" />
                     <span className="text-sm">Perpetual existence</span>
                   </li>
                 </ul>

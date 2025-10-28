@@ -24,7 +24,7 @@ export function HeroSection() {
           </div>
 
           <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-balance">
-            Launch Your Dream Business
+            Launch Your Dream <span className="text-orange-500">Business</span>
           </h1>
 
           <p className="text-xl lg:text-2xl text-gray-300 mb-8 text-pretty">
@@ -50,7 +50,7 @@ export function HeroSection() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className="h-4 w-4 fill-green-500 text-green-500"
+                  className="h-4 w-4 fill-orange-500 text-orange-500"
                 />
               ))}
             </div>
@@ -63,7 +63,7 @@ export function HeroSection() {
       {/* Feature Icons */}
       <div className="relative bg-slate-800/50 border-t border-slate-700">
         <div className="container px-4 py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center space-y-2">
               <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
                 <span className="text-primary text-xl">📋</span>
@@ -72,12 +72,12 @@ export function HeroSection() {
                 Formation and Compliance
               </span>
             </div>
-            <div className="flex flex-col items-center space-y-2">
+            {/* <div className="flex flex-col items-center space-y-2">
               <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
                 <span className="text-primary text-xl">🌐</span>
               </div>
               <span className="text-sm text-gray-300">Website and Domain</span>
-            </div>
+            </div> */}
             <div className="flex flex-col items-center space-y-2">
               <div className="h-12 w-12 bg-primary/20 rounded-full flex items-center justify-center">
                 <span className="text-primary text-xl">📊</span>

@@ -33,7 +33,7 @@ const MenuItem = ({ href, children, truncate = false }) => (
       <TooltipTrigger asChild>
         <Link
           href={href}
-          className={`text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md px-2 py-1 block transition-all duration-200 ${
+          className={`text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200 ${
             truncate ? "truncate max-w-[180px]" : ""
           }`}
         >
@@ -113,7 +113,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full h-20  bg-black ">
       <div className="container flex h-20 items-center justify-between px-4 gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 min-w-0">
+        <Link href="/" className="flex space-x-2 min-w-0">
           {/* <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center"> 
              <span className="text-white font-bold text-sm">FFG</span>
            
@@ -121,7 +121,7 @@ export function Header() {
           <span className="font-bold text-sm text-black whitespace-nowrap hidden xl:inline">
             FAAZ Financial Group LLC
           </span> */}
-          <Image src="/faaz_logo4.png" alt="Faaz Financial Group" width={250} height={150} className=" object-contain" />
+          <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={140} height={30} />
          
         </Link>
 
@@ -130,13 +130,13 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("products")}
-              className={`flex items-center space-x-1 text-foreground hover:text-green-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
                 activeDropdown === "products"
-                  ? "text-green-600 border-b-2 border-green-600"
+                  ? "text-orange-600 border-b-2 border-orange-600"
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white">Services And Pricing</span>
+              <span className="whitespace-nowrap text-white font-bold">Services & Pricing</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -346,13 +346,13 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => router.push("/blog")}
-              className={`flex items-center space-x-1 text-foreground hover:text-green-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
                 activeDropdown === "guides"
-                  ? "text-green-600 border-b-2 border-green-600"
+                  ? "text-orange-600 border-b-2 border-orange-600"
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white">Learning Center</span>
+              <span className="whitespace-nowrap text-white font-bold">Learning Center</span>
             </button>
           </div>
 
@@ -360,13 +360,13 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("about")}
-              className={`flex items-center space-x-1 text-foreground hover:text-green-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
                 activeDropdown === "about"
-                  ? "text-green-600 border-b-2 border-green-600"
+                  ? "text-orange-600 border-b-2 border-orange-600"
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white font-bold">Get To Know Us</span>
               {activeDropdown === "about" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -383,7 +383,7 @@ export function Header() {
                   <li>
                     <Link
                       href="/about"
-                      className="text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md px-2 py-1 block transition-all duration-200"
+                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
                     >
                       About Us
                     </Link>
@@ -391,7 +391,7 @@ export function Header() {
                   <li>
                     <Link
                       href="/contact"
-                      className="text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md px-2 py-1 block transition-all duration-200"
+                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
                     >
                       Contact Us
                     </Link>
@@ -404,7 +404,7 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center space-x-2.5 lg:space-x-3 xl:space-x-4 min-w-0">
-          {/* <button className="p-2 text-gray-600 hover:text-green-600 transition-colors hidden xl:inline-flex">
+          {/* <button className="p-2 text-gray-600 hover:text-orange-600 transition-colors hidden xl:inline-flex">
             <Search className="h-5 w-5" />
           </button> */}
           <span className="text-sm text-white flex items-center space-x-1 whitespace-nowrap hidden xl:inline-flex">
@@ -429,7 +429,7 @@ export function Header() {
                   }
                   variant="outline"
                   size="sm"
-                  className="border-black text-black hover:bg-black hover:text-white"
+                  className="border-black text-black hover:bg-primary hover:text-white"
                 >
                   Dashboard
                 </Button>
@@ -445,7 +445,7 @@ export function Header() {
 
           {/* <Button
             variant="ghost"
-            className="text-gray-600 hover:text-green-600"
+            className="text-gray-600 hover:text-orange-600"
             onClick={() => router.push("/auth/login")}
           >
             Log In
@@ -499,25 +499,25 @@ export function Header() {
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/llc-formation-2"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         LLC Formation
                       </Link>
                       <Link
                         href="/services/corporation-formation"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Corp. Formation
                       </Link>
                       <Link
                         href="/services/corporation-formation"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Compare Formation Plans
                       </Link>
                       <Link
                         href="/services/dba-trademark-registration"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         DBA/Trademark Registration
                       </Link>
@@ -531,98 +531,98 @@ export function Header() {
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/ein-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         EIN Services
                       </Link>
                       <Link
                         href="/services/boi-filing-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         BOI Filing Services
                       </Link>
                       <Link
                         href="/services/itin-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         ITIN Services
                       </Link>
                       <Link
                         href="/services/sales-and-usetax-registration"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Sales & Use Tax Registration
                       </Link>
                       <Link
                         href="/services/annual-company-state-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Annual Company State Filing
                       </Link>
                       <Link
                         href="/services/ein-closing-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         EIN Closing Services
                       </Link>
                       <Link
                         href="/services/registered-agent"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Registered Agent Services
                       </Link>
                       <Link
                         href="/services/company-dissolution"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Company Dissolution(State Fee Vary)
                       </Link>
                       <Link
                         href="/services/company-revival"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Company Revival (State Fee vary)
                       </Link>
                       <Link
                         href="/services/address-change-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Address Change Services
                       </Link>
                       <Link
                         href="/services/filing-articles-of-amendments"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Filing Articles Of Amendments(State fee excluded)
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Related Services
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Withholding Account Registration
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         UI(Unemployment Insurance)
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Management (Gusto, Adp, QBO, Paychecks, Paycom,
                         Rippling) monthly
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Account Setup (Reach out for pricing)
                       </Link>
@@ -636,79 +636,79 @@ export function Header() {
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/pro-bookkeeping-services(small-business)"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Pro-BookKeeping Services (Small Business)
                       </Link>
                       <Link
                         href="/services/pro-bookkeeping-services(medium-business)"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Pro-BookKeeping Services (Medium Business)
                       </Link>
                       <Link
                         href="/services/pro-bookkeeping-services(large-business)"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Pro-Bookkeeping Services (Large Business)
                       </Link>
                       <Link
                         href="/services/full-year-reconciliation-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Full-Year Reconciliation Services
                       </Link>
                       <Link
                         href="/services/setting-up-new-books-in-QBO"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Setting Up New Books In QBO/Xero Or Any ERP
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Financial Reporting - Reach Out For Pricing
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Virtual CFO Services-Reach Out For Pricing
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Taxes
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Withholding Tax Filing
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         W2 & 1099 Filing
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Tax Filing Services
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Tax Filing Individual ( Non Resident) With ITIN
                       </Link>
                       <Link
                         href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Company Tax Filing Vary Based On The Volume Of Business
                       </Link>
@@ -722,110 +722,110 @@ export function Header() {
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/uk-ltd-formation"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         UK LTD Formation
                       </Link>
                       <Link
                         href="/services/simple-corp-tax-return-ct600"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Simple Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
                         href="/services/complex-corp-tax-return-ct600"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Advance Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
                         href="/services/registering-client-for-selfassessment"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Registering Client For Selfassessment
                       </Link>
                       <Link
                         href="/services/simple-self-assessment-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Simple Self Assessment (SA100) Filing
                       </Link>
                       <Link
                         href="/services/advance-self-assessment-filing"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Advance Self Assessment (SA100) Filing
                       </Link>
                       <Link
                         href="/services/annual-accounts-preparation"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Annual Corporation Tax Accounts Preparation
                       </Link>
                      
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Dormant Accounts Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Micro-Entity Accounts Filiing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Abridged Accounts Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Full Statutory Accounts Filing
                       </Link>
                       <Link
                         href="/services/confirmation-statement-filing-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Confirmation Statement Filing
                       </Link>
                       <Link
                         href="/services/vat-registration-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         VAT Registeration
                       </Link>
                       <Link
                         href="/services/vat-return-filing-services"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         VAT Return Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Tax Planning & Consulation On Zoom
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Tax Budgeting & Taxation In Investment Appraisal
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Company Registration
                       </Link>
                       <Link
                         href="/services/initial-compliance-after-formation"
-                        className="block text-sm text-gray-600 hover:text-green-600"
+                        className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Initial Compliance After Formation
                       </Link>
@@ -842,7 +842,7 @@ export function Header() {
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/blog"
-                      className="block text-sm text-gray-600 hover:text-green-600"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
                     >
                       Visit our Blog
                     </Link>
@@ -858,13 +858,13 @@ export function Header() {
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/about"
-                      className="block text-sm text-gray-600 hover:text-green-600"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
                     >
                       About Us
                     </Link>
                     <Link
                       href="/contact"
-                      className="block text-sm text-gray-600 hover:text-green-600"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
                     >
                       Contact Us
                     </Link>
