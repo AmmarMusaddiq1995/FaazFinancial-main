@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -9,12 +10,13 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <Link href="/" className="flex items-center space-x-2 mb-6">
-              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+              {/* <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">
                   FFG
                 </span>
               </div>
-              <span className="font-bold text-xl">FaazFinancialGroup</span>
+              <span className="font-bold text-xl">FaazFinancialGroup</span> */}
+              <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={140} height={20} />
             </Link>
             <p className="text-gray-400 mb-4">
               Making business formation simple and affordable for entrepreneurs

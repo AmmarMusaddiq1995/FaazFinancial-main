@@ -215,7 +215,7 @@ export function PricingSection() {
       ],
     },
     {
-      name: "Pro",
+      name: "Standard",
       price: `$${currentPrices.Pro}`,
       period: "",
       description: "Most popular plan for new businesses",
@@ -410,14 +410,29 @@ export function PricingSection() {
               className={`relative ${
                 plan.popular ? "border-primary shadow-lg scale-105" : ""
               }`}
+              
             >
-              {plan.popular && (
+              {plan.name === "Standard" && (
+                <div className="absolute top-4 -right-9 z-10">
+                  <span className="bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
+                    RECOMMENDED
+                  </span>
+                </div>
+              )}
+              {plan.name === "Premium" && (
+                <div className="absolute top-12 -right-6 z-10">
+                  <span className="bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block origin-top-right">
+                    BEST VALUE
+                  </span>
+                </div>
+              )}
+              {/* {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-primary text-secondary-foreground px-4 py-1 rounded-full text-sm font-medium">
                     MOST POPULAR
                   </span>
                 </div>
-              )}
+              )} */}
 
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl font-bold">

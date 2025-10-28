@@ -121,7 +121,7 @@ export function Header() {
           <span className="font-bold text-sm text-black whitespace-nowrap hidden xl:inline">
             FAAZ Financial Group LLC
           </span> */}
-          <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={140} height={30} />
+          <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={140} height={20} />
          
         </Link>
 

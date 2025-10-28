@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
+import WhatsappButton from "@/components/WhatsappButton";
 
 export const metadata = {
   title: "Faaz Financial Group",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <AppContextProvider>
           {children}
         </AppContextProvider>
+        <WhatsappButton />
         <Analytics />
       </body>
     </html>

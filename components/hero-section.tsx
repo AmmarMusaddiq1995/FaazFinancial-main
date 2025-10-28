@@ -19,7 +19,7 @@ export function HeroSection() {
         <div className="max-w-2xl">
           <div className="mb-6">
             <span className="inline-block bg-primary/20 text-primary-foreground px-3 py-1 rounded-full text-md font-medium mb-4">
-              EVERYTHING YOU NEED. ALL IN ONE PLACE.
+              ONE HOME FOR ALL YOUR BUSINESS NEEDS.
             </span>
           </div>
 
@@ -61,7 +61,7 @@ export function HeroSection() {
       </div>
 
       {/* Feature Icons */}
-      <div className="relative bg-slate-800/50 border-t border-slate-700">
+      <div className="relative bg-primary/10 ">
         <div className="container px-4 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center space-y-2">
