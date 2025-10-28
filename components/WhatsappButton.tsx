@@ -10,7 +10,7 @@ export default function WhatsappButton() {
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="Chat on WhatsApp"
-			className="fixed bottom-9 right-10 z-[100] inline-flex h-20 w-20 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40"
+			className="fixed bottom-9 right-10 z-[100] inline-flex h-20 w-20 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary focus:outline-none focus:ring-2 focus:ring-white/40"
 		>
 			{/* WhatsApp logo (SVG) */}
 			<svg

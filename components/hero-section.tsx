@@ -65,7 +65,7 @@ export function HeroSection() {
         <div className="container mx-auto  px-4 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
                 <span className="text-primary text-3xl">📋</span>
               </div>
               <span className="text-md font-medium text-gray-300">
@@ -79,7 +79,7 @@ export function HeroSection() {
               <span className="text-sm text-gray-300">Website and Domain</span>
             </div> */}
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
                 <span className="text-primary text-3xl">📊</span>
               </div>
               <span className="text-md font-medium text-gray-300">
@@ -87,7 +87,7 @@ export function HeroSection() {
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
                 <span className="text-primary text-3xl">💡</span>
               </div>
               <span className="text-md font-medium text-gray-300">
@@ -95,7 +95,7 @@ export function HeroSection() {
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/20 rounded-full flex items-center justify-center">
+              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
                 <span className="text-primary text-3xl">🎯</span>
               </div>
               <span className="text-md font-medium text-gray-300">
