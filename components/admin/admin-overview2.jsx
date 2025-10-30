@@ -785,7 +785,7 @@ export function AdminOverview2() {
         return "bg-yellow-500 text-white";
       case "pending":
         return "bg-gray-400 text-white";
-      case "succeeded":
+      case "paid":
         return "bg-green-500 text-white";
       default:
         return "bg-gray-300 text-gray-800";
@@ -1105,7 +1105,7 @@ export function AdminOverview2() {
             </DialogHeader>
 
             {/* File Upload Section for Succeeded Payments */}
-            {selectedSubmission.payment_status === "succeeded" && (
+            {selectedSubmission.payment_status === "paid" && (
               <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
                   <Upload className="mr-2 h-5 w-5" />

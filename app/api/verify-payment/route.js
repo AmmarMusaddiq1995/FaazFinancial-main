@@ -16,9 +16,10 @@ export async function GET(req) {
       expand: ["payment_intent"],
     });
 
-    const form_id = session.metadata?.form_id;
+    const form_id = session.payment_intent?.metadata?.form_id || session.metadata?.form_id || null;
     const payment_status = session.payment_status;
     const amount_total = session.amount_total;
+    const payment_intent_id = session.payment_intent?.id || null;
 
     return new Response(
       JSON.stringify({
@@ -26,6 +27,7 @@ export async function GET(req) {
         form_id,
         payment_status,
         amount_total,
+        payment_intent_id,
       }),
       { status: 200 }
     );

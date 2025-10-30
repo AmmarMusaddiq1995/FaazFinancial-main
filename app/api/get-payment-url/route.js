@@ -5,7 +5,7 @@ console.log(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const { amount, form_id } = await req.json();
-  const totalAmountWithTax  = amount + (amount * 0.03);
+  const totalAmountWithTax  = Math.round(amount + (amount * 0.03));
 
   console.log(amount, form_id);
 
@@ -27,11 +27,11 @@ export async function POST(req) {
     payment_intent_data: {
       metadata: { form_id},
     },
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/successfully-paid?amount=${amount}`, // app k siblin folder bny hoga
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/successfully-paid?amount=${totalAmountWithTax}&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-failed`,
   });
 
-  return new Response(JSON.stringify({ url: session.url }), {
+  return new Response(JSON.stringify({ url: session.url, sessionId: session.id }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });

@@ -222,11 +222,17 @@ export function DashboardOverview2({ user, profile }) {
         amount: form.amount,
       });
       console.log(response);
-      window.location.href = response.data.url;
-      const updatedStatus = await supabase.from("form_submissions").update({
-        status: "in-progress",
-      }).eq("id", form.id);
+      
+      const updatedStatus = await supabase
+        .from("form_submissions")
+        .update({ status: "in-progress" })
+        .eq("id", form.id);
       console.log(updatedStatus);
+
+      window.location.href = response.data.url;
+
+     
+
     } catch (error) {
       console.error(error);
     }
@@ -262,7 +268,7 @@ export function DashboardOverview2({ user, profile }) {
                   const displayStatus =
                     (form.status || "").toLowerCase() === "completed"
                       ? "completed"
-                      : form.payment_status === "succeeded"
+                      : form.payment_status === "paid"
                       ? "in-progress"
                       : "pending";
                   return (
@@ -280,7 +286,7 @@ export function DashboardOverview2({ user, profile }) {
 
                
 
-                {form.payment_status === "succeeded" && (
+                {form.payment_status === "paid" && (
                   <p className="text-sm text-green-500">
                     Payment Status: Paid
                   </p>

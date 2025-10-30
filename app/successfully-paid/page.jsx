@@ -170,22 +170,63 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 
 function PaymentSuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [paymentId, setPaymentId] = useState(null);
-  const amount = searchParams.get("amount");
-  const paymentIntent = searchParams.get("payment_intent");
-  
+  const [loading, setLoading] = useState(true);
+  const [details, setDetails] = useState(null);
+  const [errorText, setErrorText] = useState("");
+
   useEffect(() => {
-    // safely access search params on client
-    setPaymentId(searchParams.get("payment_intent"));
-    
+    const run = async () => {
+      const sessionId = searchParams.get("session_id");
+      if (!sessionId) {
+        setErrorText("Missing session. If you completed payment, it may still be processing.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Verify with server (talks to Stripe securely)
+        const res = await fetch(`/api/verify-payment?session_id=${sessionId}`);
+        const data = await res.json();
+        if (res.ok && data?.form_id) {
+          // Update Supabase row
+          await supabase
+            .from("form_submissions")
+            .update({
+              payment_status: data.payment_status,
+              payment_id: data.payment_intent_id || null,
+              amount: data.amount_total ? data.amount_total / 100 : null,
+              status: data.payment_status === "paid" || data.payment_status === "succeeded" ? "in-progress" : undefined,
+            })
+            .eq("id", data.form_id);
+
+          setDetails(data);
+        } else {
+          setErrorText(data?.error || "Unable to verify payment.");
+        }
+      } catch (e) {
+        setErrorText("Failed to verify payment.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    run();
   }, [searchParams]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50">
+        <Loader2 className="h-10 w-10 text-orange-600 animate-spin mb-4" />
+        <p className="text-gray-600 text-lg">Verifying your payment...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
@@ -197,29 +238,28 @@ function PaymentSuccessContent() {
         </div>
 
         <h1 className="text-3xl font-bold text-green-700 mb-2">
-          Payment Successful 🎉
+          {errorText ? "Payment Verification" : "Payment Successful 🎉"}
         </h1>
         <p className="text-gray-600 mb-6">
-          Your payment has been processed successfully.  
-          Thank you for choosing our service.
+          {errorText || "Your payment has been processed successfully. Thank you for choosing our service."}
         </p>
 
-        <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6">
-          {/* <div className="flex justify-between text-gray-700 mb-2">
-            <span className="font-medium">Payment ID:</span>
-            <span className="text-gray-600 truncate max-w-[200px]">
-              {paymentIntent || "Loading..."}
-            </span>
-          </div> */}
-          <div className="flex justify-between text-gray-700 mb-2">
-            <span className="font-medium">Amount:</span>
-            <span className="text-orange-600 font-semibold">${amount}</span>
+        {details && (
+          <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6 text-left">
+            <div className="flex justify-between text-gray-700 mb-2">
+              <span className="font-medium">Amount:</span>
+              <span className="text-orange-600 font-semibold">${(details.amount_total / 100).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-gray-700 mb-2">
+              <span className="font-medium">Status:</span>
+              <span className="text-orange-600 font-semibold">{details.payment_status}</span>
+            </div>
+            <div className="flex justify-between text-gray-700">
+              <span className="font-medium">Form ID:</span>
+              <span className="text-gray-700">{details.form_id}</span>
+            </div>
           </div>
-          <div className="flex justify-between text-gray-700">
-            <span className="font-medium">Status:</span>
-            <span className="text-orange-600 font-semibold">Paid</span>
-          </div>
-        </div>
+        )}
 
         <Button
           className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
@@ -227,13 +267,6 @@ function PaymentSuccessContent() {
         >
           Go to Dashboard
         </Button>
-
-        <p className="text-sm text-gray-500 mt-6">
-          Having trouble?{" "}
-          <a href="/contact" className="text-orange-600 hover:underline">
-            Contact Support
-          </a>
-        </p>
       </div>
     </div>
   );
