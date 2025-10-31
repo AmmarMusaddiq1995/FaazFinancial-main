@@ -43,14 +43,14 @@ const router = useRouter();
 
         <Button
           onClick={() => router.push("/dashboard")}
-          className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg shadow-md hover:shadow-lg transition-all"
+          className="bg-primary hover:bg-primary/80 cursor-pointer text-white rounded-full px-8 py-3 text-lg shadow-md hover:shadow-lg transition-all"
         >
           Proceed To Payment
         </Button>
 
         <p className="text-sm text-gray-500 mt-6">
           Need help?{" "}
-          <a href="/contact" className="text-orange-600 hover:underline">
+          <a href="/contact" className="text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4">
             Contact Support
           </a>
         </p>

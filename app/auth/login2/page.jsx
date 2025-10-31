@@ -17,6 +17,7 @@ import { useAuthContext } from "@/context/AppContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -44,27 +45,23 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
       {/* Toast notifications */}
       <ToastContainer position="top-right" autoClose={3000} />
 
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <div className="h-10 w-10 rounded-full bg-cyan-600 flex items-center justify-center">
-              <span className="text-white font-bold">FFG</span>
-            </div>
-            <span className="font-bold text-2xl text-gray-900">
-              FaazFinancialGroup
-            </span>
+          
+            <Image src="/logo-resized2.png" alt="logo" width={150} height={100} />
           </Link>
         </div>
 
-        <Card className="shadow-lg">
+        <Card className="hover:shadow-primary transition-all duration-300 hover:shadow-lg">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Welcome Back</CardTitle>
             <CardDescription>
-              Sign in to your FaazFinancialGroup account to manage your business
+              Sign in to your account to manage your business
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -94,7 +91,7 @@ export default function LoginPage() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-cyan-600 hover:bg-cyan-700"
+                  className="w-full bg-primary hover:bg-primary/80 cursor-pointer text-white rounded-full px-8 py-3 text-lg transition-all "
                   disabled={isLoading}
                 >
                   {isLoading ? "Signing in..." : "Sign In"}
@@ -103,7 +100,7 @@ export default function LoginPage() {
               <div className="mt-6 text-center text-sm">
                 <Link
                   href="#"
-                  className="text-cyan-600 hover:text-cyan-700 underline underline-offset-4"
+                  className="text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4"
                 >
                   Forgot your password?
                 </Link>
@@ -112,7 +109,7 @@ export default function LoginPage() {
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/auth/sign-up2"
-                  className="text-cyan-600 hover:text-cyan-700 underline underline-offset-4 font-medium"
+                  className="text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4 font-medium"
                 >
                   Create one now
                 </Link>
@@ -122,8 +119,8 @@ export default function LoginPage() {
         </Card>
 
         <div className="mt-8 text-center">
-          <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
-            ← Back to FaazFinancialGroup
+          <Link href="/" className="text-primary hover:text-primary/80 cursor-pointer text-sm">
+            ← Back to Home
           </Link>
         </div>
       </div>

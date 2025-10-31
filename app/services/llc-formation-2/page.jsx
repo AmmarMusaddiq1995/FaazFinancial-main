@@ -125,7 +125,7 @@ function LLCFormationContent() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Pricing Section
       <section className="py-16 px-4">
         <div className="container max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -217,7 +217,7 @@ function LLCFormationContent() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

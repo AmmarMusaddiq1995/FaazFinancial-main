@@ -114,13 +114,7 @@ export function Header() {
       <div className="container flex h-20 items-center justify-between px-4 gap-4">
         {/* Logo */}
         <Link href="/" className="flex space-x-2 min-w-0">
-          {/* <div className="h-8 w-8 rounded-full bg-green-600 flex items-center justify-center"> 
-             <span className="text-white font-bold text-sm">FFG</span>
-           
-          </div> 
-          <span className="font-bold text-sm text-black whitespace-nowrap hidden xl:inline">
-            FAAZ Financial Group LLC
-          </span> */}
+         
           <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={100} height={20} />
          
         </Link>
@@ -136,7 +130,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold">Services & Pricing</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Services & Pricing</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -352,7 +346,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold">Learning Center</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Learning Center</span>
             </button>
           </div>
 
@@ -366,7 +360,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Get To Know Us</span>
               {activeDropdown === "about" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -418,7 +412,7 @@ export function Header() {
                 <span className="text-white max-w-[160px] lg:max-w-[200px] truncate hidden xl:inline">
                   {session.user?.email || "User"}
                 </span>
-                <Button size="sm" onClick={handleLogout}>
+                <Button size="sm" onClick={handleLogout} className="hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">
                   Log Out
                 </Button>
                 <Button
@@ -429,14 +423,14 @@ export function Header() {
                   }
                   variant="outline"
                   size="sm"
-                  className="border-black text-black hover:bg-primary hover:text-white"
+                  className="text-black hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300"
                 >
                   Dashboard
                 </Button>
               </>
             ) : (
               <>
-                <Button size="sm" onClick={() => router.push("/auth/login2")}>
+                <Button size="sm" className="hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300" onClick={() => router.push("/auth/login2")}>
                   Log In
                 </Button>
               </>

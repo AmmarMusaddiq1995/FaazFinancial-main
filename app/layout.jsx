@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
 import WhatsappButton from "@/components/WhatsappButton";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Faaz Financial Group",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <AppContextProvider>
           {children}
         </AppContextProvider>
+        <Toaster position="top-right" />
         <WhatsappButton />
         <Analytics />
       </body>
