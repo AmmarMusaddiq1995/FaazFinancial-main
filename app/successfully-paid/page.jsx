@@ -194,8 +194,10 @@ function PaymentSuccessContent() {
         // Verify with server (talks to Stripe securely)
         const res = await fetch(`/api/verify-payment?session_id=${sessionId}`);
         const data = await res.json();
+        console.log("data coming from stripe api session",data);
         if (res.ok && data?.form_id) {
           // Update Supabase row
+          console.log("data coming from supabase",data);
           await supabase
             .from("form_submissions")
             .update({
@@ -230,7 +232,7 @@ function PaymentSuccessContent() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-      <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
+      <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl text-center border border-green-100">
         <div className="flex justify-center mb-6">
           <div className="bg-orange-100 p-4 rounded-full">
             <CheckCircle className="h-16 w-16 text-orange-600" />
@@ -252,17 +254,21 @@ function PaymentSuccessContent() {
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Status:</span>
-              <span className="text-orange-600 font-semibold">{details.payment_status}</span>
+              <span className="text-orange-600 font-semibold">{details.payment_status.charAt(0).toUpperCase() + details.payment_status.slice(1)}</span>
             </div>
-            <div className="flex justify-between text-gray-700">
+            <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Form ID:</span>
-              <span className="text-gray-700">{details.form_id}</span>
+              <span className="text-orange-600 font-semibold">{details.form_id}</span>
+            </div>
+            <div className="flex justify-between text-gray-700 mb-2">
+              <span className="font-medium">Payment ID:</span>
+              <span className="text-orange-600 font-semibold">{details.payment_intent_id}</span>
             </div>
           </div>
         )}
 
         <Button
-          className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
+          className="bg-primary hover:bg-primary/80 cursor-pointer text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
           onClick={() => router.push("/dashboard")}
         >
           Go to Dashboard
