@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "target": "ES6",
     "skipLibCheck": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -19,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -38,7 +44,15 @@
     "app/api/business-formation/route.js",
     "app/start-business/page.jsx",
     "components/dashboard/dashboard-overview.jsx",
-    "components/admin/admin-overview.jsx"
-, "app/layout.jsx", "app/page.jsx", "app/dashboard/documents/page.jsx", "app/services/registered-agent/page.jsx", "components/pricing-section.jsx"  ],
-  "exclude": ["node_modules"]
+    "components/admin/admin-overview.jsx",
+    "app/layout.jsx",
+    "app/page.jsx",
+    "app/dashboard/documents/page.jsx",
+    "app/services/registered-agent/page.jsx",
+    "components/pricing-section.jsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

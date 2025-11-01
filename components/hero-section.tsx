@@ -23,13 +23,13 @@ export function HeroSection() {
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-balance">
-            Launch Your Dream <span className="text-orange-500">Business</span>
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+            Launch Your <br />
+            <span className="text-orange-500 mx-60 whitespace-nowrap"><span className="text-white">Dream</span> Business</span>
           </h1>
 
-          <p className="text-xl lg:text-2xl text-gray-300 mb-8 text-pretty">
-            Start and protect your business with worry-free services and expert
-            support. 
+          <p className="text-xl lg:text-2xl text-gray-300 mb-8 whitespace-nowrap">
+            Build Boldly , Protect Wisely , Succeed Easily - <span className="text-orange-500 font-bold">All in One Place</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">

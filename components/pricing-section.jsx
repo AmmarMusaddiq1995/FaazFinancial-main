@@ -228,7 +228,7 @@ export function PricingSection() {
         "1 Year Registered Agent Service",
         "Registered Agent Address",
         "EIN Confirmation (with C147 letter)",
-        "Bank Account",
+        
       ],
     },
     {
@@ -259,13 +259,12 @@ export function PricingSection() {
             Compare our packages
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Our customized packages meet the compliance, filing speed, and
-            support needs of your new business in one place.
+          Discover Your Perfect Fit: <span className="text-orange-500 font-bold">Tailored</span> Packages for <span className="text-orange-500 font-bold">Seamless</span> Compliance, <span className="text-orange-500 font-bold">Swift</span> Filings, and Unmatched<span className="text-orange-500 font-bold"> Support</span>.
           </p>
         </div>
 
         {/* Pricing Configuration Section */}
-        <div className="bg-white rounded-lg shadow-sm border p-8 mb-12 max-w-4xl mx-auto">
+        <div className="bg-white rounded-lg shadow-sm border p-8 mb-12 hover:shadow-lg transition-all duration-700 hover:scale-105 hover:shadow-primary/80 max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold text-center mb-8 text-gray-900">
             Configure Your Package
           </h3>
@@ -407,20 +406,29 @@ export function PricingSection() {
           {plans.map((plan, index) => (
             <Card
               key={index}
-              className={`relative ${
+              className={`relative transition-all duration-300 ${
                 plan.popular ? "border-primary shadow-lg scale-105" : ""
-              }`}
+              } hover:scale-105 hover:shadow-lg hover:shadow-orange-500`}
               
             >
+
+              {plan.name === "Starter" && (
+                <div className="absolute top-4 -right-6 z-10">
+                  <span className="bg-gray-200 text-black px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
+                    YOUR CHOICE
+                  </span>
+                </div>
+              )}
+
               {plan.name === "Standard" && (
-                <div className="absolute top-4 -right-9 z-10">
-                  <span className="bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
+                <div className="absolute top-4 -right-7 z-10">
+                  <span className="bg-gray-300 text-black px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
                     RECOMMENDED
                   </span>
                 </div>
               )}
               {plan.name === "Premium" && (
-                <div className="absolute top-12 -right-6 z-10">
+                <div className="absolute top-12 -right-5 z-10">
                   <span className="bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block origin-top-right">
                     BEST VALUE
                   </span>
@@ -435,7 +443,7 @@ export function PricingSection() {
               )} */}
 
               <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl font-bold">
+                <CardTitle className="text-2xl font-bold bg-black text-white rounded-lg p-2  w-full">
                   {plan.name}
                 </CardTitle>
                 <div className="mt-4">
@@ -500,7 +508,7 @@ export function PricingSection() {
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
             *Promotional terms are based on receiving complete information.
-            FaazFinancialGroup processing times do not include Secretary of
+            Faaz Financial Group LLC processing times do not include Secretary of
             State processing times, which can vary.
           </p>
         </div>

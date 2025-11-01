@@ -16,7 +16,7 @@ export function Footer() {
                 </span>
               </div>
               <span className="font-bold text-xl">FaazFinancialGroup</span> */}
-              <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={140} height={20} />
+              <Image src="/logo-new-2.png" alt="Faaz Financial Group" width={140} height={20} />
             </Link>
             <p className="text-gray-400 mb-4">
               Making business formation simple and affordable for entrepreneurs
@@ -132,7 +132,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/legal/terms"
+                  href="/legal/terms-of-services"
                   className="hover:text-white transition-colors"
                 >
                   Terms of Service

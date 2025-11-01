@@ -28,7 +28,7 @@ export function ServicesSection() {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-balance">
-            Everything You Need to Start, Protect, and Grow Your Business
+            Everything You Need to <span className="text-orange-500 font-bold">Start</span>, <span className="text-orange-500 font-bold">Protect</span>, and <span className="text-orange-500 font-bold">Grow</span> Your Business
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
             From formation to ongoing compliance, we provide comprehensive business services to help entrepreneurs
@@ -48,8 +48,8 @@ export function ServicesSection() {
               </div>
 
               <div className="flex items-center justify-center mb-4">
-                <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-2xl">{service.icon}</span>
+                <div className="h-16 w-16 bg-primary/80 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-2xl rounded-full ">{service.icon}</span>
                 </div>
                 <h3 className="text-2xl font-bold">{service.title}</h3>
               </div>

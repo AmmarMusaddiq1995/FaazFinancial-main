@@ -510,8 +510,8 @@ export function AdminOverview2() {
                   <td className="px-4 py-3">
                     {submission.payment_id}
                   </td>
-                  <td className="px-4 py-3">
-                    {submission.amount}
+                  <td className="px-4 py-3 font-bold">
+                    ${submission.amount}
                   </td>
                  
                   <td className="px-4 py-3 text-center">

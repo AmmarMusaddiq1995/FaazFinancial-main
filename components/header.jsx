@@ -115,7 +115,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex space-x-2 min-w-0">
          
-          <Image src="/logo-resized2.png" alt="Faaz Financial Group" width={100} height={20} />
+          <Image src="/logo-new-2.png" alt="Faaz Financial Group" width={125} height={20} />
          
         </Link>
 
