@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const navigation = [
   { name: "Overview", href: "/admin", icon: LayoutDashboard },
@@ -83,7 +84,7 @@ export function AdminLayout({ children }) {
                   className={cn(
                     "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                     pathname === item.href
-                      ? "bg-cyan-100 text-cyan-900"
+                      ? "bg-primary text-white"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   )}
                   onClick={() => setSidebarOpen(false)}
@@ -110,9 +111,13 @@ export function AdminLayout({ children }) {
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200">
-          <div className="flex h-16 items-center px-4">
-            <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
+          <div className="flex h-26 items-center px-4">
+            <Link href="/">
+            <Image src="/faaz_logo3.png" alt="Faaz Financial Group" width={250} height={150} className="object-contain" />
+            {/* <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1> */}
+            </Link>
           </div>
+          <hr className="border-gray-200 " />
           <nav className="flex-1 space-y-1 px-2 py-4">
             {navigation.map((item) => {
               const Icon = item.icon;
@@ -123,7 +128,7 @@ export function AdminLayout({ children }) {
                   className={cn(
                     "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                     pathname === item.href
-                      ? "bg-cyan-100 text-cyan-900"
+                      ? "bg-primary text-white"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   )}
                 >
