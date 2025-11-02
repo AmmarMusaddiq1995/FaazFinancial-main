@@ -18,17 +18,17 @@ export function HeroSection() {
       <div className="relative container px-4 py-20 lg:py-32">
         <div className="max-w-2xl">
           <div className="mb-6">
-            <span className="inline-block bg-primary/20 text-primary-foreground px-3 py-1 rounded-full text-md font-medium mb-4">
+            <span className="inline-block bg-primary/20 text-primary-foreground px-3 py-1 rounded-full text-sm lg:text-md font-medium mb-4">
               ONE HOME FOR ALL YOUR BUSINESS NEEDS.
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-3xl lg:text-6xl font-bold mb-6">
             Launch Your <br />
-            <span className="text-orange-500 mx-60 whitespace-nowrap"><span className="text-white">Dream</span> Business</span>
+            <span className="text-orange-500 mx-30 lg:mx-60 whitespace-nowrap"><span className="text-white">Dream</span> Business</span>
           </h1>
 
-          <p className="text-xl lg:text-2xl text-gray-300 mb-8 whitespace-nowrap">
+          <p className="text-xs lg:text-2xl text-gray-300 mb-8 whitespace-nowrap">
             Build Boldly , Protect Wisely , Succeed Easily - <span className="text-orange-500 font-bold">All in One Place</span>
           </p>
 
@@ -65,10 +65,10 @@ export function HeroSection() {
         <div className="container mx-auto  px-4 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
-                <span className="text-primary text-3xl">📋</span>
+              <div className="h-12 w-12 lg:h-18 lg:w-18 bg-primary/80 rounded-full flex items-center justify-center">
+                <span className="text-primary text-2xl lg:text-3xl">📋</span>
               </div>
-              <span className="text-md font-medium text-gray-300">
+              <span className="text-xs lg:text-md font-medium text-gray-300">
                 Formation and Compliance
               </span>
             </div>
@@ -79,26 +79,26 @@ export function HeroSection() {
               <span className="text-sm text-gray-300">Website and Domain</span>
             </div> */}
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
-                <span className="text-primary text-3xl">📊</span>
+              <div className="h-12 w-12 lg:h-18 lg:w-18 bg-primary/80 rounded-full flex items-center justify-center">
+                <span className="text-primary text-2xl lg:text-3xl">📊</span>
               </div>
-              <span className="text-md font-medium text-gray-300">
+              <span className="text-xs lg:text-md font-medium text-gray-300">
                 Banking and Bookkeeping
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
-                <span className="text-primary text-3xl">💡</span>
+              <div className="h-12 w-12 lg:h-18 lg:w-18 bg-primary/80 rounded-full flex items-center justify-center">
+                <span className="text-primary text-2xl lg:text-3xl">💡</span>
               </div>
-              <span className="text-md font-medium text-gray-300">
+              <span className="text-xs lg:text-md font-medium text-gray-300">
                 Tax Advice and Filing
               </span>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="h-18 w-18 bg-primary/80 rounded-full flex items-center justify-center">
-                <span className="text-primary text-3xl">🎯</span>
+              <div className="h-12 w-12 lg:h-18 lg:w-18 bg-primary/80 rounded-full flex items-center justify-center">
+                <span className="text-primary text-2xl lg:text-3xl">🎯</span>
               </div>
-              <span className="text-md font-medium text-gray-300">
+              <span className="text-xs lg:text-md font-medium text-gray-300">
                 Expert Customer Support
               </span>
             </div>
