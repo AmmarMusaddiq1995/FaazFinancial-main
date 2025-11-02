@@ -24,13 +24,13 @@ export function ServicesSection() {
   ]
 
   return (
-    <section className="py-20 bg-background ">
+    <section className="py-10 lg:py-20 bg-background ">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-balance">
+          <h2 className="text-xl lg:text-4xl font-bold mb-4 text-balance">
             Everything You Need to <span className="text-orange-500 font-bold">Start</span>, <span className="text-orange-500 font-bold">Protect</span>, and <span className="text-orange-500 font-bold">Grow</span> Your Business
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+          <p className="text-sm lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
             From formation to ongoing compliance, we provide comprehensive business services to help entrepreneurs
             succeed at every stage.
           </p>
@@ -39,7 +39,7 @@ export function ServicesSection() {
         <div className="grid lg:grid-cols-3 gap-12">
           {services.map((service, index) => (
             <div key={index} className="text-center">
-              <div className="mb-8">
+              <div className="mb-4 lg:mb-8">
                 <img
                   src={service.image || "/placeholder.svg"}
                   alt={service.title}
@@ -48,13 +48,13 @@ export function ServicesSection() {
               </div>
 
               <div className="flex items-center justify-center mb-4">
-                <div className="h-16 w-16 bg-primary/80 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-2xl rounded-full ">{service.icon}</span>
+                <div className="h-12 w-12 lg:h-16 lg:w-16 bg-primary/80 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-xl lg:text-2xl rounded-full ">{service.icon}</span>
                 </div>
-                <h3 className="text-2xl font-bold">{service.title}</h3>
+                <h3 className="text-lg lg:text-2xl font-bold">{service.title}</h3>
               </div>
 
-              <p className="text-muted-foreground mb-6 text-pretty">{service.description}</p>
+              <p className="text-muted-foreground mb-4 lg:mb-6 text-pretty text-sm lg:text-md">{service.description}</p>
             </div>
           ))}
         </div>

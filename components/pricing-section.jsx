@@ -252,20 +252,20 @@ export function PricingSection() {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-10 lg:py-20 bg-muted/30">
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-balance">
+          <h2 className="text-xl lg:text-4xl font-bold mb-4 text-balance">
             Compare our packages
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+          <p className="text-sm lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
           Discover Your Perfect Fit: <span className="text-orange-500 font-bold">Tailored</span> Packages for <span className="text-orange-500 font-bold">Seamless</span> Compliance, <span className="text-orange-500 font-bold">Swift</span> Filings, and Unmatched<span className="text-orange-500 font-bold"> Support</span>.
           </p>
         </div>
 
         {/* Pricing Configuration Section */}
         <div className="bg-white rounded-lg shadow-sm border p-8 mb-12 hover:shadow-lg transition-all duration-700 hover:scale-105 hover:shadow-primary/80 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gray-900">
+          <h3 className="text-lg lg:text-2xl font-bold text-center mb-8 text-gray-900">
             Configure Your Package
           </h3>
           
@@ -275,7 +275,7 @@ export function PricingSection() {
 
             {/* Package Type Selection */}
             <div className="space-y-3">
-              <Label htmlFor="packageType" className="text-base font-semibold text-gray-700">
+              <Label htmlFor="packageType" className="text-sm lg:text-base font-semibold text-gray-700">
                 Package Type
               </Label>
               <Select
@@ -314,7 +314,7 @@ export function PricingSection() {
 
             {/* State Selection */}
             <div className="space-y-3">
-              <Label htmlFor="state" className="text-base font-semibold text-gray-700">
+              <Label htmlFor="state" className="text-sm lg:text-base font-semibold text-gray-700">
                 State of Formation
               </Label>
               <Select
@@ -339,7 +339,7 @@ export function PricingSection() {
 
             {/* Service Selection */}
             <div className="space-y-3">
-              <Label htmlFor="selectService" className="text-base font-semibold text-gray-700">
+              <Label htmlFor="selectService" className="text-sm lg:text-base font-semibold text-gray-700">
                 Service Type
               </Label>
               <Select
@@ -373,16 +373,16 @@ export function PricingSection() {
           {/* Price Preview */}
           {(formData.packageType || formData.state || formData.selectService) && (
             <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
-              <p className="text-sm text-gray-600 text-center">
+              <p className="text-xs lg:text-sm text-gray-600 text-center">
                 <span className="font-medium">Current pricing:</span> Starter ${currentPrices.Starter} • Pro ${currentPrices.Pro} • Premium ${currentPrices.Premium}
                 {formData.packageType && (
-                  <span className="block mt-1 text-xs">
+                  <span className="block mt-1 text-xs lg:text-sm">
                     {formData.packageType === "normal" && "Normal processing: 14 business days"}
                     {formData.packageType === "express" && "Express processing: 7 business days"}
                   </span>
                 )}
                 {formData.state && (
-                  <span className="block mt-1 text-xs">
+                  <span className="block mt-1 text-xs lg:text-sm">
                     {formData.state === "California" && "California has higher state fees"}
                     {formData.state === "New York" && "New York has higher state fees"}
                     {formData.state === "Delaware" && "Delaware has moderate state fees"}
@@ -413,23 +413,23 @@ export function PricingSection() {
             >
 
               {plan.name === "Starter" && (
-                <div className="absolute top-4 -right-6 z-10">
-                  <span className="bg-gray-200 text-black px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
+                <div className="absolute top-7 lg:top-4 -right-2 lg:-right-6 z-10">
+                  <span className="bg-gray-200 text-black px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block">
                     YOUR CHOICE
                   </span>
                 </div>
               )}
 
               {plan.name === "Standard" && (
-                <div className="absolute top-4 -right-7 z-10">
-                  <span className="bg-gray-300 text-black px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block">
+                <div className="absolute top-9 lg:top-6 -right-2 lg:-right-7 z-10">
+                  <span className="bg-gray-300 text-black px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block">
                     RECOMMENDED
                   </span>
                 </div>
               )}
               {plan.name === "Premium" && (
-                <div className="absolute top-12 -right-5 z-10">
-                  <span className="bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded shadow-sm rotate-45 inline-block origin-top-right">
+                <div className="absolute top-15 lg:top-14 -right-2 lg:-right-6 z-10">
+                  <span className="bg-orange-500 text-white px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block origin-top-right">
                     BEST VALUE
                   </span>
                 </div>
@@ -443,11 +443,11 @@ export function PricingSection() {
               )} */}
 
               <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl font-bold bg-black text-white rounded-lg p-2  w-full">
+                <CardTitle className="text-lg lg:text-2xl font-bold bg-black text-white rounded-lg p-2  w-full">
                   {plan.name}
                 </CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
+                  <span className="text-2xl lg:text-4xl font-bold">{plan.price}</span>
                   <span className="text-muted-foreground">{plan.period}</span>
                 </div>
                 <p className="text-muted-foreground mt-2">{plan.description}</p>
@@ -461,7 +461,7 @@ export function PricingSection() {
                       className="flex items-start space-x-3"
                     >
                       <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
+                      <span className="text-xs lg:text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -506,7 +506,7 @@ export function PricingSection() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs lg:text-sm text-muted-foreground">
             *Promotional terms are based on receiving complete information.
             Faaz Financial Group LLC processing times do not include Secretary of
             State processing times, which can vary.
