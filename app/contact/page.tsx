@@ -43,8 +43,8 @@ export default function ContactPage() {
     {
       icon: Clock,
       title: "Business Hours",
-      details: "Monday - Saturday",
-      description: "10:00 AM - 04:00 PM EST",
+      details: "Monday - Friday",
+      description: "09:00 AM - 05:00 PM EST",
     },
   ];
 
@@ -236,7 +236,7 @@ export default function ContactPage() {
                 {
                   question: "How long does it take to form my business?",
                   answer:
-                    "Most formations are completed within 5-10 business days, depending on the state and business type.",
+                    "7 days under Express Package and 14 businessdays under Normal Package",
                 },
                 {
                   question: "Do I need a registered agent?",

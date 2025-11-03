@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Calendar, User, ArrowRight, Search } from "lucide-react"
 import { supabase } from "@/lib/supabaseClient"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 export default function BlogPage() {
@@ -123,6 +124,7 @@ export default function BlogPage() {
 
   const blogPosts = (posts && posts.length > 0)
     ? posts.map((p) => ({
+        id: p.id,
         title: p.title,
         excerpt: p.description,
         author: p.author,
@@ -138,10 +140,10 @@ export default function BlogPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-cyan-50 to-blue-50 py-20">
+        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-cyan-100 text-cyan-800">Business Blog</Badge>
+              <Badge className="mb-4 bg-primary text-white">Business Blog</Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
                 Business Formation Insights
               </h1>
@@ -167,7 +169,8 @@ export default function BlogPage() {
                   key={index}
                   variant={index === 0 ? "default" : "outline"}
                   size="sm"
-                  className={index === 0 ? "bg-cyan-600 hover:bg-cyan-700" : ""}
+                  className={index === 0 ? "bg-primary hover:bg-primary/90" : ""}
+                  cursor-pointer
                 >
                   {category}
                 </Button>
@@ -191,7 +194,7 @@ export default function BlogPage() {
                     />
                   </div>
                   <div className="p-8 flex flex-col justify-center">
-                    <Badge className="w-fit mb-4 bg-cyan-100 text-cyan-800">{featuredPost.category}</Badge>
+                    <Badge className="w-fit mb-4 bg-primary text-white">{featuredPost.category}</Badge>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">{featuredPost.title}</h3>
                     <p className="text-gray-600 mb-6">{featuredPost.excerpt}</p>
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
@@ -205,10 +208,19 @@ export default function BlogPage() {
                       </div>
                       <span>{featuredPost.readTime}</span>
                     </div>
-                    <Button className="w-fit bg-cyan-600 hover:bg-cyan-700">
-                      Read Article
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    {posts && posts.length > 0 ? (
+                      <Button asChild className="w-fit bg-primary hover:bg-primary/90 cursor-pointer">
+                        <Link href={`/blog/${posts[0].id}`}>
+                          Read Article
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button className="w-fit bg-primary hover:bg-primary/90 cursor-pointer" disabled>
+                        Read Article
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -232,7 +244,7 @@ export default function BlogPage() {
                       />
                     </div>
                     <CardContent className="p-6">
-                      <Badge className="mb-3 bg-cyan-100 text-cyan-800">{post.category}</Badge>
+                      <Badge className="mb-3 bg-primary text-white">{post.category}</Badge>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">{post.title}</h3>
                       <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                       <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
@@ -247,10 +259,19 @@ export default function BlogPage() {
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-500">{post.readTime}</span>
-                        <Button variant="ghost" size="sm">
-                          Read More
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </Button>
+                        {"id" in post ? (
+                          <Button asChild variant="ghost" size="sm" className="cursor-pointer">
+                            <Link href={`/blog/${(post as any).id}`}>
+                              Read More
+                              <ArrowRight className="ml-1 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        ) : (
+                          <Button variant="ghost" size="sm" className="cursor-pointer" disabled>
+                            Read More
+                            <ArrowRight className="ml-1 h-4 w-4" />
+                          </Button>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
@@ -259,7 +280,7 @@ export default function BlogPage() {
 
               {/* Load More */}
               <div className="text-center mt-12">
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
                   Load More Articles
                 </Button>
               </div>

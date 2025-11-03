@@ -47,6 +47,7 @@ import { Suspense } from "react";
          
           <div className="mt-10 mb-10">
             <BusinessFormationForm />
+            
           </div>
         </div>
       </div>

@@ -469,13 +469,14 @@ export function PricingSection() {
                 <Button
                   className={`w-full ${
                     plan.popular ? "bg-primary hover:bg-primary/90" : ""
-                  }`}
+                  } cursor-pointer`}
                   variant={plan.popular ? "default" : "outline"}
                   onClick={() => {
                     const serviceType = formData.selectService || "LLC Formation";
                     const packageType = formData.packageType || "normal";
                     const state = formData.state || "Alabama";
-                    const price = currentPrices[plan.name];
+                    const lookupName = plan.name === "Standard" ? "Pro" : plan.name;
+                    const price = currentPrices[lookupName];
                     
                     // Create URL parameters
                     const params = new URLSearchParams({
@@ -483,7 +484,7 @@ export function PricingSection() {
                       state,
                       serviceType,
                       planName: plan.name,
-                      price: price.toString()
+                      price: price?.toString()
                     });
                     
                     // Redirect based on service type
@@ -496,8 +497,8 @@ export function PricingSection() {
                 >
                   {plan.name === "Starter"
                     ? "Get Starter"
-                    : plan.name === "Pro"
-                    ? "Get Pro"
+                    : plan.name === "Standard"
+                    ? "Get Standard"
                     : "Get Premium"}
                 </Button>
               </CardContent>

@@ -111,10 +111,10 @@ export default function AdminBlogsPage() {
               </div>
 
               <div className="flex gap-3">
-                <Button type="submit" disabled={submitting} className="bg-cyan-600 hover:bg-cyan-700">
+                <Button type="submit" disabled={submitting} className="bg-primary hover:bg-primary/90 cursor-pointer">
                   {submitting ? "Publishing..." : "Publish"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setForm({ category: "", title: "", description: "", author: "", posted_at: "", image_url: "" })}>
+                <Button type="button" variant="outline" className="cursor-pointer" onClick={() => setForm({ category: "", title: "", description: "", author: "", posted_at: "", image_url: "" })}>
                   Reset
                 </Button>
               </div>

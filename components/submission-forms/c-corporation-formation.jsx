@@ -230,9 +230,9 @@ export function CorporationFormationForm({ pricingData }) {
     }
     
     // Add $65 if user wants unique business address
-    const additionalAmount = formData.q2 === "Yes" ? 65 : 0;
+    const additionalAmount = formData.doYouNeedUniqueBusinessAddress === "Yes" ? 65 : 0;
     setPrice(basePrice + additionalAmount);
-  }, [formData.state, formData.packageType, formData.q2, pricingData]);
+  }, [formData.state, formData.packageType, formData.doYouNeedUniqueBusinessAddress, pricingData]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -609,6 +609,7 @@ export function CorporationFormationForm({ pricingData }) {
               <Label htmlFor="state">State of Formation</Label>
               <Select
                 value={formData.state}
+                disabled={!!pricingData?.state}
                 onValueChange={(value) =>
                   setFormData({ ...formData, state: value })
                 }
@@ -630,7 +631,7 @@ export function CorporationFormationForm({ pricingData }) {
             <div className="space-y-2">
               <Label htmlFor="packageType">Select Package Type</Label>
                 <Select
-                  value={formData.packageType}
+                  value={formData.packageType} disabled={!!pricingData?.packageType}
                    onValueChange={(value) =>
                    setFormData({ ...formData, packageType: value })
                  }
@@ -640,7 +641,7 @@ export function CorporationFormationForm({ pricingData }) {
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="normal">
+                <SelectItem value="normal">               
                   <div className="flex items-center justify-between gap-3">
                     <span>Normal</span>
                     <TooltipProvider>
@@ -673,7 +674,7 @@ export function CorporationFormationForm({ pricingData }) {
                     </TooltipProvider>
                   </div>
                 </SelectItem>
-                 <SelectItem value="express">
+                 <SelectItem value="express">                 
                   <div className="flex items-center justify-between gap-3">
                     <span>Express</span>
                     <TooltipProvider>
@@ -734,16 +735,17 @@ export function CorporationFormationForm({ pricingData }) {
                   )}
                   <div className="flex justify-between">
                     <span>Subtotal:</span>
-                    <span>${priceTableForCCorp[formData.state]?.[formData.packageType] || 0}</span>
+                    <span>${price}</span>
+                   
                   </div>
                   <div className="flex justify-between">
                     <span>Card Processing Fee (3%):</span>
-                    <span>${(price * 0.03).toFixed(2)}</span>
+                    <span>${Math.ceil(price * 0.03)}</span>
                   </div>
                   <hr className="my-2" />
                   <div className="flex justify-between font-semibold text-lg">
                     <span>Total:</span>
-                    <span className="text-blue-600">${(price * 1.03).toFixed(2)}</span>
+                    <span className="text-primary font-bold">${Math.ceil(price * 1.03)}</span>
                   </div>
                 </div>
               </div>

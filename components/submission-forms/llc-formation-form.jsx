@@ -613,6 +613,7 @@ export function BusinessFormationForm({ pricingData }) {
               <Label htmlFor="state">State of Formation</Label>
               <Select
                 value={formData.state}
+                disabled={!!pricingData?.state}
                 onValueChange={(value) =>
                   setFormData({ ...formData, state: value })
                 }
@@ -634,7 +635,7 @@ export function BusinessFormationForm({ pricingData }) {
             <div className="space-y-2">
               <Label htmlFor="packageType">Select Package Type</Label>
                 <Select
-                  value={formData.packageType}
+                  value={formData.packageType} disabled={!!pricingData?.packageType}
                    onValueChange={(value) =>
                    setFormData({ ...formData, packageType: value })
                  }
@@ -744,12 +745,12 @@ export function BusinessFormationForm({ pricingData }) {
                   </div>
                   <div className="flex justify-between">
                     <span>Card Processing Fee (3%):</span>
-                    <span>${(price * 0.03).toFixed(2)}</span>
+                    <span>${Math.ceil(price * 0.03)}</span>
                   </div>
                   <hr className="my-2" />
                   <div className="flex justify-between font-semibold text-lg">
                     <span>Total:</span>
-                    <span className="text-blue-600">${(price * 1.03).toFixed(2)}</span>
+                    <span className="text-primary font-bold">${Math.ceil(price * 1.03)}</span>
                   </div>
                 </div>
               </div>
