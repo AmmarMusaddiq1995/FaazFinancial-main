@@ -75,6 +75,63 @@ const US_STATES = [
     "Wyoming",
   ];
 
+  const priceTableForDBAServices = {
+    Wyoming: { normal:250, express: 320},
+    Texas: { normal: 175, express: 245},
+    Washington: { normal: 155, express: 225},
+    California: { normal: 250, express: 320},
+    Colorado: { normal: 185, express: 250},
+    Florida: { normal: 200, express: 270},
+    Georgia: { normal: 250, express: 320},
+    NewYork:{ normal: 250, express: 320},
+    Alabama: { normal: 160, express: 230},
+    Alaska: { normal: 200, express: 270},
+    NewHampshire: { normal: 165, express: 235},
+    Hawaii: { normal: 200, express: 270},
+    WestVirginia: { normal: 175, express: 245},
+    Virginia: { normal: 160, express: 230},
+    Arizona: { normal: 175, express: 245},
+    Arkansas: { normal: 175, express: 245},
+    NewJersey: { normal: 200, express: 270},
+    NewMexico: { normal: 200, express: 270},
+    Connecticut: { normal: 200, express: 270},
+    Delaware: { normal: 175, express: 245},
+    Vermont: { normal: 190, express: 260},
+    Idaho: { normal: 175, express: 245},
+    Illinois: { normal: 300, express: 370},
+    Indiana: { normal: 180, express: 250},
+    Iowa: { normal: 155, express: 225},
+    Kansas: { normal: 150, express: 220},
+    Kentucky: { normal: 165, express: 235},
+    Louisiana: { normal: 225, express: 295},
+    Maine: { normal: 175, express: 245},
+    Maryland: { normal: 250, express: 320},
+    Massachusetts: { normal: 200, express: 270},
+    Michigan: { normal: 160, express: 230},
+    Minnesota: { normal: 200, express: 270},
+    Mississippi: { normal: 175, express: 245},
+    Missouri: { normal: 157, express: 227},
+    Montana: { normal: 170, express: 220},
+    Nebraska: { normal: 250, express: 320},
+    Nevada: { normal: 170, express: 240},
+    NorthCarolina:{ normal: 176, express: 246},
+    NorthDakota:{ normal: 175, express: 245},
+    Ohio: { normal: 175, express: 245},
+    Oklahoma: { normal: 175, express: 245},
+    Oregon: { normal: 200, express: 270},
+    Pennsylvania: { normal: 220, express: 290},
+    RhodeIsland: { normal: 200, express: 270},
+    SouthCarolina: { normal: 175, express: 245},
+    SouthDakota: { normal: 170, express: 240},
+    Tennessee: { normal: 170, express: 240},
+    Texas: { normal: 175, express: 245},
+    Utah: { normal: 172, express: 242},
+    Wisconsin: { normal: 165, express: 235},
+    
+    
+  }
+  
+
 
 
 
@@ -93,7 +150,7 @@ export function DBATrademarkRegistrationServicesForm() {
     businessEntityType: "",
     primaryBusinessActivities: "",
     state: "",
-    
+    packageType: "",
 
   });
 
@@ -122,6 +179,17 @@ export function DBATrademarkRegistrationServicesForm() {
     fetchUserData();
   }, [user]);
 
+
+  const [price, setPrice] = useState(0);
+  useEffect(()=>{
+    if(formData.packageType === "normal"){
+      const selectedPrice = priceTableForDBAServices[formData.state]?.normal ?? 0;
+      setPrice(selectedPrice);
+    } else if(formData.packageType === "express"){
+      const selectedPrice = priceTableForDBAServices[formData.state]?.express ?? 0;
+      setPrice(selectedPrice);
+    }
+  }, [formData.packageType]);
   
 
   
@@ -160,7 +228,7 @@ export function DBATrademarkRegistrationServicesForm() {
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount:350
+          amount:price
 
 
         },
@@ -409,14 +477,17 @@ export function DBATrademarkRegistrationServicesForm() {
                   <SelectItem value="LLC">
                     LLC
                   </SelectItem>
-                  <SelectItem value="ECommerceBusiness">
-                    E-Commerce Business
+                  <SelectItem value="C-Corp">
+                    C-Corp
                   </SelectItem>
-                  <SelectItem value="WholesaleBusiness">
-                    Wholesale Business
+                  <SelectItem value="S-Corp">
+                    S-Corp
                   </SelectItem>
-                  <SelectItem value="RetailBusiness">
-                    Retail Business
+                  <SelectItem value="Partnership">
+                    Partnership
+                  </SelectItem>
+                  <SelectItem value="Non-Profit">
+                    Non-Profit
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -463,7 +534,25 @@ export function DBATrademarkRegistrationServicesForm() {
               </Select>
             </div>
 
-              
+              <div className="space-y-2">
+                <Label htmlFor="packageType">Select Package Type</Label>
+                <Select
+                  value={formData.packageType}
+                  onValueChange={(value) =>
+                    setFormData({ ...formData, packageType: value })
+                  }
+                  required
+                >
+                
+                  <SelectTrigger className="border-gray-300">
+                    <SelectValue placeholder="Select package type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="normal">Normal</SelectItem>
+                    <SelectItem value="express">Express</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
              
              

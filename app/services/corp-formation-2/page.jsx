@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer";
 import { CorporationFormationForm } from "@/components/submission-forms/c-corporation-formation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, FileText, Clock, Check } from "lucide-react";
+import { Shield, FileText, Clock, Check, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 function CorpFormationContent() {
@@ -128,7 +128,7 @@ export default function CorporationFormationPage() {
     <div>
       <Header />
       {/* ✅ Wrap inside Suspense */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div><Loader2 className="h-4 w-4 animate-spin" /></div>}>
         <CorpFormationContent />
       </Suspense>
       <Footer />

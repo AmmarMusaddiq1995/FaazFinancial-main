@@ -221,11 +221,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Users, Layers, Target } from "lucide-react";
+import { CardBody , CardContainer, CardItem } from "@/components/ui/3d-card";
+import Link from "next/link";
 
 export default function AboutPage() {
   const stats = [
     { number: "5+", label: "Years of Expertise" },
-    { number: "200+", label: "Clients Served" },
+    { number: "200k+", label: "Clients Served" },
     { number: "2", label: "Countries (USA & UK)" },
     { number: "99%", label: "Client Satisfaction" },
   ];
@@ -301,6 +303,206 @@ export default function AboutPage() {
           </div>
         </section>
 
+                {/* Team Section */}
+         {/* Values Section */}
+         {/* <section className="py-20 bg-gray-50 min-h-screen flex items-center justify-center w-full">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Meet Our Leadership Team
+              </h2>
+              <p className="text-xl text-gray-600">
+                Experienced professionals dedicated to your success
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mx-auto -mt-10 ">
+
+            <CardContainer className=" w-full">
+      <CardBody className="bg-gray-50 relative group/card border rounded-xl shadow-md hover:shadow-xl shadow-primary transition-all duration-300  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2]  w-auto sm:w-[30rem] h-auto  p-6   ">
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white"
+        >
+          Mr. Zohaib Zia
+        </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+        >
+          <strong>CEO</strong> of FAAZ Financial Group LLC
+        </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4">
+          <img
+            src="/zohaib.png"
+            height="1000"
+            width="1000"
+            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            alt="thumbnail"
+          />
+        </CardItem>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            as="a"
+            href="https://twitter.com/mannupaaji"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:bg-primary hover:text-white"
+          >
+             Visit LinkedIn →
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold hover:bg-primary hover:text-white"
+          >
+              Facebook
+          </CardItem>
+        </div>
+      </CardBody>
+            </CardContainer>
+
+            <CardContainer className=" w-full">
+      <CardBody className="bg-gray-50 relative group/card border rounded-xl shadow-md hover:shadow-xl shadow-primary transition-all duration-300 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2]  w-auto sm:w-[30rem] h-auto p-6   ">
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white"
+        >
+          Mr. Zohaib Zia
+        </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+        >
+          <strong>CEO</strong> of FAAZ Financial Group LLC
+        </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4">
+          <img
+            src="/zohaib.png"
+            height="1000"
+            width="1000"
+            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            alt="thumbnail"
+          />
+        </CardItem>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            as="a"
+            href="https://twitter.com/mannupaaji"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:bg-primary hover:text-white"
+          >
+             Visit LinkedIn →
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold hover:bg-primary hover:text-white"
+          >
+              Facebook
+          </CardItem>
+        </div>
+      </CardBody>
+            </CardContainer>
+
+
+            <CardContainer className=" w-full">
+      <CardBody className="bg-gray-50 relative group/card border rounded-xl shadow-md hover:shadow-xl shadow-primary transition-all duration-300  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2]  w-auto sm:w-[30rem] h-auto p-6   ">
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white"
+        >
+          Mr. Zohaib Zia
+        </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+        >
+          <strong>CEO</strong> of FAAZ Financial Group LLC
+        </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4">
+          <img
+            src="/zohaib.png"
+            height="1000"
+            width="1000"
+            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            alt="thumbnail"
+          />
+        </CardItem>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            as="a"
+            href="https://twitter.com/mannupaaji"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:bg-primary hover:text-white"
+          >
+             Visit LinkedIn →
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold hover:bg-primary hover:text-white"
+          >
+              Facebook
+          </CardItem>
+        </div>
+      </CardBody>
+            </CardContainer>
+
+
+            <CardContainer className=" w-full">
+      <CardBody className="bg-gray-50 relative group/card border rounded-xl shadow-md hover:shadow-xl shadow-primary transition-all duration-300  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2]  w-auto sm:w-[30rem] h-auto p-6   ">
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white"
+        >
+          Mr. Zohaib Zia
+        </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+        >
+          <strong>CEO</strong> of FAAZ Financial Group LLC
+        </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4">
+          <img
+            src="/zohaib.png"
+            height="900"
+            width="900"
+            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            alt="thumbnail"
+          />
+        </CardItem>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            as="a"
+            href="https://twitter.com/mannupaaji"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:bg-primary hover:text-white"
+          >
+             Visit LinkedIn →
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold hover:bg-primary hover:text-white"
+          >
+              Facebook
+          </CardItem>
+        </div>
+      </CardBody>
+            </CardContainer>
+             
+            </div>
+          </div>
+        </section> */}
+
         {/* Story Section */}
         <section className="py-20">
           <div className="container mx-auto px-4">
@@ -362,6 +564,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+
+
         {/* CTA Section */}
         <section className="bg-gray-900 text-white py-20">
           <div className="container mx-auto px-4 text-center">
@@ -374,9 +578,10 @@ export default function AboutPage() {
             </p>
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground px-8 py-4 text-lg"
+              asChild
+              className="bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground px-8 py-4 text-lg hover:text-white"
             >
-              Contact Us Today
+              <Link href="/contact">Contact Us Today</Link>
             </Button>
           </div>
         </section>

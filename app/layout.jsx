@@ -5,6 +5,7 @@ import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
 import WhatsappButton from "@/components/WhatsappButton";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 
 export const metadata = {
   title: "Faaz Financial Group",
@@ -16,6 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <Script
+          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          strategy="lazyOnload"
+        />
         <AppContextProvider>
           {children}
         </AppContextProvider>

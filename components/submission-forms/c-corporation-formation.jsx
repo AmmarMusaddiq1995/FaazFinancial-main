@@ -29,6 +29,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
+import { toast } from "react-toastify";
 
 const US_STATES = [
   "Alabama",
@@ -271,7 +272,7 @@ export function CorporationFormationForm({ pricingData }) {
       console.log("user :", user);
 
       if (!user || userError) {
-        alert("Please login to submit business formation", userError);
+        toast.error("Please login to submit business formation", userError);
         return;
       }
 
@@ -312,7 +313,7 @@ export function CorporationFormationForm({ pricingData }) {
       
     } catch (err) {
       console.error("Error submitting form:", err);
-      alert("Something went wrong.");
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }

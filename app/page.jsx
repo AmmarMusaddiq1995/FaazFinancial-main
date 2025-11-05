@@ -5,6 +5,8 @@ import { HeroSection } from "@/components/hero-section";
 import { PricingSection } from "@/components/pricing-section.jsx";
 import { ServicesSection } from "@/components/services-section";
 import { Separator } from "@/components/ui/separator";
+import Script from "next/script";
+import TestimonialsSection from "@/components/testimonials";
 
 
 export default function HomePage() {
@@ -12,9 +14,11 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Header />
       <main>
+        
         <HeroSection />      
         <ServicesSection />
         <PricingSection />
+        {/* <TestimonialsSection /> */}
         <CTASection />
         <Separator />
       </main>
