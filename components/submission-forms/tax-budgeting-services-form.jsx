@@ -122,7 +122,7 @@ export function TaxBudgetingServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Tax Budgeting Services
@@ -147,7 +147,7 @@ export function TaxBudgetingServicesForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -166,7 +166,7 @@ export function TaxBudgetingServicesForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Tax Budgeting Services"}
             </Button>
           </form>

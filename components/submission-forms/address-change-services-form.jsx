@@ -176,7 +176,8 @@ export function AddressChangeServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+    
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
                 Start Your Address Change Services
@@ -202,7 +203,7 @@ export function AddressChangeServicesForm() {
                       businessName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -218,7 +219,7 @@ export function AddressChangeServicesForm() {
                       existingBusinessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -234,7 +235,7 @@ export function AddressChangeServicesForm() {
                       newBusinessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -250,7 +251,7 @@ export function AddressChangeServicesForm() {
                       emailId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -268,7 +269,7 @@ export function AddressChangeServicesForm() {
                       contactNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -284,7 +285,7 @@ export function AddressChangeServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -307,7 +308,7 @@ export function AddressChangeServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfFormation"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -355,7 +356,7 @@ export function AddressChangeServicesForm() {
                       ownerName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -372,7 +373,7 @@ export function AddressChangeServicesForm() {
                       ownerAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -380,15 +381,15 @@ export function AddressChangeServicesForm() {
              
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Address Change Services"}
             </Button>
           </form>
         </CardContent>
       </Card>
-<div className="mt-10">
 
-</div>
+    
+
       
     </>
   );

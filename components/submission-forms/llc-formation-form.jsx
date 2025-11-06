@@ -321,7 +321,7 @@ export function BusinessFormationForm({ pricingData }) {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your LLC Formation
@@ -357,7 +357,7 @@ export function BusinessFormationForm({ pricingData }) {
                     desiredCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -375,7 +375,7 @@ export function BusinessFormationForm({ pricingData }) {
                     alternativeCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -407,7 +407,7 @@ export function BusinessFormationForm({ pricingData }) {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -427,7 +427,7 @@ export function BusinessFormationForm({ pricingData }) {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -447,7 +447,7 @@ export function BusinessFormationForm({ pricingData }) {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -469,7 +469,7 @@ export function BusinessFormationForm({ pricingData }) {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -491,7 +491,7 @@ export function BusinessFormationForm({ pricingData }) {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -539,7 +539,7 @@ export function BusinessFormationForm({ pricingData }) {
                     phoneNumber: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -552,7 +552,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -565,7 +565,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, faxNumber: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -578,7 +578,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, country: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -591,7 +591,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, addressLocal: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -604,7 +604,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -619,7 +619,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -641,7 +641,7 @@ export function BusinessFormationForm({ pricingData }) {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -765,7 +765,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, zipCode: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -789,7 +789,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -810,7 +810,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -829,7 +829,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -850,7 +850,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -881,7 +881,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -895,7 +895,7 @@ export function BusinessFormationForm({ pricingData }) {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -923,7 +923,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, businessWebsite: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -936,13 +936,13 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, businessEmail: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Start LLC Formation"}
           </Button>
         </form>

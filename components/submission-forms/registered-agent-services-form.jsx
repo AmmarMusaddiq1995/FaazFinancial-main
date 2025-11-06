@@ -186,7 +186,7 @@ export function RegisteredAgentServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Registered Agent Services
@@ -213,7 +213,7 @@ export function RegisteredAgentServicesForm() {
                       businessName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -228,7 +228,7 @@ export function RegisteredAgentServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -248,7 +248,7 @@ export function RegisteredAgentServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfFormation"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -298,7 +298,7 @@ export function RegisteredAgentServicesForm() {
                       ownerFullLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -317,7 +317,7 @@ export function RegisteredAgentServicesForm() {
                       anotherPartnerFullLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -333,7 +333,7 @@ export function RegisteredAgentServicesForm() {
                       businessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -350,7 +350,7 @@ export function RegisteredAgentServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -378,7 +378,7 @@ export function RegisteredAgentServicesForm() {
                       provideBusinessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                   placeholder="Provide your business address"
                 />
@@ -394,7 +394,7 @@ export function RegisteredAgentServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -421,7 +421,7 @@ export function RegisteredAgentServicesForm() {
                       nameOfExistingRegisteredAgent: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                   placeholder="Provide the name of the existing registered agent and its address"
                 />
@@ -437,7 +437,7 @@ export function RegisteredAgentServicesForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -449,7 +449,7 @@ export function RegisteredAgentServicesForm() {
            
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Registered Agent Services"}
             </Button>
           </form>

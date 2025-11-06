@@ -131,7 +131,7 @@ export function SimpleCorpTaxReturnPage() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Simple Corporation Tax Return (CT600)
@@ -156,7 +156,7 @@ export function SimpleCorpTaxReturnPage() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -178,7 +178,7 @@ export function SimpleCorpTaxReturnPage() {
                       governmentGatewayId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                 />
                 <div className="flex items-center space-x-2">
                   <input
@@ -222,7 +222,7 @@ export function SimpleCorpTaxReturnPage() {
                       governmentPassword: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -239,7 +239,7 @@ export function SimpleCorpTaxReturnPage() {
                       averageNumberCompanyHas: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -254,7 +254,7 @@ export function SimpleCorpTaxReturnPage() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -273,7 +273,7 @@ export function SimpleCorpTaxReturnPage() {
                  }
                  optional
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -295,7 +295,7 @@ export function SimpleCorpTaxReturnPage() {
                       companyName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -312,7 +312,7 @@ export function SimpleCorpTaxReturnPage() {
                       companyRegistrationNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -325,7 +325,7 @@ export function SimpleCorpTaxReturnPage() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Simple Corporation Tax Return (CT600)"}
             </Button>
           </form>

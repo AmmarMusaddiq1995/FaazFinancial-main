@@ -138,7 +138,7 @@ export function ItinApplicationForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your ITIN Application
@@ -163,7 +163,7 @@ export function ItinApplicationForm() {
                       legalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -179,7 +179,7 @@ export function ItinApplicationForm() {
                       permanentAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -195,7 +195,7 @@ export function ItinApplicationForm() {
                       mailingAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   placeholder="If different from permanent address document will be mailed by IRS"
                   optional
                 />
@@ -212,7 +212,7 @@ export function ItinApplicationForm() {
                       phoneNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -228,7 +228,7 @@ export function ItinApplicationForm() {
                       emailAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -244,7 +244,7 @@ export function ItinApplicationForm() {
                       profession: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -260,7 +260,7 @@ export function ItinApplicationForm() {
                       countryTaxId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black "
                   placeholder="If you don't have a tax ID, leave blank"
                   optional
                 />
@@ -276,7 +276,7 @@ export function ItinApplicationForm() {
                   }}
                   required
                   placeholder="Scan of your passport copy"
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
                 />
               </div>
 
@@ -290,7 +290,7 @@ export function ItinApplicationForm() {
                   }}
                   optional
                   placeholder="Only if you have a USA visa"
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
                 />
               </div>
 
@@ -303,7 +303,7 @@ export function ItinApplicationForm() {
                     handleFileUpload(e, "einLetter");
                   }}
                   required
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
                 />
               </div>
 
@@ -318,20 +318,20 @@ export function ItinApplicationForm() {
                     handleFileUpload(e, "certificateOfFormation");
                   }}
                   required
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start ITIN Application"}
             </Button>
           </form>
         </CardContent>
       </Card>
-<div className="mt-10">
-<Footer />
-</div>
+{/* <div className="mt-10">
+<Footer /> */}
+{/* </div> */}
       
     </>
   );

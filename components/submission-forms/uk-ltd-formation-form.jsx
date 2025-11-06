@@ -304,7 +304,7 @@ export function UKLTDFormationForm() {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your UK LTD Formation
@@ -327,7 +327,7 @@ export function UKLTDFormationForm() {
                     desiredCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -345,7 +345,7 @@ export function UKLTDFormationForm() {
                     alternativeCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -359,7 +359,7 @@ export function UKLTDFormationForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -408,7 +408,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -428,7 +428,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -448,7 +448,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -468,7 +468,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -491,7 +491,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -514,7 +514,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -537,7 +537,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -560,7 +560,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -582,7 +582,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                   placeholder="If you want to keep your personal address hidden, you can purchase our service address for 39£ + VAT."
                 />
@@ -606,7 +606,7 @@ export function UKLTDFormationForm() {
                       return next;
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -664,7 +664,7 @@ export function UKLTDFormationForm() {
                   })
                 }
                 maxLength={3}
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -682,7 +682,7 @@ export function UKLTDFormationForm() {
                   })
                 }
                 maxLength={3}
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -700,7 +700,7 @@ export function UKLTDFormationForm() {
                   })
                 }
                 maxLength={3}
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -732,7 +732,7 @@ export function UKLTDFormationForm() {
                     firstName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -748,7 +748,7 @@ export function UKLTDFormationForm() {
                     lastName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -765,7 +765,7 @@ export function UKLTDFormationForm() {
                     phoneNumberBusiness: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -778,7 +778,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, emailBusiness: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -791,7 +791,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, faxNumber: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -804,7 +804,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, country: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -817,7 +817,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, addressLocal: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -830,7 +830,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -843,7 +843,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, state: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -857,7 +857,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, zipCode: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -882,7 +882,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, typeOfProduct: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -897,7 +897,7 @@ export function UKLTDFormationForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select type of business" />
                 </SelectTrigger>
                 <SelectContent>
@@ -929,94 +929,12 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, businessWebsite: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
 
-{/* 
-            <div className="space-y-2">
-              <Label htmlFor="q1">Do you want to use a registered agent?</Label>
-              <Select
-                value={formData.q1}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, q1: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="q2">
-                Do you need Unique business address?(additional cost 65$ yearly)
-              </Label>
-              <Select
-                value={formData.q2}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, q2: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="q3">Do you want to use your own address?</Label>
-              <Select
-                value={formData.q3}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, q3: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="q4">
-                Do you want Anonymous LLC or on Member Name?
-              </Label>
-              <Select
-                value={formData.q4}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, q4: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Anonymous_LLC"> Anonymous LLC </SelectItem>
-                  <SelectItem value="On_Member_Name">
-                    {" "}
-                    On Member Name{" "}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div> */}
 
           </div>
 
@@ -1037,7 +955,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -1052,7 +970,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, businessWebsite: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -1065,13 +983,13 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, businessEmail: e.target.value })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Start UK LTD Formation"}
           </Button>
         </form>

@@ -165,7 +165,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Self Assessment Tax Return
@@ -189,7 +189,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select type of self assessment tax return" />
               </SelectTrigger>
               <SelectContent>
@@ -220,7 +220,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
                       governmentGatewayId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                 />
                
               </div>
@@ -237,7 +237,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
                       governmentGatewayPassword: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -305,7 +305,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Self Assessment Tax Return"}
             </Button>
           </form>

@@ -132,7 +132,7 @@ export function VATRegistrationServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your VAT Registration Services
@@ -155,7 +155,7 @@ export function VATRegistrationServicesForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -178,7 +178,7 @@ export function VATRegistrationServicesForm() {
                       governmentGatewayId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                 />
                 <div className="flex items-center space-x-2">
                   <input
@@ -221,7 +221,7 @@ export function VATRegistrationServicesForm() {
                       governmentPassword: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -240,7 +240,7 @@ export function VATRegistrationServicesForm() {
                       fullName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -257,7 +257,7 @@ export function VATRegistrationServicesForm() {
                       address: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -273,7 +273,7 @@ export function VATRegistrationServicesForm() {
                       businessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -290,7 +290,7 @@ export function VATRegistrationServicesForm() {
                       companyName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -307,7 +307,7 @@ export function VATRegistrationServicesForm() {
                       companyRegistrationNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -320,7 +320,7 @@ export function VATRegistrationServicesForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start VAT Registration Services"}
             </Button>
           </form>

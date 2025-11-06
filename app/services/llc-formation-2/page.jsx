@@ -43,7 +43,8 @@ function LLCFormationContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen ">
+      <div className="absolute -z-20 top-0 left-0 w-full min-h-full" style={{backgroundImage: "radial-gradient(circle, #e6e6e6 1px, transparent 1px)", backgroundSize: "10px 10px"}}></div>
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">

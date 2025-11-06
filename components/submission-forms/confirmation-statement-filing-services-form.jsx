@@ -127,7 +127,7 @@ export function ConfirmationStatementFilingServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Confirmation Statement Filing Service
@@ -153,7 +153,7 @@ export function ConfirmationStatementFilingServicesForm() {
                       registeredEmailAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                 />
                 <div className="flex items-center space-x-2">
@@ -186,7 +186,7 @@ export function ConfirmationStatementFilingServicesForm() {
                       passwordOfCompanyWebfilingAccount: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                 />
                 <div className="flex items-center space-x-2">
@@ -230,7 +230,7 @@ export function ConfirmationStatementFilingServicesForm() {
                       companyName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -247,7 +247,7 @@ export function ConfirmationStatementFilingServicesForm() {
                       companyRegistrationNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -265,7 +265,7 @@ export function ConfirmationStatementFilingServicesForm() {
                       companyHouseAuthenticationCode: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                 />
                 <div className="flex items-center space-x-2">
@@ -291,7 +291,7 @@ export function ConfirmationStatementFilingServicesForm() {
 
           </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Confirmation Statement Filing Service"}
             </Button>
           </form>

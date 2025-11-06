@@ -4,11 +4,13 @@ import { ItinApplicationForm } from "@/components/submission-forms/itin-applicat
 
 export default function ItinServicesPage() {
   return (
-    <div>
+    <div className="relative min-h-screen">
+      <div className="absolute -z-20 top-0 left-0 w-full min-h-full" style={{backgroundImage: "radial-gradient(circle, #e6e6e6 1px, transparent 1px)", backgroundSize: "10px 10px"}}></div>
       <Header />
-      <div className = "mt-10 mb-10">
+      <div className="py-20">
         <ItinApplicationForm />
       </div>
+      <Footer />
     </div>
   );
 }

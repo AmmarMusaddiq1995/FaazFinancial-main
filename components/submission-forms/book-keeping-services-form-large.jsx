@@ -152,7 +152,7 @@ ${user?.email || 'User'}
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your Book Keeping Services (Large Business)
@@ -175,7 +175,7 @@ ${user?.email || 'User'}
                     businessName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -196,7 +196,7 @@ ${user?.email || 'User'}
                     accountingSoftware: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -216,7 +216,7 @@ ${user?.email || 'User'}
                     businessActivityNature: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -234,7 +234,7 @@ ${user?.email || 'User'}
                     monthlyVolume: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -252,7 +252,7 @@ ${user?.email || 'User'}
                     annualSalesVolume: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -271,7 +271,7 @@ ${user?.email || 'User'}
                     contactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -288,7 +288,7 @@ ${user?.email || 'User'}
                     emailAddress: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -298,7 +298,7 @@ ${user?.email || 'User'}
           
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Get Quotation For Book Keeping Services (Large Business)"}
           </Button>
         </form>

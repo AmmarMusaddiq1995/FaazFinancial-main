@@ -231,7 +231,7 @@ export function CompanyRevivalForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Company Revival
@@ -258,7 +258,7 @@ export function CompanyRevivalForm() {
                       businessName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -274,7 +274,7 @@ export function CompanyRevivalForm() {
                       businessEmailId: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -291,7 +291,7 @@ export function CompanyRevivalForm() {
                       businessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -308,7 +308,7 @@ export function CompanyRevivalForm() {
                       ownerFullLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -325,7 +325,7 @@ export function CompanyRevivalForm() {
                       contactNumber: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -338,7 +338,7 @@ export function CompanyRevivalForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dobOfOwner"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -382,7 +382,7 @@ export function CompanyRevivalForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfRevival"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -437,7 +437,7 @@ export function CompanyRevivalForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -460,7 +460,7 @@ export function CompanyRevivalForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -549,7 +549,7 @@ export function CompanyRevivalForm() {
                   }}
                   required
                   placeholder="Scan of your articles of formation/organization/certificate of formation"
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />
               </div>
 
@@ -563,14 +563,14 @@ export function CompanyRevivalForm() {
                   }}
                   required
                   placeholder="Upload your EIN letter"
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />
               </div>
 
              
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Company Revival"}
             </Button>
           </form>

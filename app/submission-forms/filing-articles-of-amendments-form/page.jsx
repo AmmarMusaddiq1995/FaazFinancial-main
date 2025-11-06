@@ -5,9 +5,10 @@ import { FilingArticlesOfAmendmentsForm } from "@/components/submission-forms/fi
 
 export default function FilingArticlesOfAmendmentsPage() {
   return (
-  <div>
+  <div className="relative min-h-screen">
     <Header />
-    <div className = "mt-10 mb-10">
+    <div className="absolute -z-20 top-0 left-0 w-full min-h-full" style={{backgroundImage: "radial-gradient(circle, #e6e6e6 1px, transparent 1px)", backgroundSize: "10px 10px"}}></div>
+    <div className="py-20">
      <FilingArticlesOfAmendmentsForm />
      </div>
     <Footer />

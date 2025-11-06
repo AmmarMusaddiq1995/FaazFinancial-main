@@ -194,7 +194,7 @@ export function SalesAndUsetaxRegistrationForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Sales and Usetax Registration
@@ -221,7 +221,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       businessLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -233,7 +233,7 @@ export function SalesAndUsetaxRegistrationForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfFormation"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -281,7 +281,7 @@ export function SalesAndUsetaxRegistrationForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -314,7 +314,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       ownerFullLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -326,7 +326,7 @@ export function SalesAndUsetaxRegistrationForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfBirth"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -377,7 +377,7 @@ export function SalesAndUsetaxRegistrationForm() {
                     businessActivityNature: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -394,7 +394,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       ownerAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -410,7 +410,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       businessAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -429,7 +429,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       ssn: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   optional
                 />
               </div>
@@ -445,7 +445,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       nicsCode: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -462,7 +462,7 @@ export function SalesAndUsetaxRegistrationForm() {
                       estimatedSalesValue: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -477,7 +477,7 @@ export function SalesAndUsetaxRegistrationForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -503,7 +503,7 @@ export function SalesAndUsetaxRegistrationForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -521,7 +521,7 @@ export function SalesAndUsetaxRegistrationForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Sales and Usetax Registration"}
             </Button>
           </form>

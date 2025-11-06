@@ -135,7 +135,7 @@ export function EinClosingServicesForm() {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your EIN Closing Services
@@ -158,7 +158,7 @@ export function EinClosingServicesForm() {
                     BusinessLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -175,7 +175,7 @@ export function EinClosingServicesForm() {
                     OwnerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -192,7 +192,7 @@ export function EinClosingServicesForm() {
                     AddressOfBusiness: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -209,7 +209,7 @@ export function EinClosingServicesForm() {
                     AddressOfOwner: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -226,7 +226,7 @@ export function EinClosingServicesForm() {
                     EmailAddress: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -243,7 +243,7 @@ export function EinClosingServicesForm() {
                     ContactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -261,7 +261,7 @@ export function EinClosingServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className=" justify-start text-left font-normal border-gray-300"
+                    className=" justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="DateOfEINClosing"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -309,7 +309,7 @@ export function EinClosingServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="BusinessDissolutionDate"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -348,7 +348,7 @@ export function EinClosingServicesForm() {
           
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Start EIN Closing Services"}
           </Button>
         </form>

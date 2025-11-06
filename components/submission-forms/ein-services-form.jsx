@@ -146,7 +146,7 @@ export function EinServicesForm() {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your EIN Services
@@ -169,7 +169,7 @@ export function EinServicesForm() {
                     CompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -180,7 +180,7 @@ export function EinServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfFormation"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -225,7 +225,7 @@ export function EinServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent className="border-gray-300">
@@ -250,7 +250,7 @@ export function EinServicesForm() {
                     OwnerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -267,7 +267,7 @@ export function EinServicesForm() {
                     members: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -278,7 +278,7 @@ export function EinServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className=" justify-start text-left font-normal border-gray-300"
+                    className=" justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="fiscalYearEndDate"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -327,7 +327,7 @@ export function EinServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -345,7 +345,7 @@ export function EinServicesForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="registrationDate"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -393,7 +393,7 @@ export function EinServicesForm() {
                     contactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -412,7 +412,7 @@ export function EinServicesForm() {
                     businessActivityNature: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -422,7 +422,7 @@ export function EinServicesForm() {
                 Have you previously obtained the EIN if yes provide the number?
               </Label>
               <Input
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 type="text"
                 id="prevEin"
                 value={formData.prevEin}
@@ -445,7 +445,7 @@ export function EinServicesForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -458,7 +458,7 @@ export function EinServicesForm() {
           
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Start Business Formation"}
           </Button>
         </form>

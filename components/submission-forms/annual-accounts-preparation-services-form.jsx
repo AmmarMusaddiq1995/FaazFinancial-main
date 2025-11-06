@@ -125,7 +125,7 @@ export function AnnualAccountsPreparationServicesForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Annual Accounts Preparation Services
@@ -146,10 +146,11 @@ export function AnnualAccountsPreparationServicesForm() {
                   value={formData.packageType}
                    onValueChange={(value) =>
                    setFormData({ ...formData, packageType: value })
+
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select type of annual accounts preparation" />
               </SelectTrigger>
               <SelectContent>
@@ -178,7 +179,7 @@ export function AnnualAccountsPreparationServicesForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
@@ -196,7 +197,7 @@ export function AnnualAccountsPreparationServicesForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Annual Accounts Preparation Services"}
             </Button>
           </form>

@@ -160,7 +160,7 @@ export function FilingArticlesOfAmendmentsForm() {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-center">
           Start Your Filing Articles of Amendments
@@ -185,7 +185,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     businessName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -205,7 +205,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     reasonForFilingAmendments: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -223,7 +223,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     provideNewBusinessName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 optional
                 placeholder="If business name is changing, provide new business name (optional)"
               />
@@ -243,7 +243,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     ownerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -261,7 +261,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     emailAddress: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -279,7 +279,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     ownerAddress: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -298,7 +298,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     contactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -316,7 +316,7 @@ export function FilingArticlesOfAmendmentsForm() {
                     businessAddress: e.target.value,
                   })
                 }
-                className="border-gray-300"
+                className="border-gray-300 shadow-md shadow-black"
                 required
               />
             </div>
@@ -333,7 +333,7 @@ export function FilingArticlesOfAmendmentsForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -413,7 +413,7 @@ export function FilingArticlesOfAmendmentsForm() {
           
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
             {loading ? "Submitting..." : "Start Filing Articles of Amendments"}
           </Button>
         </form>

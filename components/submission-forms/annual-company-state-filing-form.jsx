@@ -313,7 +313,7 @@ export function AnnualCompanyStateFilingForm() {
 
   return (
     <>
-      <Card className="max-w-2xl mx-auto">
+      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-center">
             Start Your Annual Company State Filing
@@ -340,7 +340,7 @@ export function AnnualCompanyStateFilingForm() {
                       businessName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -355,7 +355,7 @@ export function AnnualCompanyStateFilingForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300">
+                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -378,7 +378,7 @@ export function AnnualCompanyStateFilingForm() {
                  }
                  required
                 >
-               <SelectTrigger className="border-gray-300">
+               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                 <SelectValue placeholder="Select package type" />
               </SelectTrigger>
               <SelectContent>
@@ -463,7 +463,7 @@ export function AnnualCompanyStateFilingForm() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="justify-start text-left font-normal border-gray-300"
+                  className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
                     id="dateOfFormation"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -517,7 +517,7 @@ export function AnnualCompanyStateFilingForm() {
                       ownerFullLegalName: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -535,7 +535,7 @@ export function AnnualCompanyStateFilingForm() {
                       emailAddress: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -552,7 +552,7 @@ export function AnnualCompanyStateFilingForm() {
                       cashBalanceOfBusiness: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -571,7 +571,7 @@ export function AnnualCompanyStateFilingForm() {
                       accountsRecieveables: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -588,7 +588,7 @@ export function AnnualCompanyStateFilingForm() {
                       bankAccountBalanaceAsOfDate: e.target.value,
                     })
                   }
-                  className="border-gray-300"
+                  className="border-gray-300 shadow-md shadow-black"
                   required
                 />
               </div>
@@ -605,7 +605,7 @@ export function AnnualCompanyStateFilingForm() {
                     handleFileUpload(e, "balanceSheet");
                   }}
                   required
-                  className="border-gray-300 cursor-pointer"
+                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />
               </div>
 
@@ -620,7 +620,7 @@ export function AnnualCompanyStateFilingForm() {
               
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
               {loading ? "Submitting..." : "Start Annual Company State Filing"}
             </Button>
           </form>
