@@ -84,7 +84,7 @@ const US_STATES = [
 ];
 
 const priceTableForLLC = {
-  Wyoming: { normal:380, express: 450},
+  Wyoming: { normal:450, express: 520},
   Texas: { normal: 585, express: 655},
   Alabama: { normal: 500, express: 570},
   Alaska: { normal: 550, express: 620},

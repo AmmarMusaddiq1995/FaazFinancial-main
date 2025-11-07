@@ -126,7 +126,7 @@ export function PricingSection() {
         "Washington": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
         "West Virginia": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } },
         "Wisconsin": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } },
-        "Wyoming": { Starter: { normal: 300, express: 370 }, Pro: { normal: 330, express: 400 }, Premium: { normal: 380, express: 450 } }
+        "Wyoming": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } }
       },
       "C Corporation Formation": {
         "Alabama": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },

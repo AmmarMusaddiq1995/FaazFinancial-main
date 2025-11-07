@@ -223,6 +223,8 @@ import { Badge } from "@/components/ui/badge";
 import { Shield, Users, Layers, Target } from "lucide-react";
 import { CardBody , CardContainer, CardItem } from "@/components/ui/3d-card";
 import Link from "next/link";
+import WorldMap from "@/components/ui/world-map";
+import {motion} from "motion/react";
 
 export default function AboutPage() {
   const stats = [
@@ -563,6 +565,10 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* Availability Section */}
+
+
 
 
 
