@@ -1,94 +1,103 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+"use client";
 
-export default function PrivacyPage() {
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { motion } from "framer-motion";
+
+export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen">
+    <div className="bg-white text-gray-800">
       <Header />
-      <main className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-600 mb-6">Last updated: March 1, 2024</p>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Information We Collect</h2>
-                <p className="text-gray-600 mb-4">
-                  We collect information you provide directly to us, such as when you create an account, use our
-                  services, or contact us for support. This may include:
-                </p>
-                <ul className="list-disc pl-6 text-gray-600 mb-4">
-                  <li>Personal information (name, email address, phone number)</li>
-                  <li>Business information (company name, business type, formation details)</li>
-                  <li>Payment information (processed securely through third-party providers)</li>
-                  <li>Communication preferences and support interactions</li>
-                </ul>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">How We Use Your Information</h2>
-                <p className="text-gray-600 mb-4">We use the information we collect to:</p>
-                <ul className="list-disc pl-6 text-gray-600 mb-4">
-                  <li>Provide and maintain our business formation services</li>
-                  <li>Process your business formation documents and filings</li>
-                  <li>Communicate with you about your account and services</li>
-                  <li>Provide customer support and respond to your inquiries</li>
-                  <li>Send you important updates about your business and compliance requirements</li>
-                  <li>Improve our services and develop new features</li>
-                </ul>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Information Sharing</h2>
-                <p className="text-gray-600 mb-4">
-                  We do not sell, trade, or otherwise transfer your personal information to third parties except as
-                  described in this policy. We may share your information:
-                </p>
-                <ul className="list-disc pl-6 text-gray-600 mb-4">
-                  <li>With state agencies as required for business formation filings</li>
-                  <li>With service providers who assist us in operating our business</li>
-                  <li>When required by law or to protect our rights and safety</li>
-                  <li>In connection with a business transfer or acquisition</li>
-                </ul>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Data Security</h2>
-                <p className="text-gray-600 mb-4">
-                  We implement appropriate security measures to protect your personal information against unauthorized
-                  access, alteration, disclosure, or destruction. However, no method of transmission over the internet
-                  is 100% secure.
-                </p>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your Rights</h2>
-                <p className="text-gray-600 mb-4">You have the right to:</p>
-                <ul className="list-disc pl-6 text-gray-600 mb-4">
-                  <li>Access and update your personal information</li>
-                  <li>Request deletion of your personal information</li>
-                  <li>Opt out of marketing communications</li>
-                  <li>Request a copy of your personal information</li>
-                </ul>
-              </section>
-
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Us</h2>
-                <p className="text-gray-600">
-                  If you have any questions about this Privacy Policy, please contact us at:
-                </p>
-                <div className="mt-4 text-gray-600">
-                  <p>Email: privacy@faazfinancialgroup.com</p>
-                  <p>Phone: (844) 493-6249</p>
-                  <p>Address: FaazFinancialGroup, Austin, TX</p>
-                </div>
-              </section>
-            </div>
-          </div>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-orange-500 text-white py-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 opacity-90"></div>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-bold mb-4"
+          >
+            Privacy Policy
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-lg opacity-90"
+          >
+            Your privacy matters to us. This page explains how Faaz Financial Group collects, uses, and protects your information.
+          </motion.p>
         </div>
-      </main>
+      </section>
+
+      {/* Content Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="max-w-5xl mx-auto py-16 px-6 space-y-10"
+      >
+        {/* Section Template */}
+        {[
+          {
+            title: "Our Commitment to Privacy",
+            content: `This Privacy Policy describes how FAAZ Financial Group LLC ("we", "us", or "FAAZ") collects, uses, and protects your personal information when you use our websites, apps, and services.`,
+          },
+          {
+            title: "Consent",
+            content: `By using our services, you consent to the collection, use, and sharing of your data as described in this policy. You may withdraw your consent anytime by contacting compliance@faazfinancialgroup.com.`,
+          },
+          {
+            title: "Information We Collect",
+            content: `We collect personal details such as name, email, phone, government ID, financial info, and transaction details. We may also collect device data, geolocation, and usage analytics to improve user experience.`,
+          },
+          {
+            title: "How We Use Your Information",
+            content: `Your information helps us provide, personalize, and secure our services. It’s also used for compliance, marketing (with your consent), and improving our platform.`,
+          },
+          {
+            title: "Disclosure of Information",
+            content: `We may share your data with affiliates, service providers, and legal authorities when necessary. FAAZ does not sell your personal information.`,
+          },
+          {
+            title: "Cookies & Tracking",
+            content: `We use cookies and analytics tools to enhance performance, measure engagement, and provide tailored experiences. You can control cookies through your browser settings.`,
+          },
+          {
+            title: "Children’s Privacy",
+            content: `Our services are not directed to individuals under 18. If we become aware of data from a minor, we promptly delete it.`,
+          },
+          {
+            title: "California Privacy Rights",
+            content: `California residents have the right to access, delete, or restrict the use of their personal data as per the CPRA. Contact compliance@faazfinancialgroup.com for requests.`,
+          },
+          {
+            title: "Changes to This Policy",
+            content: `We may update this Privacy Policy periodically. Continued use of our services after updates means you agree to the revised terms.`,
+          },
+          {
+            title: "Contact Us",
+            content: `If you have questions or concerns regarding this policy, reach us at compliance@faazfinancialgroup.com or call +1 307 400 1963.`,
+          },
+        ].map((section, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl font-semibold text-orange-600 mb-3">
+              {section.title}
+            </h2>
+            <p className="text-gray-700 leading-relaxed">{section.content}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
