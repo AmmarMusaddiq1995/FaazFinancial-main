@@ -567,13 +567,58 @@ export default function AboutPage() {
         </section>
 
         {/* Availability Section */}
+        <section className="py-20 mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-6">Our Global Reach</h2>
+          <p className="text-gray-600 text-center mb-6">
+            We serve our clients across the globe to provide them with the compliance and formation services mainly in USA and UK.
+          </p>
+          <div className="container mx-auto w-full">
+          <WorldMap
+        dots={[
+          {
+            start: {
+              lat: 64.2008,
+              lng: -149.4937,
+            
+            }, // Alaska (Fairbanks)
+            end: {
+              lat: 34.0522,
+              lng: -118.2437,
+            }, // Los Angeles
+            
+          },
+          {
+            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
+            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            
+          },
+          {
+            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+          },
+          {
+            start: { lat: 51.5074, lng: -0.1278 }, // London
+            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+          },
+          {
+            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+          },
+          {
+            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+          },
+        ]}
+      />
+          </div>
+        </section>
 
 
 
 
 
         {/* CTA Section */}
-        <section className="bg-gray-900 text-white py-20">
+        <section className="bg-gray-900 text-white py-20 border-b border-gray-800">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Simplify <span className="text-orange-500">Your Business Journey?</span>
