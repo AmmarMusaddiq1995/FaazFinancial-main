@@ -119,8 +119,8 @@ export function Header() {
          
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8 min-w-0 whitespace-nowrap">
-          {/* Products & Pricing Dropdown */}
+        <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-2 xl:space-x-3 min-w-0 whitespace-nowrap flex-wrap">
+          {/* Compliance Services Dropdown */}
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("products")}
@@ -130,7 +130,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Services & Pricing</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Compliance & Formation</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -139,7 +139,7 @@ export function Header() {
             </button>
 
             {activeDropdown === "products" && (
-              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 overflow-y-auto">
+              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 overflow-y-auto">
                 {/* Column 1: FORMATION SERVICES */}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
@@ -200,9 +200,7 @@ export function Header() {
                     <MenuItem href="/services/filing-articles-of-amendments" truncate>
                       Filing Articles Of Amendments(State fee excluded)
                     </MenuItem>
-                    <MenuItem href="/services/templates">
-                      Payroll Related Services
-                    </MenuItem>
+                    
                     <MenuItem href="/services/templates" truncate>
                       Payroll Withholding Account Registration (Some states may
                       have a small fee that is excluded)
@@ -220,56 +218,7 @@ export function Header() {
                   </ul>
                 </div>
 
-                {/* Column 3: ACCOUNTING & BOOKKEEPING TAXES */}
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    Bookkeeping & Taxes
-                  </h3>
-                  <ul className="space-y-1">
-                    <MenuItem href="/services/pro-bookkeeping-services(small-business)" truncate>
-                      SMB Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/pro-bookkeeping-services(medium-business)" truncate>
-                      SME Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/pro-bookkeeping-services(large-business)" truncate>
-                      Full Scale Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/full-year-reconciliation-services">
-                      Full-Year Reconciliation Services
-                    </MenuItem>
-                    <MenuItem href="/services/setting-up-new-books-in-QBO" truncate>
-                      Setting Up New Books In QBO/Xero Or Any ERP (charges
-                      varies based on nature of work)
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Financial Reporting - Reach Out For Pricing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Virtual CFO Services-Reach Out For Pricing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      Payroll Taxes
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      Payroll Withholding Tax Filing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      W2 & 1099 Filing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      Tax Filing Services
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Tax Filing Individual ( Non Resident) With ITIN
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Company Tax Filing
-                    </MenuItem>
-                  </ul>
-                </div>
-
-                {/* Column 4: UK FORMATION & COMPLIANCE SERVICES */}
+                {/* Column 3: UK FORMATION & COMPLIANCE SERVICES */}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
                     UK FORMATION SERVICES
@@ -336,6 +285,94 @@ export function Header() {
             )}
           </div>
 
+          {/* Bookkeeping Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => handleDropdownToggle("bookkeeping")}
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+                activeDropdown === "bookkeeping"
+                  ? "text-orange-600 border-b-2 border-orange-600"
+                  : ""
+              }`}
+            >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting Services</span>
+              {activeDropdown === "bookkeeping" ? (
+                <ChevronUp className="h-4 w-4 text-white" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-white" />
+              )}
+            </button>
+
+            {activeDropdown === "bookkeeping" && (
+              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[900px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 overflow-y-auto">
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-700 mb-6 text-sm uppercase tracking-wide">
+                    Bookkeeping & Taxes
+                  </h3>
+                  <ul className="space-y-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+                    <MenuItem href="/services/pro-bookkeeping-services(small-business)" truncate>
+                      SMB Bookkeeping
+                    </MenuItem>
+                    <MenuItem href="/services/pro-bookkeeping-services(medium-business)" truncate>
+                      SME Bookkeeping
+                    </MenuItem>
+                    <MenuItem href="/services/pro-bookkeeping-services(large-business)" truncate>
+                      Full Scale Bookkeeping
+                    </MenuItem>
+                    <MenuItem href="/services/full-year-reconciliation-services">
+                      Full-Year Reconciliation Services
+                    </MenuItem>
+                    <MenuItem href="/services/setting-up-new-books-in-QBO" truncate>
+                      Setting Up New Books In QBO/Xero Or Any ERP (charges
+                      varies based on nature of work)
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing" truncate>
+                      Financial Reporting - Reach Out For Pricing
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing" truncate>
+                      Virtual CFO Services-Reach Out For Pricing
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing">
+                      Payroll Taxes
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing">
+                      Payroll Withholding Tax Filing
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing">
+                      W2 & 1099 Filing
+                    </MenuItem>
+                    
+                    <MenuItem href="/services/tax-filing" truncate>
+                      Tax Filing Individual ( Non Resident) With ITIN
+                    </MenuItem>
+                    <MenuItem href="/services/tax-filing" truncate>
+                      Company Tax Filing
+                    </MenuItem>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Pricing Dropdown */}
+          {/* <div className="relative">
+          <button
+              onClick={() => handleDropdownToggle("pricing")}
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+                activeDropdown === "pricing"
+                  ? "text-orange-600 border-b-2 border-orange-600"
+                  : ""
+              }`}
+            >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Bookkeeping Services</span>
+              {activeDropdown === "pricing" ? (
+                <ChevronUp className="h-4 w-4 text-white" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-white" />
+              )}
+            </button>
+          </div> */}
+
           {/* Guides & Resources Dropdown */}
           <div className="relative">
             <button
@@ -346,7 +383,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Learning Center</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Learning Center</span>
             </button>
           </div>
 
@@ -360,7 +397,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Get To Know Us</span>
               {activeDropdown === "about" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -401,7 +438,7 @@ export function Header() {
           {/* <button className="p-2 text-gray-600 hover:text-orange-600 transition-colors hidden xl:inline-flex">
             <Search className="h-5 w-5" />
           </button> */}
-          <span className="text-sm text-white flex items-center space-x-1 whitespace-nowrap hidden xl:inline-flex">
+          <span className="text-sm text-white hidden items-center space-x-1 whitespace-nowrap">
             <Phone className="h-4 w-4 text-white" />
             <span>+1 307-400-1963</span>
           </span>
@@ -483,7 +520,7 @@ export function Header() {
             <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="services">
                 <AccordionTrigger className="text-sm ">
-                  Services & Pricing
+                  Compliance & Formation
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="space-y-2">
@@ -625,92 +662,6 @@ export function Header() {
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
-                      Accounting & Bookkeeping Taxes
-                    </h4>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/services/pro-bookkeeping-services(small-business)"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Pro-BookKeeping Services (Small Business)
-                      </Link>
-                      <Link
-                        href="/services/pro-bookkeeping-services(medium-business)"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Pro-BookKeeping Services (Medium Business)
-                      </Link>
-                      <Link
-                        href="/services/pro-bookkeeping-services(large-business)"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Pro-Bookkeeping Services (Large Business)
-                      </Link>
-                      <Link
-                        href="/services/full-year-reconciliation-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Full-Year Reconciliation Services
-                      </Link>
-                      <Link
-                        href="/services/setting-up-new-books-in-QBO"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Setting Up New Books In QBO/Xero Or Any ERP
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Financial Reporting - Reach Out For Pricing
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Virtual CFO Services-Reach Out For Pricing
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Payroll Taxes
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Payroll Withholding Tax Filing
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        W2 & 1099 Filing
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Tax Filing Services
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Tax Filing Individual ( Non Resident) With ITIN
-                      </Link>
-                      <Link
-                        href="/services/tax-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Company Tax Filing Vary Based On The Volume Of Business
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
                       UK Formation & Compliance
                     </h4>
                     <div className="pl-4 space-y-2">
@@ -824,6 +775,94 @@ export function Header() {
                         Initial Compliance After Formation
                       </Link>
                     </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="bookkeeping">
+                <AccordionTrigger className="text-sm">
+                  Accounting Services
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
+                  <div className="pl-4 space-y-2">
+                    <Link
+                      href="/services/pro-bookkeeping-services(small-business)"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Pro-BookKeeping Services (Small Business)
+                    </Link>
+                    <Link
+                      href="/services/pro-bookkeeping-services(medium-business)"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Pro-BookKeeping Services (Medium Business)
+                    </Link>
+                    <Link
+                      href="/services/pro-bookkeeping-services(large-business)"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Pro-Bookkeeping Services (Large Business)
+                    </Link>
+                    <Link
+                      href="/services/full-year-reconciliation-services"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Full-Year Reconciliation Services
+                    </Link>
+                    <Link
+                      href="/services/setting-up-new-books-in-QBO"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Setting Up New Books In QBO/Xero Or Any ERP
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Financial Reporting - Reach Out For Pricing
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Virtual CFO Services-Reach Out For Pricing
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Payroll Taxes
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Payroll Withholding Tax Filing
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      W2 & 1099 Filing
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Tax Filing Services
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Tax Filing Individual ( Non Resident) With ITIN
+                    </Link>
+                    <Link
+                      href="/services/tax-filing"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Company Tax Filing Vary Based On The Volume Of Business
+                    </Link>
                   </div>
                 </AccordionContent>
               </AccordionItem>
