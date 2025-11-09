@@ -5,21 +5,21 @@ export function ServicesSection() {
       title: "Start Strong",
       description:
         "Select your LLC package, appoint a registered agent, secure your Employer ID Number (EIN), set up your company online with a professional website, and keep your personal and business banking separate with our personal and business banking.",
-      image: "/business-formation-documents-and-laptop.png",
+      image: "/start-strong.jpeg",
     },
     {
       icon: "🛡️",
       title: "Stay Protected",
       description:
         "Meet all ongoing local, state, and federal requirements by securing the business licenses and permits you need to legally operate, completing annual reports and filings, and managing your business finances to file your business tax returns.",
-      image: "/business-compliance-and-protection-documents.png",
+      image: "/stay-protected.jpeg",
     },
     {
       icon: "📈",
       title: "Strengthen and Grow",
       description:
         "Access business tools and educational resources that help refine your business plan, expand your online presence, automate your finances, and streamline your sales and marketing.",
-      image: "/business-growth-charts-and-analytics-dashboard.png",
+      image: "/strength.jpeg",
     },
   ]
 

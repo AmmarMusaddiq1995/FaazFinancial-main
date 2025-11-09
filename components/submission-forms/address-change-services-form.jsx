@@ -157,7 +157,7 @@ export function AddressChangeServicesForm() {
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount:1
+          amount:100
 
 
         },

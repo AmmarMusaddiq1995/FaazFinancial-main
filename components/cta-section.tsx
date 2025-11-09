@@ -53,7 +53,7 @@ export function CTASection() {
         <Button
           onClick={handleClick}
           size="lg"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg"
+          className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 text-primary-foreground cursor-pointer  px-8 py-4 text-lg"
         >
           Start Your LLC Today
         </Button>

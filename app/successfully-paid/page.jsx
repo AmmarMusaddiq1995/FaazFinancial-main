@@ -173,6 +173,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 function PaymentSuccessContent() {
   const searchParams = useSearchParams();
@@ -231,6 +233,8 @@ function PaymentSuccessContent() {
   }
 
   return (
+    <div>
+    <Header />
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl text-center border border-green-100">
         <div className="flex justify-center mb-6">
@@ -250,15 +254,15 @@ function PaymentSuccessContent() {
           <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6 text-left">
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Order Amount:</span>
-              <span className="text-orange-600 font-semibold">${Math.round((details.amount_total / 100)-(details.amount_total / 100) * 0.03).toFixed(2)}</span>
+              <span className="text-orange-600 font-semibold">${((details.amount_total / 100)-(details.amount_total / 100) * 0.03).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Card Fee (3%):</span>
-              <span className="text-orange-600 font-semibold">${Math.round((details.amount_total / 100) * 0.03).toFixed(2)}</span>
+              <span className="text-orange-600 font-semibold">${((details.amount_total / 100) * 0.03).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Total Amount:</span>
-              <span className="text-orange-600 font-semibold">${Math.round(details.amount_total / 100).toFixed(2)}</span>
+              <span className="text-orange-600 font-semibold">${(details.amount_total / 100).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Status:</span>
@@ -282,6 +286,8 @@ function PaymentSuccessContent() {
           Go to Dashboard
         </Button>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }
