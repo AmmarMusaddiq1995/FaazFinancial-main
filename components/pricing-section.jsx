@@ -126,7 +126,7 @@ export function PricingSection() {
         "Washington": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
         "West Virginia": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } },
         "Wisconsin": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } },
-        "Wyoming": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } }
+        "Wyoming": { Starter: { normal: 320, express: 400 }, Pro: { normal: 350, express: 430 }, Premium: { normal: 400, express: 480 } }
       },
       "C Corporation Formation": {
         "Alabama": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },
@@ -178,7 +178,7 @@ export function PricingSection() {
         "Washington": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },
         "West Virginia": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
         "Wisconsin": { Starter: { normal: 400, express: 470 }, Pro: { normal: 430, express: 500 }, Premium: { normal: 480, express: 550 } },
-        "Wyoming": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } }
+        "Wyoming": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } }
       }
     };
 

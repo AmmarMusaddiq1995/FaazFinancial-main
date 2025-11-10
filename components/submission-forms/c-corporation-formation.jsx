@@ -85,7 +85,7 @@ const US_STATES = [
 ];
 
 const priceTableForCCorp = {
-  Wyoming: { normal:430, express: 500},
+  Wyoming: { normal:450, express: 520},
   Texas: { normal: 635, express: 705},
   Washington: { normal: 500, express: 570},
   California: { normal: 415, express: 485},

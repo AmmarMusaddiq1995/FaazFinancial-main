@@ -10,6 +10,9 @@ import Script from "next/script";
 export const metadata = {
   title: "Faaz Financial Group",
   description: "Created with Next.js",
+  icons: {
+    icon: "/favicon.png",
+  },
   generator: "Next",
 };
 
