@@ -365,7 +365,7 @@ export function BoiFilingServicesForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 

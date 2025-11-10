@@ -323,7 +323,7 @@ export function CompanyDissolutionForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
               
@@ -340,7 +340,7 @@ export function CompanyDissolutionForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 
@@ -558,7 +558,7 @@ export function CompanyDissolutionForm() {
                   onChange={(e) => {
                     handleFileUpload(e, "articlesOfFormation");
                   }}
-                  required
+                  
                   placeholder="Scan of your articles of formation/organization/certificate of formation"
                   className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />

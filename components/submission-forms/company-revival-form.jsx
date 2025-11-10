@@ -326,7 +326,7 @@ export function CompanyRevivalForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 
@@ -413,7 +413,7 @@ export function CompanyRevivalForm() {
               <input
                 type="hidden"
                 value={formData.dateOfRevival}
-                required
+                
                 readOnly
               />
             </div>
@@ -547,7 +547,7 @@ export function CompanyRevivalForm() {
                   onChange={(e) => {
                     handleFileUpload(e, "articlesOfFormation");
                   }}
-                  required
+                  
                   placeholder="Scan of your articles of formation/organization/certificate of formation"
                   className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />
@@ -561,7 +561,7 @@ export function CompanyRevivalForm() {
                   onChange={(e) => {
                     handleFileUpload(e, "einLetter");
                   }}
-                  required
+                  
                   placeholder="Upload your EIN letter"
                   className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />

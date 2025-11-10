@@ -468,7 +468,7 @@ export function DBATrademarkRegistrationServicesForm() {
                 onValueChange={(value) =>
                   setFormData({ ...formData, businessEntityType: value })
                 }
-                required
+                
               >
                 <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business entity type" />

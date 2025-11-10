@@ -318,7 +318,7 @@ export function RegisteredAgentServicesForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 
@@ -334,7 +334,7 @@ export function RegisteredAgentServicesForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 

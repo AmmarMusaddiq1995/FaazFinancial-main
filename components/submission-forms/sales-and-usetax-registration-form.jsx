@@ -279,7 +279,7 @@ export function SalesAndUsetaxRegistrationForm() {
                 onValueChange={(value) =>
                   setFormData({ ...formData, businessEntityType: value })
                 }
-                required
+                
               >
                 <SelectTrigger className="border-gray-300 shadow-md shadow-black">
                   <SelectValue placeholder="Select business entity type" />
@@ -463,7 +463,7 @@ export function SalesAndUsetaxRegistrationForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 

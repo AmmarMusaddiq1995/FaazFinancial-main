@@ -536,7 +536,7 @@ export function AnnualCompanyStateFilingForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 
@@ -572,7 +572,7 @@ export function AnnualCompanyStateFilingForm() {
                     })
                   }
                   className="border-gray-300 shadow-md shadow-black"
-                  required
+                  
                 />
               </div>
 
@@ -604,7 +604,7 @@ export function AnnualCompanyStateFilingForm() {
                   onChange={(e) => {
                     handleFileUpload(e, "balanceSheet");
                   }}
-                  required
+                  
                   className="border-gray-300 cursor-pointer shadow-md shadow-black"
                 />
               </div>

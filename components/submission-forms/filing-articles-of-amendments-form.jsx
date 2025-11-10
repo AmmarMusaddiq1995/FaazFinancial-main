@@ -262,7 +262,7 @@ export function FilingArticlesOfAmendmentsForm() {
                   })
                 }
                 className="border-gray-300 shadow-md shadow-black"
-                required
+                
               />
             </div>
 
@@ -280,7 +280,7 @@ export function FilingArticlesOfAmendmentsForm() {
                   })
                 }
                 className="border-gray-300 shadow-md shadow-black"
-                required
+                
               />
             </div>
 
@@ -299,7 +299,7 @@ export function FilingArticlesOfAmendmentsForm() {
                   })
                 }
                 className="border-gray-300 shadow-md shadow-black"
-                required
+                
               />
             </div>
 
