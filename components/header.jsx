@@ -197,7 +197,7 @@ export function Header() {
                     <MenuItem href="/services/address-change-services">
                       Address Change Services
                     </MenuItem>
-                    <MenuItem href="/services/filing-articles-of-amendments" truncate>
+                    <MenuItem href="/services/filing-articles-of-amendments" >
                       Filing Articles Of Amendments(State fee excluded)
                     </MenuItem>
                     
@@ -227,22 +227,22 @@ export function Header() {
                     <MenuItem href="/services/uk-ltd-formation">
                       UK LTD Formation
                     </MenuItem>
-                    <MenuItem href="/services/simple-corp-tax-return-ct600" truncate>
+                    <MenuItem href="/services/simple-corp-tax-return-ct600">
                       Simple Corporation Tax 
                     </MenuItem>
-                    <MenuItem href="/services/complex-corp-tax-return-ct600" truncate>
+                    <MenuItem href="/services/complex-corp-tax-return-ct600">
                       Advance Corporation Tax 
                     </MenuItem>
                     <MenuItem href="/services/registering-client-for-selfassessment">
                       Registering Client For Selfassessment
                     </MenuItem>
-                    <MenuItem href="/services/simple-self-assessment-filing" truncate>
+                    <MenuItem href="/services/simple-self-assessment-filing" >
                       Simple Self Assessment (SA100) Filing
                     </MenuItem>
-                    <MenuItem href="/services/advance-self-assessment-filing" truncate>
+                    <MenuItem href="/services/advance-self-assessment-filing" >
                       Advance Self Assessment (SA100) Filing
                     </MenuItem>
-                    <MenuItem href="/services/annual-accounts-preparation" truncate>
+                    <MenuItem href="/services/annual-accounts-preparation" >
                       Annual Corporation Tax Accounts Preparation
                     </MenuItem>
                     
@@ -270,7 +270,7 @@ export function Header() {
                     <MenuItem href="/services/logo-kit">
                       Tax Planning & Consulation On Zoom
                     </MenuItem>
-                    <MenuItem href="/services/tax-budgeting-services" truncate>
+                    <MenuItem href="/services/tax-budgeting-services" >
                       Tax Budgeting & Taxation In Investment Appraisal
                     </MenuItem>
                     <MenuItem href="/services/logo-kit">
