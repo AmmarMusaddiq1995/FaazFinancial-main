@@ -77,10 +77,10 @@ export default function HowItWorksPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-cyan-50 to-blue-50 py-20">
+        <section className="bg-gradient-to-br from-primary-50 to-primary-100 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-cyan-100 text-cyan-800">How It Works</Badge>
+              <Badge className="mb-4 bg-primary-100 text-primary-800">How It Works</Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
                 Business Formation Made Simple
               </h1>
@@ -88,7 +88,7 @@ export default function HowItWorksPage() {
                 From choosing your package to receiving your official documents, we make starting your business
                 straightforward and stress-free.
               </p>
-              <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
+              <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
                 Start Your Business Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -115,13 +115,13 @@ export default function HowItWorksPage() {
                     <CardContent className="p-8">
                       <div className="flex items-start gap-6">
                         <div className="flex-shrink-0">
-                          <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center">
+                          <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
                             <step.icon className="h-8 w-8 text-cyan-600" />
                           </div>
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-4 mb-4">
-                            <span className="text-4xl font-bold text-cyan-600">{step.number}</span>
+                            <span className="text-4xl font-bold text-primary-600">{step.number}</span>
                             <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
                           </div>
                           <p className="text-gray-600 mb-6">{step.description}</p>
@@ -153,7 +153,7 @@ export default function HowItWorksPage() {
               <div className="grid md:grid-cols-3 gap-8">
                 <Card>
                   <CardContent className="pt-6 text-center">
-                    <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl font-bold text-cyan-600">1</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Day 1</h3>
@@ -163,7 +163,7 @@ export default function HowItWorksPage() {
 
                 <Card>
                   <CardContent className="pt-6 text-center">
-                    <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl font-bold text-cyan-600">2-3</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Days 2-3</h3>
@@ -173,7 +173,7 @@ export default function HowItWorksPage() {
 
                 <Card>
                   <CardContent className="pt-6 text-center">
-                    <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl font-bold text-cyan-600">5-15</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Days 5-15</h3>
@@ -182,7 +182,7 @@ export default function HowItWorksPage() {
                 </Card>
               </div>
 
-              <div className="mt-8 p-4 bg-cyan-50 rounded-lg">
+              <div className="mt-8 p-4 bg-primary-50 rounded-lg">
                 <p className="text-cyan-800">
                   <strong>Need it faster?</strong> Expedited processing available for most states - typically 1-3
                   business days.
@@ -197,9 +197,9 @@ export default function HowItWorksPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose ZenBusiness?</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose FAAZ Financial Group?</h2>
                 <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  We've helped over 500,000 entrepreneurs start their businesses with confidence
+                  We've helped over 200,000 entrepreneurs start their businesses with confidence and trust
                 </p>
               </div>
 
@@ -274,21 +274,21 @@ export default function HowItWorksPage() {
         {/* CTA Section */}
         <section className="bg-gray-900 text-white py-20">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Business Journey?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your <span className="text-orange-500">Business</span> Journey?</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of successful entrepreneurs who chose ZenBusiness to launch their dreams.
+              Join thousands of successful entrepreneurs who chose FAAZ Financial Group to launch their dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
+              <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
                 Start Your LLC Today
               </Button>
-              <Button
+              {/* <Button
                 size="lg"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
               >
                 Compare Packages
-              </Button>
+              </Button> */}
             </div>
           </div>
         </section>
