@@ -5,8 +5,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Search, MessageCircle, Phone } from "lucide-react"
-
+import { useRouter } from "next/navigation" 
 export default function FAQPage() {
+  const router = useRouter();
   const faqCategories = [
     {
       category: "Getting Started",
@@ -115,10 +116,10 @@ export default function FAQPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-cyan-50 to-blue-50 py-20">
+        <section className="bg-gradient-to-br from-primary-50 to-primary-100 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-cyan-100 text-cyan-800">Help Center</Badge>
+              <Badge className="mb-4 bg-primary-100 text-primary-800">Help Center</Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
                 Frequently Asked Questions
               </h1>
@@ -132,7 +133,7 @@ export default function FAQPage() {
                 <input
                   type="text"
                   placeholder="Search for answers..."
-                  className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -145,25 +146,26 @@ export default function FAQPage() {
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <Phone className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+                  <Phone className="h-12 w-12 text-primary-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Call Us</h3>
                   <p className="text-gray-600 mb-4">Speak with a formation specialist</p>
-                  <p className="text-cyan-600 font-semibold">(844) 493-6249</p>
+                  <p className="text-primary-600 font-semibold">+1-307-400-1963</p>
                 </CardContent>
               </Card>
 
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <MessageCircle className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+                  <MessageCircle className="h-12 w-12 text-primary-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Live Chat</h3>
                   <p className="text-gray-600 mb-4">Get instant help from our team</p>
-                  <Button variant="outline">Start Chat</Button>
+
+                  <Button variant="outline" onClick={() => router.push('https://wa.me/13074001963')}>Start Chat</Button>
                 </CardContent>
               </Card>
 
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <Search className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+                  <Search className="h-12 w-12 text-primary-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Help Center</h3>
                   <p className="text-gray-600 mb-4">Browse our knowledge base</p>
                   <Button variant="outline">View Articles</Button>
@@ -203,13 +205,13 @@ export default function FAQPage() {
         </section>
 
         {/* Still Need Help */}
-        <section className="py-20">
+        {/* <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Still Need Help?</h2>
               <p className="text-xl text-gray-600 mb-8">Our business formation experts are here to help you succeed.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
+                <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
                   Contact Support
                 </Button>
                 <Button size="lg" variant="outline">
@@ -218,7 +220,7 @@ export default function FAQPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </div>
