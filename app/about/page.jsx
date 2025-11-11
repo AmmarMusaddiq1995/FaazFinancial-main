@@ -266,7 +266,7 @@ export default function AboutPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
+        <section className="bg-linear-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4 text-center">
             <Badge className="mb-4 bg-primary text-white font-bold">
               About FAAZ Financial Group LLC
@@ -630,7 +630,7 @@ export default function AboutPage() {
             <Button
               size="lg"
               asChild
-              className="bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground px-8 py-4 text-lg hover:text-white"
+              className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 cursor-pointer text-primary-foreground px-8 py-4 text-lg hover:text-white"
             >
               <Link href="/contact">Contact Us Today</Link>
             </Button>

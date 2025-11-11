@@ -77,18 +77,18 @@ export default function HowItWorksPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
+        <section className="bg-linear-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <Badge className="mb-4 bg-primary text-white">How It Works</Badge>
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
-                Business Formation Made Simple
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 ">
+                <span className="text-primary">Business Formation</span> Made Simple
               </h1>
               <p className="text-xl text-gray-600 mb-8 text-pretty">
                 From choosing your package to receiving your official documents, we make starting your business
                 straightforward and stress-free.
               </p>
-              <Button size="lg" className="bg-primary hover:bg-primary-700">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 cursor-pointer text-primary-foreground px-8 py-4 text-lg">
                 Start Your Business Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -114,7 +114,7 @@ export default function HowItWorksPage() {
                   <Card key={index} className="relative overflow-hidden">
                     <CardContent className="p-8">
                       <div className="flex items-start gap-6">
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                           <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
                             <step.icon className="h-8 w-8 text-primary" />
                           </div>
@@ -128,7 +128,7 @@ export default function HowItWorksPage() {
                           <ul className="space-y-2">
                             {step.details.map((detail, detailIndex) => (
                               <li key={detailIndex} className="flex items-start gap-2">
-                                <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 shrink-0" />
                                 <span className="text-sm text-gray-600">{detail}</span>
                               </li>
                             ))}
@@ -239,7 +239,7 @@ export default function HowItWorksPage() {
                         "Formation confirmation and tracking",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 shrink-0" />
                           <span className="text-gray-600">{item}</span>
                         </li>
                       ))}
@@ -259,7 +259,7 @@ export default function HowItWorksPage() {
                         "Business growth resources",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 shrink-0" />
                           <span className="text-gray-600">{item}</span>
                         </li>
                       ))}
@@ -279,7 +279,7 @@ export default function HowItWorksPage() {
               Join thousands of successful entrepreneurs who chose FAAZ Financial Group to launch their dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 cursor-pointer text-primary-foreground px-8 py-4 text-lg">
                 Start Your LLC Today
               </Button>
               {/* <Button

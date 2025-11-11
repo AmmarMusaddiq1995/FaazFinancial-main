@@ -28,14 +28,14 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
             
-              <li>
+              {/* <li>
                 <Link
                   href="/pricing"
                   className="hover:text-white transition-colors"
                 >
                   Pricing
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <a
                   href="/services/llc-formation-2"
@@ -46,7 +46,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/services/corporation-formation"
+                  href="/services/corp-formation-2"
                   className="hover:text-white transition-colors"
                 >
                   Corporation Formation
@@ -90,16 +90,16 @@ export function Footer() {
                   How It Works
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:text-white transition-colors">
                   Business Formation Guide
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="#" className="hover:text-white transition-colors">
                   State Requirements
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 

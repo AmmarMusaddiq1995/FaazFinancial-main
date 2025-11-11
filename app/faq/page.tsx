@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
@@ -5,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Search, MessageCircle, Phone } from "lucide-react"
+import { Router } from "next/router"
 import { useRouter } from "next/navigation" 
 export default function FAQPage() {
   const router = useRouter();
@@ -116,12 +119,12 @@ export default function FAQPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
+        <section className="bg-linear-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-primary-100 text-primary-800">Help Center</Badge>
+              <Badge className="mb-4 bg-primary text-white">Help Center</Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
-                Frequently Asked Questions
+                Frequently Asked <span className="text-primary">Questions</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 text-pretty">
                 Find answers to common questions about business formation, our services, and the LLC process.
@@ -146,16 +149,16 @@ export default function FAQPage() {
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <Phone className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+                  <Phone className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Call Us</h3>
                   <p className="text-gray-600 mb-4">Speak with a formation specialist</p>
-                  <p className="text-primary-600 font-semibold">+1-307-400-1963</p>
+                  <p className="text-primary font-semibold">+1-307-400-1963</p>
                 </CardContent>
               </Card>
 
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <MessageCircle className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+                  <MessageCircle className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Live Chat</h3>
                   <p className="text-gray-600 mb-4">Get instant help from our team</p>
 
@@ -165,10 +168,10 @@ export default function FAQPage() {
 
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <Search className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+                  <Search className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">Help Center</h3>
                   <p className="text-gray-600 mb-4">Browse our knowledge base</p>
-                  <Button variant="outline">View Articles</Button>
+                  <Button variant="outline" onClick={() => router.push('/blog')}>View Articles</Button>
                 </CardContent>
               </Card>
             </div>
