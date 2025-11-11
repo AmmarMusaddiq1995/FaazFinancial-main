@@ -116,7 +116,7 @@ export default function FAQPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary-50 to-primary-100 py-20">
+        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <Badge className="mb-4 bg-primary-100 text-primary-800">Help Center</Badge>

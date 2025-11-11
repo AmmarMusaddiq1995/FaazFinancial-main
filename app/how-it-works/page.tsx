@@ -77,10 +77,10 @@ export default function HowItWorksPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary-50 to-primary-100 py-20">
+        <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-4 bg-primary-100 text-primary-800">How It Works</Badge>
+              <Badge className="mb-4 bg-primary text-white">How It Works</Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-balance">
                 Business Formation Made Simple
               </h1>
@@ -88,7 +88,7 @@ export default function HowItWorksPage() {
                 From choosing your package to receiving your official documents, we make starting your business
                 straightforward and stress-free.
               </p>
-              <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
+              <Button size="lg" className="bg-primary hover:bg-primary-700">
                 Start Your Business Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -116,7 +116,7 @@ export default function HowItWorksPage() {
                       <div className="flex items-start gap-6">
                         <div className="flex-shrink-0">
                           <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
-                            <step.icon className="h-8 w-8 text-cyan-600" />
+                            <step.icon className="h-8 w-8 text-primary" />
                           </div>
                         </div>
                         <div className="flex-1">
@@ -154,7 +154,7 @@ export default function HowItWorksPage() {
                 <Card>
                   <CardContent className="pt-6 text-center">
                     <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-bold text-cyan-600">1</span>
+                      <span className="text-2xl font-bold text-primary">1</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Day 1</h3>
                     <p className="text-gray-600">Order placed and documents prepared</p>
@@ -164,7 +164,7 @@ export default function HowItWorksPage() {
                 <Card>
                   <CardContent className="pt-6 text-center">
                     <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-bold text-cyan-600">2-3</span>
+                      <span className="text-2xl font-bold text-primary">2-3</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Days 2-3</h3>
                     <p className="text-gray-600">Filed with state agency for processing</p>
@@ -174,7 +174,7 @@ export default function HowItWorksPage() {
                 <Card>
                   <CardContent className="pt-6 text-center">
                     <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-bold text-cyan-600">5-15</span>
+                      <span className="text-2xl font-bold text-primary">5-15</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Days 5-15</h3>
                     <p className="text-gray-600">Approved and documents delivered</p>
@@ -183,7 +183,7 @@ export default function HowItWorksPage() {
               </div>
 
               <div className="mt-8 p-4 bg-primary-50 rounded-lg">
-                <p className="text-cyan-800">
+                <p className="text-gray-900">
                   <strong>Need it faster?</strong> Expedited processing available for most states - typically 1-3
                   business days.
                 </p>
@@ -197,7 +197,7 @@ export default function HowItWorksPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose FAAZ Financial Group?</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose <span className="text-primary">FAAZ Financial Group</span>?</h2>
                 <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                   We've helped over 200,000 entrepreneurs start their businesses with confidence and trust
                 </p>
@@ -279,7 +279,7 @@ export default function HowItWorksPage() {
               Join thousands of successful entrepreneurs who chose FAAZ Financial Group to launch their dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary-600 hover:bg-primary-700">
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
                 Start Your LLC Today
               </Button>
               {/* <Button
