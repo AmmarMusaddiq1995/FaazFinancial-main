@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Clock, FileText, Shield, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function HowItWorksPage() {
   const steps = [
@@ -88,10 +89,12 @@ export default function HowItWorksPage() {
                 From choosing your package to receiving your official documents, we make starting your business
                 straightforward and stress-free.
               </p>
+              <Link href="/services/llc-formation-2">
               <Button size="lg" className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 cursor-pointer text-primary-foreground px-8 py-4 text-lg">
                 Start Your Business Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -279,9 +282,11 @@ export default function HowItWorksPage() {
               Join thousands of successful entrepreneurs who chose FAAZ Financial Group to launch their dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/services/llc-formation-2">
               <Button size="lg" className="bg-primary hover:bg-primary/90 hover:scale-115 transition-all duration-300 cursor-pointer text-primary-foreground px-8 py-4 text-lg">
                 Start Your LLC Today
               </Button>
+              </Link>
               {/* <Button
                 size="lg"
                 variant="outline"
