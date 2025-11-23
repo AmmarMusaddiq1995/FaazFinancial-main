@@ -22,7 +22,7 @@ export default function InitialComplianceAfterFormationPage() {
             We handle the essential filings, registrations, and documentation to set your business on a fully compliant foundation.
           </p>
           <Link href="/submission-forms/initial-compliance-after-formation-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Start Your Compliance Setup
             </Button>
           </Link>

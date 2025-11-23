@@ -23,7 +23,7 @@ export default function AnnualCompanyStateFilingPage() {
             avoiding late fees, penalties, and potential administrative dissolution.
           </p>
           <Link href="/submission-forms/annual-company-state-filing-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get Annual Filing Service
             </Button>
           </Link>

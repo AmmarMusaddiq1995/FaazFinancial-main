@@ -23,7 +23,7 @@ export default function AnnualAccountsPreparationPage() {
             compliance with accounting standards, and clarity for stakeholders and HMRC.
           </p>
           <Link href="/submission-forms/annual-accounts-preparation-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get Your Annual Accounts Prepared
             </Button>
           </Link>

@@ -23,7 +23,7 @@ export default function ConfirmationStatementFilingPage() {
             company details, shareholders, and key information to keep your records up to date.
           </p>
           <Link href="/submission-forms/confirmation-statement-filing-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               File Your Confirmation Statement
             </Button>
           </Link>

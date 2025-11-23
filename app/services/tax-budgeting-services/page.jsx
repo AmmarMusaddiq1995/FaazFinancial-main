@@ -22,7 +22,7 @@ export default function TaxBudgetingPage() {
             We help individuals and businesses forecast, plan, and optimize their taxes to ensure compliance and maximize savings throughout the financial year.
           </p>
           <Link href="/submission-forms/tax-budgeting-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Start Your Tax Budgeting Plan
             </Button>
           </Link>

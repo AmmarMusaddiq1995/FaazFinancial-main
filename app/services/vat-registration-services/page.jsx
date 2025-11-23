@@ -23,7 +23,7 @@ export default function VATRegistrationServicesPage() {
             ensuring compliance, correct setup, and a smooth transition to VAT reporting.
           </p>
           <Link href="/submission-forms/vat-registration-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Register for VAT
             </Button>
           </Link>

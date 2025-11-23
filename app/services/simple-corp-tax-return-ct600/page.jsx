@@ -23,7 +23,7 @@ export default function SimpleCT600FilingPage() {
             submission, and stress-free tax filing for your limited company.
           </p>
           <Link href="/submission-forms/simple-corp-tax-return-ct600-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               File Your CT600 Now
             </Button>
           </Link>

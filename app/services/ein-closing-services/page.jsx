@@ -22,7 +22,7 @@ export default function EINClosingServicesPage() {
             and preventing future tax obligations or penalties.
           </p>
           <Link href="/submission-forms/ein-closing-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Close My EIN
             </Button>
           </Link>

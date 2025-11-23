@@ -23,7 +23,7 @@ export default function AdvanceSA100FilingPage() {
             and capital gains to ensure full HMRC compliance and peace of mind.
           </p>
           <Link href="/submission-forms/simple-sa100-filing-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               File Your Advance SA100
             </Button>
           </Link>

@@ -23,7 +23,7 @@ export default function CompanyDissolutionServicePage() {
             filings to ensure your business is legally and properly closed.
           </p>
           <Link href="/submission-forms/company-dissolution-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Start Company Dissolution
             </Button>
           </Link>

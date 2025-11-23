@@ -24,7 +24,7 @@ export default function EINServicesPage() {
             banking needs.
           </p>
           <Link href="/submission-forms/ein-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get EIN Service
             </Button>
           </Link>

@@ -201,7 +201,7 @@ export function Header() {
                       Filing Articles Of Amendments(State fee excluded)
                     </MenuItem>
                     
-                    <MenuItem href="/services/templates" truncate>
+                    <MenuItem href="/services/payroll-withholding-services" truncate>
                       Payroll Withholding Account Registration (Some states may
                       have a small fee that is excluded)
                     </MenuItem>
@@ -626,14 +626,9 @@ export function Header() {
                       >
                         Filing Articles Of Amendments(State fee excluded)
                       </Link>
+                    
                       <Link
-                        href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
-                      >
-                        Payroll Related Services
-                      </Link>
-                      <Link
-                        href="/services/templates"
+                        href="/services/payroll-withholding-services"
                         className="block text-sm text-gray-600 hover:text-orange-600"
                       >
                         Payroll Withholding Account Registration

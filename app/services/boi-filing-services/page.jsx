@@ -24,7 +24,7 @@ export default function BOIFilingServicesPage() {
             accurately and on time.
           </p>
           <Link href="/submission-forms/boi-filing-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get BOI Filing Service
             </Button>
           </Link>

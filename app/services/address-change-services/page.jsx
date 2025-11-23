@@ -21,7 +21,7 @@ export default function AddressChangeServicesPage() {
           We handle the filing process, ensure timely updates with the Secretary of State, and protect your privacy.
           </p>
           <Link href="/submission-forms/address-change-services-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get Address Change Services
             </Button>
           </Link>

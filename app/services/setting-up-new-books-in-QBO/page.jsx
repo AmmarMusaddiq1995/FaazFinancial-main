@@ -24,7 +24,7 @@ export default function SetupNewBooksPage() {
             compliance from day one.
           </p>
           <Link href="/submission-forms/setting-up-new-books-in-QBO-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Set Up New Books
             </Button>
           </Link>

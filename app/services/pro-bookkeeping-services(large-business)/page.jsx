@@ -24,7 +24,7 @@ export default function ProBookkeepingServicesLargePage() {
             maintain accuracy and compliance across your organization.
           </p>
           <Link href="/submission-forms/book-keeping-services-form-large">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Get Bookkeeping Service
             </Button>
           </Link>

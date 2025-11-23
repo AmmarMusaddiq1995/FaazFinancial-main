@@ -24,7 +24,7 @@ export default function ComplexCT600FilingPage() {
             compliance for your company.
           </p>
           <Link href="/submission-forms/complex-ct600-filing-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               File Your Complex CT600
             </Button>
           </Link>

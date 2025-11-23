@@ -23,7 +23,7 @@ export default function UKFormationLTDPage() {
             House, ensuring full compliance with HMRC and UK regulations.
           </p>
           <Link href="/submission-forms/uk-ltd-formation-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               Register Your LTD Company
             </Button>
           </Link>

@@ -24,7 +24,7 @@ export default function FilingArticlesOfAmendmentPage() {
             filing process accurately and efficiently.
           </p>
           <Link href="/submission-forms/filing-articles-of-amendments-form">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg shadow-black transition-all duration-300 hover:scale-105 cursor-pointer">
               File Articles of Amendment
             </Button>
           </Link>
