@@ -394,8 +394,8 @@ export function DashboardOverview2({ user, profile }) {
         <p className="text-gray-500 text-sm">No forms found for this user.</p>
       )}
 
-      <div className="w-full p-6 space-y-6">
-        {/* Quick Actions */}
+      {/* <div className="w-full p-6 space-y-6">
+    
         <Card>
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
@@ -436,7 +436,7 @@ export function DashboardOverview2({ user, profile }) {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
     </div>
   );
 }
