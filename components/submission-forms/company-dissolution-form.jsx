@@ -560,7 +560,7 @@ export function CompanyDissolutionForm() {
                   }}
                   
                   placeholder="Scan of your articles of formation/organization/certificate of formation"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
+                  className="border-gray-300 cursor-pointer rounded-md p-2 shadow-md shadow-black"
                 />
               </div>
 
@@ -574,7 +574,7 @@ export function CompanyDissolutionForm() {
                   }}
                   required
                   placeholder="Upload your EIN letter"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
+                  className="border-gray-300 cursor-pointer rounded-md p-2 shadow-md shadow-black"
                 />
               </div>
 

@@ -113,6 +113,17 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@layer utilities{
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-title{
+  @apply font-extrabold  bg-gradient-to-br
+  from-white via-orange-200 to-orange-600 bg-clip-text 
+  tracking-tighter text-transparent pr-2 pb-2 ;
+}
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

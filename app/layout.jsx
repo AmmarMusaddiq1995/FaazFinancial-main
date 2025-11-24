@@ -1,3 +1,5 @@
+
+
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
@@ -6,6 +8,8 @@ import { AppContextProvider } from "@/context/AppContext";
 import WhatsappButton from "@/components/WhatsappButton";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
+import { useAuthContext } from "@/context/AppContext";
+import WhatsappWrapper from "@/components/whatsappWrapper";
 
 export const metadata = {
   title: "Faaz Financial Group",
@@ -16,7 +20,10 @@ export const metadata = {
   generator: "Next",
 };
 
+
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
@@ -26,9 +33,10 @@ export default function RootLayout({ children }) {
         />
         <AppContextProvider>
           {children}
+          <WhatsappWrapper />
         </AppContextProvider>
         <Toaster position="top-right" />
-        <WhatsappButton />
+        
         <Analytics />
       </body>
     </html>

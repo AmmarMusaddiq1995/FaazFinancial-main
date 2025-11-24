@@ -23,7 +23,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { Clock, CheckCircle, Loader2, Upload, FileText, Download } from "lucide-react";
+import { Clock, CheckCircle, Loader2, Upload, FileText, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import LoadingSpinner from "../LoadingSpinner";
 import { toast } from "react-hot-toast";
 
@@ -38,6 +38,8 @@ export function AdminOverview2() {
   const [uploadedFiles, setUploadedFiles] = useState({});
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
   const [counts, setCounts] = useState({
     pending: 0,
@@ -216,7 +218,21 @@ export function AdminOverview2() {
     }
 
     setFilteredData(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [statusFilter, searchQuery, formSubmissionsData]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedData = filteredData.slice(startIndex, endIndex);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -440,7 +456,7 @@ export function AdminOverview2() {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((submission) => (
+              {paginatedData.map((submission) => (
                 <tr
                   key={submission.id}
                   className="border-b hover:bg-gray-50 transition-all"
@@ -528,6 +544,71 @@ export function AdminOverview2() {
           </table>
         </div>
       </Card>
+
+      {/* Pagination Controls */}
+      {filteredData.length > itemsPerPage && (
+        <div className="flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-lg shadow-sm">
+          <div className="text-sm text-gray-700">
+            Showing {startIndex + 1} to {Math.min(endIndex, filteredData.length)} of {filteredData.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="flex items-center gap-1"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Previous
+            </Button>
+            
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                // Show first page, last page, current page, and pages around current
+                if (
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 1 && page <= currentPage + 1)
+                ) {
+                  return (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handlePageChange(page)}
+                      className="min-w-[2.5rem]"
+                    >
+                      {page}
+                    </Button>
+                  );
+                } else if (
+                  page === currentPage - 2 ||
+                  page === currentPage + 2
+                ) {
+                  return (
+                    <span key={page} className="px-2 text-gray-500">
+                      ...
+                    </span>
+                  );
+                }
+                return null;
+              })}
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="flex items-center gap-1"
+            >
+              Next
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Modal for JSON data */}
       {selectedSubmission && (

@@ -22,11 +22,11 @@ import Image from "next/image";
 
 const navigation = [
   { name: "Overview", href: "/admin", icon: LayoutDashboard },
-  { name: "Users", href: "/admin/users", icon: Users },
-  { name: "Businesses", href: "/admin/businesses", icon: Building2 },
-  { name: "Blogs", href: "/admin/blogs", icon: FileText },
-  { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
+  // { name: "Users", href: "/admin/users", icon: Users },
+  // { name: "Businesses", href: "/admin/businesses", icon: Building2 },
+  // { name: "Blogs", href: "/admin/blogs", icon: FileText },
+  // { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+  // { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
 export function AdminLayout({ children }) {

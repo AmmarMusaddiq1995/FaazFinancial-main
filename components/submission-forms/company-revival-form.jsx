@@ -549,7 +549,7 @@ export function CompanyRevivalForm() {
                   }}
                   
                   placeholder="Scan of your articles of formation/organization/certificate of formation"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
+                  className="border-gray-300 cursor-pointer shadow-md rounded-md p-2 shadow-black"
                 />
               </div>
 
@@ -563,7 +563,7 @@ export function CompanyRevivalForm() {
                   }}
                   
                   placeholder="Upload your EIN letter"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
+                  className="border-gray-300 cursor-pointer shadow-md rounded-md p-2 shadow-black"
                 />
               </div>
 
