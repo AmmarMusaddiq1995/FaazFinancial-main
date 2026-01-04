@@ -26,6 +26,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        
+        <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+
+
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <Script
           src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"

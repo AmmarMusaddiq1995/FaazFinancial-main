@@ -51,7 +51,7 @@
     "app/services/registered-agent/page.jsx",
     "components/pricing-section.jsx",
     ".next/dev/types/**/*.ts"
-, "app/about/page.jsx"  ],
+, "app/about/page.jsx", "components/hero-section.jsx"  ],
   "exclude": [
     "node_modules"
   ]

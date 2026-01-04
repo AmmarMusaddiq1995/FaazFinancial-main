@@ -3,6 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import Link from "next/link";
+import TrustPilotWidget from "./TrustPilotWidget";
+import { AnimatedTestimonials } from "./ui/animated-testimonials";
+
 
 export function HeroSection() {
 
@@ -45,6 +48,7 @@ export function HeroSection() {
     // You can add all 35 here...
   ];
 
+  
 
   return (
     <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden -mt-20 pt-20">
@@ -100,6 +104,13 @@ export function HeroSection() {
             <span className="text-gray-300">24,000 reviews</span>
             <span className="text-gray-300">Trustpilot</span>
           </div> */}
+
+          {/* <TrustPilotWidget /> */}
+
+           
+
+
+          
         </div>
       </div>
 
