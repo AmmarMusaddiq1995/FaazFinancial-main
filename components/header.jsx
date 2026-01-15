@@ -205,7 +205,7 @@ export function Header() {
                       Payroll Withholding Account Registration (Some states may
                       have a small fee that is excluded)
                     </MenuItem>
-                    <MenuItem href="/services/templates">
+                    {/* <MenuItem href="/services/templates">
                       UI(Unemployment Insurance)
                     </MenuItem>
                     <MenuItem href="/services/templates" truncate>
@@ -214,7 +214,7 @@ export function Header() {
                     </MenuItem>
                     <MenuItem href="/services/templates" truncate>
                       Payroll Account Setup (Reach out for pricing)
-                    </MenuItem>
+                    </MenuItem> */}
                   </ul>
                 </div>
 
@@ -246,7 +246,7 @@ export function Header() {
                       Annual Corporation Tax Accounts Preparation
                     </MenuItem>
                     
-                    <MenuItem href="/services/logo-kit">
+                    {/* <MenuItem href="/services/logo-kit">
                       Dormant Accounts Filing
                     </MenuItem>
                     <MenuItem href="/services/logo-kit">
@@ -257,7 +257,7 @@ export function Header() {
                     </MenuItem>
                     <MenuItem href="/services/logo-kit">
                       Full Statutory Accounts Filing
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem href="/services/confirmation-statement-filing-services">
                       Confirmation Statement Filing
                     </MenuItem>
@@ -267,15 +267,15 @@ export function Header() {
                     <MenuItem href="/services/vat-return-filing-services">
                       VAT Return Filing
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    {/* <MenuItem href="/services/logo-kit">
                       Tax Planning & Consulation On Zoom
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem href="/services/tax-budgeting-services" >
                       Tax Budgeting & Taxation In Investment Appraisal
                     </MenuItem>
-                    <MenuItem href="/services/logo-kit">
+                    {/* <MenuItem href="/services/logo-kit">
                       Company Registration
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem href="/services/initial-compliance-after-formation">
                       Initial Compliance After Formation
                     </MenuItem>
@@ -326,7 +326,7 @@ export function Header() {
                       Setting Up New Books In QBO/Xero Or Any ERP (charges
                       varies based on nature of work)
                     </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
+                    {/* <MenuItem href="/services/tax-filing" truncate>
                       Financial Reporting - Reach Out For Pricing
                     </MenuItem>
                     <MenuItem href="/services/tax-filing" truncate>
@@ -347,7 +347,7 @@ export function Header() {
                     </MenuItem>
                     <MenuItem href="/services/tax-filing" truncate>
                       Company Tax Filing
-                    </MenuItem>
+                    </MenuItem> */}
                   </ul>
                 </div>
               </div>
@@ -810,7 +810,7 @@ export function Header() {
                     >
                       Setting Up New Books In QBO/Xero Or Any ERP
                     </Link>
-                    <Link
+                    {/* <Link
                       href="/services/tax-filing"
                       className="block text-sm text-gray-600 hover:text-orange-600"
                     >
@@ -857,7 +857,7 @@ export function Header() {
                       className="block text-sm text-gray-600 hover:text-orange-600"
                     >
                       Company Tax Filing Vary Based On The Volume Of Business
-                    </Link>
+                    </Link> */}
                   </div>
                 </AccordionContent>
               </AccordionItem>

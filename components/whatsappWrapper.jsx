@@ -5,6 +5,6 @@ import WhatsappButton from "./WhatsappButton";
 export default function WhatsappWrapper() {
 
     const { isAdmin , session } = useAuthContext();
-    if (isAdmin || !session) return null;
+    if (!isAdmin || !session) return null;
     return <WhatsappButton />;
 }

@@ -80,12 +80,12 @@ export const AnimatedTestimonials = ({
                   className="absolute inset-0 origin-bottom"
                 >
                   <img
-                    src={testimonial.src}
-                    alt={testimonial.name}
+                    // src={testimonial.src}
+                    // alt={testimonial.name}
                     width={500}
                     height={500}
                     draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center"
+                    className="h-full w-full rounded-3xl bg-gray-200 object-cover object-center"
                   />
                 </motion.div>
               ))}
