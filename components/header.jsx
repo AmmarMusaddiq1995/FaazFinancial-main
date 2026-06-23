@@ -25,6 +25,8 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { accountingCategories, accountingServices } from "@/lib/accounting-services-data";
+import { CALENDLY_URL } from "@/components/accounting-service-template";
 
 // Helper component for menu items
 const MenuItem = ({ href, children, truncate = false }) => (
@@ -156,7 +158,7 @@ export function Header() {
                       Compare Formation Plans
                     </MenuItem>
                     <MenuItem href="/services/dba-trademark-registration">
-                      DBA/Trademark Registration
+                      DBA/Trademark Registeration
                     </MenuItem>
                   </ul>
                 </div>
@@ -177,7 +179,7 @@ export function Header() {
                       ITIN Services
                     </MenuItem>
                     <MenuItem href="/services/sales-and-usetax-registration">
-                      Sales & Use Tax Registration
+                      Sales & Use Tax Registeration
                     </MenuItem>
                     <MenuItem href="/services/annual-company-state-filing">
                       Annual Company State Filing
@@ -189,10 +191,10 @@ export function Header() {
                       Registered Agent Services
                     </MenuItem>
                     <MenuItem href="/services/company-dissolution">
-                      Company Dissolution(State Fee Vary)
+                      Company Dissolution
                     </MenuItem>
                     <MenuItem href="/services/company-revival">
-                      Company Revival (State Fee vary)
+                      Company Revival 
                     </MenuItem>
                     <MenuItem href="/services/address-change-services">
                       Address Change Services
@@ -201,20 +203,10 @@ export function Header() {
                       Filing Articles Of Amendments(State fee excluded)
                     </MenuItem>
                     
-                    <MenuItem href="/services/payroll-withholding-services" truncate>
-                      Payroll Withholding Account Registration (Some states may
-                      have a small fee that is excluded)
+                    <MenuItem href="/services/payroll-withholding-services">
+                      Payroll Withholding Tax Registeration
                     </MenuItem>
-                    {/* <MenuItem href="/services/templates">
-                      UI(Unemployment Insurance)
-                    </MenuItem>
-                    <MenuItem href="/services/templates" truncate>
-                      Payroll Management (Gusto, Adp, QBO, Paychecks, Paycom,
-                      Rippling) monthly
-                    </MenuItem>
-                    <MenuItem href="/services/templates" truncate>
-                      Payroll Account Setup (Reach out for pricing)
-                    </MenuItem> */}
+                    
                   </ul>
                 </div>
 
@@ -245,19 +237,6 @@ export function Header() {
                     <MenuItem href="/services/annual-accounts-preparation" >
                       Annual Corporation Tax Accounts Preparation
                     </MenuItem>
-                    
-                    {/* <MenuItem href="/services/logo-kit">
-                      Dormant Accounts Filing
-                    </MenuItem>
-                    <MenuItem href="/services/logo-kit">
-                      Micro-Entity Accounts Filiing
-                    </MenuItem>
-                    <MenuItem href="/services/logo-kit">
-                      Abridged Accounts Filing
-                    </MenuItem>
-                    <MenuItem href="/services/logo-kit">
-                      Full Statutory Accounts Filing
-                    </MenuItem> */}
                     <MenuItem href="/services/confirmation-statement-filing-services">
                       Confirmation Statement Filing
                     </MenuItem>
@@ -273,9 +252,6 @@ export function Header() {
                     <MenuItem href="/services/tax-budgeting-services" >
                       Tax Budgeting & Taxation In Investment Appraisal
                     </MenuItem>
-                    {/* <MenuItem href="/services/logo-kit">
-                      Company Registration
-                    </MenuItem> */}
                     <MenuItem href="/services/initial-compliance-after-formation">
                       Initial Compliance After Formation
                     </MenuItem>
@@ -295,7 +271,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting Services</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting & Bookkeeping</span>
               {activeDropdown === "bookkeeping" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -354,6 +330,72 @@ export function Header() {
             )}
           </div>
 
+          {/* Accounting Services Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => handleDropdownToggle("accountingServices")}
+              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+                activeDropdown === "accountingServices"
+                  ? "text-orange-600 border-b-2 border-orange-600"
+                  : ""
+              }`}
+            >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting Services</span>
+              {activeDropdown === "accountingServices" ? (
+                <ChevronUp className="h-4 w-4 text-white" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-white" />
+              )}
+            </button>
+
+            {activeDropdown === "accountingServices" && (
+              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 overflow-y-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wide">
+                    Accounting Services
+                  </h3>
+                  <Link
+                    href="/services/accounting-services"
+                    className="text-xs lg:text-sm text-orange-600 hover:text-orange-700 font-medium"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    View all Accounting Services &rarr;
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {accountingCategories.map((category) => (
+                    <div key={category.id} className="min-w-0">
+                      <h4 className="font-semibold text-gray-700 mb-4 text-sm uppercase tracking-wide">
+                        {category.title}
+                      </h4>
+                      <ul className="space-y-1">
+                        {accountingServices
+                          .filter((service) => service.category === category.id)
+                          .map((service) => (
+                            <MenuItem key={service.slug} href={`/services/${service.slug}`}>
+                              {service.name}
+                            </MenuItem>
+                          ))}
+                      </ul>
+                      {category.id === "operational-support" && (
+                        <Link
+                          href={CALENDLY_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer">
+                            Book a free consultation
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Pricing Dropdown */}
           {/* <div className="relative">
           <button
@@ -384,6 +426,16 @@ export function Header() {
               }`}
             >
               <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Learning Center</span>
+            </button>
+          </div>
+
+          {/* IT Services Link */}
+          <div className="relative">
+            <button
+              onClick={() => router.push("/it-services")}
+              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
+            >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">IT Services</span>
             </button>
           </div>
 
@@ -606,13 +658,13 @@ export function Header() {
                         href="/services/company-dissolution"
                         className="block text-sm text-gray-600 hover:text-orange-600"
                       >
-                        Company Dissolution(State Fee Vary)
+                        Company Dissolution
                       </Link>
                       <Link
                         href="/services/company-revival"
                         className="block text-sm text-gray-600 hover:text-orange-600"
                       >
-                        Company Revival (State Fee vary)
+                        Company Revival 
                       </Link>
                       <Link
                         href="/services/address-change-services"
@@ -631,7 +683,7 @@ export function Header() {
                         href="/services/payroll-withholding-services"
                         className="block text-sm text-gray-600 hover:text-orange-600"
                       >
-                        Payroll Withholding Account Registration
+                        Payroll Withholding Tax Registration
                       </Link>
                       <Link
                         href="/services/templates"
@@ -776,7 +828,7 @@ export function Header() {
 
               <AccordionItem value="bookkeeping">
                 <AccordionTrigger className="text-sm">
-                  Accounting Services
+                  Accounting & Bookkeeping
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="pl-4 space-y-2">
@@ -862,6 +914,49 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
+              <AccordionItem value="accounting-services">
+                <AccordionTrigger className="text-sm">
+                  Accounting Services
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
+                  <div className="pl-4">
+                    <Link
+                      href="/services/accounting-services"
+                      className="block text-sm font-semibold text-orange-600 hover:text-orange-700 mb-2"
+                    >
+                      View all Accounting Services &rarr;
+                    </Link>
+                  </div>
+                  {accountingCategories.map((category) => (
+                    <div key={category.id} className="space-y-2">
+                      <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide pl-4">
+                        {category.title}
+                      </h4>
+                      <div className="pl-4 space-y-2">
+                        {accountingServices
+                          .filter((service) => service.category === category.id)
+                          .map((service) => (
+                            <Link
+                              key={service.slug}
+                              href={`/services/${service.slug}`}
+                              className="block text-sm text-gray-600 hover:text-orange-600"
+                            >
+                              {service.name}
+                            </Link>
+                          ))}
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pl-4">
+                    <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer">
+                        Book a free consultation
+                      </Button>
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
               <AccordionItem value="learning">
                 <AccordionTrigger className="text-sm">
                   Learning Center
@@ -873,6 +968,22 @@ export function Header() {
                       className="block text-sm text-gray-600 hover:text-orange-600"
                     >
                       Visit our Blog
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="it-services">
+                <AccordionTrigger className="text-sm">
+                  IT Services
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="pl-4 space-y-2">
+                    <Link
+                      href="/it-services"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Web Development & AI Automation
                     </Link>
                   </div>
                 </AccordionContent>

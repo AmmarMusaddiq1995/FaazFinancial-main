@@ -2,6 +2,7 @@ import { CTASection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
+import { ITServicesTeaser } from "@/components/it-services-teaser";
 import { PricingSection } from "@/components/pricing-section.jsx";
 import { ServicesSection } from "@/components/services-section";
 import { Separator } from "@/components/ui/separator";
@@ -14,12 +15,13 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        
-        <HeroSection />      
+
+        <HeroSection />
         <ServicesSection />
         <PricingSection />
+        <ITServicesTeaser />
         <CTASection />
-       <TestimonialsSection /> 
+       <TestimonialsSection />
         <Separator />
       </main>
       <Footer />
