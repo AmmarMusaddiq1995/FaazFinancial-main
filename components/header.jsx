@@ -155,7 +155,7 @@ export function Header() {
                       Corp. Formation
                     </MenuItem>
                     <MenuItem href="/start-business?serviceType=corp">
-                      Compare Formation Plans
+                      Compare Formation Plan
                     </MenuItem>
                     <MenuItem href="/services/dba-trademark-registration">
                       DBA/Trademark Registeration
