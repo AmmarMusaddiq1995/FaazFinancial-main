@@ -1,24 +1,8 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import ContactForm from "@/components/contact-form";
 
 export default function ContactPage() {
   const contactInfo = [
@@ -128,92 +112,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Contact Form</CardTitle>
-                    <CardDescription>
-                      Tell us about your business needs
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="firstName">First Name</Label>
-                          <Input id="firstName" placeholder="John" />
-                        </div>
-                        <div>
-                          <Label htmlFor="lastName">Last Name</Label>
-                          <Input id="lastName" placeholder="Doe" />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="john@example.com"
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="businessType">Business Type</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select business type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="llc">LLC</SelectItem>
-                            <SelectItem value="corporation">
-                              Corporation
-                            </SelectItem>
-                            <SelectItem value="partnership">
-                              Partnership
-                            </SelectItem>
-                            <SelectItem value="sole-proprietorship">
-                              Sole Proprietorship
-                            </SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          id="subject"
-                          placeholder="How can we help you?"
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="message">Message</Label>
-                        <Textarea
-                          id="message"
-                          placeholder="Tell us more about your business needs..."
-                          rows={4}
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-primary hover:bg-primary/90 cursor-pointer text-primary-foreground px-8 py-4 text-lg"
-                      >
-                        Send Message
-                      </Button>
-                    </form>
-                  </CardContent>
-                </Card>
+                <ContactForm />
               </div>
             </div>
           </div>

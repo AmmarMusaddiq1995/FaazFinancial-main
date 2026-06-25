@@ -12,6 +12,7 @@ import {
   BarChart3,
   Settings,
   FileText,
+  BookOpen,
   Menu,
   X,
   LogOut,
@@ -25,6 +26,7 @@ const navigation = [
   // { name: "Users", href: "/admin/users", icon: Users },
   // { name: "Businesses", href: "/admin/businesses", icon: Building2 },
   { name: "Blogs", href: "/admin/blogs", icon: FileText },
+  { name: "Learning Center", href: "/admin/learning-center", icon: BookOpen },
   // { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   // { name: "Settings", href: "/admin/settings", icon: Settings },
 ];

@@ -81,7 +81,7 @@ export default function AccountingServicesHubPage() {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg w-full sm:w-auto cursor-pointer">
+              <Button size="lg" variant="outline" className="border-white text-black hover:bg-white hover:text-slate-900 px-8 py-4 text-lg w-full sm:w-auto cursor-pointer">
                 Send us a message
               </Button>
             </Link>

@@ -5,7 +5,7 @@ import { CheckCircle, ListChecks, Users, DollarSign } from "lucide-react";
 import Link from "next/link";
 
 // TODO: replace with your real Calendly URL once available.
-export const CALENDLY_URL = "#TODO-add-your-calendly-url";
+export const CALENDLY_URL = "https://calendly.com/ammarmusaddiq123/30min";
 
 export default function AccountingServiceTemplate({ service }) {
   return (
@@ -101,7 +101,7 @@ export default function AccountingServiceTemplate({ service }) {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg w-full sm:w-auto cursor-pointer">
+              <Button size="lg" variant="outline" className="border-white text-black hover:bg-white hover:text-slate-900 px-8 py-4 text-lg w-full sm:w-auto cursor-pointer">
                 Send us a message
               </Button>
             </Link>

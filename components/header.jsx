@@ -121,7 +121,7 @@ export function Header() {
          
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-2 xl:space-x-3 min-w-0 whitespace-nowrap flex-wrap">
+        <nav className="hidden xl:flex items-center space-x-1 2xl:space-x-2 min-w-0 whitespace-nowrap">
           {/* Compliance Services Dropdown */}
           <div className="relative">
             <button
@@ -132,7 +132,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Compliance & Formation</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Compliance & Formation</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -262,7 +262,7 @@ export function Header() {
           </div>
 
           {/* Bookkeeping Dropdown */}
-          <div className="relative">
+          {/* <div className="relative">
             <button
               onClick={() => handleDropdownToggle("bookkeeping")}
               className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
@@ -271,7 +271,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting & Bookkeeping</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Accounting & Bookkeeping</span>
               {activeDropdown === "bookkeeping" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -302,33 +302,12 @@ export function Header() {
                       Setting Up New Books In QBO/Xero Or Any ERP (charges
                       varies based on nature of work)
                     </MenuItem>
-                    {/* <MenuItem href="/services/tax-filing" truncate>
-                      Financial Reporting - Reach Out For Pricing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Virtual CFO Services-Reach Out For Pricing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      Payroll Taxes
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      Payroll Withholding Tax Filing
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing">
-                      W2 & 1099 Filing
-                    </MenuItem>
-                    
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Tax Filing Individual ( Non Resident) With ITIN
-                    </MenuItem>
-                    <MenuItem href="/services/tax-filing" truncate>
-                      Company Tax Filing
-                    </MenuItem> */}
+                  
                   </ul>
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Accounting Services Dropdown */}
           <div className="relative">
@@ -340,7 +319,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Accounting Services</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Accounting & Bookkeeping</span>
               {activeDropdown === "accountingServices" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -415,29 +394,70 @@ export function Header() {
             </button>
           </div> */}
 
-          {/* Guides & Resources Dropdown */}
+           {/* IT Services Link */}
           <div className="relative">
             <button
-              onClick={() => router.push("/blog")}
+              onClick={() => router.push("/it-services")}
+              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
+            >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">IT Services</span>
+            </button>
+          </div>
+
+          {/* Learning Center Dropdown */}
+          <div className="relative">
+            <button
+               onClick={() => router.push("/learning-center")}
+              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
+           >
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Learning Center</span>
+            </button>
+            {/* <button
+              onClick={() => handleDropdownToggle("guides")}
               className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
                 activeDropdown === "guides"
                   ? "text-orange-600 border-b-2 border-orange-600"
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Learning Center</span>
-            </button>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Learning Center</span>
+              {activeDropdown === "guides" ? (
+                <ChevronUp className="h-4 w-4 text-white" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-white" />
+              )}
+            </button> */}
+{/* 
+            {activeDropdown === "guides" && (
+              <div
+                className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-4 z-50"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ul className="space-y-1">
+                  <li>
+                    <Link
+                      href="/learning-center"
+                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      Learning Topics
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog"
+                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      Business Blog
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )} */}
           </div>
 
-          {/* IT Services Link */}
-          <div className="relative">
-            <button
-              onClick={() => router.push("/it-services")}
-              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
-            >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">IT Services</span>
-            </button>
-          </div>
+         
 
           {/* About Us Dropdown */}
           <div className="relative">
@@ -449,7 +469,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary p-2 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs lg:text-sm">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Get To Know Us</span>
               {activeDropdown === "about" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -486,7 +506,7 @@ export function Header() {
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden md:flex items-center space-x-2.5 lg:space-x-3 xl:space-x-4 min-w-0">
+        <div className="hidden xl:flex items-center space-x-2 min-w-0">
           {/* <button className="p-2 text-gray-600 hover:text-orange-600 transition-colors hidden xl:inline-flex">
             <Search className="h-5 w-5" />
           </button> */}
@@ -495,10 +515,10 @@ export function Header() {
             <span>+1 307-400-1963</span>
           </span>
 
-          <div className="flex items-center gap-3 lg:gap-4">
+          <div className="flex items-center gap-2">
             {session ? (
               <>
-                <span className="text-white max-w-[160px] lg:max-w-[200px] truncate hidden xl:inline">
+                <span className="text-white max-w-[140px] truncate hidden 2xl:inline">
                   {session.user?.email || "User"}
                 </span>
                 <Button size="sm" onClick={handleLogout} className="hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">
@@ -547,7 +567,7 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="xl:hidden"
           // onClick={() => setIsMenuOpen(!isMenuOpen)}
           onClick={() => { setIsMenuOpen(!isMenuOpen); 
             if (isMenuOpen) {
@@ -567,7 +587,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-background">
+        <div className="xl:hidden border-t bg-background">
           <div className="container px-4 py-4 space-y-4 ">
             <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="services">
@@ -964,10 +984,16 @@ export function Header() {
                 <AccordionContent>
                   <div className="pl-4 space-y-2">
                     <Link
+                      href="/learning-center"
+                      className="block text-sm text-gray-600 hover:text-orange-600"
+                    >
+                      Learning Topics
+                    </Link>
+                    <Link
                       href="/blog"
                       className="block text-sm text-gray-600 hover:text-orange-600"
                     >
-                      Visit our Blog
+                      Business Blog
                     </Link>
                   </div>
                 </AccordionContent>
