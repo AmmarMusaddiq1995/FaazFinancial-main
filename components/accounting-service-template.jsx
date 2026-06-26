@@ -5,7 +5,7 @@ import { CheckCircle, ListChecks, Users, DollarSign } from "lucide-react";
 import Link from "next/link";
 
 // TODO: replace with your real Calendly URL once available.
-export const CALENDLY_URL = "https://calendly.com/ammarmusaddiq123/30min";
+export const CALENDLY_URL = "https://calendly.com/zohaib-faazfinancialgroup/30min";
 
 export default function AccountingServiceTemplate({ service }) {
   return (

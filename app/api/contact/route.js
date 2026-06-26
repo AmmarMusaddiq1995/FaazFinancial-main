@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 // ── Easy to change ────────────────────────────────────────────────────────────
 // To update the recipient, change CONTACT_FORM_RECIPIENT in .env.local.
 // Falls back to this default so it works without any env setup.
-const RECIPIENT = process.env.CONTACT_FORM_RECIPIENT ?? "ammarmu007@gmail.com";
+const RECIPIENT = process.env.CONTACT_FORM_RECIPIENT ?? "zohaib@faazfinancialgroup.com";
 // ─────────────────────────────────────────────────────────────────────────────
 
 function buildEmailHtml({ firstName, lastName, email, phone, businessType, subject, message }) {

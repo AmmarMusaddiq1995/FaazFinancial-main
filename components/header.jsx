@@ -132,7 +132,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Compliance & Formation</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Compliance & Formation</span>
               {activeDropdown === "products" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -319,7 +319,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Accounting & Bookkeeping</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Accounting & Bookkeeping</span>
               {activeDropdown === "accountingServices" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
@@ -400,7 +400,7 @@ export function Header() {
               onClick={() => router.push("/it-services")}
               className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">IT Services</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">IT Services</span>
             </button>
           </div>
 
@@ -410,7 +410,7 @@ export function Header() {
                onClick={() => router.push("/learning-center")}
               className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
            >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Learning Center</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Learning Center</span>
             </button>
             {/* <button
               onClick={() => handleDropdownToggle("guides")}
@@ -469,7 +469,7 @@ export function Header() {
                   : ""
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Get To Know Us</span>
+              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Get To Know Us</span>
               {activeDropdown === "about" ? (
                 <ChevronUp className="h-4 w-4 text-white" />
               ) : (
