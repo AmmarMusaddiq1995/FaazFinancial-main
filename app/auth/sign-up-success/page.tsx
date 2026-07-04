@@ -8,8 +8,18 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CheckCircle, Mail } from "lucide-react";
+import { safeInternalPath } from "@/lib/safe-redirect";
 
-export default function SignUpSuccessPage() {
+export default async function SignUpSuccessPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ redirect?: string }>;
+}) {
+  // Keep the pending service-form redirect alive through the sign-in link.
+  const redirect = safeInternalPath((await searchParams).redirect);
+  const loginHref = redirect
+    ? `/auth/login2?redirect=${encodeURIComponent(redirect)}`
+    : "/auth/login2";
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
@@ -53,7 +63,7 @@ export default function SignUpSuccessPage() {
               </p> */}
 
               <div className="flex flex-col gap-3">
-                <Link href="/auth/login2">
+                <Link href={loginHref}>
                   <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
                     Go to Sign In
                   </Button>

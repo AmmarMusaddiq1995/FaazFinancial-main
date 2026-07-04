@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, ShieldCheck, Clock, Star } from "lucide-react";
+import { useScrollReveal } from "@/components/ui/use-scroll-reveal";
 import {
   Select,
   SelectContent,
@@ -67,6 +67,7 @@ const US_STATES = [
 ];
 
 export function PricingSection() {
+  const sectionRef = useScrollReveal();
   const [formData, setFormData] = useState({
     packageType: "",
     state: "",
@@ -252,20 +253,23 @@ export function PricingSection() {
   ];
 
   return (
-    <section className="py-10 lg:py-20 bg-muted/30">
+    <section ref={sectionRef} className="py-16 lg:py-24 bg-muted/30">
       <div className="container px-4 mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-xl lg:text-4xl font-bold mb-4 text-balance">
-            Compare our packages
+        <div className="reveal text-center mb-12 lg:mb-16">
+          <span className="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-orange-700 mb-4">
+            Pricing
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight mb-5 text-balance">
+            Compare Our Packages
           </h2>
-          <p className="text-sm lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          Discover Your Perfect Fit: <span className="text-orange-500 font-bold">Tailored</span> Packages for <span className="text-orange-500 font-bold">Seamless</span> Compliance, <span className="text-orange-500 font-bold">Swift</span> Filings, and Unmatched<span className="text-orange-500 font-bold"> Support</span>.
+          <p className="text-sm lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
+          Discover Your Perfect Fit: <span className="text-orange-600 font-bold">Tailored</span> Packages for <span className="text-orange-600 font-bold">Seamless</span> Compliance, <span className="text-orange-600 font-bold">Swift</span> Filings, and Unmatched<span className="text-orange-600 font-bold"> Support</span>.
           </p>
         </div>
 
         {/* Pricing Configuration Section */}
-        <div className="bg-white rounded-lg shadow-sm border p-8 mb-12 hover:shadow-lg transition-all duration-700 hover:scale-105 hover:shadow-primary/80 max-w-4xl mx-auto">
-          <h3 className="text-lg lg:text-2xl font-bold text-center mb-8 text-gray-900">
+        <div className="reveal bg-white rounded-2xl border border-gray-200/80 shadow-lg shadow-black/[0.04] p-6 sm:p-8 lg:p-10 mb-14 max-w-4xl mx-auto">
+          <h3 className="text-lg lg:text-2xl font-bold tracking-tight text-center mb-8 text-gray-900">
             Configure Your Package
           </h3>
           
@@ -285,7 +289,7 @@ export function PricingSection() {
                 }
                 required
               >
-                <SelectTrigger className="w-full h-12 border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
+                <SelectTrigger className="w-full h-12 rounded-xl border-gray-200 bg-gray-50/50 hover:border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
                   <SelectValue placeholder="Select package type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -324,7 +328,7 @@ export function PricingSection() {
                 }
                 required
               >
-                <SelectTrigger className="w-full h-12 border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
+                <SelectTrigger className="w-full h-12 rounded-xl border-gray-200 bg-gray-50/50 hover:border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent className="max-h-60">
@@ -349,7 +353,7 @@ export function PricingSection() {
                 }
                 required
               >
-                <SelectTrigger className="w-full h-12 border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
+                <SelectTrigger className="w-full h-12 rounded-xl border-gray-200 bg-gray-50/50 hover:border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
                   <SelectValue placeholder="Select service" />
                 </SelectTrigger>
                 <SelectContent>
@@ -372,7 +376,7 @@ export function PricingSection() {
 
           {/* Price Preview */}
           {(formData.packageType || formData.state || formData.selectService) && (
-            <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
+            <div className="mt-8 p-4 lg:p-5 bg-primary/5 rounded-xl border border-primary/20">
               <p className="text-xs lg:text-sm text-gray-600 text-center">
                 <span className="font-medium">Current pricing:</span> Starter ${currentPrices.Starter} • Pro ${currentPrices.Pro} • Premium ${currentPrices.Premium}
                 {formData.packageType && (
@@ -402,74 +406,80 @@ export function PricingSection() {
           )}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch pt-4">
           {plans.map((plan, index) => (
-            <Card
+            <div
               key={index}
-              className={`relative transition-all duration-300 ${
-                plan.popular ? "border-primary shadow-lg scale-105" : ""
-              } hover:scale-105 hover:shadow-lg hover:shadow-orange-500`}
-              
+              className={`reveal relative flex flex-col rounded-2xl bg-white p-7 lg:p-8 transition-all duration-300 hover:-translate-y-1 ${
+                plan.popular
+                  ? "border-2 border-primary shadow-2xl shadow-primary/25 ring-4 ring-primary/10 lg:scale-[1.04] z-10 hover:shadow-primary/35"
+                  : "border border-gray-200/80 shadow-sm hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10"
+              }`}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
-
+              {/* Plan badge */}
               {plan.name === "Starter" && (
-                <div className="absolute top-7 lg:top-4 -right-2 lg:-right-6 z-10">
-                  <span className="bg-gray-200 text-black px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block">
-                    YOUR CHOICE
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span className="bg-gray-100 text-gray-600 border border-gray-200 px-4 py-1 text-xs font-semibold tracking-wider uppercase rounded-full whitespace-nowrap">
+                    Your Choice
                   </span>
                 </div>
               )}
-
               {plan.name === "Standard" && (
-                <div className="absolute top-9 lg:top-6 -right-2 lg:-right-7 z-10">
-                  <span className="bg-gray-300 text-black px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block">
-                    RECOMMENDED
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1 text-xs font-semibold tracking-wider uppercase rounded-full shadow-lg shadow-primary/30 whitespace-nowrap">
+                    Recommended
                   </span>
                 </div>
               )}
               {plan.name === "Premium" && (
-                <div className="absolute top-15 lg:top-14 -right-2 lg:-right-6 z-10">
-                  <span className="bg-orange-500 text-white px-3 py-1 text-xs lg:text-sm font-semibold rounded shadow-sm rotate-45 inline-block origin-top-right">
-                    BEST VALUE
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span className="bg-gray-900 text-white px-4 py-1 text-xs font-semibold tracking-wider uppercase rounded-full whitespace-nowrap">
+                    Best Value
                   </span>
                 </div>
               )}
-              {/* {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-primary text-secondary-foreground px-4 py-1 rounded-full text-sm font-medium">
-                    MOST POPULAR
-                  </span>
-                </div>
-              )} */}
 
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-lg lg:text-2xl font-bold bg-black text-white rounded-lg p-2  w-full">
+              {/* Header */}
+              <div className="text-center pt-3 pb-7 border-b border-gray-100">
+                <p className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">
                   {plan.name}
-                </CardTitle>
-                <div className="mt-4">
-                  <span className="text-2xl lg:text-4xl font-bold">{plan.price}</span>
+                </p>
+                <div>
+                  <span className="text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+                    {plan.price}
+                  </span>
                   <span className="text-muted-foreground">{plan.period}</span>
                 </div>
-                <p className="text-muted-foreground mt-2">{plan.description}</p>
-              </CardHeader>
+                <p className="text-sm text-muted-foreground mt-3 text-pretty">
+                  {plan.description}
+                </p>
+              </div>
 
-              <CardContent className="space-y-6">
-                <ul className="space-y-3">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li
-                      key={featureIndex}
-                      className="flex items-start space-x-3"
-                    >
-                      <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                      <span className="text-xs lg:text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Features */}
+              <ul className="space-y-3.5 py-7 flex-1">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check
+                        className="h-3 w-3 text-primary"
+                        strokeWidth={3}
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <span className="text-sm text-gray-700 leading-snug">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
-                <Button
-                  className={`w-full ${
-                    plan.popular ? "bg-primary hover:bg-primary/90" : ""
-                  } cursor-pointer`}
+              <Button
+                  className={`w-full min-h-[48px] rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 ${
+                    plan.popular
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5"
+                      : "border-gray-300 text-gray-900 hover:border-primary hover:text-primary hover:bg-primary/5"
+                  }`}
                   variant={plan.popular ? "default" : "outline"}
                   onClick={() => {
                     const serviceType = formData.selectService || "LLC Formation";
@@ -501,12 +511,31 @@ export function PricingSection() {
                     ? "Get Standard"
                     : "Get Premium"}
                 </Button>
-              </CardContent>
-            </Card>
+            </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* Trust indicators */}
+        <div className="reveal mt-12 flex flex-wrap justify-center items-center gap-x-8 gap-y-3">
+          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+            <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
+            Secure payments
+          </span>
+          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Star
+              className="h-4 w-4 text-[#00b67a]"
+              fill="currentColor"
+              aria-hidden="true"
+            />
+            Rated 4.7/5 on Trustpilot
+          </span>
+          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
+            7–14 business day processing
+          </span>
+        </div>
+
+        <div className="text-center mt-8">
           <p className="text-xs lg:text-sm text-muted-foreground">
             *Promotional terms are based on receiving complete information.
             Faaz Financial Group LLC processing times do not include Secretary of

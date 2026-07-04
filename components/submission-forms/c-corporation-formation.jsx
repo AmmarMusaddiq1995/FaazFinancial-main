@@ -133,7 +133,6 @@ const priceTableForCCorp = {
   SouthCarolina: { normal: 450, express: 520},
   SouthDakota: { normal: 500, express: 570},
   Tennessee: { normal: 650, express: 720},
-  Texas: { normal: 585, express: 655},
   Utah: { normal: 500, express: 570},
   Wisconsin: { normal: 480, express: 550},
   

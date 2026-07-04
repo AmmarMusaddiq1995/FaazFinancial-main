@@ -1,21 +1,30 @@
+import { Rocket, Shield, TrendingUp, type LucideIcon } from "lucide-react";
+
+type Service = {
+  Icon: LucideIcon;
+  title: string;
+  description: string;
+  image: string;
+};
+
 export function ServicesSection() {
-  const services = [
+  const services: Service[] = [
     {
-      icon: "🚀",
+      Icon: Rocket,
       title: "Start Strong",
       description:
         "Select your LLC package, appoint a registered agent, secure your Employer ID Number (EIN), set up your company online with a professional website, and keep your personal and business banking separate with our personal and business banking.",
       image: "/start-strong.jpeg",
     },
     {
-      icon: "🛡️",
+      Icon: Shield,
       title: "Stay Protected",
       description:
         "Meet all ongoing local, state, and federal requirements by securing the business licenses and permits you need to legally operate, completing annual reports and filings, and managing your business finances to file your business tax returns.",
       image: "/stay-protected.jpeg",
     },
     {
-      icon: "📈",
+      Icon: TrendingUp,
       title: "Strengthen and Grow",
       description:
         "Access business tools and educational resources that help refine your business plan, expand your online presence, automate your finances, and streamline your sales and marketing.",
@@ -49,7 +58,7 @@ export function ServicesSection() {
 
               <div className="flex items-center justify-center mb-4">
                 <div className="h-12 w-12 lg:h-16 lg:w-16 bg-primary/80 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-xl lg:text-2xl rounded-full ">{service.icon}</span>
+                  <service.Icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg lg:text-2xl font-bold">{service.title}</h3>
               </div>

@@ -19,6 +19,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BusinessFormationForm } from "@/components/submission-forms/llc-formation-form";
+import AuthGate from "@/components/auth-gate";
 import { useSearchParams } from "next/navigation";
 
 // ✅ Split the logic into a child component that uses useSearchParams()
@@ -36,9 +37,11 @@ function LLCFormationContent() {
   // If pricing data is provided, show the form instead of the landing page
   if (pricingData.price !== "0") {
     return (
-      <div className="mt-10 mb-10">
-        <BusinessFormationForm pricingData={pricingData} />
-      </div>
+      <AuthGate>
+        <div className="mt-10 mb-10">
+          <BusinessFormationForm pricingData={pricingData} />
+        </div>
+      </AuthGate>
     );
   }
 

@@ -13,8 +13,9 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AppContext";
+import { safeInternalPath } from "@/lib/safe-redirect";
 import Image from "next/image";
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -27,7 +28,16 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { signup } = useAuthContext();
- 
+
+  // Carry the ?redirect= target over to the login link (set after mount to
+  // avoid a hydration mismatch).
+  const [redirectQuery, setRedirectQuery] = useState("");
+  useEffect(() => {
+    const redirect = new URLSearchParams(window.location.search).get("redirect");
+    if (safeInternalPath(redirect)) {
+      setRedirectQuery(`?redirect=${encodeURIComponent(redirect)}`);
+    }
+  }, []);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -47,8 +57,23 @@ export default function SignUpPage() {
     }
 
     try {
-      await signup({ email, password, firstName, lastName });
-      router.push("/auth/sign-up-success");
+      const data = await signup({ email, password, firstName, lastName });
+      const redirect = safeInternalPath(
+        new URLSearchParams(window.location.search).get("redirect")
+      );
+      if (data?.session && redirect) {
+        // Email confirmation disabled — the user is already signed in, so
+        // continue straight to the form they originally wanted.
+        router.push(redirect);
+      } else {
+        // Otherwise keep the redirect alive through the success page's
+        // "Go to Sign In" link.
+        router.push(
+          redirect
+            ? `/auth/sign-up-success?redirect=${encodeURIComponent(redirect)}`
+            : "/auth/sign-up-success"
+        );
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -182,7 +207,7 @@ export default function SignUpPage() {
               <div className="mt-6 text-center text-sm">
                 Already have an account?{" "}
                 <Link
-                  href="/auth/login2"
+                  href={`/auth/login2${redirectQuery}`}
                   className="text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4 font-medium"
                 >
                   Sign in

@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CorporationFormationForm } from "@/components/submission-forms/c-corporation-formation";
+import AuthGate from "@/components/auth-gate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, FileText, Clock, Check, Loader2 } from "lucide-react";
@@ -25,9 +26,11 @@ function CorpFormationContent() {
   // If pricing data is provided, show the form instead of the landing page
   if (pricingData.price !== "0") {
   return (
-    <div>
-      <CorporationFormationForm pricingData={pricingData} />
-    </div>
+    <AuthGate>
+      <div>
+        <CorporationFormationForm pricingData={pricingData} />
+      </div>
+    </AuthGate>
   );
 }
 

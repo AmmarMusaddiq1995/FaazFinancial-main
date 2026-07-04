@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, Menu, X, Search, Phone } from "lucide-react";
+import { CalendarDays, ChevronDown, ChevronUp, Menu, X, Search, Phone } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -31,11 +31,11 @@ import { CALENDLY_URL } from "@/components/accounting-service-template";
 // Helper component for menu items
 const MenuItem = ({ href, children, truncate = false }) => (
   <li>
-    <Tooltip>
+    {/* <Tooltip>
       <TooltipTrigger asChild>
         <Link
           href={href}
-          className={`text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200 ${
+          className={`text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg px-2.5 py-1.5 block transition-all duration-200 ${
             truncate ? "truncate max-w-[180px]" : ""
           }`}
         >
@@ -45,7 +45,17 @@ const MenuItem = ({ href, children, truncate = false }) => (
       <TooltipContent>
         <p>{children}</p>
       </TooltipContent>
-    </Tooltip>
+    </Tooltip> */}
+
+
+      <Link
+          href={href}
+          className={`text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg px-2.5 py-1.5 block transition-all duration-200 ${
+            truncate ? "truncate max-w-[180px]" : ""
+          }`}
+        >
+          {children}
+        </Link>
   </li>
 );
 
@@ -112,8 +122,15 @@ export function Header() {
   // bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60
 
   return (
-    <header className="sticky top-0 z-50 w-full h-20  bg-black ">
-      <div className="container flex h-20 items-center justify-between px-4 gap-4">
+    <header className="sticky top-0 z-50 w-full h-20">
+      {/* Glass background lives on a child layer: backdrop-filter on the header
+          itself would turn it into the containing block for the fixed-position
+          dropdown panels, overlay, and mobile sheet below. */}
+      <div
+        className="absolute inset-0 bg-slate-950/85 backdrop-blur-xl border-b border-white/[0.08]"
+        aria-hidden="true"
+      />
+      <div className="relative container flex h-20 items-center justify-between px-4 gap-4 mx-auto">
         {/* Logo */}
         <Link href="/" className="flex space-x-2 min-w-0">
          
@@ -126,107 +143,143 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("products")}
-              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer transition-colors duration-200 ${
                 activeDropdown === "products"
-                  ? "text-orange-600 border-b-2 border-orange-600"
-                  : ""
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Compliance & Formation</span>
-              {activeDropdown === "products" ? (
-                <ChevronUp className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-white" />
-              )}
+              <span className="whitespace-nowrap">Formation & Compliance</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  activeDropdown === "products" ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {activeDropdown === "products" && (
-              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 overflow-y-auto">
+              <div className="fixed z-50 top-[84px] left-1/2 -translate-x-1/2 w-[96vw] max-w-[1240px] bg-white border border-gray-200/80 rounded-2xl shadow-2xl shadow-black/20 overflow-hidden animate-slideDown">
+                {/* Scroll lives on this inner wrapper so the scrollbar doesn't
+                    paint over the panel's rounded corners */}
+                <div className="max-h-[80vh] overflow-y-auto px-8 py-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 whitespace-normal">
+          
                 {/* Column 1: FORMATION SERVICES */}
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    FORMATION SERVICES
+
+                  <h3 className="text-sm  font-semibold text-gray-400 mb-4 uppercase tracking-wider">
+                    US FORMATION & COMPLIANCE
                   </h3>
+
                   <ul className="space-y-1">
                     <MenuItem href="/services/llc-formation-2">
                       LLC Formation
                     </MenuItem>                   
                     <MenuItem href="/services/corp-formation-2">
-                      Corp. Formation
-                    </MenuItem>
-                    <MenuItem href="/start-business?serviceType=corp">
-                      Compare Formation Plan
-                    </MenuItem>
-                    <MenuItem href="/services/dba-trademark-registration">
-                      DBA/Trademark Registeration
-                    </MenuItem>
-                  </ul>
-                </div>
-
-                {/* Column 2: COMPLIANCE SERVICES */}
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    COMPLIANCE SERVICES
-                  </h3>
-                  <ul className="space-y-1">
-                    <MenuItem href="/services/ein-services">
-                      EIN Services
-                    </MenuItem>
-                    <MenuItem href="/services/boi-filing-services">
-                      BOI Filing Services
-                    </MenuItem>
-                    <MenuItem href="/services/itin-services">
-                      ITIN Services
-                    </MenuItem>
-                    <MenuItem href="/services/sales-and-usetax-registration">
-                      Sales & Use Tax Registeration
-                    </MenuItem>
-                    <MenuItem href="/services/annual-company-state-filing">
-                      Annual Company State Filing
-                    </MenuItem>
-                    <MenuItem href="/services/ein-closing-services">
-                      EIN Closing Services
+                      Corporation Formation
                     </MenuItem>
                     <MenuItem href="/services/registered-agent">
                       Registered Agent Services
                     </MenuItem>
-                    <MenuItem href="/services/company-dissolution">
+                    <MenuItem href="/services/ein-services">
+                      EIN Services
+                    </MenuItem>
+                      <MenuItem href="/services/itin-services">
+                      ITIN Services
+                    </MenuItem>
+                    <MenuItem href="/services/boi-filing-services">
+                      BOI Filing Services
+                    </MenuItem>
+                    <MenuItem href="/services/dba-trademark-registration">
+                      DBA/Trademark Registeration
+                    </MenuItem>
+                     <MenuItem href="/services/filing-articles-of-amendments" >
+                      Filing Articles Of Amendments(State fee excluded)
+                    </MenuItem>
+                     <MenuItem href="/services/company-dissolution">
                       Company Dissolution
                     </MenuItem>
-                    <MenuItem href="/services/company-revival">
+                      <MenuItem href="/services/company-revival">
                       Company Revival 
                     </MenuItem>
                     <MenuItem href="/services/address-change-services">
                       Address Change Services
-                    </MenuItem>
-                    <MenuItem href="/services/filing-articles-of-amendments" >
-                      Filing Articles Of Amendments(State fee excluded)
-                    </MenuItem>
-                    
-                    <MenuItem href="/services/payroll-withholding-services">
-                      Payroll Withholding Tax Registeration
-                    </MenuItem>
-                    
+                    </MenuItem>               
                   </ul>
                 </div>
 
-                {/* Column 3: UK FORMATION & COMPLIANCE SERVICES */}
+                  {/* Column 2: US TAX, PAYROLL & BOOKKEEPING */}
+
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-8 text-sm uppercase tracking-wide">
-                    UK FORMATION SERVICES
+
+                  <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
+                    US TAX, PAYROLL & BOOKKEEPING
                   </h3>
+
                   <ul className="space-y-1">
+                    <MenuItem href="#">
+                      Bookkeeping Services
+                    </MenuItem>  
+                     <MenuItem href="#">
+                      Bank Account Opening
+                    </MenuItem>      
+                     <MenuItem href="/services/sales-and-usetax-registration">
+                      Sales & Use Tax Registeration
+                    </MenuItem>
+                    <MenuItem href="/services/payroll-withholding-services">
+                      Payroll Withholding Tax Registeration
+                    </MenuItem>
+                    <MenuItem href="#">
+                      Payroll Management
+                    </MenuItem>
+                    <MenuItem href="#">
+                      Payroll Tax Filing
+                    </MenuItem>
+                    <MenuItem href="#">
+                      W2 & 1099 Filing
+                    </MenuItem>
+                    <MenuItem href="#">
+                      UI Account Registration
+                    </MenuItem>
+                     <MenuItem href="/services/annual-company-state-filing">
+                      Annual Company State Filing
+                    </MenuItem>
+                 </ul>
+                </div>
+
+                {/* Column 3: UK FORMATION */}
+                <div className="min-w-0">
+
+                  <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
+                    UK FORMATION
+                  </h3>
+
+                  <ul className="space-y-1">
+
                     <MenuItem href="/services/uk-ltd-formation">
                       UK LTD Formation
                     </MenuItem>
+                    <MenuItem href="/services/registering-client-for-selfassessment">
+                      Registering Client For Selfassessment
+                    </MenuItem>
+                     <MenuItem href="/services/confirmation-statement-filing-services">
+                      Confirmation Statement Filing
+                    </MenuItem>
+           
+                  </ul>
+                </div>
+
+                {/* Column 4: UK TAX & VAT */}
+                <div className="min-w-0">
+                  <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
+                    UK TAX & VAT
+                  </h3>
+                  <ul className="space-y-1">
+                  
                     <MenuItem href="/services/simple-corp-tax-return-ct600">
                       Simple Corporation Tax 
                     </MenuItem>
                     <MenuItem href="/services/complex-corp-tax-return-ct600">
-                      Advance Corporation Tax 
-                    </MenuItem>
-                    <MenuItem href="/services/registering-client-for-selfassessment">
-                      Registering Client For Selfassessment
+                      Advance Corporation Tax (CT600)
                     </MenuItem>
                     <MenuItem href="/services/simple-self-assessment-filing" >
                       Simple Self Assessment (SA100) Filing
@@ -234,103 +287,71 @@ export function Header() {
                     <MenuItem href="/services/advance-self-assessment-filing" >
                       Advance Self Assessment (SA100) Filing
                     </MenuItem>
-                    <MenuItem href="/services/annual-accounts-preparation" >
-                      Annual Corporation Tax Accounts Preparation
-                    </MenuItem>
-                    <MenuItem href="/services/confirmation-statement-filing-services">
-                      Confirmation Statement Filing
-                    </MenuItem>
                     <MenuItem href="/services/vat-registration-services">
                       VAT Registeration
                     </MenuItem>
                     <MenuItem href="/services/vat-return-filing-services">
                       VAT Return Filing
                     </MenuItem>
+                    <MenuItem href="#">
+                      Dormant Accounts Filing
+                    </MenuItem>
+                    <MenuItem href="#">
+                      Micro Entity Accounts Filing
+                    </MenuItem>
+                    <MenuItem href="#">
+                      Abridged Accounts Filing
+                    </MenuItem>
+                    <MenuItem href="#">
+                      Full Statutory Accounts Filing
+                    </MenuItem>
+                    
+                    
+                    {/* <MenuItem href="/services/confirmation-statement-filing-services">
+                      Confirmation Statement Filing
+                    </MenuItem> */}
+                    {/* <MenuItem href="/services/annual-accounts-preparation" >
+                      Annual Corporation Tax Accounts Preparation
+                    </MenuItem> */}
                     {/* <MenuItem href="/services/logo-kit">
                       Tax Planning & Consulation On Zoom
                     </MenuItem> */}
-                    <MenuItem href="/services/tax-budgeting-services" >
+                    {/* <MenuItem href="/services/tax-budgeting-services" >
                       Tax Budgeting & Taxation In Investment Appraisal
                     </MenuItem>
                     <MenuItem href="/services/initial-compliance-after-formation">
                       Initial Compliance After Formation
-                    </MenuItem>
+                    </MenuItem> */}
                   </ul>
+                </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Bookkeeping Dropdown */}
-          {/* <div className="relative">
-            <button
-              onClick={() => handleDropdownToggle("bookkeeping")}
-              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
-                activeDropdown === "bookkeeping"
-                  ? "text-orange-600 border-b-2 border-orange-600"
-                  : ""
-              }`}
-            >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Accounting & Bookkeeping</span>
-              {activeDropdown === "bookkeeping" ? (
-                <ChevronUp className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-white" />
-              )}
-            </button>
-
-            {activeDropdown === "bookkeeping" && (
-              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[900px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 overflow-y-auto">
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-gray-700 mb-6 text-sm uppercase tracking-wide">
-                    Bookkeeping & Taxes
-                  </h3>
-                  <ul className="space-y-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6">
-                    <MenuItem href="/services/pro-bookkeeping-services(small-business)" truncate>
-                      SMB Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/pro-bookkeeping-services(medium-business)" truncate>
-                      SME Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/pro-bookkeeping-services(large-business)" truncate>
-                      Full Scale Bookkeeping
-                    </MenuItem>
-                    <MenuItem href="/services/full-year-reconciliation-services">
-                      Full-Year Reconciliation Services
-                    </MenuItem>
-                    <MenuItem href="/services/setting-up-new-books-in-QBO" truncate>
-                      Setting Up New Books In QBO/Xero Or Any ERP (charges
-                      varies based on nature of work)
-                    </MenuItem>
-                  
-                  </ul>
-                </div>
-              </div>
-            )}
-          </div> */}
-
           {/* Accounting Services Dropdown */}
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("accountingServices")}
-              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer transition-colors duration-200 ${
                 activeDropdown === "accountingServices"
-                  ? "text-orange-600 border-b-2 border-orange-600"
-                  : ""
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Accounting & Bookkeeping</span>
-              {activeDropdown === "accountingServices" ? (
-                <ChevronUp className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-white" />
-              )}
+              <span className="whitespace-nowrap">Accounting & Bookkeeping</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  activeDropdown === "accountingServices" ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {activeDropdown === "accountingServices" && (
-              <div className="fixed z-50 top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] max-h-[80vh] bg-white border rounded-lg shadow-lg px-6 py-6 overflow-y-auto">
+              <div className="fixed z-50 top-[84px] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] bg-white border border-gray-200/80 rounded-2xl shadow-2xl shadow-black/20 overflow-hidden animate-slideDown">
+                <div className="max-h-[80vh] overflow-y-auto px-8 py-7 whitespace-normal">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wide">
+                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                     Accounting Services
                   </h3>
                   <Link
@@ -344,7 +365,7 @@ export function Header() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {accountingCategories.map((category) => (
                     <div key={category.id} className="min-w-0">
-                      <h4 className="font-semibold text-gray-700 mb-4 text-sm uppercase tracking-wide">
+                      <h4 className="text-xs font-semibold text-gray-400 mb-4 uppercase tracking-wider">
                         {category.title}
                       </h4>
                       <ul className="space-y-1">
@@ -370,6 +391,7 @@ export function Header() {
                       )}
                     </div>
                   ))}
+                </div>
                 </div>
               </div>
             )}
@@ -398,9 +420,9 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => router.push("/it-services")}
-              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
+              className="flex items-center px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer text-gray-300 hover:text-white hover:bg-white/[0.06] transition-colors duration-200"
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">IT Services</span>
+              <span className="whitespace-nowrap">IT Services</span>
             </button>
           </div>
 
@@ -408,9 +430,9 @@ export function Header() {
           <div className="relative">
             <button
                onClick={() => router.push("/learning-center")}
-              className="flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap"
+              className="flex items-center px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer text-gray-300 hover:text-white hover:bg-white/[0.06] transition-colors duration-200"
            >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Learning Center</span>
+              <span className="whitespace-nowrap">Learning Center</span>
             </button>
             {/* <button
               onClick={() => handleDropdownToggle("guides")}
@@ -463,23 +485,23 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => handleDropdownToggle("about")}
-              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
+              className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap cursor-pointer transition-colors duration-200 ${
                 activeDropdown === "about"
-                  ? "text-orange-600 border-b-2 border-orange-600"
-                  : ""
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-sm">Get To Know Us</span>
-              {activeDropdown === "about" ? (
-                <ChevronUp className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-white" />
-              )}
+              <span className="whitespace-nowrap">Get To Know Us</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  activeDropdown === "about" ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {activeDropdown === "about" && (
-              <div 
-                className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-4 z-50"
+              <div
+                className="absolute top-full right-0 mt-3 w-64 bg-white border border-gray-200/80 rounded-2xl shadow-2xl shadow-black/20 p-3 z-50 animate-slideDown"
                 onClick={(e) => e.stopPropagation()}
               >
                 <ul className="space-y-1">
@@ -497,6 +519,18 @@ export function Header() {
                       className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
                     >
                       Contact Us
+                    </Link>
+                  </li>
+                  <li className="border-t border-gray-100 mt-1 pt-1">
+                    <Link
+                      href={CALENDLY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-md px-2 py-1 flex items-center gap-1.5 transition-all duration-200 font-medium"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      Book a discovery call
                     </Link>
                   </li>
                 </ul>
@@ -518,10 +552,15 @@ export function Header() {
           <div className="flex items-center gap-2">
             {session ? (
               <>
-                <span className="text-white max-w-[140px] truncate hidden 2xl:inline">
+                <span className="text-sm text-gray-300 max-w-[140px] truncate hidden 2xl:inline">
                   {session.user?.email || "User"}
                 </span>
-                <Button size="sm" onClick={handleLogout} className="hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300">
+                <Button
+                  size="sm"
+                  onClick={handleLogout}
+                  variant="ghost"
+                  className="rounded-full text-gray-300 hover:text-white hover:bg-white/10 cursor-pointer transition-colors duration-200"
+                >
                   Log Out
                 </Button>
                 <Button
@@ -530,18 +569,30 @@ export function Header() {
                       ? router.push("/dashboard")
                       : router.push("/admin")
                   }
-                  variant="outline"
                   size="sm"
-                  className="text-black hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300"
+                  className="rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90 hover:shadow-primary/40 cursor-pointer transition-all duration-300"
                 >
                   Dashboard
                 </Button>
               </>
             ) : (
               <>
-                <Button size="sm" className="hover:bg-primary rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300" onClick={() => router.push("/auth/login2")}>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="rounded-full text-gray-300 hover:text-white hover:bg-white/10 cursor-pointer transition-colors duration-200"
+                  onClick={() => router.push("/auth/login2")}
+                >
                   Log In
                 </Button>
+                <Link href="/start-business" className="hidden min-[1400px]:block">
+                  <Button
+                    size="sm"
+                    className="rounded-full bg-primary text-primary-foreground px-4 shadow-lg shadow-primary/25 hover:bg-primary/90 hover:shadow-primary/40 hover:-translate-y-px cursor-pointer transition-all duration-300"
+                  >
+                    Start Your Business →
+                  </Button>
+                </Link>
               </>
             )}
           </div>
@@ -567,7 +618,8 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="xl:hidden"
+          className="xl:hidden text-white hover:text-white hover:bg-white/10 min-h-[44px] min-w-[44px] rounded-xl transition-colors duration-200"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           // onClick={() => setIsMenuOpen(!isMenuOpen)}
           onClick={() => { setIsMenuOpen(!isMenuOpen); 
             if (isMenuOpen) {
@@ -587,40 +639,40 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="xl:hidden border-t bg-background">
-          <div className="container px-4 py-4 space-y-4 ">
+        <div className="xl:hidden fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto bg-slate-950/95 backdrop-blur-xl border-t border-white/10 animate-slideDown">
+          <div className="container px-4 py-6 space-y-4 mx-auto">
             <Accordion type="single" collapsible className="w-full ">
-              <AccordionItem value="services">
-                <AccordionTrigger className="text-sm ">
-                  Compliance & Formation
+              <AccordionItem value="services" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
+                  Formation & Compliance
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
+                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
                       Formation Services
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/llc-formation-2"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         LLC Formation
                       </Link>
                       <Link
                         href="/services/corporation-formation"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Corp. Formation
                       </Link>
                       <Link
                         href="/services/corporation-formation"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Compare Formation Plans
                       </Link>
                       <Link
                         href="/services/dba-trademark-registration"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         DBA/Trademark Registration
                       </Link>
@@ -628,99 +680,99 @@ export function Header() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
+                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
                       Compliance Services
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/ein-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         EIN Services
                       </Link>
                       <Link
                         href="/services/boi-filing-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         BOI Filing Services
                       </Link>
                       <Link
                         href="/services/itin-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         ITIN Services
                       </Link>
                       <Link
                         href="/services/sales-and-usetax-registration"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Sales & Use Tax Registration
                       </Link>
                       <Link
                         href="/services/annual-company-state-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Annual Company State Filing
                       </Link>
                       <Link
                         href="/services/ein-closing-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         EIN Closing Services
                       </Link>
                       <Link
                         href="/services/registered-agent"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Registered Agent Services
                       </Link>
                       <Link
                         href="/services/company-dissolution"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Company Dissolution
                       </Link>
                       <Link
                         href="/services/company-revival"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Company Revival 
                       </Link>
                       <Link
                         href="/services/address-change-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Address Change Services
                       </Link>
                       <Link
                         href="/services/filing-articles-of-amendments"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Filing Articles Of Amendments(State fee excluded)
                       </Link>
                     
                       <Link
                         href="/services/payroll-withholding-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Withholding Tax Registration
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         UI(Unemployment Insurance)
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Management (Gusto, Adp, QBO, Paychecks, Paycom,
                         Rippling) monthly
                       </Link>
                       <Link
                         href="/services/templates"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Account Setup (Reach out for pricing)
                       </Link>
@@ -728,116 +780,116 @@ export function Header() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide">
+                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
                       UK Formation & Compliance
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
                         href="/services/uk-ltd-formation"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         UK LTD Formation
                       </Link>
                       <Link
                         href="/services/simple-corp-tax-return-ct600"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Simple Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
                         href="/services/complex-corp-tax-return-ct600"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Advance Corporation Tax Return Filing (CT600)
                       </Link>
                       <Link
                         href="/services/registering-client-for-selfassessment"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Registering Client For Selfassessment
                       </Link>
                       <Link
                         href="/services/simple-self-assessment-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Simple Self Assessment (SA100) Filing
                       </Link>
                       <Link
                         href="/services/advance-self-assessment-filing"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Advance Self Assessment (SA100) Filing
                       </Link>
                       <Link
                         href="/services/annual-accounts-preparation"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Annual Corporation Tax Accounts Preparation
                       </Link>
                      
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Dormant Accounts Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Micro-Entity Accounts Filiing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Abridged Accounts Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Full Statutory Accounts Filing
                       </Link>
                       <Link
                         href="/services/confirmation-statement-filing-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Confirmation Statement Filing
                       </Link>
                       <Link
                         href="/services/vat-registration-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         VAT Registeration
                       </Link>
                       <Link
                         href="/services/vat-return-filing-services"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         VAT Return Filing
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Tax Planning & Consulation On Zoom
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Tax Budgeting & Taxation In Investment Appraisal
                       </Link>
                       <Link
                         href="/services/logo-kit"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Company Registration
                       </Link>
                       <Link
                         href="/services/initial-compliance-after-formation"
-                        className="block text-sm text-gray-600 hover:text-orange-600"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Initial Compliance After Formation
                       </Link>
@@ -846,87 +898,87 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="bookkeeping">
-                <AccordionTrigger className="text-sm">
+              <AccordionItem value="bookkeeping" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   Accounting & Bookkeeping
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/services/pro-bookkeeping-services(small-business)"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Pro-BookKeeping Services (Small Business)
                     </Link>
                     <Link
                       href="/services/pro-bookkeeping-services(medium-business)"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Pro-BookKeeping Services (Medium Business)
                     </Link>
                     <Link
                       href="/services/pro-bookkeeping-services(large-business)"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Pro-Bookkeeping Services (Large Business)
                     </Link>
                     <Link
                       href="/services/full-year-reconciliation-services"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Full-Year Reconciliation Services
                     </Link>
                     <Link
                       href="/services/setting-up-new-books-in-QBO"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Setting Up New Books In QBO/Xero Or Any ERP
                     </Link>
                     {/* <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Financial Reporting - Reach Out For Pricing
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Virtual CFO Services-Reach Out For Pricing
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Payroll Taxes
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Payroll Withholding Tax Filing
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       W2 & 1099 Filing
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Tax Filing Services
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Tax Filing Individual ( Non Resident) With ITIN
                     </Link>
                     <Link
                       href="/services/tax-filing"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Company Tax Filing Vary Based On The Volume Of Business
                     </Link> */}
@@ -934,8 +986,8 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="accounting-services">
-                <AccordionTrigger className="text-sm">
+              <AccordionItem value="accounting-services" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   Accounting Services
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
@@ -949,7 +1001,7 @@ export function Header() {
                   </div>
                   {accountingCategories.map((category) => (
                     <div key={category.id} className="space-y-2">
-                      <h4 className="font-semibold text-gray-700 text-xs uppercase tracking-wide pl-4">
+                      <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider pl-4">
                         {category.title}
                       </h4>
                       <div className="pl-4 space-y-2">
@@ -959,7 +1011,7 @@ export function Header() {
                             <Link
                               key={service.slug}
                               href={`/services/${service.slug}`}
-                              className="block text-sm text-gray-600 hover:text-orange-600"
+                              className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                             >
                               {service.name}
                             </Link>
@@ -977,21 +1029,21 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="learning">
-                <AccordionTrigger className="text-sm">
+              <AccordionItem value="learning" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   Learning Center
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/learning-center"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Learning Topics
                     </Link>
                     <Link
                       href="/blog"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Business Blog
                     </Link>
@@ -999,15 +1051,15 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="it-services">
-                <AccordionTrigger className="text-sm">
+              <AccordionItem value="it-services" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   IT Services
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/it-services"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Web Development & AI Automation
                     </Link>
@@ -1015,42 +1067,54 @@ export function Header() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="about">
-                <AccordionTrigger className="text-sm">
+              <AccordionItem value="about" className="border-white/10">
+                <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   Get To Know Us
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="pl-4 space-y-2">
                     <Link
                       href="/about"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       About Us
                     </Link>
                     <Link
                       href="/contact"
-                      className="block text-sm text-gray-600 hover:text-orange-600"
+                      className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Contact Us
+                    </Link>
+                    <Link
+                      href={CALENDLY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center gap-1.5"
+                    >
+                      <CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      Book a discovery call
                     </Link>
                   </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
 
-            <div className="pt-2 border-t space-y-2">
+            <div className="pt-4 border-t border-white/10 space-y-3">
               {session ? (
                 <>
-                  <div className="text-gray-700 text-sm">
+                  <div className="text-gray-300 text-sm truncate">
                     {session.user?.email || "User"}
                   </div>
-                  <Button onClick={handleLogout} className="w-full">
+                  <Button
+                    onClick={handleLogout}
+                    className="w-full min-h-[44px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 transition-all duration-300"
+                  >
                     Log Out
                   </Button>
                   <Button
                     onClick={() => router.push("/dashboard")}
                     variant="outline"
-                    className="w-full border-black text-black hover:bg-black hover:text-white"
+                    className="w-full min-h-[44px] rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white transition-colors duration-200"
                   >
                     Dashboard
                   </Button>
@@ -1058,7 +1122,10 @@ export function Header() {
               ) : (
                 <>
                   <Link href="/auth/login2">
-                    <Button variant="ghost" className="w-full justify-center">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-center min-h-[44px] rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white transition-colors duration-200"
+                    >
                       Log In
                     </Button>
                   </Link>
@@ -1072,7 +1139,7 @@ export function Header() {
       {/* Click outside to close dropdowns */}
       {activeDropdown && (
         <div
-          className="fixed inset-0 z-30"
+          className="fixed inset-x-0 top-20 bottom-0 z-30 bg-slate-950/30 backdrop-blur-[2px]"
           onClick={() => setActiveDropdown(null)}
         />
       )}

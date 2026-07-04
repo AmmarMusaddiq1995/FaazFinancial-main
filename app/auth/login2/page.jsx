@@ -12,8 +12,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AppContext";
+import { safeInternalPath } from "@/lib/safe-redirect";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,6 +27,16 @@ export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuthContext();
 
+  // Carry the ?redirect= target over to the sign-up page link (set after
+  // mount to avoid a hydration mismatch).
+  const [redirectQuery, setRedirectQuery] = useState("");
+  useEffect(() => {
+    const redirect = new URLSearchParams(window.location.search).get("redirect");
+    if (safeInternalPath(redirect)) {
+      setRedirectQuery(`?redirect=${encodeURIComponent(redirect)}`);
+    }
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -34,7 +45,10 @@ export default function LoginPage() {
     try {
       await login({ email, password });
       toast.success("Login successful!");
-      router.push("/");
+      // Return the user to the page that sent them here (e.g. a gated
+      // service form); fall back to home for a plain login.
+      const redirect = new URLSearchParams(window.location.search).get("redirect");
+      router.push(safeInternalPath(redirect) || "/");
     } catch (err) {
       console.error("Unexpected error:", err);
       const message = err?.message || "Invalid email or password";
@@ -108,7 +122,7 @@ export default function LoginPage() {
               <div className="mt-4 text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <Link
-                  href="/auth/sign-up2"
+                  href={`/auth/sign-up2${redirectQuery}`}
                   className="text-primary hover:text-primary/80 cursor-pointer underline underline-offset-4 font-medium"
                 >
                   Create one now

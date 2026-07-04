@@ -2,6 +2,8 @@
 
 import { useEffect, useCallback, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { Quote } from "lucide-react";
+import { useScrollReveal } from "@/components/ui/use-scroll-reveal";
 
 // TODO: When TRUSTPILOT_API_KEY is configured in .env.local, uncomment the
 // useEffect below to swap hardcoded reviews for live Trustpilot data.
@@ -24,12 +26,13 @@ const REVIEWS = [
 
 // Trustpilot green star SVG — matches the real Trustpilot star shape.
 // fillPercent (0–100) drives a left-to-right gradient for partial stars.
-let _starGradientId = 0;
+// The gradient id is derived from fillPercent (deterministic) so server and
+// client renders match — a module-level counter here caused hydration errors.
 function TrustpilotStar({ filled = true, fillPercent, size = 20 }) {
   // Determine effective fill: explicit fillPercent overrides the boolean filled prop
   const pct = fillPercent !== undefined ? fillPercent : filled ? 100 : 0;
   const isPartial = pct > 0 && pct < 100;
-  const gradientId = isPartial ? `tp-grad-${++_starGradientId}` : null;
+  const gradientId = isPartial ? `tp-grad-${pct}` : null;
 
   return (
     <svg
@@ -64,9 +67,9 @@ function TrustpilotStar({ filled = true, fillPercent, size = 20 }) {
 
 function StarRating({ rating }) {
   return (
-    <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
+    <div className="flex gap-1" aria-label={`${rating} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((n) => (
-        <TrustpilotStar key={n} filled={n <= rating} size={22} />
+        <TrustpilotStar key={n} filled={n <= rating} size={24} />
       ))}
     </div>
   );
@@ -94,11 +97,13 @@ export default function TestimonialsSection() {
   const [reviews, setReviews] = useState(REVIEWS);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
+  const sectionRef = useScrollReveal();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
     slidesToScroll: 1,
+    duration: 28,
   });
 
   // TODO: Uncomment to fetch live Trustpilot reviews once API key is configured.
@@ -140,52 +145,88 @@ export default function TestimonialsSection() {
   }, [emblaApi]);
 
   return (
-    <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 lg:py-24 overflow-hidden">
-      <div className="container px-4 mx-auto">
+    <section
+      ref={sectionRef}
+      className="relative bg-slate-950 py-16 lg:py-24 border-t border-white/[0.06] overflow-hidden"
+    >
+      {/* Layered background: subtle grid + soft glows, echoing the hero */}
+      <div
+        className="absolute inset-0 opacity-[0.25]"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(148,163,184,0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.09) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          maskImage:
+            "radial-gradient(ellipse 75% 80% at 50% 50%, black 30%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 75% 80% at 50% 50%, black 30%, transparent 100%)",
+        }}
+      />
+      <div
+        className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-emerald-600/[0.07] blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative container px-4 mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-10 lg:mb-14">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <TrustpilotStar filled size={26} />
-            <span className="text-[#00b67a] font-semibold text-sm lg:text-base tracking-wide uppercase">
+        <div className="reveal text-center mb-12 lg:mb-16">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm px-4 py-1.5 mb-5">
+            <TrustpilotStar filled size={20} />
+            <span className="text-[#00b67a] font-semibold text-xs lg:text-sm tracking-widest uppercase">
               Trustpilot
             </span>
           </div>
-          <h2 className="text-2xl lg:text-4xl font-bold text-white text-balance">
-            What our clients say
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-white text-balance mb-3">
+            What Our{" "}
+            <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400 bg-clip-text text-transparent">
+              Clients Say
+            </span>
           </h2>
-          <p className="text-sm lg:text-base text-gray-400 mt-2">
+          <p className="text-sm lg:text-lg text-gray-400">
             Rated <span className="text-[#00b67a] font-semibold">Excellent</span> by our clients
           </p>
         </div>
 
         {/* Carousel */}
-        <div className="relative">
+        <div className="reveal relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-4 touch-pan-y">
+            <div className="flex gap-5 lg:gap-6 touch-pan-y">
               {reviews.map((review, i) => (
                 <article
                   key={review.id}
                   className="
-                    flex-none w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)]
-                    bg-white/10 backdrop-blur-md border border-white/15
-                    rounded-2xl p-6 shadow-xl
-                    flex flex-col gap-4
-                    transition-transform duration-300 hover:scale-[1.02]
+                    group relative flex-none w-full md:w-[calc(50%-10px)] xl:w-[calc(33.333%-16px)]
+                    bg-white/[0.05] backdrop-blur-md border border-white/10
+                    rounded-2xl p-7 lg:p-8 shadow-xl shadow-black/20
+                    flex flex-col gap-5
+                    transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.07] hover:shadow-2xl hover:shadow-primary/10
                   "
                 >
+                  {/* Decorative quote mark */}
+                  <Quote
+                    className="absolute top-6 right-6 h-9 w-9 text-white/[0.07] group-hover:text-primary/25 transition-colors duration-300 rotate-180"
+                    aria-hidden="true"
+                    fill="currentColor"
+                  />
+
                   {/* Stars */}
                   <StarRating rating={review.rating} />
 
                   {/* Review text */}
-                  <p className="text-sm lg:text-base text-gray-200 leading-relaxed flex-1 line-clamp-5">
+                  <p className="text-base lg:text-lg text-gray-200 leading-relaxed flex-1 line-clamp-6 text-pretty">
                     &ldquo;{review.text}&rdquo;
                   </p>
 
                   {/* Reviewer */}
-                  <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/[0.08]">
                     <div
-                      className={`h-9 w-9 rounded-full bg-gradient-to-br ${AVATAR_COLORS[i % AVATAR_COLORS.length]} flex items-center justify-center flex-shrink-0`}
+                      className={`h-11 w-11 rounded-full bg-gradient-to-br ${AVATAR_COLORS[i % AVATAR_COLORS.length]} ring-2 ring-white/10 flex items-center justify-center flex-shrink-0`}
                       aria-hidden="true"
                     >
                       <span className="text-white text-xs font-bold">
@@ -193,10 +234,10 @@ export default function TestimonialsSection() {
                       </span>
                     </div>
                     <div>
-                      <p className="text-white text-sm font-semibold leading-tight">
+                      <p className="text-white text-sm lg:text-base font-semibold leading-tight">
                         {review.author}
                       </p>
-                      <p className="text-gray-400 text-xs flex items-center gap-1">
+                      <p className="text-gray-400 text-xs flex items-center gap-1.5 mt-0.5">
                         <TrustpilotStar filled size={12} />
                         Verified review
                       </p>
@@ -213,10 +254,10 @@ export default function TestimonialsSection() {
             aria-label="Previous review"
             className="
               absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 lg:-translate-x-5
-              h-10 w-10 rounded-full
-              bg-white/10 backdrop-blur-md border border-white/20
-              flex items-center justify-center
-              text-white hover:bg-white/20 transition-colors
+              h-11 w-11 rounded-full
+              bg-slate-950/80 backdrop-blur-md border border-white/15
+              flex items-center justify-center cursor-pointer
+              text-white hover:border-primary/50 hover:bg-slate-900 transition-colors duration-200
             "
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -230,10 +271,10 @@ export default function TestimonialsSection() {
             aria-label="Next review"
             className="
               absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 lg:translate-x-5
-              h-10 w-10 rounded-full
-              bg-white/10 backdrop-blur-md border border-white/20
-              flex items-center justify-center
-              text-white hover:bg-white/20 transition-colors
+              h-11 w-11 rounded-full
+              bg-slate-950/80 backdrop-blur-md border border-white/15
+              flex items-center justify-center cursor-pointer
+              text-white hover:border-primary/50 hover:bg-slate-900 transition-colors duration-200
             "
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -243,7 +284,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Review slides">
+        <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label="Review slides">
           {scrollSnaps.map((_, i) => (
             <button
               key={i}
@@ -251,31 +292,31 @@ export default function TestimonialsSection() {
               aria-selected={i === selectedIndex}
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => emblaApi?.scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                 i === selectedIndex
-                  ? "w-6 bg-[#00b67a]"
-                  : "w-1.5 bg-white/30 hover:bg-white/50"
+                  ? "w-7 bg-[#00b67a]"
+                  : "w-1.5 bg-white/25 hover:bg-white/50"
               }`}
             />
           ))}
         </div>
 
         {/* Trustpilot footer badge */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="reveal mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="flex items-center gap-1.5" aria-label="4.7 out of 5 stars">
             {[1, 2, 3, 4].map((n) => (
               <TrustpilotStar key={n} filled size={28} />
             ))}
             <TrustpilotStar fillPercent={70} size={28} />
           </div>
-          <span className="text-white text-sm font-medium">
+          <span className="text-white text-sm lg:text-base font-medium">
             <span className="font-bold">Excellent</span> · Rated 4.7/5 on Trustpilot
           </span>
           <a
             href={TRUSTPILOT_PROFILE}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#00b67a] text-sm font-semibold hover:underline"
+            className="text-[#00b67a] text-sm lg:text-base font-semibold hover:underline"
           >
             Leave us a review →
           </a>

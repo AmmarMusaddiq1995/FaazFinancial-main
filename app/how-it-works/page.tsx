@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
       icon: Clock,
       details: [
         "Professional document preparation and review",
-        "Direct filing with state agencies",
+        "Filing formation with secretary of state",
         "Real-time status updates throughout the process",
       ],
     },
@@ -170,7 +170,7 @@ export default function HowItWorksPage() {
                       <span className="text-2xl font-bold text-primary">2-3</span>
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Days 2-3</h3>
-                    <p className="text-gray-600">Filed with state agency for processing</p>
+                    <p className="text-gray-600">Filed with secretary of state for processing</p>
                   </CardContent>
                 </Card>
 
@@ -187,7 +187,7 @@ export default function HowItWorksPage() {
 
               <div className="mt-8 p-4 bg-primary-50 rounded-lg">
                 <p className="text-gray-900">
-                  <strong>Need it faster?</strong> Expedited processing available for most states - typically 1-3
+                  <strong>Need it faster?</strong> Expedited processing available for most states - typically 5-7
                   business days.
                 </p>
               </div>
@@ -202,7 +202,7 @@ export default function HowItWorksPage() {
               <div className="text-center mb-16">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose <span className="text-primary">FAAZ Financial Group</span>?</h2>
                 <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  We've helped over 200,000 entrepreneurs start their businesses with confidence and trust
+                  We've helped over 10,000+ entrepreneurs start their businesses with confidence and trust
                 </p>
               </div>
 
@@ -237,8 +237,7 @@ export default function HowItWorksPage() {
                       {[
                         "Business name availability check",
                         "Articles of Organization/Incorporation filing",
-                        "State filing fee included in some packages",
-                        "Official state-stamped documents",
+                        "State filing fee included",
                         "Formation confirmation and tracking",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
@@ -259,7 +258,6 @@ export default function HowItWorksPage() {
                         "Compliance calendar and reminders",
                         "Document storage and access",
                         "Customer support and guidance",
-                        "Business growth resources",
                       ].map((item, index) => (
                         <li key={index} className="flex items-start gap-2">
                           <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 shrink-0" />
@@ -287,13 +285,7 @@ export default function HowItWorksPage() {
                 Start Your LLC Today
               </Button>
               </Link>
-              {/* <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
-              >
-                Compare Packages
-              </Button> */}
+             
             </div>
           </div>
         </section>

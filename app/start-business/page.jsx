@@ -6,6 +6,7 @@ import { EinServicesForm } from "@/components/submission-forms/ein-services-form
 import { ItinApplicationForm } from "@/components/submission-forms/itin-application-form";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import AuthGate from "@/components/auth-gate";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -52,7 +53,9 @@ import { Suspense } from "react";
 export default function MyPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <StartBusinessPage />
+      <AuthGate>
+        <StartBusinessPage />
+      </AuthGate>
     </Suspense>
   );
 }
