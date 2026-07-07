@@ -1,27 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-
-
-
+import { Building2, FileText, Clock, Zap } from "lucide-react";
+import {
+  DateField,
+  FileUploadField,
+  FormWizard,
+  PackageCards,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
 export function BoiFilingServicesForm() {
   const [loading, setLoading] = useState(false);
@@ -76,7 +70,7 @@ export function BoiFilingServicesForm() {
   }, [formData.packageType]);
 
   const handleFileUpload = async (e, type) => {
-    
+
 
     let fileUrl = null;
     const fileName = `${userPersonalId}/${type}/${Date.now()}-${
@@ -157,266 +151,235 @@ export function BoiFilingServicesForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your BOI Filing Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your BOI filing services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-              <div className="space-y-2">
-                <Label htmlFor="companyName">
-                  Company Name
-                </Label>
-                <Input
-                  id="companyName"
-                  value={formData.companyName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-              <Label htmlFor="dateOfFormation">Date of formation</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfFormation"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfFormation
-                      ? new Date(formData.dateOfFormation).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfFormation
-                        ? new Date(formData.dateOfFormation)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfFormation: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
-                value={formData.dateOfFormation}
+  const steps = [
+    {
+      title: "Company",
+      subtitle: "Business & members",
+      icon: Building2,
+      heading: "Company & member details",
+      intro: "Tell us about the company and its beneficial owners.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="companyName">Company Name</Label>
+              <Input
+                id="companyName"
+                value={formData.companyName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    companyName: e.target.value,
+                  })
+                }
+                className={inputStyles}
                 required
-                readOnly
               />
             </div>
 
-
-
-
-              <div className="space-y-2">
-              <Label htmlFor="businessType">Business Entity Type</Label>
-              <Select
-                value={formData.businessEntityType}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, businessEntityType: value })
+            <div className="space-y-2">
+              <Label htmlFor="dateOfFormation">Date of formation</Label>
+              <DateField
+                id="dateOfFormation"
+                value={formData.dateOfFormation}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfFormation: value })
                 }
                 required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select business entity type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="LLC">
-                    LLC
-                  </SelectItem>
-                  <SelectItem value="ECommerceBusiness">
-                    E-Commerce Business
-                  </SelectItem>
-                  <SelectItem value="WholesaleBusiness">
-                    Wholesale Business
-                  </SelectItem>
-                  <SelectItem value="RetailBusiness">
-                    Retail Business
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="businessType">Business Entity Type</Label>
+            <Select
+              value={formData.businessEntityType}
+              onValueChange={(value) =>
+                setFormData({ ...formData, businessEntityType: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select business entity type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="LLC">
+                  LLC
+                </SelectItem>
+                <SelectItem value="ECommerceBusiness">
+                  E-Commerce Business
+                </SelectItem>
+                <SelectItem value="WholesaleBusiness">
+                  Wholesale Business
+                </SelectItem>
+                <SelectItem value="RetailBusiness">
+                  Retail Business
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="member1FullLegalName">
+                Member 1 Full Legal Name
+              </Label>
+              <Input
+                id="member1FullLegalName"
+                value={formData.member1FullLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    member1FullLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="member1FullLegalName">
-                  Member 1 Full Legal Name
-                </Label>
-                <Input
-                  id="member1FullLegalName"
-                  value={formData.member1FullLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      member1FullLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="member1AddressDetails">Member 1 Address Details</Label>
-                <Input
-                  id="member1AddressDetails"
-                  value={formData.member1AddressDetails}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      member1AddressDetails: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="member2FullLegalName">
-                  Member 2 Full Legal Name
-                </Label>
-                <Input
-                  id="member2FullLegalName"
-                  value={formData.member2FullLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      member2FullLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="member2AddressDetails">Member 2 Address Details</Label>
-                <Input
-                  id="member2AddressDetails"
-                  value={formData.member2AddressDetails}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      member2AddressDetails: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-              </div>
-
-              
-
-              <div className="space-y-2">
-                <Label htmlFor="usContactNumber">US Contact Number</Label>
-                <Input
-                  id="usContactNumber"
-                  value={formData.usContactNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      usContactNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="businessEmailAddress">Business Email address</Label>
-                <Input
-                  id="businessEmailAddress"
-                  value={formData.businessEmailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessEmailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-              <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="normal">Normal</SelectItem>
-                 <SelectItem value="express">Express</SelectItem>
-              </SelectContent>
-              </Select>
-          </div>
-
-             
-
-             
-
-              <div className="space-y-2">
-                <Label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">Upload your passport</Label>
-                <input
-                  type="file"
-                  id="passport"
-                  onChange={(e) => {
-                    handleFileUpload(e, "passport");
-                  }}
-                  required
-                  placeholder="Scan of your passport copy"
-                  className="border-gray-300 border rounded-md p-2 cursor-pointer shadow-md shadow-black"
-                />
-              </div>
-
-              
+              <Label htmlFor="member1AddressDetails">Member 1 Address Details</Label>
+              <Input
+                id="member1AddressDetails"
+                value={formData.member1AddressDetails}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    member1AddressDetails: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start BOI Filing Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="member2FullLegalName">
+                Member 2 Full Legal Name
+              </Label>
+              <Input
+                id="member2FullLegalName"
+                value={formData.member2FullLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    member2FullLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
 
-      
-    </>
+            <div className="space-y-2">
+              <Label htmlFor="member2AddressDetails">Member 2 Address Details</Label>
+              <Input
+                id="member2AddressDetails"
+                value={formData.member2AddressDetails}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    member2AddressDetails: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="usContactNumber">US Contact Number</Label>
+              <Input
+                id="usContactNumber"
+                value={formData.usContactNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    usContactNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="businessEmailAddress">Business Email address</Label>
+              <Input
+                id="businessEmailAddress"
+                value={formData.businessEmailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    businessEmailAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Filing",
+      subtitle: "Package & passport",
+      icon: FileText,
+      heading: "Package & documents",
+      intro: "Pick your filing speed, upload your passport, and submit.",
+      validate: () => {
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                { value: "normal", label: "Normal", icon: Clock, price: 25 },
+                { value: "express", label: "Express", icon: Zap, badge: "Fastest", price: 35 },
+              ]}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="passport">Upload your passport</Label>
+            <FileUploadField
+              id="passport"
+              uploaded={!!formData.passport}
+              placeholder="Scan of your passport copy"
+              required
+              onChange={(e) => handleFileUpload(e, "passport")}
+            />
+          </div>
+
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `BOI Filing (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your BOI Filing Services"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start BOI Filing Services"
+      price={price}
+    />
   );
 }

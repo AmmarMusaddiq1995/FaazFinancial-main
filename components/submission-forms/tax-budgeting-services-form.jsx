@@ -1,35 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calculator } from "lucide-react";
+import {
+  FormWizard,
+  OptionToggle,
+  PriceSummary,
+} from "@/components/submission-forms/form-wizard";
 
-
-
+const TAX_BUDGETING_PRICE = 336;
 
 export function TaxBudgetingServicesForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
-    
+
    budgetingRequiredFor: "",
-    
+
   });
 
   const { user } = useAuthContext();
@@ -56,17 +47,6 @@ export function TaxBudgetingServicesForm() {
 
     fetchUserData();
   }, [user]);
-
-  // const [price, setPrice] = useState(0);
-  // useEffect(()=>{
-  //   if(formData.packageType === "normal"){
-  //     const selectedPrice = 25;
-  //     setPrice(selectedPrice);
-  //   } else if(formData.packageType === "express"){
-  //     const selectedPrice = 35;
-  //     setPrice(selectedPrice);
-  //   }
-  // }, [formData.packageType]);
 
 
   const handleSubmit = async (e) => {
@@ -120,60 +100,67 @@ export function TaxBudgetingServicesForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Tax Budgeting Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Tax Budgeting Services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-         
-
-            <div className="space-y-2">
-              <Label htmlFor="budgetingRequiredFor">Budgeting required for ?</Label>
-                <Select
-                  value={formData.budgetingRequiredFor}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, budgetingRequiredFor: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select an option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="corporationTax">Corporation Tax</SelectItem>
-                 <SelectItem value="incomeTax">Income Tax</SelectItem>
-                 <SelectItem value="both">Both</SelectItem>
-              </SelectContent>
-              </Select>
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Tax budgeting",
+      icon: Calculator,
+      validate: () => {
+        if (!formData.budgetingRequiredFor)
+          return "Please select what the budgeting is required for.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label>Budgeting required for ?</Label>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {[
+                { value: "corporationTax", label: "Corporation Tax" },
+                { value: "incomeTax", label: "Income Tax" },
+                { value: "both", label: "Both" },
+              ].map((option) => {
+                const selected = formData.budgetingRequiredFor === option.value;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    onClick={() =>
+                      setFormData({ ...formData, budgetingRequiredFor: option.value })
+                    }
+                    className={`flex min-h-[44px] items-center justify-center rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      selected
+                        ? "border-primary bg-primary/10 text-primary shadow-sm"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-primary/40 hover:bg-primary/5"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
+          <PriceSummary
+            price={TAX_BUDGETING_PRICE}
+            rows={[{ label: "Tax Budgeting Services", amount: TAX_BUDGETING_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
 
-             
-
-      
-
-              
-            </div>
-
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Tax Budgeting Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      
-    </>
+  return (
+    <FormWizard
+      title="Start Your Tax Budgeting Services"
+      description="Fill out the form below to begin your Tax Budgeting Services process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Tax Budgeting Services"
+      price={TAX_BUDGETING_PRICE}
+    />
   );
 }

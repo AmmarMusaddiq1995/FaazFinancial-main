@@ -53,6 +53,11 @@ export function Footer() {
                   Registered Agent
                 </a>
               </li>
+              <li>
+                <a href="/services/it-services" className={linkClass}>
+                  IT Services
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -75,6 +80,12 @@ export function Footer() {
                   How It Works
                 </Link>
               </li>
+              <li>
+                <Link href="https://www.trustpilot.com/review/faazfinancialgroup.com" className={linkClass}>
+                  Trustpilot Reviews
+                </Link>
+              </li>
+
             </ul>
           </div>
 

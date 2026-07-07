@@ -1,28 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Textarea } from "../ui/textarea";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-import { Textarea } from "../ui/textarea";
+import { FileText } from "lucide-react";
+import {
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
-
-
+const REGISTER_CLIENT_PRICE = 40;
 
 export function RegisterClientForSelfAssessmentForm() {
   const [loading, setLoading] = useState(false);
@@ -36,7 +28,7 @@ export function RegisterClientForSelfAssessmentForm() {
     emailAddress: "",
     phoneNumber: "",
     reasonToRegisterForSelfAssessment: "",
-    
+
   });
 
   const { user } = useAuthContext();
@@ -118,167 +110,164 @@ export function RegisterClientForSelfAssessmentForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Register Client for Self Assessment
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Register Client for Self Assessment process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-         
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Self assessment registration",
+      icon: FileText,
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="fullName">Full name</Label>
+            <Input
+              id="fullName"
+              value={formData.fullName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  fullName: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
+            <Input
+              id="governmentGatewayId"
+              value={formData.governmentGatewayId}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  governmentGatewayId: e.target.value,
+                })
+              }
+              className={inputStyles}
+            />
+            <div className="flex items-center space-x-2">
+              <input
+                id="noGovernmentGatewayId"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.noGovernmentGatewayId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    noGovernmentGatewayId: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="noGovernmentGatewayId">I don't have one</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                id="cannotProvideGovernmentGatewayId"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.cannotProvideGovernmentGatewayId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    cannotProvideGovernmentGatewayId: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="cannotProvideGovernmentGatewayId">I can't provide it</Label>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="governmentPassword">Government password</Label>
+            <Input
+              id="governmentPassword"
+              value={formData.governmentPassword}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  governmentPassword: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-                <Label htmlFor="fullName">Full name</Label>
-                <Input
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      fullName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-            <div className="space-y-2">
-                <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
-                <Input
-                  id="governmentGatewayId"
-                  value={formData.governmentGatewayId}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentGatewayId: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="noGovernmentGatewayId"
-                    type="checkbox"
-                    checked={!!formData.noGovernmentGatewayId}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        noGovernmentGatewayId: e.target.checked,
-                      })
-                    }
-                  />
-                  <Label htmlFor="noGovernmentGatewayId">I don't have one</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="cannotProvideGovernmentGatewayId"
-                    type="checkbox"
-                    checked={!!formData.cannotProvideGovernmentGatewayId}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        cannotProvideGovernmentGatewayId: e.target.checked,
-                      })
-                    }
-                  />
-                  <Label htmlFor="cannotProvideGovernmentGatewayId">I can't provide it</Label>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="governmentPassword">Government password</Label>
-                <Input
-                  id="governmentPassword"
-                  value={formData.governmentPassword}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentPassword: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="emailAddress">Regularly used email address</Label>
-                <Input
-                  id="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      emailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Regularly used phone number</Label>
-                <Input
-                  id="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      phoneNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="reasonToRegisterForSelfAssessment">Reason to register for self assessment</Label>
-                <Textarea
-                  id="reasonToRegisterForSelfAssessment"
-                  value={formData.reasonToRegisterForSelfAssessment}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      reasonToRegisterForSelfAssessment: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                  rows={4}
-                />
-              </div>
-
-
-             
-
-      
-
-              
+              <Label htmlFor="emailAddress">Regularly used email address</Label>
+              <Input
+                id="emailAddress"
+                value={formData.emailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    emailAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Register Client for Self Assessment"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="phoneNumber">Regularly used phone number</Label>
+              <Input
+                id="phoneNumber"
+                type="tel"
+                value={formData.phoneNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    phoneNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
 
-      
-    </>
+          <div className="space-y-2">
+            <Label htmlFor="reasonToRegisterForSelfAssessment">
+              Reason to register for self assessment
+            </Label>
+            <Textarea
+              id="reasonToRegisterForSelfAssessment"
+              value={formData.reasonToRegisterForSelfAssessment}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  reasonToRegisterForSelfAssessment: e.target.value,
+                })
+              }
+              className="rounded-lg border-gray-200 bg-white shadow-sm transition-colors focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30"
+              required
+              rows={4}
+            />
+          </div>
+
+          <PriceSummary
+            price={REGISTER_CLIENT_PRICE}
+            rows={[
+              { label: "Register Client for Self Assessment", amount: REGISTER_CLIENT_PRICE },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your Register Client for Self Assessment"
+      description="Fill out the form below to begin your Register Client for Self Assessment process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Register Client for Self Assessment"
+      price={REGISTER_CLIENT_PRICE}
+    />
   );
 }

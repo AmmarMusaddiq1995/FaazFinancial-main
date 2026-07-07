@@ -1,40 +1,22 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { handleSubmit } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Building2 } from "lucide-react";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar as CalendarIcon } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DateField,
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
+
+const EIN_CLOSING_PRICE = 80;
 
 export function EinClosingServicesForm() {
-
-  
-
-
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     BusinessLegalName: "",
@@ -45,7 +27,7 @@ export function EinClosingServicesForm() {
     ContactNumber: "",
     DateOfEINClosing: "",
     BusinessDissolutionDate: "",
-    
+
   });
 
   const router = useRouter();
@@ -75,9 +57,6 @@ export function EinClosingServicesForm() {
 
     fetchUserData();
   }, [user]);
-
-
- 
 
 
 
@@ -118,7 +97,7 @@ export function EinClosingServicesForm() {
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount: price,
+          amount: EIN_CLOSING_PRICE,
           payment_id: "",
         },
       ]);
@@ -134,19 +113,14 @@ export function EinClosingServicesForm() {
     }
   };
 
-  return (
-    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-center">
-          Start Your EIN Closing Services
-        </CardTitle>
-        <CardDescription className="text-center">
-          Fill out the form below to begin your EIN closing services process
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 border rounded-md p-4">
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "EIN closing",
+      icon: Building2,
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="BusinessLegalName">Business Legal Name</Label>
               <Input
@@ -158,11 +132,10 @@ export function EinClosingServicesForm() {
                     BusinessLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="OwnerFullLegalName">Owner Full Legal Name</Label>
@@ -175,46 +148,45 @@ export function EinClosingServicesForm() {
                     OwnerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="AddressOfBusiness">Address of business</Label>
+            <Input
+              id="AddressOfBusiness"
+              value={formData.AddressOfBusiness}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  AddressOfBusiness: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="AddressOfBusiness">Address of business</Label>
-              <Input
-                id="AddressOfBusiness"
-                value={formData.AddressOfBusiness}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    AddressOfBusiness: e.target.value,
-                  })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="AddressOfOwner">Address of owner</Label>
+            <Input
+              id="AddressOfOwner"
+              value={formData.AddressOfOwner}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  AddressOfOwner: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-
-            <div className="space-y-2">
-              <Label htmlFor="AddressOfOwner">Address of owner</Label>
-              <Input
-                id="AddressOfOwner"
-                value={formData.AddressOfOwner}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    AddressOfOwner: e.target.value,
-                  })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="EmailAddress">Email address</Label>
               <Input
@@ -226,16 +198,15 @@ export function EinClosingServicesForm() {
                     EmailAddress: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                
+                className={inputStyles}
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="ContactNumber">Contact number</Label>
               <Input
                 id="ContactNumber"
+                type="tel"
                 value={formData.ContactNumber}
                 onChange={(e) =>
                   setFormData({
@@ -243,116 +214,56 @@ export function EinClosingServicesForm() {
                     ContactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
-
-           
-
-            
-
-           
 
             <div className="space-y-2">
               <Label htmlFor="DateOfEINClosing">Date of EIN closing</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className=" justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="DateOfEINClosing"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.DateOfEINClosing
-                      ? new Date(
-                          formData.DateOfEINClosing
-                        ).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.DateOfEINClosing
-                        ? new Date(formData.DateOfEINClosing)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        DateOfEINClosing: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="DateOfEINClosing"
                 value={formData.DateOfEINClosing}
+                onChange={(value) =>
+                  setFormData({ ...formData, DateOfEINClosing: value })
+                }
                 required
-                readOnly
               />
             </div>
-
-           
 
             <div className="space-y-2">
               <Label htmlFor="BusinessDissolutionDate">
                 Business dissolution date
               </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="BusinessDissolutionDate"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.BusinessDissolutionDate
-                      ? new Date(formData.BusinessDissolutionDate).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.BusinessDissolutionDate
-                        ? new Date(formData.BusinessDissolutionDate)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        BusinessDissolutionDate: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="BusinessDissolutionDate"
                 value={formData.BusinessDissolutionDate}
+                onChange={(value) =>
+                  setFormData({ ...formData, BusinessDissolutionDate: value })
+                }
                 required
-                readOnly
               />
             </div>
-
-          
           </div>
 
-          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-            {loading ? "Submitting..." : "Start EIN Closing Services"}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+          <PriceSummary
+            price={EIN_CLOSING_PRICE}
+            rows={[{ label: "EIN Closing Services", amount: EIN_CLOSING_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your EIN Closing Services"
+      description="Fill out the form below to begin your EIN closing services process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start EIN Closing Services"
+      price={EIN_CLOSING_PRICE}
+    />
   );
 }

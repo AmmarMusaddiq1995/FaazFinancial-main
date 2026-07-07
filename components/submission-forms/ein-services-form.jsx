@@ -1,27 +1,11 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { handleSubmit } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar as CalendarIcon } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -29,12 +13,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Building2, Package, Clock, Zap } from "lucide-react";
+import {
+  DateField,
+  FormWizard,
+  OptionToggle,
+  PackageCards,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
 export function EinServicesForm() {
-
-  
-
-
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     CompanyName: "",
@@ -145,19 +134,21 @@ export function EinServicesForm() {
     }
   };
 
-  return (
-    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-center">
-          Start Your EIN Services
-        </CardTitle>
-        <CardDescription className="text-center">
-          Fill out the form below to begin your EIN services process
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 border rounded-md p-4">
+  const steps = [
+    {
+      title: "Business",
+      subtitle: "Company details",
+      icon: Building2,
+      heading: "Company details",
+      intro: "Tell us about the business that needs an EIN.",
+      validate: () => {
+        if (!formData.anyUsEmployee)
+          return "Please tell us if you have any US employees.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="CompanyName">Company name</Label>
               <Input
@@ -169,50 +160,20 @@ export function EinServicesForm() {
                     CompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="dateOfFormation">Date of formation</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfFormation"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfFormation
-                      ? new Date(formData.dateOfFormation).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfFormation
-                        ? new Date(formData.dateOfFormation)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfFormation: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="dateOfFormation"
                 value={formData.dateOfFormation}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfFormation: value })
+                }
                 required
-                readOnly
               />
             </div>
 
@@ -225,7 +186,7 @@ export function EinServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
+                <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent className="border-gray-300">
@@ -250,7 +211,7 @@ export function EinServicesForm() {
                     OwnerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -267,117 +228,31 @@ export function EinServicesForm() {
                     members: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                
+                className={inputStyles}
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="fiscalYearEndDate">Fiscal year end date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className=" justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="fiscalYearEndDate"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.fiscalYearEndDate
-                      ? new Date(
-                          formData.fiscalYearEndDate
-                        ).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.fiscalYearEndDate
-                        ? new Date(formData.fiscalYearEndDate)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        fiscalYearEndDate: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="fiscalYearEndDate"
                 value={formData.fiscalYearEndDate}
+                onChange={(value) =>
+                  setFormData({ ...formData, fiscalYearEndDate: value })
+                }
                 required
-                readOnly
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="anyUsEmployee">
-                Do you have any US employees?
-              </Label>
-              <Select
-                value={formData.anyUsEmployee}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, anyUsEmployee: value })
+              <Label htmlFor="registrationDate">Business registeration date</Label>
+              <DateField
+                id="registrationDate"
+                value={formData.registrationDate}
+                onChange={(value) =>
+                  setFormData({ ...formData, registrationDate: value })
                 }
                 required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes">Yes</SelectItem>
-                  <SelectItem value="No">No</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="registrationDate">
-                Business registeration date
-              </Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="registrationDate"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.registrationDate
-                      ? new Date(formData.registrationDate).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.registrationDate
-                        ? new Date(formData.registrationDate)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        registrationDate: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
-                value={formData.registrationDate}
-                required
-                readOnly
               />
             </div>
 
@@ -393,76 +268,111 @@ export function EinServicesForm() {
                     contactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="businessActivityNature">
-                Business activity/nature
-              </Label>
-              <Input
-                type="text"
-                id="businessActivityNature"
-                value={formData.businessActivityNature}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    businessActivityNature: e.target.value,
-                  })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="prevEin">
-                Have you previously obtained the EIN if yes provide the number?
-              </Label>
-              <Input
-                className="border-gray-300 shadow-md shadow-black"
-                type="text"
-                id="prevEin"
-                value={formData.prevEin}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    prevEin: e.target.value,
-                  })
-                }
-                
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="normal">Normal</SelectItem>
-                 <SelectItem value="express">Express</SelectItem>
-              </SelectContent>
-              </Select>
           </div>
 
-          
+          <div className="space-y-2">
+            <Label>Do you have any US employees?</Label>
+            <OptionToggle
+              options={[
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" },
+              ]}
+              value={formData.anyUsEmployee}
+              onChange={(value) =>
+                setFormData({ ...formData, anyUsEmployee: value })
+              }
+            />
           </div>
 
-          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-            {loading ? "Submitting..." : "Start Business Formation"}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+          <div className="space-y-2">
+            <Label htmlFor="businessActivityNature">
+              Business activity/nature
+            </Label>
+            <Input
+              type="text"
+              id="businessActivityNature"
+              value={formData.businessActivityNature}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessActivityNature: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="prevEin">
+              Have you previously obtained the EIN if yes provide the number?
+            </Label>
+            <Input
+              className={inputStyles}
+              type="text"
+              id="prevEin"
+              value={formData.prevEin}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  prevEin: e.target.value,
+                })
+              }
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Package",
+      subtitle: "Review & submit",
+      icon: Package,
+      heading: "Select Package Type",
+      intro: "Choose your processing speed, review the price, and submit.",
+      validate: () => {
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <PackageCards
+            value={formData.packageType}
+            onChange={(value) =>
+              setFormData({ ...formData, packageType: value })
+            }
+            options={[
+              { value: "normal", label: "Normal", icon: Clock, price: 40 },
+              { value: "express", label: "Express", icon: Zap, badge: "Fastest", price: 75 },
+            ]}
+          />
+
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `EIN Services (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your EIN Services"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Business Formation"
+      price={price}
+    />
   );
 }

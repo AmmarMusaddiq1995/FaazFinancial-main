@@ -1,79 +1,21 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-
-
-const US_STATES = [
-    "Alabama",
-    "Alaska",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "Florida",
-    "Georgia",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Vermont",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-  ];
+import { Building2, FileText, Clock, Zap } from "lucide-react";
+import {
+  DateField,
+  FormWizard,
+  PackageCards,
+  PriceSummary,
+  US_STATES,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
   const priceTableForDBAServices = {
     Wyoming: { normal:250, express: 320},
@@ -83,17 +25,17 @@ const US_STATES = [
     Colorado: { normal: 185, express: 250},
     Florida: { normal: 200, express: 270},
     Georgia: { normal: 250, express: 320},
-    NewYork:{ normal: 250, express: 320},
+    New_York:{ normal: 250, express: 320},
     Alabama: { normal: 160, express: 230},
     Alaska: { normal: 200, express: 270},
-    NewHampshire: { normal: 165, express: 235},
+    New_Hampshire: { normal: 165, express: 235},
     Hawaii: { normal: 200, express: 270},
-    WestVirginia: { normal: 175, express: 245},
+    West_Virginia: { normal: 175, express: 245},
     Virginia: { normal: 160, express: 230},
     Arizona: { normal: 175, express: 245},
     Arkansas: { normal: 175, express: 245},
-    NewJersey: { normal: 200, express: 270},
-    NewMexico: { normal: 200, express: 270},
+    New_Jersey: { normal: 200, express: 270},
+    New_Mexico: { normal: 200, express: 270},
     Connecticut: { normal: 200, express: 270},
     Delaware: { normal: 175, express: 245},
     Vermont: { normal: 190, express: 260},
@@ -114,26 +56,21 @@ const US_STATES = [
     Montana: { normal: 170, express: 220},
     Nebraska: { normal: 250, express: 320},
     Nevada: { normal: 170, express: 240},
-    NorthCarolina:{ normal: 176, express: 246},
-    NorthDakota:{ normal: 175, express: 245},
+    North_Carolina:{ normal: 176, express: 246},
+    North_Dakota:{ normal: 175, express: 245},
     Ohio: { normal: 175, express: 245},
     Oklahoma: { normal: 175, express: 245},
     Oregon: { normal: 200, express: 270},
     Pennsylvania: { normal: 220, express: 290},
-    RhodeIsland: { normal: 200, express: 270},
-    SouthCarolina: { normal: 175, express: 245},
-    SouthDakota: { normal: 170, express: 240},
+    Rhode_Island: { normal: 200, express: 270},
+    South_Carolina: { normal: 175, express: 245},
+    South_Dakota: { normal: 170, express: 240},
     Tennessee: { normal: 170, express: 240},
-    Texas: { normal: 175, express: 245},
     Utah: { normal: 172, express: 242},
     Wisconsin: { normal: 165, express: 235},
-    
-    
+
+
   }
-  
-
-
-
 
 export function DBATrademarkRegistrationServicesForm() {
   const [loading, setLoading] = useState(false);
@@ -189,10 +126,9 @@ export function DBATrademarkRegistrationServicesForm() {
       const selectedPrice = priceTableForDBAServices[formData.state]?.express ?? 0;
       setPrice(selectedPrice);
     }
-  }, [formData.packageType]);
-  
+  }, [formData.packageType, formData.state]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -245,232 +181,147 @@ export function DBATrademarkRegistrationServicesForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your DBA Trademark Registration Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your DBA trademark registration services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-              <div className="space-y-2">
-                <Label htmlFor="businessLegalName">
-                  Business Legal Name
-                </Label>
-                <Input
-                  id="businessLegalName"
-                  value={formData.businessLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+  const steps = [
+    {
+      title: "Business",
+      subtitle: "Company & owner",
+      icon: Building2,
+      heading: "Business & owner details",
+      intro: "Tell us about the business and the trade name you want.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="businessLegalName">Business Legal Name</Label>
+              <Input
+                id="businessLegalName"
+                value={formData.businessLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    businessLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="proposedTradeName">Proposed Trade Name</Label>
+              <Input
+                id="proposedTradeName"
+                value={formData.proposedTradeName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    proposedTradeName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="proposedTradeName">
-                  Proposed Trade Name
-                </Label>
-                <Input
-                  id="proposedTradeName"
-                  value={formData.proposedTradeName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      proposedTradeName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-
-              <div className="space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="businessFormationDate">Business formation date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="businessFormationDate"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.businessFormationDate
-                      ? new Date(formData.businessFormationDate).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.businessFormationDate
-                        ? new Date(formData.businessFormationDate)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        businessFormationDate: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="businessFormationDate"
                 value={formData.businessFormationDate}
+                onChange={(value) =>
+                  setFormData({ ...formData, businessFormationDate: value })
+                }
                 required
-                readOnly
               />
             </div>
 
-
+            <div className="space-y-2">
+              <Label htmlFor="ownerLegalName">Owner Full Legal Name</Label>
+              <Input
+                id="ownerLegalName"
+                value={formData.ownerLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ownerLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
 
             <div className="space-y-2">
-                <Label htmlFor="ownerLegalName">
-                  Owner Full Legal Name
-                </Label>
-                <Input
-                  id="ownerLegalName"
-                  value={formData.ownerLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
               <Label htmlFor="dateOfBirth">Date of birth</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfBirth"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfBirth
-                      ? new Date(formData.dateOfBirth).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfBirth
-                        ? new Date(formData.dateOfBirth)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfBirth: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="dateOfBirth"
                 value={formData.dateOfBirth}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfBirth: value })
+                }
                 required
-                readOnly
               />
             </div>
 
-
             <div className="space-y-2">
-                <Label htmlFor="businessAddress">Business Address</Label>
-                <Input
-                  id="businessAddress"
-                  value={formData.businessAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+              <Label htmlFor="naicsCode">NAICS Code</Label>
+              <Input
+                id="naicsCode"
+                value={formData.naicsCode}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    naicsCode: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="businessAddress">Business Address</Label>
+            <Input
+              id="businessAddress"
+              value={formData.businessAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="ownerAddress">Owner Address</Label>
-                <Input
-                  id="ownerAddress"
-                  value={formData.ownerAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="ownerAddress">Owner Address</Label>
+            <Input
+              id="ownerAddress"
+              value={formData.ownerAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  ownerAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-
-
-              <div className="space-y-2">
-                <Label htmlFor="naicsCode">NAICS Code</Label>
-                <Input
-                  id="naicsCode"
-                  value={formData.naicsCode}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      naicsCode: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-
-
-
-              <div className="space-y-2">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
               <Label htmlFor="businessType">Business Entity Type</Label>
               <Select
                 value={formData.businessEntityType}
                 onValueChange={(value) =>
                   setFormData({ ...formData, businessEntityType: value })
                 }
-                
               >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
+                <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -493,84 +344,114 @@ export function DBATrademarkRegistrationServicesForm() {
               </Select>
             </div>
 
-            
-
-             <div className="space-y-2">
-                <Label htmlFor="primaryBusinessActivities">Primary Business Activities</Label>
-                <Input
-                  id="primaryBusinessActivities"
-                  value={formData.primaryBusinessActivities}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      primaryBusinessActivities: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-              <Label htmlFor="state">State of Formation</Label>
-              <Select
-                value={formData.state}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, state: value })
+            <div className="space-y-2">
+              <Label htmlFor="primaryBusinessActivities">Primary Business Activities</Label>
+              <Input
+                id="primaryBusinessActivities"
+                value={formData.primaryBusinessActivities}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    primaryBusinessActivities: e.target.value,
+                  })
                 }
+                className={inputStyles}
                 required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select state" />
-                </SelectTrigger>
-                <SelectContent>
-                  {US_STATES.map((state) => (
-                    <SelectItem key={state} value={state}>
-                      {state}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              />
             </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Filing",
+      subtitle: "State & package",
+      icon: FileText,
+      heading: "State & package",
+      intro: "Pick the state and filing speed, review the price, and submit.",
+      validate: () => {
+        if (!formData.state) return "Please select your state of formation.";
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="state">State of Formation</Label>
+            <Select
+              value={formData.state}
+              onValueChange={(value) =>
+                setFormData({ ...formData, state: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select state" />
+              </SelectTrigger>
+              <SelectContent>
+                {US_STATES.map((state) => (
+                  <SelectItem key={state} value={state}>
+                    {state}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, packageType: value })
-                  }
-                  required
-                >
-                
-                  <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                    <SelectValue placeholder="Select package type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="normal">Normal</SelectItem>
-                    <SelectItem value="express">Express</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                {
+                  value: "normal",
+                  label: "Normal",
+                  icon: Clock,
+                  price: formData.state
+                    ? priceTableForDBAServices[formData.state]?.normal ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                },
+                {
+                  value: "express",
+                  label: "Express",
+                  icon: Zap,
+                  badge: "Fastest",
+                  price: formData.state
+                    ? priceTableForDBAServices[formData.state]?.express ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                },
+              ]}
+            />
+          </div>
 
-             
-             
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `DBA Trademark Registration (${formData.packageType || ""} - ${formData.state || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
 
-             
-
-
-                
-                </div>
-
-                <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-                {loading ? "Submitting..." : "Start DBA Trademark Registration Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      
-    </>
+  return (
+    <FormWizard
+      title="Start Your DBA Trademark Registration Services"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start DBA Trademark Registration Services"
+      price={price}
+    />
   );
 }

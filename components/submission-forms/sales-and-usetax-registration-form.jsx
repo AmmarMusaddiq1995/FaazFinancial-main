@@ -1,25 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-
+import { Building2, FileText, Clock, Zap } from "lucide-react";
+import {
+  DateField,
+  FormWizard,
+  PackageCards,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
 const US_STATES = [
     "Alabama",
@@ -73,10 +68,6 @@ const US_STATES = [
     "Wisconsin",
     "Wyoming",
   ];
-  
-
-
-
 
 export function SalesAndUsetaxRegistrationForm() {
   const [loading, setLoading] = useState(false);
@@ -95,13 +86,8 @@ export function SalesAndUsetaxRegistrationForm() {
     estimatedSalesValue: "",
     state: "",
     packageType: "",
-   
+
   });
-
-
-
- 
-
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
@@ -139,7 +125,7 @@ export function SalesAndUsetaxRegistrationForm() {
     }
   }, [formData.packageType]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -192,96 +178,53 @@ export function SalesAndUsetaxRegistrationForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Sales and Usetax Registration
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your sales and usetax registration process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-              <div className="space-y-2">
-                <Label htmlFor="businessLegalName">
-                  Business Legal Name
-                </Label>
-                <Input
-                  id="businessLegalName"
-                  value={formData.businessLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-              <Label htmlFor="dateOfFormation">Date of formation</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfFormation"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfFormation
-                      ? new Date(formData.dateOfFormation).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfFormation
-                        ? new Date(formData.dateOfFormation)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfFormation: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
-                value={formData.dateOfFormation}
+  const steps = [
+    {
+      title: "Business",
+      subtitle: "Company & owner",
+      icon: Building2,
+      heading: "Business & owner details",
+      intro: "Tell us about the business registering for sales and use tax.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="businessLegalName">Business Legal Name</Label>
+              <Input
+                id="businessLegalName"
+                value={formData.businessLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    businessLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
                 required
-                readOnly
               />
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="dateOfFormation">Date of formation</Label>
+              <DateField
+                id="dateOfFormation"
+                value={formData.dateOfFormation}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfFormation: value })
+                }
+                required
+              />
+            </div>
 
-
-
-              <div className="space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="businessType">Business Entity Type</Label>
               <Select
                 value={formData.businessEntityType}
                 onValueChange={(value) =>
                   setFormData({ ...formData, businessEntityType: value })
                 }
-                
               >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
+                <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Select business entity type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -302,66 +245,34 @@ export function SalesAndUsetaxRegistrationForm() {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="ownerFullLegalName">
-                  Owner/Partner Full Legal Name
-                </Label>
-                <Input
-                  id="ownerFullLegalName"
-                  value={formData.ownerFullLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerFullLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-              <Label htmlFor="dateOfBirth">Date of birth</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfBirth"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfBirth
-                      ? new Date(formData.dateOfBirth).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfBirth
-                        ? new Date(formData.dateOfBirth)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfBirth: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
-                value={formData.dateOfBirth}
+              <Label htmlFor="ownerFullLegalName">
+                Owner/Partner Full Legal Name
+              </Label>
+              <Input
+                id="ownerFullLegalName"
+                value={formData.ownerFullLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ownerFullLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
                 required
-                readOnly
               />
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="dateOfBirth">Date of birth</Label>
+              <DateField
+                id="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfBirth: value })
+                }
+                required
+              />
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="businessActivityNature">
@@ -377,158 +288,166 @@ export function SalesAndUsetaxRegistrationForm() {
                     businessActivityNature: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="ownerAddress">Owner Address</Label>
+            <Input
+              id="ownerAddress"
+              value={formData.ownerAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  ownerAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="businessAddress">Business Address</Label>
+            <Input
+              id="businessAddress"
+              value={formData.businessAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="space-y-2">
+              <Label htmlFor="ssn">SSN/ITIN Number (if applicable)</Label>
+              <Input
+                id="ssn"
+                value={formData.ssn}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ssn: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="nicsCode">NICS Code</Label>
+              <Input
+                id="nicsCode"
+                value={formData.nicsCode}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    nicsCode: e.target.value,
+                  })
+                }
+                className={inputStyles}
                 required
               />
             </div>
 
-
-              <div className="space-y-2">
-                <Label htmlFor="ownerAddress">Owner Address</Label>
-                <Input
-                  id="ownerAddress"
-                  value={formData.ownerAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="businessAddress">Business Address</Label>
-                <Input
-                  id="businessAddress"
-                  value={formData.businessAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="ssn">
-                  SSN/ITIN Number (if applicable)
-                </Label>
-                <Input
-                  id="ssn"
-                  value={formData.ssn}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ssn: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="nicsCode">NICS Code</Label>
-                <Input
-                  id="nicsCode"
-                  value={formData.nicsCode}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      nicsCode: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="estimatedSalesValue">Estimated Sales Value</Label>
-                <Input
-                  id="estimatedSalesValue"
-                  value={formData.estimatedSalesValue}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      estimatedSalesValue: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-
-              <div className="space-y-2">
-              <Label htmlFor="state">State of Formation</Label>
-              <Select
-                value={formData.state}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, state: value })
+            <div className="space-y-2">
+              <Label htmlFor="estimatedSalesValue">Estimated Sales Value</Label>
+              <Input
+                id="estimatedSalesValue"
+                value={formData.estimatedSalesValue}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    estimatedSalesValue: e.target.value,
+                  })
                 }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select state" />
-                </SelectTrigger>
-                <SelectContent>
-                  {US_STATES.map((state) => (
-                    <SelectItem key={state} value={state}>
-                      {state}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                className={inputStyles}
+              />
             </div>
-
-              
-
-              
-
-              <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Registration",
+      subtitle: "State & package",
+      icon: FileText,
+      heading: "State & package",
+      intro: "Pick the state and processing speed, review the price, and submit.",
+      validate: () => {
+        if (!formData.state) return "Please select your state of formation.";
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="state">State of Formation</Label>
+            <Select
+              value={formData.state}
+              onValueChange={(value) =>
+                setFormData({ ...formData, state: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select state" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="normal">Normal</SelectItem>
-                 <SelectItem value="express">Express</SelectItem>
+                {US_STATES.map((state) => (
+                  <SelectItem key={state} value={state}>
+                    {state}
+                  </SelectItem>
+                ))}
               </SelectContent>
-              </Select>
+            </Select>
           </div>
 
-             
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                { value: "normal", label: "Normal", icon: Clock, price: 75 },
+                { value: "express", label: "Express", icon: Zap, badge: "Fastest", price: 100 },
+              ]}
+            />
+          </div>
 
-             
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `Sales & Usetax Registration (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
 
-            
-              
-            </div>
-
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Sales and Usetax Registration"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      
-    </>
+  return (
+    <FormWizard
+      title="Start Your Sales and Usetax Registration"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Sales and Usetax Registration"
+      price={price}
+    />
   );
 }

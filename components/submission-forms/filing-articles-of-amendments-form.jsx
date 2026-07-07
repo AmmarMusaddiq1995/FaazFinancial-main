@@ -1,37 +1,19 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Building2, Package, Clock, Zap } from "lucide-react";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar as CalendarIcon } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Info } from "lucide-react";
-
-
+  FormWizard,
+  PackageCards,
+  PackageDetailsTooltip,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
 const PACKAGE_FEATURES = {
     normal: [
@@ -47,10 +29,6 @@ const PACKAGE_FEATURES = {
   };
 
 export function FilingArticlesOfAmendmentsForm() {
-
-  
-
-
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
    businessName: "",
@@ -159,21 +137,16 @@ export function FilingArticlesOfAmendmentsForm() {
     }
   };
 
-  return (
-    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-center">
-          Start Your Filing Articles of Amendments
-        </CardTitle>
-        <CardDescription className="text-center">
-          Fill out the form below to begin your Filing Articles of Amendments process
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 border rounded-md p-4">
-
-
+  const steps = [
+    {
+      title: "Business",
+      subtitle: "Amendment details",
+      icon: Building2,
+      heading: "Business & amendment details",
+      intro: "Tell us about the business and what you're amending.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="businessName">Business name</Label>
               <Input
@@ -185,13 +158,10 @@ export function FilingArticlesOfAmendmentsForm() {
                     businessName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
-
-        
 
             <div className="space-y-2">
               <Label htmlFor="reasonForFilingAmendments">Reason for filing amendments</Label>
@@ -205,32 +175,30 @@ export function FilingArticlesOfAmendmentsForm() {
                     reasonForFilingAmendments: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="provideNewBusinessName">Provide new business name</Label>
+            <Input
+              type="text"
+              id="provideNewBusinessName"
+              value={formData.provideNewBusinessName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  provideNewBusinessName: e.target.value,
+                })
+              }
+              className={inputStyles}
+              placeholder="If business name is changing, provide new business name (optional)"
+            />
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="provideNewBusinessName">Provide new business name</Label>
-              <Input
-                type="text"
-                id="provideNewBusinessName"
-                value={formData.provideNewBusinessName}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    provideNewBusinessName: e.target.value,
-                  })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                optional
-                placeholder="If business name is changing, provide new business name (optional)"
-              />
-            </div>
-
-
-
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="ownerFullLegalName">Owner full legal name</Label>
               <Input
@@ -243,11 +211,10 @@ export function FilingArticlesOfAmendmentsForm() {
                     ownerFullLegalName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="emailAddress">Email address</Label>
@@ -261,11 +228,9 @@ export function FilingArticlesOfAmendmentsForm() {
                     emailAddress: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                
+                className={inputStyles}
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="ownerAddress">Owner address</Label>
@@ -279,12 +244,9 @@ export function FilingArticlesOfAmendmentsForm() {
                     ownerAddress: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                
+                className={inputStyles}
               />
             </div>
-
-
 
             <div className="space-y-2">
               <Label htmlFor="contactNumber">US contact number</Label>
@@ -298,126 +260,101 @@ export function FilingArticlesOfAmendmentsForm() {
                     contactNumber: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                
+                className={inputStyles}
               />
             </div>
-
-
-            <div className="space-y-2">
-              <Label htmlFor="businessAddress">Business address</Label>
-              <Input
-                type="text"
-                id="businessAddress"
-                value={formData.businessAddress}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    businessAddress: e.target.value,
-                  })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-
-           
-
-            <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="normal">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Normal</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Normal package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-white p-2">
-                            {/* <p className="font-semibold mb-1">Includes:</p> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.normal.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            {/* <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul> */}
-                            {/* <ul className="list-disc ml-4 space-y-1">
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForAnnualCompanyStateFiling[formData.state]?.normal ?? "—"}</p>
-                            )}
-                            </ul> */}
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-                 <SelectItem value="express">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Express</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Express package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4 " />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-white p-2">
-                            {/* <p className="font-semibold mb-1">Includes:</p> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.express.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            {/* <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul> */}
-                            {/* <ul className="list-disc ml-4 space-y-1">
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForAnnualCompanyStateFiling[formData.state]?.express ?? "—"}</p>
-                            )}
-                            </ul> */}
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-              </SelectContent>
-              </Select>
-          </div>
-          
           </div>
 
-          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-            {loading ? "Submitting..." : "Start Filing Articles of Amendments"}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+          <div className="space-y-2">
+            <Label htmlFor="businessAddress">Business address</Label>
+            <Input
+              type="text"
+              id="businessAddress"
+              value={formData.businessAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Package",
+      subtitle: "Review & submit",
+      icon: Package,
+      heading: "Select Package Type",
+      intro: "Choose your filing speed, review the price, and submit.",
+      validate: () => {
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <PackageCards
+            value={formData.packageType}
+            onChange={(value) =>
+              setFormData({ ...formData, packageType: value })
+            }
+            options={[
+              {
+                value: "normal",
+                label: "Normal",
+                delivery: "14 business days",
+                icon: Clock,
+                price: 125,
+                tooltip: (
+                  <PackageDetailsTooltip
+                    label="Normal"
+                    features={PACKAGE_FEATURES.normal}
+                  />
+                ),
+              },
+              {
+                value: "express",
+                label: "Express",
+                delivery: "7 business days",
+                icon: Zap,
+                badge: "Fastest",
+                price: 125,
+                tooltip: (
+                  <PackageDetailsTooltip
+                    label="Express"
+                    features={PACKAGE_FEATURES.express}
+                  />
+                ),
+              },
+            ]}
+          />
+
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `Filing Articles of Amendments (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your Filing Articles of Amendments"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Filing Articles of Amendments"
+      price={price}
+    />
   );
 }

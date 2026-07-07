@@ -5,7 +5,7 @@ console.log(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const { amount, form_id } = await req.json();
-  const totalAmountWithTax  = (amount + (amount * 0.03));
+  const totalAmountWithTax  = (amount + (amount * 0.045));
 
   console.log(amount, form_id);
 

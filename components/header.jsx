@@ -167,7 +167,7 @@ export function Header() {
                 <div className="min-w-0">
 
                   <h3 className="text-sm  font-semibold text-gray-400 mb-4 uppercase tracking-wider">
-                    US FORMATION & COMPLIANCE
+                    USA FORMATIONS
                   </h3>
 
                   <ul className="space-y-1">
@@ -180,15 +180,7 @@ export function Header() {
                     <MenuItem href="/services/registered-agent">
                       Registered Agent Services
                     </MenuItem>
-                    <MenuItem href="/services/ein-services">
-                      EIN Services
-                    </MenuItem>
-                      <MenuItem href="/services/itin-services">
-                      ITIN Services
-                    </MenuItem>
-                    <MenuItem href="/services/boi-filing-services">
-                      BOI Filing Services
-                    </MenuItem>
+                    
                     <MenuItem href="/services/dba-trademark-registration">
                       DBA/Trademark Registeration
                     </MenuItem>
@@ -207,42 +199,55 @@ export function Header() {
                   </ul>
                 </div>
 
-                  {/* Column 2: US TAX, PAYROLL & BOOKKEEPING */}
+                  {/* Column 2: US TAX & COMPLIANCE */}
 
                 <div className="min-w-0">
 
                   <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
-                    US TAX, PAYROLL & BOOKKEEPING
+                    USA TAX & COMPLIANCES
                   </h3>
 
-                  <ul className="space-y-1">
-                    <MenuItem href="#">
-                      Bookkeeping Services
+                  <ul className="space-y-1"> 
+                     <MenuItem href="/services/annual-company-state-filing">
+                      Annual Company State Filing
+                    </MenuItem>
+                    <MenuItem href="/contact">
+                      1120 Proforma + 5472 Form Filing
                     </MenuItem>  
-                     <MenuItem href="#">
-                      Bank Account Opening
-                    </MenuItem>      
+                    <MenuItem href="/contact">
+                      Partnership Tax  Filing (1065 + K1 Schedule)
+                    </MenuItem>  
+                     <MenuItem href="/contact">
+                      Corporation Tax  Filing (1120 & 1120S)
+                    </MenuItem>  
                      <MenuItem href="/services/sales-and-usetax-registration">
                       Sales & Use Tax Registeration
+                    </MenuItem>
+                    <MenuItem href="/contact">
+                      UI Account Registration
                     </MenuItem>
                     <MenuItem href="/services/payroll-withholding-services">
                       Payroll Withholding Tax Registeration
                     </MenuItem>
-                    <MenuItem href="#">
-                      Payroll Management
-                    </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       Payroll Tax Filing
                     </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       W2 & 1099 Filing
                     </MenuItem>
-                    <MenuItem href="#">
-                      UI Account Registration
+                    <MenuItem href="/services/ein-services">
+                      EIN Services
                     </MenuItem>
-                     <MenuItem href="/services/annual-company-state-filing">
-                      Annual Company State Filing
+                      <MenuItem href="/services/itin-services">
+                      ITIN Services
                     </MenuItem>
+                    <MenuItem href="/services/boi-filing-services">
+                      BOI Filing Services
+                    </MenuItem>
+                     <MenuItem href="/contact">
+                      Bank Account Opening
+                    </MenuItem>      
+                    
                  </ul>
                 </div>
 
@@ -250,7 +255,7 @@ export function Header() {
                 <div className="min-w-0">
 
                   <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
-                    UK FORMATION
+                    UK FORMATIONS
                   </h3>
 
                   <ul className="space-y-1">
@@ -271,7 +276,7 @@ export function Header() {
                 {/* Column 4: UK TAX & VAT */}
                 <div className="min-w-0">
                   <h3 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
-                    UK TAX & VAT
+                    UK TAX & COMPLIANCES
                   </h3>
                   <ul className="space-y-1">
                   
@@ -293,16 +298,16 @@ export function Header() {
                     <MenuItem href="/services/vat-return-filing-services">
                       VAT Return Filing
                     </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       Dormant Accounts Filing
                     </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       Micro Entity Accounts Filing
                     </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       Abridged Accounts Filing
                     </MenuItem>
-                    <MenuItem href="#">
+                    <MenuItem href="/contact">
                       Full Statutory Accounts Filing
                     </MenuItem>
                     
@@ -434,49 +439,7 @@ export function Header() {
            >
               <span className="whitespace-nowrap">Learning Center</span>
             </button>
-            {/* <button
-              onClick={() => handleDropdownToggle("guides")}
-              className={`flex items-center space-x-1 text-foreground hover:text-orange-600 transition-colors whitespace-nowrap ${
-                activeDropdown === "guides"
-                  ? "text-orange-600 border-b-2 border-orange-600"
-                  : ""
-              }`}
-            >
-              <span className="whitespace-nowrap text-white font-bold hover:bg-primary px-2 py-1 rounded-full hover:shadow-md shadow-white cursor-pointer transition-all duration-300 text-xs">Learning Center</span>
-              {activeDropdown === "guides" ? (
-                <ChevronUp className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-white" />
-              )}
-            </button> */}
-{/* 
-            {activeDropdown === "guides" && (
-              <div
-                className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-4 z-50"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href="/learning-center"
-                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      Learning Topics
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/blog"
-                      className="text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md px-2 py-1 block transition-all duration-200"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      Business Blog
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )} */}
+           
           </div>
 
          
@@ -597,21 +560,7 @@ export function Header() {
             )}
           </div>
 
-          {/* <Button
-            variant="ghost"
-            className="text-gray-600 hover:text-orange-600"
-            onClick={() => router.push("/auth/login")}
-          >
-            Log In
-          </Button> */}
-          {/* <Link href="/start-business">
-            <Button
-              variant="outline"
-              className="border-black text-black hover:bg-black hover:text-white"
-            >
-              Start an LLC
-            </Button>
-          </Link> */}
+        
         </div>
 
         {/* Mobile Menu Button */}
@@ -649,7 +598,7 @@ export function Header() {
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="space-y-2">
                     <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
-                      Formation Services
+                      USA Formations
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
@@ -664,11 +613,12 @@ export function Header() {
                       >
                         Corp. Formation
                       </Link>
-                      <Link
-                        href="/services/corporation-formation"
+                      
+                       <Link
+                        href="/services/registered-agent"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
-                        Compare Formation Plans
+                        Registered Agent Services
                       </Link>
                       <Link
                         href="/services/dba-trademark-registration"
@@ -676,55 +626,11 @@ export function Header() {
                       >
                         DBA/Trademark Registration
                       </Link>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
-                      Compliance Services
-                    </h4>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/services/ein-services"
+                       <Link
+                        href="/services/filing-articles-of-amendments"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
-                        EIN Services
-                      </Link>
-                      <Link
-                        href="/services/boi-filing-services"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        BOI Filing Services
-                      </Link>
-                      <Link
-                        href="/services/itin-services"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        ITIN Services
-                      </Link>
-                      <Link
-                        href="/services/sales-and-usetax-registration"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Sales & Use Tax Registration
-                      </Link>
-                      <Link
-                        href="/services/annual-company-state-filing"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Annual Company State Filing
-                      </Link>
-                      <Link
-                        href="/services/ein-closing-services"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        EIN Closing Services
-                      </Link>
-                      <Link
-                        href="/services/registered-agent"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Registered Agent Services
+                        Filing Articles Of Amendments(State fee excluded)
                       </Link>
                       <Link
                         href="/services/company-dissolution"
@@ -744,44 +650,142 @@ export function Header() {
                       >
                         Address Change Services
                       </Link>
+
+
+                      
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
+                      USA Tax & Compliance
+                    </h4>
+                    <div className="pl-4 space-y-2">
+
                       <Link
-                        href="/services/filing-articles-of-amendments"
+                        href="/services/annual-company-state-filing"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
-                        Filing Articles Of Amendments(State fee excluded)
+                        Annual Company State Filing
                       </Link>
-                    
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        1120 Proforma + 5472 Form Filing
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Partnership Tax Filing (1065 + K1 Schedule)
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Corporation Tax Filing (1120 & 1120S)
+                      </Link>
+
+                       <Link
+                        href="/services/sales-and-usetax-registration"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Sales & Use Tax Registration
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        UI Account Registration
+                      </Link>
+
                       <Link
                         href="/services/payroll-withholding-services"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Withholding Tax Registration
                       </Link>
+
                       <Link
-                        href="/services/templates"
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Payroll Tax Filing
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        W2 & 1099 Filing
+                      </Link>
+
+                      <Link
+                        href="/services/ein-services"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        EIN Services
+                      </Link>
+
+                      <Link
+                        href="/services/itin-services"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        ITIN Services
+                      </Link>
+
+                      <Link
+                        href="/services/boi-filing-services"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        BOI Filing Services
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Bank Account Opening
+                      </Link>
+                     
+                      
+                      {/* <Link
+                        href="/services/ein-closing-services"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        EIN Closing Services
+                      </Link> */}
+                      
+                      {/* <Link
+                        href="/contact"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         UI(Unemployment Insurance)
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/contact"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Management (Gusto, Adp, QBO, Paychecks, Paycom,
                         Rippling) monthly
                       </Link>
                       <Link
-                        href="/services/templates"
+                        href="/contact"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Payroll Account Setup (Reach out for pricing)
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
-                      UK Formation & Compliance
+                      UK Formations
                     </h4>
                     <div className="pl-4 space-y-2">
                       <Link
@@ -790,6 +794,30 @@ export function Header() {
                       >
                         UK LTD Formation
                       </Link>
+
+                      <Link
+                        href="/services/registering-client-for-selfassessment"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Registering Client For Selfassessment
+                      </Link>
+
+                       <Link
+                        href="/services/confirmation-statement-filing-services"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Confirmation Statement Filing
+                      </Link>
+                      </div>
+                      </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-orange-400/90 text-xs uppercase tracking-wider">
+                      UK Tax & Compliances
+                    </h4>
+
+                    <div className="pl-4 space-y-2">
+
                       <Link
                         href="/services/simple-corp-tax-return-ct600"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
@@ -802,12 +830,7 @@ export function Header() {
                       >
                         Advance Corporation Tax Return Filing (CT600)
                       </Link>
-                      <Link
-                        href="/services/registering-client-for-selfassessment"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Registering Client For Selfassessment
-                      </Link>
+                      
                       <Link
                         href="/services/simple-self-assessment-filing"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
@@ -820,44 +843,7 @@ export function Header() {
                       >
                         Advance Self Assessment (SA100) Filing
                       </Link>
-                      <Link
-                        href="/services/annual-accounts-preparation"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Annual Corporation Tax Accounts Preparation
-                      </Link>
-                     
-                      <Link
-                        href="/services/logo-kit"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Dormant Accounts Filing
-                      </Link>
-                      <Link
-                        href="/services/logo-kit"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Micro-Entity Accounts Filiing
-                      </Link>
-                      <Link
-                        href="/services/logo-kit"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Abridged Accounts Filing
-                      </Link>
-                      <Link
-                        href="/services/logo-kit"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Full Statutory Accounts Filing
-                      </Link>
-                      <Link
-                        href="/services/confirmation-statement-filing-services"
-                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
-                      >
-                        Confirmation Statement Filing
-                      </Link>
-                      <Link
+                       <Link
                         href="/services/vat-registration-services"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
@@ -869,7 +855,40 @@ export function Header() {
                       >
                         VAT Return Filing
                       </Link>
+                      {/* <Link
+                        href="/services/annual-accounts-preparation"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Annual Corporation Tax Accounts Preparation
+                      </Link> */}
+                     
                       <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Dormant Accounts Filing
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Micro-Entity Accounts Filiing
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Abridged Accounts Filing
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
+                      >
+                        Full Statutory Accounts Filing
+                      </Link>
+                     
+                     
+                      {/* <Link
                         href="/services/logo-kit"
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
@@ -892,13 +911,13 @@ export function Header() {
                         className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                       >
                         Initial Compliance After Formation
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="bookkeeping" className="border-white/10">
+              {/* <AccordionItem value="bookkeeping" className="border-white/10">
                 <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
                   Accounting & Bookkeeping
                 </AccordionTrigger>
@@ -933,7 +952,7 @@ export function Header() {
                       className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
                     >
                       Setting Up New Books In QBO/Xero Or Any ERP
-                    </Link>
+                    </Link> */}
                     {/* <Link
                       href="/services/tax-filing"
                       className="block text-sm text-gray-300 hover:text-orange-400 py-1.5 transition-colors duration-200"
@@ -982,13 +1001,13 @@ export function Header() {
                     >
                       Company Tax Filing Vary Based On The Volume Of Business
                     </Link> */}
-                  </div>
+                  {/* </div>
                 </AccordionContent>
-              </AccordionItem>
+              </AccordionItem> */}
 
               <AccordionItem value="accounting-services" className="border-white/10">
                 <AccordionTrigger className="text-[15px] font-medium text-gray-100 hover:text-orange-400 hover:no-underline min-h-[44px]">
-                  Accounting Services
+                  Accounting & Bookkeeping
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 overflow-y-auto max-h-[50vh]">
                   <div className="pl-4">

@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
+import { User, FileText } from "lucide-react";
+import {
+  FileUploadField,
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
+
+const ITIN_PRICE = 400;
 
 export function ItinApplicationForm() {
   const [loading, setLoading] = useState(false);
@@ -55,7 +55,7 @@ export function ItinApplicationForm() {
   }, [user]);
 
   const handleFileUpload = async (e, type) => {
-    
+
 
     let fileUrl = null;
     const fileName = `${userPersonalId}/${type}/${Date.now()}-${
@@ -136,203 +136,201 @@ export function ItinApplicationForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your ITIN Application
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your ITIN application process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              <div className="space-y-2">
-                <Label htmlFor="legalName">
-                  Full legal name as per passport
-                </Label>
-                <Input
-                  id="legalName"
-                  value={formData.legalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      legalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+  const steps = [
+    {
+      title: "Applicant",
+      subtitle: "Personal details",
+      icon: User,
+      heading: "Applicant details",
+      intro: "Tell us about yourself, exactly as it appears on your passport.",
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="legalName">Full legal name as per passport</Label>
+            <Input
+              id="legalName"
+              value={formData.legalName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  legalName: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="permanentAddress">Permanent address</Label>
-                <Input
-                  id="permanentAddress"
-                  value={formData.permanentAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      permanentAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="permanentAddress">Permanent address</Label>
+            <Input
+              id="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  permanentAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="mailingAddress">Mailing address</Label>
-                <Input
-                  id="mailingAddress"
-                  value={formData.mailingAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      mailingAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  placeholder="If different from permanent address document will be mailed by IRS"
-                  optional
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="mailingAddress">Mailing address</Label>
+            <Input
+              id="mailingAddress"
+              value={formData.mailingAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  mailingAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              placeholder="If different from permanent address document will be mailed by IRS"
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Phone number</Label>
-                <Input
-                  id="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      phoneNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="emailAddress">Email address</Label>
-                <Input
-                  id="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      emailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="profession">Profession</Label>
-                <Input
-                  id="profession"
-                  value={formData.profession}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      profession: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="countryTaxId">Your country tax ID</Label>
-                <Input
-                  id="countryTaxId"
-                  value={formData.countryTaxId}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      countryTaxId: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black "
-                  placeholder="If you don't have a tax ID, leave blank"
-                  optional
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">Upload your passport</Label>
-                <input
-                  type="file"
-                  id="passport"
-                  onChange={(e) => {
-                    handleFileUpload(e, "passport");
-                  }}
-                  required
-                  placeholder="Scan of your passport copy"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="file">Upload USA Visa</Label>
-                <input
-                  type="file"
-                  id="usaVisa"
-                  onChange={(e) => {
-                    handleFileUpload(e, "usaVisa");
-                  }}
-                  optional
-                  placeholder="Only if you have a USA visa"
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="file">EIN letter</Label>
-                <input
-                  type="file"
-                  id="einLetter"
-                  onChange={(e) => {
-                    handleFileUpload(e, "einLetter");
-                  }}
-                  required
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="file">
-                  Certificate of formation for your LLC
-                </Label>
-                <input
-                  type="file"
-                  id="certificateOfFormation"
-                  onChange={(e) => {
-                    handleFileUpload(e, "certificateOfFormation");
-                  }}
-                  required
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black rounded-md p-2"
-                />
-              </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="phoneNumber">Phone number</Label>
+              <Input
+                id="phoneNumber"
+                type="tel"
+                value={formData.phoneNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    phoneNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start ITIN Application"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-{/* <div className="mt-10">
-<Footer /> */}
-{/* </div> */}
-      
-    </>
+            <div className="space-y-2">
+              <Label htmlFor="emailAddress">Email address</Label>
+              <Input
+                id="emailAddress"
+                value={formData.emailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    emailAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="profession">Profession</Label>
+              <Input
+                id="profession"
+                value={formData.profession}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    profession: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="countryTaxId">Your country tax ID</Label>
+              <Input
+                id="countryTaxId"
+                value={formData.countryTaxId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    countryTaxId: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                placeholder="If you don't have a tax ID, leave blank"
+              />
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Documents",
+      subtitle: "Review & submit",
+      icon: FileText,
+      heading: "Upload your documents",
+      intro: "Last step — upload the required documents, review the price, and submit.",
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="passport">Upload your passport</Label>
+            <FileUploadField
+              id="passport"
+              uploaded={!!formData.passport}
+              placeholder="Scan of your passport copy"
+              required
+              onChange={(e) => handleFileUpload(e, "passport")}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="usaVisa">Upload USA Visa</Label>
+            <FileUploadField
+              id="usaVisa"
+              uploaded={!!formData.usaVisa}
+              placeholder="Only if you have a USA visa"
+              onChange={(e) => handleFileUpload(e, "usaVisa")}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="einLetter">EIN letter</Label>
+            <FileUploadField
+              id="einLetter"
+              uploaded={!!formData.einLetter}
+              placeholder="Upload your EIN letter"
+              required
+              onChange={(e) => handleFileUpload(e, "einLetter")}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="certificateOfFormation">
+              Certificate of formation for your LLC
+            </Label>
+            <FileUploadField
+              id="certificateOfFormation"
+              uploaded={!!formData.certificateOfFormation}
+              placeholder="Upload your certificate of formation"
+              required
+              onChange={(e) => handleFileUpload(e, "certificateOfFormation")}
+            />
+          </div>
+
+          <PriceSummary
+            price={ITIN_PRICE}
+            rows={[{ label: "ITIN Application", amount: ITIN_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your ITIN Application"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start ITIN Application"
+      price={ITIN_PRICE}
+    />
   );
 }

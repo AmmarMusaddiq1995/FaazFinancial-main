@@ -1,80 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Info } from "lucide-react";
-
-
-const US_STATES = [
-    "Alabama",
-    "Alaska",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "Florida",
-    "Georgia",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Vermont",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-  ];
+import { Building2, FileText, Clock, Zap } from "lucide-react";
+import {
+  DateField,
+  FileUploadField,
+  FormWizard,
+  PackageCards,
+  PackageDetailsTooltip,
+  PriceSummary,
+  US_STATES,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
   const priceTableForAnnualCompanyStateFiling = {
     Wyoming: { normal:130, express: 160},
@@ -107,66 +50,39 @@ const US_STATES = [
     Montana: { normal: 70, express: 100},
     Nebraska: { normal: 95, express: 125},
     Nevada: { normal: 420, express: 450},
-    NewHampshire: { normal: 170, express: 200},
-    NewJersey: { normal: 145, express: 175},
-    NewMexico: { normal: 70, express: 100},
-    NewYork:{ normal: 79, express: 109},
-    NorthCarolina:{ normal: 273, express: 303},
-    NorthDakota:{ normal: 120, express: 150},
+    New_Hampshire: { normal: 170, express: 200},
+    New_Jersey: { normal: 145, express: 175},
+    New_Mexico: { normal: 70, express: 100},
+    New_York:{ normal: 79, express: 109},
+    North_Carolina:{ normal: 273, express: 303},
+    North_Dakota:{ normal: 120, express: 150},
     Ohio: { normal: 70, express: 100},
     Oklahoma: { normal: 95, express: 125},
     Oregon: { normal: 170, express: 200},
     Pennsylvania: { normal: 77, express: 107},
-    RhodeIsland: { normal: 120, express: 150},
-    SouthCarolina: { normal: 70, express: 100},
-    SouthDakota: { normal: 125, express: 155},
+    Rhode_Island: { normal: 120, express: 150},
+    South_Carolina: { normal: 70, express: 100},
+    South_Dakota: { normal: 125, express: 155},
     Tennessee: { normal: 370, express: 400},
-    Texas: { normal: 70, express: 100},
     Utah: { normal: 88, express: 118},
     Vermont: { normal: 115, express: 145},
     Virginia: { normal: 120, express: 150},
     Washington: { normal: 140, express: 170},
-    WestVirginia: { normal: 95, express: 125},
+    West_Virginia: { normal: 95, express: 125},
     Wisconsin: { normal: 95, express: 125},
-    Wyoming: { normal: 130, express: 160},
-    
+
   }
-  
+
   const PACKAGE_FEATURES = {
     normal: [
       "Delivery in 14 business days",
       "State fee is included",
-    //   "Unlimited name searches",
-    //   "1 year of registered agent service",
-    //   "Filing of articles of Organization/Formation/Incorporation",
-    //   "Operating aggrement",
-    //   "EIN",
-    //   "BOI filing",
-    //   "Bank account (Mercury/RelayFinance, Wise, Payoneer, Airwallex anyone of them)",
-    //   "Support services"
     ],
     express: [
       "Delivery in 7 business days",
       "State fee is included",
-    //   "Unlimited name searches",
-    //   "1 year of registered agent service",
-    //   "Filing of articles of Organization/Formation/Incorporation",
-    //   "Operating aggrement",
-    //   "EIN",
-    //   "BOI filing",
-    //   "Bank account (Mercury/RelayFinance, Wise, Payoneer, Airwallex anyone of them)",
-    //   "Support services"
     ],
   };
-  
-  const PACKAGE_EXCLUDED = [
-    "US Mobile Number",
-    "Website/Domains",
-  ];
-  
-
-
-
 
 export function AnnualCompanyStateFilingForm() {
   const [loading, setLoading] = useState(false);
@@ -182,13 +98,8 @@ export function AnnualCompanyStateFilingForm() {
         bankAccountBalanaceAsOfDate: "",
         packageType: "",
         balanceSheet: "",
-   
+
   });
-
-
-
- 
-
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
@@ -224,11 +135,11 @@ export function AnnualCompanyStateFilingForm() {
       const selectedPrice = priceTableForAnnualCompanyStateFiling[formData.state]?.express ?? 0;
       setPrice(selectedPrice);
     }
-  }, [formData.packageType]);
+  }, [formData.packageType, formData.state]);
 
 
   const handleFileUpload = async (e, type) => {
-    
+
 
     let fileUrl = null;
     const fileName = `${userPersonalId}/${type}/${Date.now()}-${
@@ -258,7 +169,7 @@ export function AnnualCompanyStateFilingForm() {
     });
   };
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -311,42 +222,38 @@ export function AnnualCompanyStateFilingForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Annual Company State Filing
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your annual company state filing process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-              <div className="space-y-2">
-                <Label htmlFor="businessName">
-                  Business Name
-                </Label>
-                <Input
-                  id="businessName"
-                  value={formData.businessName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+  const steps = [
+    {
+      title: "Company",
+      subtitle: "Business & package",
+      icon: Building2,
+      heading: "Company details",
+      intro: "Tell us about the company and pick your filing speed.",
+      validate: () => {
+        if (!formData.state) return "Please select your state of formation.";
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="businessName">Business Name</Label>
+            <Input
+              id="businessName"
+              value={formData.businessName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessName: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-
-              <div className="space-y-2">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
               <Label htmlFor="state">State of Formation</Label>
               <Select
                 value={formData.state}
@@ -355,7 +262,7 @@ export function AnnualCompanyStateFilingForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
+                <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -368,266 +275,197 @@ export function AnnualCompanyStateFilingForm() {
               </Select>
             </div>
 
-
             <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="normal">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Normal</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Normal package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-white p-2">
-                            {/* <p className="font-semibold mb-1">Includes:</p> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.normal.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            {/* <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForAnnualCompanyStateFiling[formData.state]?.normal ?? "—"}</p>
-                            )}
-                            </ul>
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-                 <SelectItem value="express">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Express</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Express package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4 " />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-white p-2">
-                            {/* <p className="font-semibold mb-1">Includes:</p> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.express.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            {/* <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul> */}
-                            <ul className="list-disc ml-4 space-y-1">
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForAnnualCompanyStateFiling[formData.state]?.express ?? "—"}</p>
-                            )}
-                            </ul>
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-              </SelectContent>
-              </Select>
+              <Label htmlFor="dateOfFormation">Date of formation</Label>
+              <DateField
+                id="dateOfFormation"
+                value={formData.dateOfFormation}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfFormation: value })
+                }
+                required
+              />
+            </div>
           </div>
 
-
-              <div className="space-y-2">
-              <Label htmlFor="dateOfFormation">Date of formation</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                  className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfFormation"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfFormation
-                      ? new Date(formData.dateOfFormation).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfFormation
-                        ? new Date(formData.dateOfFormation)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfFormation: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
-                value={formData.dateOfFormation}
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                {
+                  value: "normal",
+                  label: "Normal",
+                  delivery: "14 business days",
+                  icon: Clock,
+                  price: formData.state
+                    ? priceTableForAnnualCompanyStateFiling[formData.state]?.normal ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                  tooltip: (
+                    <PackageDetailsTooltip
+                      label="Normal"
+                      features={PACKAGE_FEATURES.normal}
+                      price={
+                        formData.state
+                          ? priceTableForAnnualCompanyStateFiling[formData.state]?.normal ?? "—"
+                          : null
+                      }
+                    />
+                  ),
+                },
+                {
+                  value: "express",
+                  label: "Express",
+                  delivery: "7 business days",
+                  icon: Zap,
+                  badge: "Fastest",
+                  price: formData.state
+                    ? priceTableForAnnualCompanyStateFiling[formData.state]?.express ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                  tooltip: (
+                    <PackageDetailsTooltip
+                      label="Express"
+                      features={PACKAGE_FEATURES.express}
+                      price={
+                        formData.state
+                          ? priceTableForAnnualCompanyStateFiling[formData.state]?.express ?? "—"
+                          : null
+                      }
+                    />
+                  ),
+                },
+              ]}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Details",
+      subtitle: "Review & submit",
+      icon: FileText,
+      heading: "Owner & financial details",
+      intro: "Last step — a few financial details, then review the price and submit.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="ownerFullLegalName">Owner Full Legal Name</Label>
+              <Input
+                id="ownerFullLegalName"
+                value={formData.ownerFullLegalName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ownerFullLegalName: e.target.value,
+                  })
+                }
+                className={inputStyles}
                 required
-                readOnly
               />
             </div>
 
-
-
-
-             
-
             <div className="space-y-2">
-                <Label htmlFor="ownerFullLegalName">
-                  Owner Full Legal Name
-                </Label>
-                <Input
-                  id="ownerFullLegalName"
-                  value={formData.ownerFullLegalName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerFullLegalName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-
-              <div className="space-y-2">
-                <Label htmlFor="emailAddress">Email Address</Label>
-                <Input
-                  id="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      emailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="cashBalanceOfBusiness">Cash Balance of Business</Label>
-                <Input
-                  id="cashBalanceOfBusiness"
-                  value={formData.cashBalanceOfBusiness}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      cashBalanceOfBusiness: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-             
-
-              <div className="space-y-2">
-                <Label htmlFor="accountsRecieveables">Accounts Recieveables</Label>
-                <Input
-                  id="accountsRecieveables"
-                  value={formData.accountsRecieveables}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      accountsRecieveables: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="bankAccountBalanaceAsOfDate">Bank Account Balanace As Of Date</Label>
-                <Input
-                  id="bankAccountBalanaceAsOfDate"
-                  value={formData.bankAccountBalanaceAsOfDate}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      bankAccountBalanaceAsOfDate: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="file">
-                  Balance Sheet
-                </Label>
-                <input
-                  type="file"
-                  id="balanceSheet"
-                  onChange={(e) => {
-                    handleFileUpload(e, "balanceSheet");
-                  }}
-                  
-                  className="border-gray-300 cursor-pointer shadow-md shadow-black"
-                />
-              </div>
-
-
-        
-
-             
-
-             
-
-            
-              
+              <Label htmlFor="emailAddress">Email Address</Label>
+              <Input
+                id="emailAddress"
+                value={formData.emailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    emailAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Annual Company State Filing"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="cashBalanceOfBusiness">Cash Balance of Business</Label>
+              <Input
+                id="cashBalanceOfBusiness"
+                value={formData.cashBalanceOfBusiness}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    cashBalanceOfBusiness: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
 
-      
-    </>
+            <div className="space-y-2">
+              <Label htmlFor="accountsRecieveables">Accounts Recieveables</Label>
+              <Input
+                id="accountsRecieveables"
+                value={formData.accountsRecieveables}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    accountsRecieveables: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="bankAccountBalanaceAsOfDate">Bank Account Balanace As Of Date</Label>
+            <Input
+              id="bankAccountBalanaceAsOfDate"
+              value={formData.bankAccountBalanaceAsOfDate}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  bankAccountBalanaceAsOfDate: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="balanceSheet">Balance Sheet</Label>
+            <FileUploadField
+              id="balanceSheet"
+              uploaded={!!formData.balanceSheet}
+              placeholder="Click to upload your balance sheet"
+              onChange={(e) => handleFileUpload(e, "balanceSheet")}
+            />
+          </div>
+
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `Annual State Filing (${formData.packageType || ""} - ${formData.state || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your Annual Company State Filing"
+      description="2 quick steps — about 3 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Annual Company State Filing"
+      price={price}
+    />
   );
 }

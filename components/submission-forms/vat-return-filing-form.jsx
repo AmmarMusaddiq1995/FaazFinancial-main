@@ -1,39 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { FileText } from "lucide-react";
+import {
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
-
-
+const VAT_RETURN_PRICE = 121;
 
 export function VATReturnFilingForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
-    
+
    governmentGatewayId: "",
    noGovernmentGatewayId: false,
    cannotProvideGovernmentGatewayId: false,
    governmentPassword: "",
    VATRegistrationNumber: "",
-    
+
   });
 
   const { user } = useAuthContext();
@@ -60,17 +52,6 @@ export function VATReturnFilingForm() {
 
     fetchUserData();
   }, [user]);
-
-  // const [price, setPrice] = useState(0);
-  // useEffect(()=>{
-  //   if(formData.packageType === "normal"){
-  //     const selectedPrice = 25;
-  //     setPrice(selectedPrice);
-  //   } else if(formData.packageType === "express"){
-  //     const selectedPrice = 35;
-  //     setPrice(selectedPrice);
-  //   }
-  // }, [formData.packageType]);
 
 
   const handleSubmit = async (e) => {
@@ -124,116 +105,110 @@ export function VATReturnFilingForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your VAT Return Filing Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your VAT Return Filing Services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-         
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "VAT return filing",
+      icon: FileText,
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
+            <Input
+              id="governmentGatewayId"
+              value={formData.governmentGatewayId}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  governmentGatewayId: e.target.value,
+                })
+              }
+              className={inputStyles}
+            />
+            <div className="flex items-center space-x-2">
+              <input
+                id="noGovernmentGatewayId"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.noGovernmentGatewayId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    noGovernmentGatewayId: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="noGovernmentGatewayId">I don't have one</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                id="cannotProvideGovernmentGatewayId"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.cannotProvideGovernmentGatewayId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    cannotProvideGovernmentGatewayId: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="cannotProvideGovernmentGatewayId">I can't provide it</Label>
+            </div>
+          </div>
 
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-                <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
-                <Input
-                  id="governmentGatewayId"
-                  value={formData.governmentGatewayId}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentGatewayId: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="noGovernmentGatewayId"
-                    type="checkbox"
-                    checked={!!formData.noGovernmentGatewayId}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        noGovernmentGatewayId: e.target.checked,
-                      })
-                    }
-                  />
-                  <Label htmlFor="noGovernmentGatewayId">I don't have one</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="cannotProvideGovernmentGatewayId"
-                    type="checkbox"
-                    checked={!!formData.cannotProvideGovernmentGatewayId}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        cannotProvideGovernmentGatewayId: e.target.checked,
-                      })
-                    }
-                  />
-                  <Label htmlFor="cannotProvideGovernmentGatewayId">I can't provide it</Label>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="governmentPassword">Government password</Label>
-                <Input
-                  id="governmentPassword"
-                  value={formData.governmentPassword}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentPassword: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="VATRegistrationNumber">VAT registration number</Label>
-                <Input
-                  id="VATRegistrationNumber"
-                  value={formData.VATRegistrationNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      VATRegistrationNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-             
-
-      
-
-              
+              <Label htmlFor="governmentPassword">Government password</Label>
+              <Input
+                id="governmentPassword"
+                value={formData.governmentPassword}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    governmentPassword: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start VAT Return Filing Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="VATRegistrationNumber">VAT registration number</Label>
+              <Input
+                id="VATRegistrationNumber"
+                value={formData.VATRegistrationNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    VATRegistrationNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
 
-      
-    </>
+          <PriceSummary
+            price={VAT_RETURN_PRICE}
+            rows={[{ label: "VAT Return Filing Services", amount: VAT_RETURN_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your VAT Return Filing Services"
+      description="Fill out the form below to begin your VAT Return Filing Services process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start VAT Return Filing Services"
+      price={VAT_RETURN_PRICE}
+    />
   );
 }

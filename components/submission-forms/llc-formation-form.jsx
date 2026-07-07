@@ -11,81 +11,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Info } from "lucide-react";
-
-const US_STATES = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-];
+  FormWizard,
+  OptionToggle,
+  PackageCards,
+  PackageDetailsTooltip,
+  PriceSummary,
+  PricingBadge,
+  US_STATES,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
+import {
+  Building2,
+  Users,
+  MapPin,
+  Settings2,
+  Globe,
+  Plus,
+  Trash2,
+  Clock,
+  Zap,
+} from "lucide-react";
 
 const priceTableForLLC = {
-  Wyoming: { normal:400, express: 480},
-  Texas: { normal: 585, express: 655},
+  Wyoming: { normal:475, express: 515},
   Alabama: { normal: 500, express: 570},
   Alaska: { normal: 550, express: 620},
   Arizona: { normal: 350, express: 420},
@@ -93,7 +45,7 @@ const priceTableForLLC = {
   California: { normal: 365, express: 435},
   Colorado: { normal: 330, express: 400},
   Connecticut: { normal: 415, express: 485},
-  Delaware: { normal: 500, express: 570},
+  Delaware: { normal: 550, express: 620},
   Florida: { normal: 380, express: 450},
   Georgia: { normal: 380, express: 450},
   Hawaii: { normal: 350, express: 420},
@@ -114,29 +66,29 @@ const priceTableForLLC = {
   Montana: { normal: 330, express: 400},
   Nebraska: { normal: 400, express: 470},
   Nevada: { normal: 500, express: 570},
-  NewHampshire: { normal: 400, express: 470},
-  NewJersey: { normal: 430, express: 500},
-  NewMexico: { normal: 330, express: 400},
-  NewYork:{ normal: 500, express: 570},
-  NorthCarolina:{ normal: 430, express: 500},
-  NorthDakota:{ normal: 415, express: 485},
+  New_Hampshire: { normal: 400, express: 470},
+  New_Jersey: { normal: 430, express: 500},
+  New_Mexico: { normal: 330, express: 400},
+  New_York:{ normal: 500, express: 570},
+  North_Carolina:{ normal: 430, express: 500},
+  North_Dakota:{ normal: 415, express: 485},
   Ohio: { normal: 380, express: 450},
   Oklahoma: { normal: 400, express: 470},
   Oregon: { normal: 385, express: 455},
   Pennsylvania: { normal: 430, express: 500},
-  RhodeIsland: { normal: 450, express: 520},
-  SouthCarolina: { normal: 400, express: 470},
-  SouthDakota: { normal: 450, express: 520},
+  Rhode_Island: { normal: 450, express: 520},
+  South_Carolina: { normal: 400, express: 470},
+  South_Dakota: { normal: 450, express: 520},
   Tennessee: { normal: 600, express: 670},
   Texas: { normal: 585, express: 655},
   Utah: { normal: 450, express: 520},
   Vermont: { normal: 415, express: 485},
   Virginia: { normal: 400, express: 470},
   Washington: { normal: 500, express: 570},
-  WestVirginia: { normal: 450, express: 520},
+  West_Virginia: { normal: 450, express: 520},
   Wisconsin: { normal: 430, express: 500},
-  Wyoming: { normal: 380, express: 450},
-  
+
+
 }
 
 const PACKAGE_FEATURES = {
@@ -219,7 +171,7 @@ export function BusinessFormationForm({ pricingData }) {
 
   useEffect(()=>{
     let basePrice = 0;
-    
+
     // If pricing data is provided from URL, use it directly
     if (pricingData?.price) {
       basePrice = parseInt(pricingData.price);
@@ -228,7 +180,7 @@ export function BusinessFormationForm({ pricingData }) {
       const statePrice = priceTableForLLC[formData.state] || priceTableForLLC.Default;
       basePrice = statePrice[formData.packageType];
     }
-    
+
     // Add $65 if user wants unique business address
     const additionalAmount = formData.doYouNeedUniqueBusinessAddress === "Yes" ? 65 : 0;
     setPrice(basePrice + additionalAmount);
@@ -257,7 +209,7 @@ export function BusinessFormationForm({ pricingData }) {
     fetchUserData();
   }, [user]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -304,14 +256,14 @@ export function BusinessFormationForm({ pricingData }) {
       ]).select().single();
 
       if(error) {
-        console.error("Error inserting form_submissions:", error);  
+        console.error("Error inserting form_submissions:", error);
       } else {
         console.log("form_submissions inserted successfully");
         console.log("insertedForm id:", insertedForm.id);
         router.push(`/form-submission-success`);
       }
 
-      
+
     } catch (err) {
       console.error("Error submitting form:", err);
       alert("Something went wrong.");
@@ -320,36 +272,26 @@ export function BusinessFormationForm({ pricingData }) {
     }
   };
 
-  return (
-    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-center">
-          Start Your LLC Formation
-        </CardTitle>
-        <CardDescription className="text-center">
-          Fill out the form below to begin your LLC formation process
-        </CardDescription>
-
-        {pricingData?.price && (
-          <div className="mt-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
-            <p className="text-sm text-center">
-              <span className="font-semibold">Selected Package:</span> {pricingData.planName} - ${pricingData.price}
-              <br />
-              <span className="text-xs text-muted-foreground">
-                {pricingData.packageType === 'normal' ? 'Normal (14 business days)' : 'Express (7 business days)'} • {pricingData.state}
-              </span>
-            </p>
-          </div>
-        )}
-        
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 border rounded-md p-4">
+  const steps = [
+    {
+      title: "Company",
+      subtitle: "Name & package",
+      icon: Building2,
+      heading: "Company details",
+      intro: "Tell us what you'd like to call your LLC and where to form it.",
+      validate: () => {
+        if (!formData.state) return "Please select your state of formation.";
+        if (!formData.packageType) return "Please choose a package to continue.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="desiredCompanyName">Desired Company Name</Label>
               <Input
                 id="desiredCompanyName"
+                placeholder="e.g. Horizon Ventures LLC"
                 value={formData.desiredCompanyName}
                 onChange={(e) =>
                   setFormData({
@@ -357,7 +299,7 @@ export function BusinessFormationForm({ pricingData }) {
                     desiredCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -368,6 +310,7 @@ export function BusinessFormationForm({ pricingData }) {
               </Label>
               <Input
                 id="alternativeCompanyName"
+                placeholder="Backup name if the first is taken"
                 value={formData.alternativeCompanyName}
                 onChange={(e) =>
                   setFormData({
@@ -375,163 +318,277 @@ export function BusinessFormationForm({ pricingData }) {
                     alternativeCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
           </div>
 
-          <hr style={{ border: "1px solid #e0e0e0" }} />
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Members Information
-            </h2>
+            <Label htmlFor="state">State of Formation</Label>
+            <Select
+              value={formData.state}
+              disabled={!!pricingData?.state}
+              onValueChange={(value) =>
+                setFormData({ ...formData, state: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select state" />
+              </SelectTrigger>
+              <SelectContent>
+                {US_STATES.map((state) => (
+                  <SelectItem key={state} value={state}>
+                    {state}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              locked={!!pricingData?.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                {
+                  value: "normal",
+                  label: "Normal",
+                  delivery: "14 business days",
+                  icon: Clock,
+                  price: formData.state
+                    ? priceTableForLLC[formData.state]?.normal ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                  tooltip: (
+                    <PackageDetailsTooltip
+                      label="Normal"
+                      features={PACKAGE_FEATURES.normal}
+                      excluded={PACKAGE_EXCLUDED}
+                      price={
+                        formData.state
+                          ? priceTableForLLC[formData.state]?.normal ?? "—"
+                          : null
+                      }
+                    />
+                  ),
+                },
+                {
+                  value: "express",
+                  label: "Express",
+                  delivery: "7 business days",
+                  icon: Zap,
+                  badge: "Fastest",
+                  price: formData.state
+                    ? priceTableForLLC[formData.state]?.express ?? null
+                    : null,
+                  priceFallback: "Select a state",
+                  tooltip: (
+                    <PackageDetailsTooltip
+                      label="Express"
+                      features={PACKAGE_FEATURES.express}
+                      excluded={PACKAGE_EXCLUDED}
+                      price={
+                        formData.state
+                          ? priceTableForLLC[formData.state]?.express ?? "—"
+                          : null
+                      }
+                    />
+                  ),
+                },
+              ]}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Members",
+      subtitle: "Ownership details",
+      icon: Users,
+      heading: "Members Information",
+      intro: "Add every member of the LLC and their ownership share.",
+      content: (
+        <>
           {members.map((member, index) => (
-            <div key={index} className="space-y-4 border rounded-md p-4">
-              <div className="text-sm font-semibold">Member {index + 1}</div>
-
-              <div className="space-y-2">
-                <Label htmlFor={`firstName-${index}`}>First Name</Label>
-                <Input
-                  id={`firstName-${index}`}
-                  value={member.firstName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        firstName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
+            <div
+              key={index}
+              className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-700">
+                    Member {index + 1}
+                  </span>
+                </div>
+                {index > 0 && (
+                  <button
+                    type="button"
+                    aria-label={`Remove member ${index + 1}`}
+                    onClick={() =>
+                      setMembers((prev) => prev.filter((_, i) => i !== index))
+                    }
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor={`middleName-${index}`}>Middle Name</Label>
-                <Input
-                  id={`middleName-${index}`}
-                  value={member.middleName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        middleName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="space-y-2">
+                  <Label htmlFor={`firstName-${index}`}>First Name</Label>
+                  <Input
+                    id={`firstName-${index}`}
+                    value={member.firstName}
+                    onChange={(e) =>
+                      setMembers((prev) => {
+                        const next = [...prev];
+                        next[index] = {
+                          ...next[index],
+                          firstName: e.target.value,
+                        };
+                        return next;
+                      })
+                    }
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`middleName-${index}`}>Middle Name</Label>
+                  <Input
+                    id={`middleName-${index}`}
+                    value={member.middleName}
+                    onChange={(e) =>
+                      setMembers((prev) => {
+                        const next = [...prev];
+                        next[index] = {
+                          ...next[index],
+                          middleName: e.target.value,
+                        };
+                        return next;
+                      })
+                    }
+                    className={inputStyles}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`lastName-${index}`}>Last Name</Label>
+                  <Input
+                    id={`lastName-${index}`}
+                    value={member.lastName}
+                    onChange={(e) =>
+                      setMembers((prev) => {
+                        const next = [...prev];
+                        next[index] = {
+                          ...next[index],
+                          lastName: e.target.value,
+                        };
+                        return next;
+                      })
+                    }
+                    className={inputStyles}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor={`lastName-${index}`}>Last Name</Label>
-                <Input
-                  id={`lastName-${index}`}
-                  value={member.lastName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        lastName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+              <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
+                <div className="space-y-2">
+                  <Label htmlFor={`residentialAddress-${index}`}>
+                    Residential Address
+                  </Label>
+                  <Input
+                    id={`residentialAddress-${index}`}
+                    value={member.residentialAddress}
+                    onChange={(e) =>
+                      setMembers((prev) => {
+                        const next = [...prev];
+                        next[index] = {
+                          ...next[index],
+                          residentialAddress: e.target.value,
+                        };
+                        return next;
+                      })
+                    }
+                    className={inputStyles}
+                    required
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor={`residentialAddress-${index}`}>
-                  Residential Address
-                </Label>
-                <Input
-                  id={`residentialAddress-${index}`}
-                  value={member.residentialAddress}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        residentialAddress: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor={`ownershipPercentage-${index}`}>
-                  Ownership Percentage
-                </Label>
-                <Input
-                  id={`ownershipPercentage-${index}`}
-                  value={member.ownershipPercentage}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        ownershipPercentage: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
+                <div className="space-y-2">
+                  <Label htmlFor={`ownershipPercentage-${index}`}>
+                    Ownership %
+                  </Label>
+                  <Input
+                    id={`ownershipPercentage-${index}`}
+                    placeholder="e.g. 50"
+                    value={member.ownershipPercentage}
+                    onChange={(e) =>
+                      setMembers((prev) => {
+                        const next = [...prev];
+                        next[index] = {
+                          ...next[index],
+                          ownershipPercentage: e.target.value,
+                        };
+                        return next;
+                      })
+                    }
+                    className={inputStyles}
+                    required
+                  />
+                </div>
               </div>
             </div>
           ))}
 
-          <div>
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() =>
-                setMembers((prev) => [
-                  ...prev,
-                  {
-                    firstName: "",
-                    middleName: "",
-                    lastName: "",
-                    residentialAddress: "",
-                    ownershipPercentage: "",
-                  },
-                ])
-              }
-            >
-              Add A Member
-            </Button>
-          </div>
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
-
-          <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Contact Information
-            </h2>
-          </div>
-
-          <div className="space-y-4 border rounded-md p-4">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full border-dashed border-primary/40 text-primary hover:bg-primary/5 hover:text-primary"
+            onClick={() =>
+              setMembers((prev) => [
+                ...prev,
+                {
+                  firstName: "",
+                  middleName: "",
+                  lastName: "",
+                  residentialAddress: "",
+                  ownershipPercentage: "",
+                },
+              ])
+            }
+          >
+            <Plus className="h-4 w-4 mr-1" /> Add A Member
+          </Button>
+        </>
+      ),
+    },
+    {
+      title: "Contact",
+      subtitle: "Address & reach",
+      icon: MapPin,
+      heading: "Contact Information",
+      intro: "How can we reach you during the formation process?",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="phoneNumber">Phone Number-USA Only</Label>
               <Input
                 id="phoneNumber"
+                type="tel"
                 value={formData.phoneNumber}
                 onChange={(e) =>
                   setFormData({
@@ -539,7 +596,7 @@ export function BusinessFormationForm({ pricingData }) {
                     phoneNumber: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -552,7 +609,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -565,7 +622,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, faxNumber: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -578,24 +635,26 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, country: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="addressLocal">Enter Local Address</Label>
-              <Input
-                id="addressLocal"
-                value={formData.addressLocal}
-                onChange={(e) =>
-                  setFormData({ ...formData, addressLocal: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="addressLocal">Enter Local Address</Label>
+            <Input
+              id="addressLocal"
+              value={formData.addressLocal}
+              onChange={(e) =>
+                setFormData({ ...formData, addressLocal: e.target.value })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="city">City</Label>
               <Input
@@ -604,158 +663,10 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="state">State of Formation</Label>
-              <Select
-                value={formData.state}
-                disabled={!!pricingData?.state}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, state: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select state" />
-                </SelectTrigger>
-                <SelectContent>
-                  {US_STATES.map((state) => (
-                    <SelectItem key={state} value={state}>
-                      {state}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType} disabled={!!pricingData?.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select package type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="normal">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Normal</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Normal package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-gray-800">
-                            <p className="font-semibold mb-1">Includes:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.normal.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            <ul className="list-disc ml-4 space-y-1">
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForLLC[formData.state]?.normal ?? "—"}</p>
-                            )}
-                            </ul>
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-                 <SelectItem value="express">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Express</span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button type="button" aria-label="Express package details" className="text-gray-500 hover:text-gray-700">
-                            <Info className="h-4 w-4" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">
-                          <div className="text-xs text-gray-800">
-                            <p className="font-semibold mb-1">Includes:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_FEATURES.express.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            <p className="font-semibold mt-3 mb-1">Excluded:</p>
-                            <ul className="list-disc ml-4 space-y-1">
-                              {PACKAGE_EXCLUDED.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                            {formData.state && (
-                              <p className="mt-2"><span className="font-semibold">Price:</span> ${priceTableForLLC[formData.state]?.express ?? "—"}</p>
-                            )}
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </SelectItem>
-              </SelectContent>
-              </Select>
-          </div>
-
-          {price > 0 && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg border">
-              <div className="text-center">
-                <p className="text-lg font-semibold mb-2">Service Price Breakdown</p>
-                <div className="space-y-1 text-sm">
-                  {pricingData?.price ? (
-                    <div className="flex justify-between">
-                      <span>Base Package ({pricingData.planName}):</span>
-                      <span>${pricingData.price}</span>
-                    </div>
-                  ) : formData.state && formData.packageType ? (
-                    <div className="flex justify-between">
-                      <span>Base Package ({formData.packageType} - {formData.state}):</span>
-                      <span>${priceTableForLLC[formData.state]?.[formData.packageType] || 0}</span>
-                    </div>
-                  ) : null}
-                  {formData.doYouNeedUniqueBusinessAddress === "Yes" && (
-                    <div className="flex justify-between">
-                      <span>Unique Business Address:</span>
-                      <span>$65</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span>Subtotal:</span>
-                    <span>${price}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Card Processing Fee (3%):</span>
-                    <span>${Math.ceil(price * 0.03)}</span>
-                  </div>
-                  <hr className="my-2" />
-                  <div className="flex justify-between font-semibold text-lg">
-                    <span>Total:</span>
-                    <span className="text-primary font-bold">${Math.ceil(price * 1.03)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
             <div className="space-y-2">
               <Label htmlFor="zipCode">Zip Code</Label>
@@ -765,156 +676,150 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, zipCode: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
           </div>
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
+        </>
+      ),
+    },
+    {
+      title: "Preferences",
+      subtitle: "Formation options",
+      icon: Settings2,
+      heading: "Additional Information",
+      intro: "A few choices about how your LLC is set up.",
+      validate: () => {
+        if (!formData.doYouWantRegisteredAgent)
+          return "Please tell us if you want a registered agent.";
+        if (!formData.doYouNeedUniqueBusinessAddress)
+          return "Please tell us if you need a unique business address.";
+        if (!formData.doYouWantToUseYourOwnAddress)
+          return "Please tell us if you want to use your own address.";
+        if (!formData.doYouWantAnonymousLLCOrOnMemberName)
+          return "Please choose Anonymous LLC or On Member Name.";
+        return "";
+      },
+      content: (
+        <div className="space-y-5">
+          <div className="space-y-2">
+            <Label>Do you want to use a registered agent?</Label>
+            <OptionToggle
+              options={[
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" },
+              ]}
+              value={formData.doYouWantRegisteredAgent}
+              onChange={(value) =>
+                setFormData({ ...formData, doYouWantRegisteredAgent: value })
+              }
+            />
+          </div>
 
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Additional Information
-            </h2>
+            <Label>
+              Do you need Unique business address?
+              <span className="ml-1 text-xs font-normal text-muted-foreground">
+                (additional cost 65$ yearly)
+              </span>
+            </Label>
+            <OptionToggle
+              options={[
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" },
+              ]}
+              value={formData.doYouNeedUniqueBusinessAddress}
+              onChange={(value) =>
+                setFormData({ ...formData, doYouNeedUniqueBusinessAddress: value })
+              }
+            />
           </div>
-
-          <div className="space-y-4 border rounded-md p-4">
-            <div className="space-y-2">
-              <Label htmlFor="doYouWantRegisteredAgent">Do you want to use a registered agent?</Label>
-              <Select
-                value={formData.doYouWantRegisteredAgent}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, doYouWantRegisteredAgent: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="doYouNeedUniqueBusinessAddress">
-                Do you need Unique business address?(additional cost 65$ yearly)
-              </Label>
-              <Select
-                value={formData.doYouNeedUniqueBusinessAddress}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, doYouNeedUniqueBusinessAddress: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="doYouWantToUseYourOwnAddress">Do you want to use your own address?</Label>
-              <Select
-                value={formData.doYouWantToUseYourOwnAddress}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, doYouWantToUseYourOwnAddress: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Yes"> Yes </SelectItem>
-                  <SelectItem value="No"> No </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="doYouWantAnonymousLLCOrOnMemberName">
-                Do you want Anonymous LLC or on Member Name?
-              </Label>
-              <Select
-                value={formData.doYouWantAnonymousLLCOrOnMemberName}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, doYouWantAnonymousLLCOrOnMemberName: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Anonymous_LLC"> Anonymous LLC </SelectItem>
-                  <SelectItem value="On_Member_Name">
-                    {" "}
-                    On Member Name{" "}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
 
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Product Information & Business Website
-            </h2>
+            <Label>Do you want to use your own address?</Label>
+            <OptionToggle
+              options={[
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" },
+              ]}
+              value={formData.doYouWantToUseYourOwnAddress}
+              onChange={(value) =>
+                setFormData({ ...formData, doYouWantToUseYourOwnAddress: value })
+              }
+            />
           </div>
 
-          <div className="space-y-4 border rounded-md p-4">
-            <div className="space-y-2">
-              <Label htmlFor="description">Brief Description Of Business</Label>
-              <Input
-                id="description"
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label>Do you want Anonymous LLC or on Member Name?</Label>
+            <OptionToggle
+              options={[
+                { value: "Anonymous_LLC", label: "Anonymous LLC" },
+                { value: "On_Member_Name", label: "On Member Name" },
+              ]}
+              value={formData.doYouWantAnonymousLLCOrOnMemberName}
+              onChange={(value) =>
+                setFormData({
+                  ...formData,
+                  doYouWantAnonymousLLCOrOnMemberName: value,
+                })
+              }
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Business",
+      subtitle: "Review & submit",
+      icon: Globe,
+      heading: "Product Information & Business Website",
+      intro: "Last step — tell us about your business, review the price, and submit.",
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="description">Brief Description Of Business</Label>
+            <Input
+              id="description"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="businessType">Business Type</Label>
-              <Select
-                value={formData.businessType}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, businessType: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select business type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="OnlineBusiness">
-                    Online Business
-                  </SelectItem>
-                  <SelectItem value="ECommerceBusiness">
-                    E-Commerce Business
-                  </SelectItem>
-                  <SelectItem value="WholesaleBusiness">
-                    Wholesale Business
-                  </SelectItem>
-                  <SelectItem value="RetailBusiness">
-                    Retail Business
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="businessType">Business Type</Label>
+            <Select
+              value={formData.businessType}
+              onValueChange={(value) =>
+                setFormData({ ...formData, businessType: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select business type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="OnlineBusiness">
+                  Online Business
+                </SelectItem>
+                <SelectItem value="ECommerceBusiness">
+                  E-Commerce Business
+                </SelectItem>
+                <SelectItem value="WholesaleBusiness">
+                  Wholesale Business
+                </SelectItem>
+                <SelectItem value="RetailBusiness">
+                  Retail Business
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="businessWebsite">Business Website</Label>
               <Input
@@ -923,7 +828,7 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, businessWebsite: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -936,19 +841,51 @@ export function BusinessFormationForm({ pricingData }) {
                 onChange={(e) =>
                   setFormData({ ...formData, businessEmail: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-            {loading ? "Submitting..." : "Start LLC Formation"}
-          </Button>
-        </form>
+          <PriceSummary
+            price={price}
+            rows={[
+              ...(pricingData?.price
+                ? [
+                    {
+                      label: `Base Package (${pricingData.planName})`,
+                      amount: pricingData.price,
+                    },
+                  ]
+                : formData.state && formData.packageType
+                ? [
+                    {
+                      label: `Base Package (${formData.packageType} - ${formData.state})`,
+                      amount:
+                        priceTableForLLC[formData.state]?.[formData.packageType] || 0,
+                    },
+                  ]
+                : []),
+              ...(formData.doYouNeedUniqueBusinessAddress === "Yes"
+                ? [{ label: "Unique Business Address", amount: 65 }]
+                : []),
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
 
-        {/* <Button onClick={() => submitForm()}>submitForm</Button> */}
-      </CardContent>
-    </Card>
+  return (
+    <FormWizard
+      title="Start Your LLC Formation"
+      description="5 quick steps — about 5 minutes"
+      badge={<PricingBadge pricingData={pricingData} />}
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start LLC Formation"
+      price={price}
+    />
   );
 }

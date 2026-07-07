@@ -1,25 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FileText } from "lucide-react";
+import {
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
-
-
-
+const CONFIRMATION_STATEMENT_PRICE = 47;
 
 export function ConfirmationStatementFilingServicesForm() {
   const [loading, setLoading] = useState(false);
@@ -33,8 +27,8 @@ export function ConfirmationStatementFilingServicesForm() {
     noRegisteredEmailAddress: false,
     passwordOfCompanyWebfilingAccount: "",
     cannotProvidePassword: false,
-    
-    
+
+
   });
 
   const { user } = useAuthContext();
@@ -61,17 +55,6 @@ export function ConfirmationStatementFilingServicesForm() {
 
     fetchUserData();
   }, [user]);
-
-  // const [price, setPrice] = useState(0);
-  // useEffect(()=>{
-  //   if(formData.packageType === "normal"){
-  //     const selectedPrice = 25;
-  //     setPrice(selectedPrice);
-  //   } else if(formData.packageType === "express"){
-  //     const selectedPrice = 35;
-  //     setPrice(selectedPrice);
-  //   }
-  // }, [formData.packageType]);
 
 
   const handleSubmit = async (e) => {
@@ -125,180 +108,164 @@ export function ConfirmationStatementFilingServicesForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Confirmation Statement Filing Service
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Confirmation Statement Filing Service process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-         
-            <div className="space-y-2">
-                <Label htmlFor="registeredEmailAddress">Registered Email address with company house webfiling account</Label>
-                <Input
-                  id="registeredEmailAddress"
-                  value={formData.registeredEmailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      registeredEmailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="noRegisteredEmailAddress"
-                    type="checkbox"
-                    checked={!!formData.noRegisteredEmailAddress}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        noRegisteredEmailAddress: e.target.checked,
-                      })
-                    }
-                    optional
-                  />
-                  <Label htmlFor="noRegisteredEmailAddress">I don't have one</Label>
-                </div>
-                
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="passwordOfCompanyWebfilingAccount">Password of company webfiling account</Label>
-                <Input
-                  id="passwordOfCompanyWebfilingAccount"
-                  value={formData.passwordOfCompanyWebfilingAccount}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      passwordOfCompanyWebfilingAccount: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="cannotProvidePassword"
-                    type="checkbox"
-                    checked={!!formData.cannotProvidePassword}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        cannotProvidePassword: e.target.checked,
-
-                      })
-                    }
-                    optional
-                  />
-                  <Label htmlFor="cannotProvidePassword">I can't provide it</Label>
-                </div>
-                
-              </div>
-           
-
-
-
-             
-
-
-    
-
-        
-
-
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Confirmation statement",
+      icon: FileText,
+      content: (
+        <>
           <div className="space-y-2">
-                <Label htmlFor="companyName">Company name</Label>
-                <Input
-                  id="companyName"
-                  value={formData.companyName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="companyRegistrationNumber">Company registration number</Label>
-                <Input
-                  id="companyRegistrationNumber"
-                  value={formData.companyRegistrationNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyRegistrationNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-
-              <div className="space-y-2">
-                <Label htmlFor="companyHouseAuthenticationCode">Company house authentication code</Label>
-                <Input
-                  id="companyHouseAuthenticationCode"
-                  value={formData.companyHouseAuthenticationCode}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyHouseAuthenticationCode: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  optional
-                />
-                <div className="flex items-center space-x-2">
-                  <input
-                    id="cannotFindCompanyCode"
-                    type="checkbox"
-                    checked={!!formData.cannotFindCompanyCode}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        cannotFindCompanyCode: e.target.checked,
-                      })
-                    }
-                    optional
-                  />
-                  <Label htmlFor="cannotFindCompanyCode">I can't find it</Label>
-                </div>
-                
-              </div>
-
-           
-             
-
+            <Label htmlFor="registeredEmailAddress">
+              Registered Email address with company house webfiling account
+            </Label>
+            <Input
+              id="registeredEmailAddress"
+              value={formData.registeredEmailAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  registeredEmailAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+            />
+            <div className="flex items-center space-x-2">
+              <input
+                id="noRegisteredEmailAddress"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.noRegisteredEmailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    noRegisteredEmailAddress: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="noRegisteredEmailAddress">I don't have one</Label>
+            </div>
           </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Confirmation Statement Filing Service"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+          <div className="space-y-2">
+            <Label htmlFor="passwordOfCompanyWebfilingAccount">
+              Password of company webfiling account
+            </Label>
+            <Input
+              id="passwordOfCompanyWebfilingAccount"
+              value={formData.passwordOfCompanyWebfilingAccount}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  passwordOfCompanyWebfilingAccount: e.target.value,
+                })
+              }
+              className={inputStyles}
+            />
+            <div className="flex items-center space-x-2">
+              <input
+                id="cannotProvidePassword"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.cannotProvidePassword}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    cannotProvidePassword: e.target.checked,
 
-      
-    </>
+                  })
+                }
+              />
+              <Label htmlFor="cannotProvidePassword">I can't provide it</Label>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="companyName">Company name</Label>
+              <Input
+                id="companyName"
+                value={formData.companyName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    companyName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="companyRegistrationNumber">Company registration number</Label>
+              <Input
+                id="companyRegistrationNumber"
+                value={formData.companyRegistrationNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    companyRegistrationNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="companyHouseAuthenticationCode">
+              Company house authentication code
+            </Label>
+            <Input
+              id="companyHouseAuthenticationCode"
+              value={formData.companyHouseAuthenticationCode}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  companyHouseAuthenticationCode: e.target.value,
+                })
+              }
+              className={inputStyles}
+            />
+            <div className="flex items-center space-x-2">
+              <input
+                id="cannotFindCompanyCode"
+                type="checkbox"
+                className="accent-primary h-4 w-4"
+                checked={!!formData.cannotFindCompanyCode}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    cannotFindCompanyCode: e.target.checked,
+                  })
+                }
+              />
+              <Label htmlFor="cannotFindCompanyCode">I can't find it</Label>
+            </div>
+          </div>
+
+          <PriceSummary
+            price={CONFIRMATION_STATEMENT_PRICE}
+            rows={[
+              { label: "Confirmation Statement Filing", amount: CONFIRMATION_STATEMENT_PRICE },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your Confirmation Statement Filing Service"
+      description="Fill out the form below to begin your Confirmation Statement Filing Service process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Confirmation Statement Filing Service"
+      price={CONFIRMATION_STATEMENT_PRICE}
+    />
   );
 }

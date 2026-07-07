@@ -254,11 +254,11 @@ function PaymentSuccessContent() {
           <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6 text-left">
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Order Amount:</span>
-              <span className="text-orange-600 font-semibold">${((details.amount_total / 100)-(details.amount_total / 100) * 0.03).toFixed(2)}</span>
+              <span className="text-orange-600 font-semibold">${((details.amount_total / 100)-(details.amount_total / 100) * 0.045).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Card Fee (3%):</span>
-              <span className="text-orange-600 font-semibold">${((details.amount_total / 100) * 0.03).toFixed(2)}</span>
+              <span className="font-medium">Card Fee (4.5%):</span>
+              <span className="text-orange-600 font-semibold">${((details.amount_total / 100) * 0.045).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-700 mb-2">
               <span className="font-medium">Total Amount:</span>

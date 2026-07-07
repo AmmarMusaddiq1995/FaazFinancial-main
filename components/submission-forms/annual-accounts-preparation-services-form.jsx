@@ -1,27 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-
-
-
+import { FileText } from "lucide-react";
+import {
+  FormWizard,
+  OptionToggle,
+  PackageCards,
+  PriceSummary,
+} from "@/components/submission-forms/form-wizard";
 
 export function AnnualAccountsPreparationServicesForm() {
   const [loading, setLoading] = useState(false);
@@ -30,9 +20,9 @@ export function AnnualAccountsPreparationServicesForm() {
     packageType: "",
     doYouUseAnAccountingSoftware: "",
 
-    
+
   });
-  
+
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
@@ -123,88 +113,81 @@ export function AnnualAccountsPreparationServicesForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Annual Accounts Preparation Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Annual Accounts Preparation Services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-
-
-
-            <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select type of annual accounts preparation" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="simple">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Simple annual accounts preparation</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="complex">
-                    <div className="flex items-center justify-between gap-3">
-                      <span>Complex annual accounts preparation</span>
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              </div>
-              
-         
-
-            <div className="space-y-2">
-              <Label htmlFor="doYouUseAnAccountingSoftware">Do you use an accounting software ?</Label>
-                <Select
-                  value={formData.doYouUseAnAccountingSoftware}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, doYouUseAnAccountingSoftware: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select an option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                 <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-              </Select>
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Accounts preparation",
+      icon: FileText,
+      validate: () => {
+        if (!formData.packageType)
+          return "Please select the type of annual accounts preparation.";
+        if (!formData.doYouUseAnAccountingSoftware)
+          return "Please tell us if you use an accounting software.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                {
+                  value: "simple",
+                  label: "Simple",
+                  delivery: "Simple annual accounts preparation",
+                  price: 80.50,
+                },
+                {
+                  value: "complex",
+                  label: "Complex",
+                  delivery: "Complex annual accounts preparation",
+                  price: 188,
+                },
+              ]}
+            />
           </div>
 
+          <div className="space-y-2">
+            <Label>Do you use an accounting software ?</Label>
+            <OptionToggle
+              options={[
+                { value: "yes", label: "Yes" },
+                { value: "no", label: "No" },
+              ]}
+              value={formData.doYouUseAnAccountingSoftware}
+              onChange={(value) =>
+                setFormData({ ...formData, doYouUseAnAccountingSoftware: value })
+              }
+            />
+          </div>
 
-             
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `Annual Accounts Preparation (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
 
-      
-
-              
-            </div>
-
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Annual Accounts Preparation Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      
-    </>
+  return (
+    <FormWizard
+      title="Start Your Annual Accounts Preparation Services"
+      description="Fill out the form below to begin your Annual Accounts Preparation Services process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Annual Accounts Preparation Services"
+      price={price}
+    />
   );
 }

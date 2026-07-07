@@ -1,35 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { ShieldCheck } from "lucide-react";
+import {
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
-
-
+const INITIAL_COMPLIANCE_PRICE = 47;
 
 export function InitialComplianceAfterFormationServiceForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
-    
-    
-    
+
+
+
   });
 
   const { user } = useAuthContext();
@@ -56,17 +48,6 @@ export function InitialComplianceAfterFormationServiceForm() {
 
     fetchUserData();
   }, [user]);
-
-  // const [price, setPrice] = useState(0);
-  // useEffect(()=>{
-  //   if(formData.packageType === "normal"){
-  //     const selectedPrice = 25;
-  //     setPrice(selectedPrice);
-  //   } else if(formData.packageType === "express"){
-  //     const selectedPrice = 35;
-  //     setPrice(selectedPrice);
-  //   }
-  // }, [formData.packageType]);
 
 
   const handleSubmit = async (e) => {
@@ -120,146 +101,136 @@ export function InitialComplianceAfterFormationServiceForm() {
     }
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Your Initial Compliance After Formation Service
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Initial Compliance After Formation Service process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              
-         
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Initial compliance",
+      icon: ShieldCheck,
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="emailAddress">Email address used regularly</Label>
+              <Input
+                id="emailAddress"
+                value={formData.emailAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    emailAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
 
-           
-
-
-
-              <div className="space-y-2">
-                <Label htmlFor="emailAddress">Email address used regularly</Label>
-                <Input
-                  id="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      emailAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Phone number used regularly</Label>
-                <Input
-                  id="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      phoneNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="company authentication number">Company authentication number with company house</Label>
-                <Input
-                  id="companyAuthenticationNumber"
-                  value={formData.companyAuthenticationNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyAuthenticationNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-    
-
-        
-
-
-          <div className="space-y-2">
-                <Label htmlFor="companyName">Company name</Label>
-                <Input
-                  id="companyName"
-                  value={formData.companyName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="companyRegistrationNumber">Company registration number</Label>
-                <Input
-                  id="companyRegistrationNumber"
-                  value={formData.companyRegistrationNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyRegistrationNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="companyUTRNumber">Company UTR number</Label>
-                <Input
-                  id="companyUTRNumber"
-                  value={formData.companyUTRNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      companyUTRNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-             
-
+            <div className="space-y-2">
+              <Label htmlFor="phoneNumber">Phone number used regularly</Label>
+              <Input
+                id="phoneNumber"
+                type="tel"
+                value={formData.phoneNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    phoneNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
           </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Initial Compliance After Formation Service"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+          <div className="space-y-2">
+            <Label htmlFor="companyAuthenticationNumber">
+              Company authentication number with company house
+            </Label>
+            <Input
+              id="companyAuthenticationNumber"
+              value={formData.companyAuthenticationNumber}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  companyAuthenticationNumber: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-      
-    </>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="companyName">Company name</Label>
+              <Input
+                id="companyName"
+                value={formData.companyName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    companyName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="companyRegistrationNumber">Company registration number</Label>
+              <Input
+                id="companyRegistrationNumber"
+                value={formData.companyRegistrationNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    companyRegistrationNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="companyUTRNumber">Company UTR number</Label>
+            <Input
+              id="companyUTRNumber"
+              value={formData.companyUTRNumber}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  companyUTRNumber: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
+
+          <PriceSummary
+            price={INITIAL_COMPLIANCE_PRICE}
+            rows={[
+              { label: "Initial Compliance After Formation", amount: INITIAL_COMPLIANCE_PRICE },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Your Initial Compliance After Formation Service"
+      description="Fill out the form below to begin your Initial Compliance After Formation Service process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Initial Compliance After Formation Service"
+      price={INITIAL_COMPLIANCE_PRICE}
+    />
   );
 }

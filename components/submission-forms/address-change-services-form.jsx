@@ -1,26 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"; 
-import { Info } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { Building2 } from "lucide-react";
+import {
+  DateField,
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
 const US_STATES = [
     "Alabama",
@@ -74,11 +67,8 @@ const US_STATES = [
     "Wisconsin",
     "Wyoming",
   ];
-  
 
-
-
-
+const ADDRESS_CHANGE_PRICE = 100;
 
 export function AddressChangeServicesForm() {
   const [loading, setLoading] = useState(false);
@@ -97,7 +87,7 @@ export function AddressChangeServicesForm() {
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
-  
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user?.id) return;
@@ -121,7 +111,7 @@ export function AddressChangeServicesForm() {
     fetchUserData();
   }, [user]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -174,109 +164,94 @@ export function AddressChangeServicesForm() {
     }
   };
 
-  return (
-    <>
-    
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-                Start Your Address Change Services
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your address change services process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
-              
-              <div className="space-y-2">
-                <Label htmlFor="businessName">
-                  Business Name
-                </Label>
-                <Input
-                  id="businessName"
-                  value={formData.businessName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      businessName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Address change",
+      icon: Building2,
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label htmlFor="businessName">Business Name</Label>
+            <Input
+              id="businessName"
+              value={formData.businessName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  businessName: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="existingBusinessAddress">Existing Business Address</Label>
-                <Input
-                  id="existingBusinessAddress"
-                  value={formData.existingBusinessAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      existingBusinessAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="existingBusinessAddress">Existing Business Address</Label>
+            <Input
+              id="existingBusinessAddress"
+              value={formData.existingBusinessAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  existingBusinessAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="newBusinessAddress">New Business Address</Label>
-                <Input
-                  id="newBusinessAddress"
-                  value={formData.newBusinessAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      newBusinessAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="newBusinessAddress">New Business Address</Label>
+            <Input
+              id="newBusinessAddress"
+              value={formData.newBusinessAddress}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  newBusinessAddress: e.target.value,
+                })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="emailId">Email ID</Label>
-                <Input
-                  id="emailId"
-                  value={formData.emailId}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      emailId: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="emailId">Email ID</Label>
+              <Input
+                id="emailId"
+                value={formData.emailId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    emailId: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
 
-             
+            <div className="space-y-2">
+              <Label htmlFor="contactNumber">Contact Number</Label>
+              <Input
+                id="contactNumber"
+                type="tel"
+                value={formData.contactNumber}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    contactNumber: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="contactNumber">Contact Number</Label>
-                <Input
-                  id="contactNumber"
-                  value={formData.contactNumber}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      contactNumber: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  
-                />
-              </div>
-
-             
-
-              <div className="space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="state">State of Formation</Label>
               <Select
                 value={formData.state}
@@ -285,7 +260,7 @@ export function AddressChangeServicesForm() {
                 }
                 required
               >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
+                <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Select state" />
                 </SelectTrigger>
                 <SelectContent>
@@ -298,100 +273,69 @@ export function AddressChangeServicesForm() {
               </Select>
             </div>
 
-
-        
-
-
-          <div className="space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="dateOfFormation">Date of formation</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="justify-start text-left font-normal border-gray-300 shadow-md shadow-black"
-                    id="dateOfFormation"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.dateOfFormation
-                      ? new Date(formData.dateOfFormation).toLocaleDateString()
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      formData.dateOfFormation
-                        ? new Date(formData.dateOfFormation)
-                        : undefined
-                    }
-                    onSelect={(date) =>
-                      date &&
-                      setFormData({
-                        ...formData,
-                        dateOfFormation: date.toISOString().split("T")[0],
-                      })
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <input
-                type="hidden"
+              <DateField
+                id="dateOfFormation"
                 value={formData.dateOfFormation}
+                onChange={(value) =>
+                  setFormData({ ...formData, dateOfFormation: value })
+                }
                 required
-                readOnly
               />
             </div>
-            
 
             <div className="space-y-2">
-                <Label htmlFor="ownerName">Owner Full Name</Label>
-                <Input
-                  id="ownerName"
-                  value={formData.ownerName}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerName: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-            <div className="space-y-2">
-                <Label htmlFor="ownerAddress">Owner Full Address</Label>
-                <Input
-                  id="ownerAddress"
-                  value={formData.ownerAddress}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      ownerAddress: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-             
+              <Label htmlFor="ownerName">Owner Full Name</Label>
+              <Input
+                id="ownerName"
+                value={formData.ownerName}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ownerName: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Address Change Services"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="ownerAddress">Owner Full Address</Label>
+              <Input
+                id="ownerAddress"
+                value={formData.ownerAddress}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ownerAddress: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
 
-    
+          <PriceSummary
+            price={ADDRESS_CHANGE_PRICE}
+            rows={[{ label: "Address Change Services", amount: ADDRESS_CHANGE_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
 
-      
-    </>
+  return (
+    <FormWizard
+      title="Start Your Address Change Services"
+      description="Fill out the form below to begin your address change services process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Address Change Services"
+      price={ADDRESS_CHANGE_PRICE}
+    />
   );
 }
-

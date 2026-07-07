@@ -1,27 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { Footer } from "../footer";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { FileText } from "lucide-react";
+import {
+  FormWizard,
+  PackageCards,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
 
-
-
+const INCOME_OPTIONS = [
+  "Employment income",
+  "Trading income",
+  "Interest income",
+  "Pension income",
+  "Property income",
+  "Dividend income",
+];
 
 export function SimpleAndAdvanceSelfAssessmentForm() {
   const [loading, setLoading] = useState(false);
@@ -31,9 +31,9 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
     governmentGatewayId: "",
     governmentGatewayPassword: "",
     incomes: [],
-    
+
   });
-  
+
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
@@ -126,7 +126,7 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount: Math.round(price), 
+          amount: Math.round(price),
           payment_id: "",
         },
       ]).select().single();
@@ -163,156 +163,125 @@ export function SimpleAndAdvanceSelfAssessmentForm() {
     });
   };
 
-  return (
-    <>
-      <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-        <CardHeader>
-          <CardTitle className="text-lg font-bold text-center">
-            Start Self Assessment Tax Return
-          </CardTitle>
-          <CardDescription className="text-center">
-            Fill out the form below to begin your Self Assessment Tax Return process
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4 border rounded-md p-4">
+  const steps = [
+    {
+      title: "Details",
+      subtitle: "Self assessment",
+      icon: FileText,
+      validate: () => {
+        if (!formData.packageType)
+          return "Please select the type of self assessment tax return.";
+        return "";
+      },
+      content: (
+        <>
+          <div className="space-y-2">
+            <Label>Select Package Type</Label>
+            <PackageCards
+              value={formData.packageType}
+              onChange={(value) =>
+                setFormData({ ...formData, packageType: value })
+              }
+              options={[
+                {
+                  value: "simple",
+                  label: "Simple",
+                  delivery: "Simple self assessment tax return",
+                  price: 80.50,
+                },
+                {
+                  value: "advance",
+                  label: "Advance",
+                  delivery: "Advance self assessment tax return",
+                  price: 147.50,
+                },
+              ]}
+            />
+          </div>
 
-
-
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="packageType">Select Package Type</Label>
-                <Select
-                  value={formData.packageType}
-                   onValueChange={(value) =>
-                   setFormData({ ...formData, packageType: value })
-                 }
-                 required
-                >
-               <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                <SelectValue placeholder="Select type of self assessment tax return" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="simple">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Simple self assessment tax return</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="advance">
-                    <div className="flex items-center justify-between gap-3">
-                      <span>Advance self assessment tax return</span>
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              </div>
-              
-         
-
-              <div className="space-y-2">
-                <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
-                <Input
-                  id="governmentGatewayId"
-                  value={formData.governmentGatewayId}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentGatewayId: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                />
-               
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor="governmentGatewayPassword">Government gateway password</Label>
-                <Input
-                  id="governmentGatewayPassword"
-                  value={formData.governmentGatewayPassword}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      governmentGatewayPassword: e.target.value,
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label>Select the incomes you earn</Label>
-                <div className="space-y-2">
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Employment income")}
-                      onChange={() => toggleIncome("Employment income")}
-                    />
-                    <span>Employment income</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Trading income")}
-                      onChange={() => toggleIncome("Trading income")}
-                    />
-                    <span>Trading income</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Interest income")}
-                      onChange={() => toggleIncome("Interest income")}
-                    />
-                    <span>Interest income</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Pension income")}
-                      onChange={() => toggleIncome("Pension income")}
-                    />
-                    <span>Pension income</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Property income")}
-                      onChange={() => toggleIncome("Property income")}
-                    />
-                    <span>Property income</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.incomes.includes("Dividend income")}
-                      onChange={() => toggleIncome("Dividend income")}
-                    />
-                    <span>Dividend income</span>
-                  </label>
-                </div>
-              </div>
-
-
-             
-
-      
-
-              
+              <Label htmlFor="governmentGatewayId">Government gateway ID</Label>
+              <Input
+                id="governmentGatewayId"
+                value={formData.governmentGatewayId}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    governmentGatewayId: e.target.value,
+                  })
+                }
+                className={inputStyles}
+              />
             </div>
 
-            <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-              {loading ? "Submitting..." : "Start Self Assessment Tax Return"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <div className="space-y-2">
+              <Label htmlFor="governmentGatewayPassword">Government gateway password</Label>
+              <Input
+                id="governmentGatewayPassword"
+                value={formData.governmentGatewayPassword}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    governmentGatewayPassword: e.target.value,
+                  })
+                }
+                className={inputStyles}
+                required
+              />
+            </div>
+          </div>
 
-      
-    </>
+          <div className="space-y-2">
+            <Label>Select the incomes you earn</Label>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {INCOME_OPTIONS.map((income) => {
+                const selected = formData.incomes.includes(income);
+                return (
+                  <label
+                    key={income}
+                    className={`flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-200 ${
+                      selected
+                        ? "border-primary bg-primary/10 text-primary shadow-sm"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-primary/40 hover:bg-primary/5"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      className="accent-primary h-4 w-4"
+                      checked={selected}
+                      onChange={() => toggleIncome(income)}
+                    />
+                    <span>{income}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <PriceSummary
+            price={price}
+            rows={[
+              {
+                label: `Self Assessment Tax Return (${formData.packageType || ""})`,
+                amount: price,
+              },
+            ]}
+          />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <FormWizard
+      title="Start Self Assessment Tax Return"
+      description="Fill out the form below to begin your Self Assessment Tax Return process"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start Self Assessment Tax Return"
+      price={price}
+    />
   );
 }

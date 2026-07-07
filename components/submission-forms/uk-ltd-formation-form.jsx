@@ -11,163 +11,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuthContext } from "@/context/AppContext";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Info } from "lucide-react";
+  FormWizard,
+  PriceSummary,
+  inputStyles,
+} from "@/components/submission-forms/form-wizard";
+import {
+  Building2,
+  Users,
+  MapPin,
+  Globe,
+  KeyRound,
+  Plus,
+  Trash2,
+} from "lucide-react";
 
-// const US_STATES = [
-//   "Alabama",
-//   "Alaska",
-//   "Arizona",
-//   "Arkansas",
-//   "California",
-//   "Colorado",
-//   "Connecticut",
-//   "Delaware",
-//   "Florida",
-//   "Georgia",
-//   "Hawaii",
-//   "Idaho",
-//   "Illinois",
-//   "Indiana",
-//   "Iowa",
-//   "Kansas",
-//   "Kentucky",
-//   "Louisiana",
-//   "Maine",
-//   "Maryland",
-//   "Massachusetts",
-//   "Michigan",
-//   "Minnesota",
-//   "Mississippi",
-//   "Missouri",
-//   "Montana",
-//   "Nebraska",
-//   "Nevada",
-//   "New Hampshire",
-//   "New Jersey",
-//   "New Mexico",
-//   "New York",
-//   "North Carolina",
-//   "North Dakota",
-//   "Ohio",
-//   "Oklahoma",
-//   "Oregon",
-//   "Pennsylvania",
-//   "Rhode Island",
-//   "South Carolina",
-//   "South Dakota",
-//   "Tennessee",
-//   "Texas",
-//   "Utah",
-//   "Vermont",
-//   "Virginia",
-//   "Washington",
-//   "West Virginia",
-//   "Wisconsin",
-//   "Wyoming",
-// ];
-
-// const priceTableForLLC = {
-//   Wyoming: { normal:380, express: 450},
-//   Texas: { normal: 585, express: 655},
-//   Alabama: { normal: 500, express: 570},
-//   Alaska: { normal: 550, express: 620},
-//   Arizona: { normal: 350, express: 420},
-//   Arkansas: { normal: 350, express: 420},
-//   California: { normal: 365, express: 435},
-//   Colorado: { normal: 330, express: 400},
-//   Connecticut: { normal: 415, express: 485},
-//   Delaware: { normal: 500, express: 570},
-//   Florida: { normal: 380, express: 450},
-//   Georgia: { normal: 380, express: 450},
-//   Hawaii: { normal: 350, express: 420},
-//   Idaho: { normal: 385, express: 455},
-//   Illinois: { normal: 450, express: 520},
-//   Indiana: { normal: 400, express: 470},
-//   Iowa: { normal: 350, express: 420},
-//   Kansas: { normal: 450, express: 520},
-//   Kentucky: { normal: 330, express: 400},
-//   Louisiana: { normal: 400, express: 470},
-//   Maine: { normal: 475, express: 545},
-//   Maryland: { normal: 400, express: 470},
-//   Massachusetts: { normal: 800, express: 870},
-//   Michigan: { normal: 350, express: 420},
-//   Minnesota: { normal: 450, express: 520},
-//   Mississippi: { normal: 350, express: 420},
-//   Missouri: { normal: 350, express: 420},
-//   Montana: { normal: 330, express: 400},
-//   Nebraska: { normal: 400, express: 470},
-//   Nevada: { normal: 500, express: 570},
-//   NewHampshire: { normal: 400, express: 470},
-//   NewJersey: { normal: 430, express: 500},
-//   NewMexico: { normal: 330, express: 400},
-//   NewYork:{ normal: 500, express: 570},
-//   NorthCarolina:{ normal: 430, express: 500},
-//   NorthDakota:{ normal: 415, express: 485},
-//   Ohio: { normal: 380, express: 450},
-//   Oklahoma: { normal: 400, express: 470},
-//   Oregon: { normal: 385, express: 455},
-//   Pennsylvania: { normal: 430, express: 500},
-//   RhodeIsland: { normal: 450, express: 520},
-//   SouthCarolina: { normal: 400, express: 470},
-//   SouthDakota: { normal: 450, express: 520},
-//   Tennessee: { normal: 600, express: 670},
-//   Texas: { normal: 585, express: 655},
-//   Utah: { normal: 450, express: 520},
-//   Vermont: { normal: 415, express: 485},
-//   Virginia: { normal: 400, express: 470},
-//   Washington: { normal: 500, express: 570},
-//   WestVirginia: { normal: 450, express: 520},
-//   Wisconsin: { normal: 430, express: 500},
-//   Wyoming: { normal: 380, express: 450},
-  
-// }
-
-// const PACKAGE_FEATURES = {
-//   normal: [
-//     "Delivery in 14 business days",
-//     "Unlimited name searches",
-//     "1 year of registered agent service",
-//     "Filing of articles of Organization/Formation/Incorporation",
-//     "Operating aggrement",
-//     "EIN",
-//     "BOI filing",
-//     "Bank account (Mercury/RelayFinance, Wise, Payoneer, Airwallex anyone of them)",
-//     "Support services"
-//   ],
-//   express: [
-//     "Delivery in 7 business days",
-//     "Unlimited name searches",
-//     "1 year of registered agent service",
-//     "Filing of articles of Organization/Formation/Incorporation",
-//     "Operating aggrement",
-//     "EIN",
-//     "BOI filing",
-//     "Bank account (Mercury/RelayFinance, Wise, Payoneer, Airwallex anyone of them)",
-//     "Support services"
-//   ],
-// };
-
-// const PACKAGE_EXCLUDED = [
-//   "US Mobile Number",
-//   "Website/Domains",
-// ];
+const UK_LTD_PRICE = 240;
 
 export function UKLTDFormationForm() {
   const [loading, setLoading] = useState(false);
@@ -208,15 +70,6 @@ export function UKLTDFormationForm() {
 
   const { user } = useAuthContext();
   const [userPersonalId, setUserPersonalId] = useState(null);
-//   const [price, setPrice] = useState(0);
-
-//   useEffect(()=>{
-//     if(formData.state && formData.packageType){
-//       const statePrice = priceTableForLLC[formData.state] || priceTableForLLC.Default;
-//       const selectedPrice = statePrice[formData.packageType];
-//       setPrice(selectedPrice);
-//     }
-//   }, [formData.state, formData.packageType]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -241,7 +94,7 @@ export function UKLTDFormationForm() {
     fetchUserData();
   }, [user]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -287,14 +140,14 @@ export function UKLTDFormationForm() {
       ]).select().single();
 
       if(error) {
-        console.error("Error inserting form_submissions:", error);  
+        console.error("Error inserting form_submissions:", error);
       } else {
         console.log("form_submissions inserted successfully");
         console.log("insertedForm id:", insertedForm.id);
         router.push(`/form-submission-success`);
       }
 
-      
+
     } catch (err) {
       console.error("Error submitting form:", err);
       alert("Something went wrong.");
@@ -303,23 +156,28 @@ export function UKLTDFormationForm() {
     }
   };
 
-  return (
-    <Card className="lg:max-w-2xl md:max-w-xl max-w-md mx-auto shadow-2xl shadow-black hover:shadow-2xl hover:shadow-primary transition-all duration-600 border rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-center">
-          Start Your UK LTD Formation
-        </CardTitle>
-        <CardDescription className="text-center">
-          Fill out the form below to begin your UK LTD formation process
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 border rounded-md p-4">
+  const memberField = (index, key, value) =>
+    setMembers((prev) => {
+      const next = [...prev];
+      next[index] = { ...next[index], [key]: value };
+      return next;
+    });
+
+  const steps = [
+    {
+      title: "Company",
+      subtitle: "Name & entity type",
+      icon: Building2,
+      heading: "Company details",
+      intro: "Tell us what you'd like to call your UK LTD.",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="desiredCompanyName">Desired Company Name</Label>
               <Input
                 id="desiredCompanyName"
+                placeholder="e.g. Horizon Ventures LTD"
                 value={formData.desiredCompanyName}
                 onChange={(e) =>
                   setFormData({
@@ -327,7 +185,7 @@ export function UKLTDFormationForm() {
                     desiredCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -338,6 +196,7 @@ export function UKLTDFormationForm() {
               </Label>
               <Input
                 id="alternativeCompanyName"
+                placeholder="Backup name if the first is taken"
                 value={formData.alternativeCompanyName}
                 onChange={(e) =>
                   setFormData({
@@ -345,203 +204,163 @@ export function UKLTDFormationForm() {
                     alternativeCompanyName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="businessEntityType">Business Entity Type</Label>
-              <Select
-                value={formData.businessEntityType}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, businessEntityType: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select business entity type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="LLC">
-                    LLC
-                  </SelectItem>
-                  <SelectItem value="Sole Proprietorship">
-                    Sole Proprietorship
-                  </SelectItem>
-                  <SelectItem value="Partnership">
-                    Partnership
-                  </SelectItem>
-                  <SelectItem value="Non-Profit">
-                    Non-Profit
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-
           </div>
 
-          <hr style={{ border: "1px solid #e0e0e0" }} />
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Management Information
-            </h2>
+            <Label htmlFor="businessEntityType">Business Entity Type</Label>
+            <Select
+              value={formData.businessEntityType}
+              onValueChange={(value) =>
+                setFormData({ ...formData, businessEntityType: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select business entity type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="LLC">
+                  LLC
+                </SelectItem>
+                <SelectItem value="Sole Proprietorship">
+                  Sole Proprietorship
+                </SelectItem>
+                <SelectItem value="Partnership">
+                  Partnership
+                </SelectItem>
+                <SelectItem value="Non-Profit">
+                  Non-Profit
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-
+        </>
+      ),
+    },
+    {
+      title: "Members",
+      subtitle: "Management details",
+      icon: Users,
+      heading: "Management Information",
+      intro: "Add every member and their details.",
+      content: (
+        <>
           {members.map((member, index) => (
-            <div key={index} className="space-y-4 border rounded-md p-4">
-              <div className="text-sm font-semibold">Member {index + 1}</div>
+            <div
+              key={index}
+              className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-700">
+                    Member {index + 1}
+                  </span>
+                </div>
+                {index > 0 && (
+                  <button
+                    type="button"
+                    aria-label={`Remove member ${index + 1}`}
+                    onClick={() =>
+                      setMembers((prev) => prev.filter((_, i) => i !== index))
+                    }
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
 
-              <div className="space-y-2">
-                <Label htmlFor={`title-${index}`}>Title</Label>
-                <Input
-                  id={`title-${index}`}
-                  value={member.title}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        title: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor={`title-${index}`}>Title</Label>
+                  <Input
+                    id={`title-${index}`}
+                    placeholder="e.g. Mr / Mrs / Dr"
+                    value={member.title}
+                    onChange={(e) => memberField(index, "title", e.target.value)}
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`firstName-${index}`}>First Name</Label>
+                  <Input
+                    id={`firstName-${index}`}
+                    value={member.firstName}
+                    onChange={(e) => memberField(index, "firstName", e.target.value)}
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`surName-${index}`}>Surname</Label>
+                  <Input
+                    id={`surName-${index}`}
+                    value={member.surName}
+                    onChange={(e) => memberField(index, "surName", e.target.value)}
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`lastName-${index}`}>Last Name</Label>
+                  <Input
+                    id={`lastName-${index}`}
+                    value={member.lastName}
+                    onChange={(e) => memberField(index, "lastName", e.target.value)}
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`ownershipPercentage-${index}`}>
+                    Ownership Percentage
+                  </Label>
+                  <Input
+                    id={`ownershipPercentage-${index}`}
+                    placeholder="e.g. 50"
+                    value={member.ownershipPercentage}
+                    onChange={(e) =>
+                      memberField(index, "ownershipPercentage", e.target.value)
+                    }
+                    className={inputStyles}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor={`nationality-${index}`}>Nationality</Label>
+                  <Input
+                    id={`nationality-${index}`}
+                    value={member.nationality}
+                    onChange={(e) => memberField(index, "nationality", e.target.value)}
+                    className={inputStyles}
+                    required
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor={`firstName-${index}`}>First Name</Label>
-                <Input
-                  id={`firstName-${index}`}
-                  value={member.firstName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        firstName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor={`surName-${index}`}>Surname</Label>
-                <Input
-                  id={`surName-${index}`}
-                  value={member.surName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        surName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor={`lastName-${index}`}>Last Name</Label>
-                <Input
-                  id={`lastName-${index}`}
-                  value={member.lastName}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        lastName: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor={`ownershipPercentage-${index}`}>
-                  Ownership Percentage
-                </Label>
-                <Input
-                  id={`ownershipPercentage-${index}`}
-                  value={member.ownershipPercentage}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        ownershipPercentage: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor={`nationality-${index}`}>
-                  Nationality
-                </Label>
-                <Input
-                  id={`nationality-${index}`}
-                  value={member.nationality}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        nationality: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
-                  required
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <Label htmlFor={`occupation-${index}`}>
-                  Occupation
-                </Label>
+                <Label htmlFor={`occupation-${index}`}>Occupation</Label>
                 <Input
                   id={`occupation-${index}`}
                   value={member.occupation}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        occupation: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
+                  onChange={(e) => memberField(index, "occupation", e.target.value)}
+                  className={inputStyles}
                   required
                 />
               </div>
-
 
               <div className="space-y-2">
                 <Label htmlFor={`residentialAddress-${index}`}>
@@ -551,177 +370,144 @@ export function UKLTDFormationForm() {
                   id={`residentialAddress-${index}`}
                   value={member.residentialAddress}
                   onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        residentialAddress: e.target.value,
-                      };
-                      return next;
-                    })
+                    memberField(index, "residentialAddress", e.target.value)
                   }
-                  className="border-gray-300 shadow-md shadow-black"
+                  className={inputStyles}
                   required
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor={`serviceAddress-${index}`}>
-                  Service/Correspondence Address (Public) 
+                  Service/Correspondence Address (Public)
                 </Label>
                 <Input
                   id={`serviceAddress-${index}`}
                   value={member.serviceAddress}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        serviceAddress: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
+                  onChange={(e) => memberField(index, "serviceAddress", e.target.value)}
+                  className={inputStyles}
                   required
                   placeholder="If you want to keep your personal address hidden, you can purchase our service address for 39£ + VAT."
                 />
               </div>
 
-
               <div className="space-y-2">
-                <Label htmlFor={`emailAddress-${index}`}>
-                    Email Address
-                </Label>
+                <Label htmlFor={`emailAddress-${index}`}>Email Address</Label>
                 <Input
                   id={`emailAddress-${index}`}
                   value={member.emailAddress}
-                  onChange={(e) =>
-                    setMembers((prev) => {
-                      const next = [...prev];
-                      next[index] = {
-                        ...next[index],
-                        emailAddress: e.target.value,
-                      };
-                      return next;
-                    })
-                  }
-                  className="border-gray-300 shadow-md shadow-black"
+                  onChange={(e) => memberField(index, "emailAddress", e.target.value)}
+                  className={inputStyles}
                   required
                 />
               </div>
-
-              
             </div>
           ))}
 
-          <div>
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() =>
-                setMembers((prev) => [
-                  ...prev,
-                  {
-                   title: "",
-                   firstName: "",
-                   surName: "",
-                   lastName: "",
-                   ownershipPercentage: "",
-                   nationality: "",
-                   occupation: "",
-                   residentialAddress: "",
-                   serviceAddress: "",
-                   emailAddress: "",
-                  },
-                ])
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full border-dashed border-primary/40 text-primary hover:bg-primary/5 hover:text-primary"
+            onClick={() =>
+              setMembers((prev) => [
+                ...prev,
+                {
+                 title: "",
+                 firstName: "",
+                 surName: "",
+                 lastName: "",
+                 ownershipPercentage: "",
+                 nationality: "",
+                 occupation: "",
+                 residentialAddress: "",
+                 serviceAddress: "",
+                 emailAddress: "",
+                },
+              ])
+            }
+          >
+            <Plus className="h-4 w-4 mr-1" /> Add A Member
+          </Button>
+        </>
+      ),
+    },
+    {
+      title: "Security",
+      subtitle: "Identity questions",
+      icon: KeyRound,
+      heading: "Security Questions",
+      intro: "Companies House requires these three identity checks.",
+      content: (
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="space-y-2">
+            <Label htmlFor="fThreeLetterOfMotherName">
+              First 3 letters of mother's maiden name
+            </Label>
+            <Input
+              id="fThreeLetterOfMotherName"
+              value={formData.fThreeLetterOfMotherName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  fThreeLetterOfMotherName: e.target.value,
+                })
               }
-            >
-              Add A Member
-            </Button>
+              maxLength={3}
+              className={inputStyles}
+              required
+            />
           </div>
 
-          
-          <hr style={{ border: "1px solid #e0e0e0" }} />
+          <div className="space-y-2">
+            <Label htmlFor="fThreeLetterOfFatherName">
+              First 3 letters of father's first name
+            </Label>
+            <Input
+              id="fThreeLetterOfFatherName"
+              value={formData.fThreeLetterOfFatherName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  fThreeLetterOfFatherName: e.target.value,
+                })
+              }
+              maxLength={3}
+              className={inputStyles}
+              required
+            />
+          </div>
 
-                <div className="space-y-2">
-                  <h2 className="text-lg font-bold text-center">
-                     Security Questions
-                  </h2>
-               </div>
-
-         <div className="space-y-4 border rounded-md p-4">
-
-               <div className="space-y-2">
-              <Label htmlFor="fThreeLetterOfMotherName">First 3 letters of mother's maiden name</Label>
-              <Input
-                id="fThreeLetterOfMotherName"
-                value={formData.fThreeLetterOfMotherName}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    fThreeLetterOfMotherName: e.target.value,
-                  })
-                }
-                maxLength={3}
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-
-            <div className="space-y-2">
-              <Label htmlFor="fThreeLetterOfFatherName">First 3 letters of father's first name</Label>
-              <Input
-                id="fThreeLetterOfFatherName"
-                value={formData.fThreeLetterOfFatherName}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    fThreeLetterOfFatherName: e.target.value,
-                  })
-                }
-                maxLength={3}
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-
-            <div className="space-y-2">
-              <Label htmlFor="fThreeLetterOfTownOfBirth">First 3 letters of town of birth</Label>
-              <Input
-                id="fThreeLetterOfTownOfBirth"
-                value={formData.fThreeLetterOfTownOfBirth}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    fThreeLetterOfTownOfBirth: e.target.value,
-                  })
-                }
-                maxLength={3}
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
+          <div className="space-y-2">
+            <Label htmlFor="fThreeLetterOfTownOfBirth">
+              First 3 letters of town of birth
+            </Label>
+            <Input
+              id="fThreeLetterOfTownOfBirth"
+              value={formData.fThreeLetterOfTownOfBirth}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  fThreeLetterOfTownOfBirth: e.target.value,
+                })
+              }
+              maxLength={3}
+              className={inputStyles}
+              required
+            />
+          </div>
         </div>
-
-
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
-
-          <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Contact Information
-            </h2>
-          </div>
-
-          <div className="space-y-4 border rounded-md p-4">
-
-
-
-          <div className="space-y-2">
+      ),
+    },
+    {
+      title: "Contact",
+      subtitle: "Address & reach",
+      icon: MapPin,
+      heading: "Contact Information",
+      intro: "How can we reach you during the formation process?",
+      content: (
+        <>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
               <Input
                 id="firstName"
@@ -732,7 +518,7 @@ export function UKLTDFormationForm() {
                     firstName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -748,16 +534,16 @@ export function UKLTDFormationForm() {
                     lastName: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="phoneNumberBusiness">Phone Number-Business</Label>
               <Input
                 id="phoneNumberBusiness"
+                type="tel"
                 value={formData.phoneNumberBusiness}
                 onChange={(e) =>
                   setFormData({
@@ -765,7 +551,7 @@ export function UKLTDFormationForm() {
                     phoneNumberBusiness: e.target.value,
                   })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -778,7 +564,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, emailBusiness: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -791,7 +577,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, faxNumber: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -804,24 +590,26 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, country: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="addressLocal">Enter Local Address</Label>
-              <Input
-                id="addressLocal"
-                value={formData.addressLocal}
-                onChange={(e) =>
-                  setFormData({ ...formData, addressLocal: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="addressLocal">Enter Local Address</Label>
+            <Input
+              id="addressLocal"
+              value={formData.addressLocal}
+              onChange={(e) =>
+                setFormData({ ...formData, addressLocal: e.target.value })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
+          <div className="grid gap-4 md:grid-cols-3">
             <div className="space-y-2">
               <Label htmlFor="city">City</Label>
               <Input
@@ -830,7 +618,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -843,11 +631,10 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, state: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
-
 
             <div className="space-y-2">
               <Label htmlFor="zipCode">Zip Code</Label>
@@ -857,70 +644,83 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, zipCode: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
           </div>
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
-
+        </>
+      ),
+    },
+    {
+      title: "Business",
+      subtitle: "Review & submit",
+      icon: Globe,
+      heading: "Product Information & Business Website",
+      intro: "Last step — tell us about your business, review the price, and submit.",
+      content: (
+        <>
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Product Information & Business Website
-            </h2>
+            <Label htmlFor="typeOfProduct">
+              Type of product you are or willing to sell
+            </Label>
+            <Input
+              id="typeOfProduct"
+              value={formData.typeOfProduct}
+              onChange={(e) =>
+                setFormData({ ...formData, typeOfProduct: e.target.value })
+              }
+              className={inputStyles}
+              required
+            />
           </div>
 
-          <div className="space-y-4 border rounded-md p-4">
-
+          <div className="space-y-2">
+            <Label htmlFor="typeOfBusiness">Type of Business</Label>
+            <Select
+              value={formData.typeOfBusiness}
+              onValueChange={(value) =>
+                setFormData({ ...formData, typeOfBusiness: value })
+              }
+              required
+            >
+              <SelectTrigger className={inputStyles}>
+                <SelectValue placeholder="Select type of business" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="OnlineBusiness">
+                  Online Business
+                </SelectItem>
+                <SelectItem value="ECommerceBusiness">
+                  E-Commerce Business
+                </SelectItem>
+                <SelectItem value="WholesaleBusiness">
+                  Wholesale Business
+                </SelectItem>
+                <SelectItem value="RetailBusiness">
+                  Retail Business
+                </SelectItem>
+                <SelectItem value="Non-Profit">
+                  Non-Profit
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
           <div className="space-y-2">
-              <Label htmlFor="typeOfProduct">Type of product you are or willing to sell</Label>
-              <Input
-                id="typeOfProduct"
-                value={formData.typeOfProduct}
-                onChange={(e) =>
-                  setFormData({ ...formData, typeOfProduct: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
+            <Label htmlFor="description">Brief Description Of Business</Label>
+            <Input
+              id="description"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+              className={inputStyles}
+              required
+            />
+          </div>
 
-
-            <div className="space-y-2">
-              <Label htmlFor="typeOfBusiness">Type of Business</Label>
-              <Select
-                value={formData.typeOfBusiness}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, typeOfBusiness: value })
-                }
-                required
-              >
-                <SelectTrigger className="border-gray-300 shadow-md shadow-black">
-                  <SelectValue placeholder="Select type of business" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="OnlineBusiness">
-                    Online Business
-                  </SelectItem>
-                  <SelectItem value="ECommerceBusiness">
-                    E-Commerce Business
-                  </SelectItem>
-                  <SelectItem value="WholesaleBusiness">
-                    Wholesale Business
-                  </SelectItem>
-                  <SelectItem value="RetailBusiness">
-                    Retail Business
-                  </SelectItem>
-                  <SelectItem value="Non-Profit">
-                    Non-Profit
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="businessWebsite">Business Website</Label>
               <Input
@@ -929,48 +729,7 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, businessWebsite: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-
-
-          </div>
-
-          <hr style={{ border: "1px solid #e0e0e0" }} />
-
-          <div className="space-y-2">
-            <h2 className="text-lg font-bold text-center">
-              Product Information & Business Website
-            </h2>
-          </div>
-
-          <div className="space-y-4 border rounded-md p-4">
-            <div className="space-y-2">
-              <Label htmlFor="description">Brief Description Of Business</Label>
-              <Input
-                id="description"
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
-                required
-              />
-            </div>
-
-           
-
-            <div className="space-y-2">
-              <Label htmlFor="businessWebsite">Business Website</Label>
-              <Input
-                id="businessWebsite"
-                value={formData.businessWebsite}
-                onChange={(e) =>
-                  setFormData({ ...formData, businessWebsite: e.target.value })
-                }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
@@ -983,19 +742,30 @@ export function UKLTDFormationForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, businessEmail: e.target.value })
                 }
-                className="border-gray-300 shadow-md shadow-black"
+                className={inputStyles}
                 required
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full hover:scale-105 transition-all duration-300 hover:shadow-md shadow-black cursor-pointer" disabled={loading}>
-            {loading ? "Submitting..." : "Start UK LTD Formation"}
-          </Button>
-        </form>
+          <PriceSummary
+            price={UK_LTD_PRICE}
+            rows={[{ label: "UK LTD Formation", amount: UK_LTD_PRICE }]}
+          />
+        </>
+      ),
+    },
+  ];
 
-        {/* <Button onClick={() => submitForm()}>submitForm</Button> */}
-      </CardContent>
-    </Card>
+  return (
+    <FormWizard
+      title="Start Your UK LTD Formation"
+      description="5 quick steps — about 5 minutes"
+      steps={steps}
+      onSubmit={handleSubmit}
+      loading={loading}
+      submitLabel="Start UK LTD Formation"
+      price={UK_LTD_PRICE}
+    />
   );
 }
