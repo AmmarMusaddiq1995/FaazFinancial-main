@@ -1145,7 +1145,7 @@ export function Header() {
                       variant="outline"
                       className="w-full justify-center min-h-[44px] rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white transition-colors duration-200"
                     >
-                      Log In
+                      Log In 
                     </Button>
                   </Link>
                 </>
