@@ -9,6 +9,7 @@ import { Calculator } from "lucide-react";
 import {
   FormWizard,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 /* Shared quotation-request form used by the bookkeeping-style services.
@@ -56,7 +57,7 @@ export function QuotationRequestForm({ serviceName, interestedIn }) {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

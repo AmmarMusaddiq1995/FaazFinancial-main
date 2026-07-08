@@ -73,17 +73,7 @@ export default function AccountingServiceTemplate({ service }) {
       </section>
 
       {/* Pricing signal */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-3xl text-center">
-          <DollarSign className="h-8 w-8 text-primary mx-auto mb-3" />
-          <h2 className="text-xl lg:text-3xl font-bold mb-3">Pricing</h2>
-          <p className="text-sm lg:text-lg text-muted-foreground mb-2">{service.pricingSignal}</p>
-          <p className="text-xs text-muted-foreground">
-            {/* TODO: replace with real pricing once available */}
-            Final pricing is confirmed after a free consultation based on your specific needs.
-          </p>
-        </div>
-      </section>
+     
 
       {/* CTA */}
       <section className="py-16 lg:py-20 px-4 bg-slate-900 text-white">

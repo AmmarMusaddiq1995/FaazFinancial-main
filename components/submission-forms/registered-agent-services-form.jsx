@@ -15,6 +15,7 @@ import {
   PackageCards,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 const US_STATES = [
@@ -134,7 +135,7 @@ export function RegisteredAgentServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

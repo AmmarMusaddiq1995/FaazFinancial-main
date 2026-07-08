@@ -38,6 +38,7 @@ import {
   PackageCards,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 
@@ -209,10 +210,10 @@ export function PayrollWithholdingServicesForm() {
   const [price, setPrice] = useState(0);
   useEffect(()=>{
     if(formData.packageType === "normal"){
-      const selectedPrice = 60;
+      const selectedPrice = 95;
       setPrice(selectedPrice);
     } else if(formData.packageType === "express"){
-      const selectedPrice = 80;
+      const selectedPrice = 130;
       setPrice(selectedPrice);
     }
   }, [formData.packageType]);
@@ -227,7 +228,7 @@ export function PayrollWithholdingServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);
@@ -1211,8 +1212,8 @@ export function PayrollWithholdingServicesForm() {
               setFormData({ ...formData, packageType: value })
             }
             options={[
-              { value: "normal", label: "Normal", icon: Clock, price: 60 },
-              { value: "express", label: "Express", icon: Zap, badge: "Fastest", price: 80 },
+              { value: "normal", label: "Normal", icon: Clock, price: 95 },
+              { value: "express", label: "Express", icon: Zap, badge: "Fastest", price: 130 },
             ]}
           />
 

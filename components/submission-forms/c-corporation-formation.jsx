@@ -24,6 +24,7 @@ import {
   PricingBadge,
   US_STATES,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 import {
   Building2,
@@ -218,7 +219,7 @@ export function CorporationFormationForm({ pricingData }) {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);
@@ -256,6 +257,7 @@ export function CorporationFormationForm({ pricingData }) {
 
       if(error) {
         console.error("Error inserting form_submissions:", error);
+        toast.error(`Failed to save form data: ${error.message}`);
       } else {
         console.log("form_submissions inserted successfully");
         console.log("insertedForm id:", insertedForm.id);

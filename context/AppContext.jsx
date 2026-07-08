@@ -45,10 +45,14 @@ export const AppContextProvider = ({ children }) => {
       setLoading(false);
 
       const { data } = supabase.auth.onAuthStateChange(
-        async (_event, session) => {
+        (_event, session) => {
           setSession(session);
           setUser(session?.user ?? null);
-          await loadRole(session?.user?.id);
+          // Deferred: awaiting a supabase query inside this callback deadlocks the
+          // client's auth lock (callback runs while the lock is held; the query
+          // needs the same lock to read the session), freezing all later auth
+          // calls in the tab. setTimeout runs it after the lock is released.
+          setTimeout(() => loadRole(session?.user?.id), 0);
         }
       );
       subscription = data.subscription;

@@ -22,11 +22,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  AlertCircle,
   Calendar as CalendarIcon,
   Check,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   Info,
+  Loader2,
   ShieldCheck,
   Upload,
 } from "lucide-react";
@@ -36,6 +39,43 @@ export const CARD_FEE_RATE = 0.045;
 export const CARD_FEE_LABEL = "4.5%";
 export const cardFeeAmount = (price) => Math.ceil(price * CARD_FEE_RATE);
 export const totalWithCardFee = (price) => Math.ceil(price * (1 + CARD_FEE_RATE));
+
+/* ── Submit-hang guard ──
+   supabase-js serializes auth calls through the Navigator LockManager with no
+   timeout, so a stale `sb-*-auth-token` lock (e.g. after the tab sat idle through
+   a token refresh) leaves `await supabase.auth.getUser()` pending forever and the
+   submit button stuck on "Submitting...". `withTimeout` rejects after `ms` so the
+   caller's catch/finally still run, and it steals any stuck auth lock first so a
+   retry doesn't queue behind the same dead holder (retry works without a reload). */
+async function releaseStuckAuthLocks() {
+  try {
+    if (typeof navigator === "undefined" || !navigator.locks?.query) return;
+    const { held = [] } = await navigator.locks.query();
+    const stuckAuthLocks = held.filter((lock) => lock.name?.startsWith("lock:sb-"));
+    // `steal: true` force-releases the dead holder; the empty callback then
+    // releases the lock immediately so the next auth call can acquire it.
+    await Promise.all(
+      stuckAuthLocks.map((lock) =>
+        navigator.locks.request(lock.name, { steal: true }, () => {})
+      )
+    );
+  } catch {
+    // Best-effort cleanup — the timeout error is surfaced regardless.
+  }
+}
+
+export function withTimeout(promise, ms = 10000) {
+  let timer;
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      timer = setTimeout(async () => {
+        await releaseStuckAuthLocks();
+        reject(new Error("The request timed out. Please try again."));
+      }, ms);
+    }),
+  ]).finally(() => clearTimeout(timer));
+}
 
 /* Shared input styling for all service forms. */
 export const inputStyles =
@@ -156,24 +196,52 @@ export function DateField({ id, value, onChange, required }) {
   );
 }
 
-/* Styled file-input: visually a dashed drop-area, the real input stays in the DOM for `required`. */
-export function FileUploadField({ id, uploaded, placeholder, required, onChange }) {
+/* Styled file-input: visually a dashed drop-area, the real input stays in the DOM for `required`.
+   `status` (optional): "uploading" | "success" | "error" — shows progress/result feedback. */
+export function FileUploadField({ id, uploaded, placeholder, required, onChange, status }) {
+  const isUploading = status === "uploading";
   return (
     <>
       <label
         htmlFor={id}
-        className="flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-600 transition-colors hover:border-primary/50 hover:bg-primary/5"
+        className={`flex min-h-[44px] items-center gap-2 rounded-lg border border-dashed border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-600 transition-colors ${
+          isUploading
+            ? "cursor-wait opacity-70"
+            : "cursor-pointer hover:border-primary/50 hover:bg-primary/5"
+        }`}
       >
-        <Upload className="h-4 w-4 text-primary shrink-0" />
-        {uploaded ? "File uploaded — choose another to replace" : placeholder}
+        {isUploading ? (
+          <Loader2 className="h-4 w-4 text-primary shrink-0 animate-spin" />
+        ) : (
+          <Upload className="h-4 w-4 text-primary shrink-0" />
+        )}
+        {isUploading
+          ? "Uploading file..."
+          : uploaded
+          ? "File uploaded — choose another to replace"
+          : placeholder}
       </label>
       <input
         type="file"
         id={id}
         onChange={onChange}
         required={required}
+        disabled={isUploading}
         className="sr-only"
       />
+      {status === "success" && (
+        <p className="flex items-center gap-1.5 text-xs font-medium text-green-600 animate-in fade-in duration-200">
+          <CheckCircle2 className="h-3.5 w-3.5 shrink-0" /> File uploaded successfully
+        </p>
+      )}
+      {status === "error" && (
+        <p
+          role="alert"
+          className="flex items-center gap-1.5 text-xs font-medium text-destructive animate-in fade-in duration-200"
+        >
+          <AlertCircle className="h-3.5 w-3.5 shrink-0" /> File upload failed — please try again
+        </p>
+      )}
     </>
   );
 }
@@ -539,8 +607,13 @@ export function FormWizard({
                   <ChevronLeft className="h-4 w-4 mr-1" /> Back
                 </Button>
               )}
+              {/* Distinct keys force a fresh DOM node when Continue becomes Submit.
+                  Without them React mutates the same <button> from type="button" to
+                  type="submit" mid-click, and the browser's default action for that
+                  click submits the form the moment the last step is reached. */}
               {!isLastStep ? (
                 <Button
+                  key="wizard-continue"
                   type="button"
                   onClick={handleNext}
                   className="flex-1 h-11 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"
@@ -549,6 +622,7 @@ export function FormWizard({
                 </Button>
               ) : (
                 <Button
+                  key="wizard-submit"
                   type="submit"
                   onClick={handleSubmitClick}
                   className="flex-1 h-11 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"

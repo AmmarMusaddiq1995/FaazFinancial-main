@@ -21,6 +21,7 @@ import {
   PackageCards,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 export function EinServicesForm() {
@@ -89,7 +90,7 @@ export function EinServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

@@ -1,11 +1,13 @@
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-console.log(process.env.STRIPE_SECRET_KEY);
+
 
 export async function POST(req) {
   const { amount, form_id } = await req.json();
-  const totalAmountWithTax  = (amount + (amount * 0.045));
+  // Round up to a whole dollar exactly like totalWithCardFee() in form-wizard.jsx,
+  // so the amount charged matches the total shown in the form's price breakdown.
+  const totalAmountWithTax  = Math.ceil(amount + (amount * 0.045));
 
   console.log(amount, form_id);
 
@@ -18,7 +20,7 @@ export async function POST(req) {
           product_data: {
             name: "Custom Payment",
           },
-          unit_amount: totalAmountWithTax * 100, // convert $50 → 5000 cents
+          unit_amount: Math.round(totalAmountWithTax * 100), // convert $50 → 5000 cents (Stripe requires an integer)
         },
         quantity: 1,
       },

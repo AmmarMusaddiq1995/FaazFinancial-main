@@ -12,6 +12,7 @@ import {
   OptionToggle,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 const COMPLEX_CT600_PRICE = 161;
@@ -68,7 +69,7 @@ export function ComplexCorpTaxReturnPage() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

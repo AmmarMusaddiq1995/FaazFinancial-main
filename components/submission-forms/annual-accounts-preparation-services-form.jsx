@@ -11,6 +11,7 @@ import {
   OptionToggle,
   PackageCards,
   PriceSummary,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 export function AnnualAccountsPreparationServicesForm() {
@@ -69,7 +70,7 @@ export function AnnualAccountsPreparationServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

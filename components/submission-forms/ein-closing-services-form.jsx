@@ -12,6 +12,7 @@ import {
   FormWizard,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 const EIN_CLOSING_PRICE = 80;
@@ -68,7 +69,7 @@ export function EinClosingServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

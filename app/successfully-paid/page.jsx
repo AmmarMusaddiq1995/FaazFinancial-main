@@ -1,180 +1,24 @@
 "use client";
 
-
-// import { useRouter } from "next/navigation";
-// export default function SuccessfullyPaid() {
-//   const router = useRouter();
-//   return (
-//   <div>
-    
-//     Successfully Paid
-//     <div>
-
-//     <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 cursor-pointer" onClick={() => router.push("/dashboard")}>Go to Dashboard</button>
-//     </div>
-  
-
-//     </div>
-//   )
-// }
-
-// "use client";
-
-// import { Suspense } from "react";
-// import { useSearchParams, useRouter } from "next/navigation";
-// import { CheckCircle } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-
-
-
-//   function PaymentSuccessContent() {
-
-//     const searchParams = useSearchParams();
-//     const router = useRouter();
-//     const paymentId = searchParams.get("payment_intent");
-
-
-//   return (
-//     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-//       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
-//         <div className="flex justify-center mb-6">
-//           <div className="bg-orange-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-orange-600" />
-//           </div>
-//         </div>
-
-//         <h1 className="text-3xl font-bold text-green-700 mb-2">
-//           Payment Successful 🎉
-//         </h1>
-//         <p className="text-gray-600 mb-6">
-//           Your payment has been processed successfully.  
-//           Thank you for choosing our service.
-//         </p>
-
-//         <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6">
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Payment ID:</span>
-//             <span className="text-gray-600 truncate max-w-[200px]">
-//               {paymentId || "pi_3JXh7ZabcXYZ"}
-//             </span>
-//           </div>
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Amount:</span>
-//             <span className="text-orange-600 font-semibold">$299.00</span>
-//           </div>
-//           <div className="flex justify-between text-gray-700">
-//             <span className="font-medium">Status:</span>
-//             <span className="text-orange-600 font-semibold">Paid</span>
-//           </div>
-//         </div>
-
-//         <Button
-//           className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
-//           onClick={() => router.push("/dashboard")}
-//         >
-//           Go to Dashboard
-//         </Button>
-
-//         <p className="text-sm text-gray-500 mt-6">
-//           Having trouble?{" "}
-//           <a href="/contact" className="text-orange-600 hover:underline">
-//             Contact Support
-//           </a>
-//         </p>
-//       </div>
-//       </div>)}
-
-// export default function PaymentSuccess() {
-//   return (
-//     <Suspense fallback={<div className="text-center mt-10 text-gray-500">Loading...</div>}>
-//       <PaymentSuccessContent />
-//     </Suspense>
-//   );
-
-// }
-
-// "use client";
-
-// import { Suspense } from "react";
-// import { useSearchParams, useRouter } from "next/navigation";
-// import { CheckCircle } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-
-// function PaymentSuccessContent() {
-//   const searchParams = useSearchParams();
-//   const router = useRouter();
-//   const paymentId = searchParams.get("payment_intent");
-
-//   return (
-//     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-//       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
-//         <div className="flex justify-center mb-6">
-//           <div className="bg-orange-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-orange-600" />
-//           </div>
-//         </div>
-
-//         <h1 className="text-3xl font-bold text-green-700 mb-2">
-//           Payment Successful 🎉
-//         </h1>
-//         <p className="text-gray-600 mb-6">
-//           Your payment has been processed successfully.  
-//           Thank you for choosing our service.
-//         </p>
-
-//         <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6">
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Payment ID:</span>
-//             <span className="text-gray-600 truncate max-w-[200px]">
-//               {paymentId || "pi_3JXh7ZabcXYZ"}
-//             </span>
-//           </div>
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Amount:</span>
-//             <span className="text-orange-600 font-semibold">$299.00</span>
-//           </div>
-//           <div className="flex justify-between text-gray-700">
-//             <span className="font-medium">Status:</span>
-//             <span className="text-orange-600 font-semibold">Paid</span>
-//           </div>
-//         </div>
-
-//         <Button
-//           className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
-//           onClick={() => router.push("/dashboard")}
-//         >
-//           Go to Dashboard
-//         </Button>
-
-//         <p className="text-sm text-gray-500 mt-6">
-//           Having trouble?{" "}
-//           <a href="/contact" className="text-orange-600 hover:underline">
-//             Contact Support
-//           </a>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default function PaymentSuccess() {
-//   return (
-//     <Suspense fallback={<div className="text-center mt-10 text-gray-500">Loading...</div>}>
-//       <PaymentSuccessContent />
-//     </Suspense>
-//   );
-// }
-/------------------------------------------/
-
-
-
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import {
+  CARD_FEE_LABEL,
+  CARD_FEE_RATE,
+} from "@/components/submission-forms/form-wizard";
+
+const usd = (n) => `$${Number(n).toFixed(2)}`;
+
+/* The receipt must show the same numbers as the form's price breakdown:
+   Order Amount = the pre-fee price stored in form_submissions.amount,
+   Card Fee = what Stripe actually charged minus that base,
+   Total = Stripe's amount_total. Recomputing the fee from the total
+   (total × 4.5%) taxes the fee itself and drifts from the form. */
 
 function PaymentSuccessContent() {
   const searchParams = useSearchParams();
@@ -193,24 +37,49 @@ function PaymentSuccessContent() {
       }
 
       try {
-        // Verify with server (talks to Stripe securely)
+        // Verify with the server (talks to Stripe securely)
         const res = await fetch(`/api/verify-payment?session_id=${sessionId}`);
         const data = await res.json();
-        console.log("data coming from stripe api session",data);
+
         if (res.ok && data?.form_id) {
-          // Update Supabase row
-          console.log("data coming from supabase",data);
+          const paid =
+            data.payment_status === "paid" || data.payment_status === "succeeded";
+
+          // Pre-fee price + service name, straight from the submission row
+          const { data: submission } = await supabase
+            .from("form_submissions")
+            .select("amount, service_name")
+            .eq("id", data.form_id)
+            .maybeSingle();
+
+          // `amount` stays the pre-fee price (see README "Card processing fee") —
+          // never overwrite it with the charged total, or the fee breakdown and
+          // any future re-charge would be computed from the wrong base.
           await supabase
             .from("form_submissions")
             .update({
               payment_status: data.payment_status,
               payment_id: data.payment_intent_id || null,
-              amount: data.amount_total ? data.amount_total / 100 : null,
-              status: data.payment_status === "paid" || data.payment_status === "succeeded" ? "in-progress" : undefined,
+              ...(paid ? { status: "in-progress" } : {}),
             })
             .eq("id", data.form_id);
 
-          setDetails(data);
+          const total = (data.amount_total ?? 0) / 100;
+          let baseAmount = Number(submission?.amount);
+          if (!baseAmount || baseAmount >= total) {
+            // Legacy rows had `amount` overwritten with the charged total —
+            // reverse the whole-dollar round-up used at charge time instead.
+            baseAmount = Math.floor(total / (1 + CARD_FEE_RATE) + 1e-9);
+          }
+
+          setDetails({
+            ...data,
+            paid,
+            total,
+            baseAmount,
+            cardFee: total - baseAmount,
+            serviceName: submission?.service_name,
+          });
         } else {
           setErrorText(data?.error || "Unable to verify payment.");
         }
@@ -226,75 +95,119 @@ function PaymentSuccessContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50">
-        <Loader2 className="h-10 w-10 text-orange-600 animate-spin mb-4" />
+        <Loader2 className="h-10 w-10 text-primary animate-spin mb-4" />
         <p className="text-gray-600 text-lg">Verifying your payment...</p>
       </div>
     );
   }
 
+  const failed = errorText || !details?.paid;
+
   return (
     <div>
-    <Header />
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-      <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-2xl text-center border border-green-100">
-        <div className="flex justify-center mb-6">
-          <div className="bg-orange-100 p-4 rounded-full">
-            <CheckCircle className="h-16 w-16 text-orange-600" />
+      <Header />
+      <main className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 px-4 py-12">
+        <div className="w-full max-w-lg rounded-3xl border border-green-100 bg-white p-6 sm:p-10 text-center shadow-2xl shadow-green-900/5">
+          <div className="flex justify-center mb-6">
+            <div
+              className={`rounded-full p-4 ${failed ? "bg-rose-50" : "bg-green-50"}`}
+            >
+              {failed ? (
+                <XCircle className="h-14 w-14 text-rose-500" />
+              ) : (
+                <CheckCircle className="h-14 w-14 text-green-600" />
+              )}
+            </div>
           </div>
+
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+            {failed ? "Payment Not Confirmed" : "Payment Successful 🎉"}
+          </h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-8">
+            {errorText ||
+              (failed
+                ? "Your payment hasn't been confirmed yet. If you completed checkout, refresh this page in a minute."
+                : "Your payment has been processed successfully. Thank you for choosing Faaz Financial Group.")}
+          </p>
+
+          {details && (
+            <div className="mb-8 rounded-2xl border bg-gray-50/70 p-5 text-left">
+              {details.serviceName && (
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <span className="font-semibold text-gray-800">
+                    {details.serviceName}
+                  </span>
+                  <span
+                    className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                      details.paid
+                        ? "bg-green-100 text-green-700"
+                        : "bg-amber-100 text-amber-700"
+                    }`}
+                  >
+                    {details.payment_status.charAt(0).toUpperCase() +
+                      details.payment_status.slice(1)}
+                  </span>
+                </div>
+              )}
+
+              <div className="space-y-1.5 text-sm text-gray-700">
+                <div className="flex justify-between">
+                  <span>Order Amount:</span>
+                  <span>{usd(details.baseAmount)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Card Processing Fee ({CARD_FEE_LABEL}):</span>
+                  <span>{usd(details.cardFee)}</span>
+                </div>
+                <hr className="my-2 border-gray-200" />
+                <div className="flex justify-between text-lg font-semibold text-gray-800">
+                  <span>Total Paid:</span>
+                  <span className="font-bold text-primary">{usd(details.total)}</span>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-1.5 border-t border-dashed border-gray-200 pt-3 text-xs text-muted-foreground">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="shrink-0">Order Reference</span>
+                  <span className="truncate font-mono" title={details.form_id}>
+                    {details.form_id}
+                  </span>
+                </div>
+                {details.payment_intent_id && (
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="shrink-0">Payment ID</span>
+                    <span
+                      className="truncate font-mono"
+                      title={details.payment_intent_id}
+                    >
+                      {details.payment_intent_id}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          <Button
+            className="h-11 w-full sm:w-auto cursor-pointer rounded-full px-8 text-base shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
+            onClick={() => router.push("/dashboard")}
+          >
+            Go to Dashboard
+          </Button>
         </div>
-
-        <h1 className="text-3xl font-bold text-green-700 mb-2">
-          {errorText ? "Payment Verification" : "Payment Successful 🎉"}
-        </h1>
-        <p className="text-gray-600 mb-6">
-          {errorText || "Your payment has been processed successfully. Thank you for choosing our service."}
-        </p>
-
-        {details && (
-          <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6 text-left">
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Order Amount:</span>
-              <span className="text-orange-600 font-semibold">${((details.amount_total / 100)-(details.amount_total / 100) * 0.045).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Card Fee (4.5%):</span>
-              <span className="text-orange-600 font-semibold">${((details.amount_total / 100) * 0.045).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Total Amount:</span>
-              <span className="text-orange-600 font-semibold">${(details.amount_total / 100).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Status:</span>
-              <span className="text-orange-600 font-semibold">{details.payment_status.charAt(0).toUpperCase() + details.payment_status.slice(1)}</span>
-            </div>
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Form ID:</span>
-              <span className="text-orange-600 font-semibold">{details.form_id}</span>
-            </div>
-            <div className="flex justify-between text-gray-700 mb-2">
-              <span className="font-medium">Payment ID:</span>
-              <span className="text-orange-600 font-semibold">{details.payment_intent_id}</span>
-            </div>
-          </div>
-        )}
-
-        <Button
-          className="bg-primary hover:bg-primary/80 cursor-pointer text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
-          onClick={() => router.push("/dashboard")}
-        >
-          Go to Dashboard
-        </Button>
-      </div>
-    </div>
-    <Footer />
+      </main>
+      <Footer />
     </div>
   );
 }
 
 export default function PaymentSuccess() {
   return (
-    <Suspense fallback={<div className="text-center mt-10 text-gray-500">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="text-center mt-10 text-gray-500">Loading...</div>
+      }
+    >
       <PaymentSuccessContent />
     </Suspense>
   );
@@ -303,410 +216,3 @@ export default function PaymentSuccess() {
 // ✅ Disable pre-rendering (fix for Vercel)
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
-
-/* -------- Latest code with backend logic -------- */
-
-
-// "use client";
-
-// import { Suspense, useEffect, useState } from "react";
-// import { useSearchParams, useRouter } from "next/navigation";
-// import { CheckCircle } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-// import { supabase } from "@/lib/supabaseClient";
-
-// function PaymentSuccessContent() {
-//   const searchParams = useSearchParams();
-//   const router = useRouter();
-
-//   const [paymentId, setPaymentId] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [paymentData, setPaymentData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchAndUpdatePayment = async () => {
-//       const paymentIntentId = searchParams.get("payment_intent");
-//       if (!paymentIntentId){
-//        setLoading(false);
-//         return;
-//       }  
-
-//       setPaymentId(paymentIntentId);
-
-//       try {
-//         // 1️⃣ Fetch record that matches payment_id (if your webhook hasn’t filled it yet)
-//         const { data: existingRecord, error: fetchError } = await supabase
-//           .from("form_submissions")
-//           .select("*")
-//           .eq("payment_id", paymentIntentId)
-//           .maybeSingle();
-
-//         if (fetchError) console.error("Fetch error:", fetchError);
-
-//         let updatedData = existingRecord;
-
-//         // 2️⃣ If record exists, mark payment as successful
-//         if (existingRecord) {
-//           const { error: updateError } = await supabase
-//             .from("form_submissions")
-//             .update({
-//               payment_status: "paid",
-//               status: "completed",
-//             })
-//             .eq("id", existingRecord.id);
-
-//           if (updateError) console.error("Update error:", updateError);
-
-//           setPaymentData({
-//             ...existingRecord,
-//             payment_status: "paid",
-//             status: "completed",
-//           });
-//         } else {
-//           // 3️⃣ If no record found (fallback)
-//           console.warn("No matching form_submissions found for:", paymentIntentId);
-//         }
-//       } catch (err) {
-//         console.error("Error in payment success logic:", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchAndUpdatePayment();
-//   }, [searchParams]);
-
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen flex items-center justify-center text-gray-600 text-lg">
-//         Verifying your payment...
-//       </div>
-//     );
-//   }
-
-  
-//   // ⚠️ If no payment data found
-//   if (!paymentData) {
-//     return (
-//       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-center px-6">
-//         <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-//           Payment Verified
-//         </h1>
-//         <p className="text-gray-600 mb-4">
-//           We couldn’t find your payment details, but your transaction may still be processing.
-//         </p>
-//         <Button onClick={() => router.push("/contact")} className="bg-green-600 hover:bg-green-700 text-white">
-//           Contact Support
-//         </Button>
-//       </div>
-//     );
-//   }
-
-
-//     // ✅ Main Success Screen
-
-//   return (
-//     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-//       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
-//         <div className="flex justify-center mb-6">
-//           <div className="bg-orange-100 p-4 rounded-full">
-//             <CheckCircle className="h-16 w-16 text-orange-600" />
-//           </div>
-//         </div>
-
-//         <h1 className="text-3xl font-bold text-green-700 mb-2">
-//           Payment Successful 🎉
-//         </h1>
-//         <p className="text-gray-600 mb-6">
-//           Your payment has been processed successfully.  
-//           Thank you for choosing our service.
-//         </p>
-
-//         <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6 text-left">
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Payment ID:</span>
-//             <span className="text-gray-600 truncate max-w-[200px]">
-//               {paymentId || "N/A"}
-//             </span>
-//           </div>
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Amount:</span>
-//             <span className="text-orange-600 font-semibold">
-//               ${paymentData?.amount || "299.00"}
-//             </span>
-//           </div>
-//           <div className="flex justify-between text-gray-700 mb-2">
-//             <span className="font-medium">Service:</span>
-//             <span>{paymentData?.service_name || "Business Formation"}</span>
-//           </div>
-//           <div className="flex justify-between text-gray-700">
-//             <span className="font-medium">Status:</span>
-//             <span className="text-orange-600 font-semibold">
-//               {paymentData?.payment_status || "Paid"}
-//             </span>
-//           </div>
-//         </div>
-
-//         <Button
-//           className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
-//           onClick={() => router.push("/dashboard")}
-//         >
-//           Go to Dashboard
-//         </Button>
-
-//         <p className="text-sm text-gray-500 mt-6">
-//           Having trouble?{" "}
-//           <a href="/contact" className="text-orange-600 hover:underline">
-//             Contact Support
-//           </a>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default function PaymentSuccess() {
-//   return (
-//     <Suspense fallback={<div className="text-center mt-10 text-gray-500">Loading...</div>}>
-//       <PaymentSuccessContent />
-//     </Suspense>
-//   );
-// }
-
-// // ✅ Prevent static rendering on Vercel
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-
-
-/* -------- More enhanced Code -------- */
-
-
-
-
-// import { useEffect, useState, Suspense } from "react";
-// import { useSearchParams, useRouter } from "next/navigation";
-// import { CheckCircle, Loader2, XCircle } from "lucide-react";
-// import { supabase } from "@/lib/supabaseClient";
-// import { Button } from "@/components/ui/button";
-
-// function PaymentSuccessContent() {
-//   const searchParams = useSearchParams();
-//   const router = useRouter();
-//   const paymentId = searchParams.get("payment_intent");
-//   const [status, setStatus] = useState("loading");
-//   const [paymentData, setPaymentData] = useState(null);
-
-//   useEffect(() => {
-//     const verifyPayment = async () => {
-//       if (!paymentId) return;
-
-//       // 🔍 Try to find the record using the payment_id stored from webhook
-//       const { data, error } = await supabase
-//         .from("form_submissions")
-//         .select("*")
-//         .eq("payment_id", paymentId)
-//         .single();
-
-//       if (error || !data) {
-//         console.error("Payment not found:", error);
-//         setStatus("notfound");
-//         return;
-//       }
-
-//       // ✅ Update payment_status if needed
-//       if (data.payment_status !== "paid") {
-//         await supabase
-//           .from("form_submissions")
-//           .update({ payment_status: "paid" })
-//           .eq("payment_id", paymentId);
-//       }
-
-//       setPaymentData(data);
-//       setStatus("success");
-//     };
-
-//     verifyPayment();
-//   }, [paymentId]);
-
-//   if (status === "loading") {
-//     return (
-//       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50">
-//         <Loader2 className="h-10 w-10 text-orange-600 animate-spin mb-4" />
-//         <p className="text-gray-600 text-lg">Verifying your payment...</p>
-//       </div>
-//     );
-//   }
-
-//   if (status === "notfound") {
-//     return (
-//       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 via-white to-rose-50">
-//         <XCircle className="h-16 w-16 text-red-500 mb-4" />
-//         <h1 className="text-2xl font-semibold text-red-600 mb-2">Payment Verification</h1>
-//         <p className="text-gray-600 max-w-md text-center">
-//           We couldn’t find your payment details, but your transaction may still be processing.
-//           Please refresh after a minute or contact support if the issue persists.
-//         </p>
-//         <Button className="mt-6" onClick={() => router.push("/")}>
-//           Go Home
-//         </Button>
-//       </div>
-//     );
-//   }
-
-//   if (status === "success" && paymentData) {
-//     return (
-//       <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6">
-//         <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg text-center border border-green-100">
-//           <div className="flex justify-center mb-6">
-//             <div className="bg-orange-100 p-4 rounded-full">
-//               <CheckCircle className="h-16 w-16 text-orange-600" />
-//             </div>
-//           </div>
-
-//           <h1 className="text-3xl font-bold text-green-700 mb-2">
-//             Payment Successful 🎉
-//           </h1>
-//           <p className="text-gray-600 mb-6">
-//             Your payment has been processed successfully. Thank you for choosing our service.
-//           </p>
-
-//           <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 mb-6">
-//             <div className="flex justify-between text-gray-700 mb-2">
-//               <span className="font-medium">Payment ID:</span>
-//               <span className="text-gray-600 truncate max-w-[200px]">
-//                 {paymentId}
-//               </span>
-//             </div>
-//             <div className="flex justify-between text-gray-700 mb-2">
-//               <span className="font-medium">Amount:</span>
-//               <span className="text-orange-600 font-semibold">
-//                 ${paymentData.amount || "0.00"}
-//               </span>
-//             </div>
-//             <div className="flex justify-between text-gray-700">
-//               <span className="font-medium">Status:</span>
-//               <span className="text-orange-600 font-semibold">
-//                 {paymentData.payment_status || "Paid"}
-//               </span>
-//             </div>
-//           </div>
-
-//           <Button
-//             className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 py-3 text-lg transition-all shadow-md hover:shadow-lg"
-//             onClick={() => router.push("/dashboard")}
-//           >
-//             Go to Dashboard
-//           </Button>
-
-//           <p className="text-sm text-gray-500 mt-6">
-//             Having trouble?{" "}
-//             <a href="/contact" className="text-orange-600 hover:underline">
-//               Contact Support
-//             </a>
-//           </p>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return null;
-// }
-
-// export default function PaymentSuccessPage() {
-//   return (
-//     <Suspense fallback={<p>Loading...</p>}>
-//       <PaymentSuccessContent />
-//     </Suspense>
-//   );
-// }
-
-
-/* ------- Latest code with updated ffrontend and backend logic -------- */
-
-
-
-// import { useEffect, useState, Suspense } from "react";
-// import { useSearchParams } from "next/navigation";
-// import { supabase } from "@/lib/supabaseClient";
-
-// function PaymentSuccessContent() {
-//   const searchParams = useSearchParams();
-//   const sessionId = searchParams.get("session_id");
-
-//   const [status, setStatus] = useState("Verifying your payment...");
-//   const [details, setDetails] = useState(null);
-
-//   useEffect(() => {
-//     if (!sessionId) {
-//       setStatus("No session found. Please try again.");
-//       return;
-//     }
-
-//     const verifyPayment = async () => {
-//       try {
-//         // 1️⃣ Fetch payment session from backend (which calls Stripe)
-//         const res = await fetch(`/api/verify-payment?session_id=${sessionId}`);
-//         const data = await res.json();
-
-//         if (data?.payment_status === "paid" && data?.form_id) {
-//           // 2️⃣ Update Supabase with confirmed payment
-//           const { error } = await supabase
-//             .from("form_submissions")
-//             .update({
-//               payment_status: "paid",
-//               amount: data.amount_total / 100,
-//             })
-//             .eq("form_id", data.form_id);
-
-//           if (error) throw error;
-
-//           // 3️⃣ Show success message
-//           setDetails(data);
-//           setStatus("Payment successful! 🎉 Thank you for your purchase.");
-//         } else {
-//           setStatus(
-//             "Payment Verified, but we couldn’t find your form details. Your transaction may still be processing."
-//           );
-//         }
-//       } catch (err) {
-//         console.error(err);
-//         setStatus("An error occurred while verifying payment.");
-//       }
-//     };
-
-//     verifyPayment();
-//   }, [sessionId]);
-
-//   return (
-//     <div className="flex flex-col items-center justify-center h-screen bg-gray-50 text-center p-6">
-//       <div className="bg-white p-8 rounded-xl shadow-md max-w-lg w-full">
-//         <h1 className="text-2xl font-semibold mb-3 text-gray-800">
-//           {status}
-//         </h1>
-
-//         {details && (
-//           <div className="mt-4 text-gray-700">
-//             <p><strong>Payment ID:</strong> {details.id}</p>
-//             <p><strong>Amount Paid:</strong> ${(details.amount_total / 100).toFixed(2)}</p>
-//             <p><strong>Status:</strong> {details.payment_status}</p>
-//             <p><strong>Form ID:</strong> {details.form_id}</p>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default function Page() {
-//   return (
-//     <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
-//       <PaymentSuccessContent />
-//     </Suspense>
-//   );
-// }
-
-
-
-
-
-

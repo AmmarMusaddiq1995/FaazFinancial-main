@@ -13,20 +13,21 @@ import {
   PackageDetailsTooltip,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
-const PACKAGE_FEATURES = {
-    normal: [
-      "Delivery in 14 business days",
-      "State fee is not included",
-      "Our service fee is 125$"
-    ],
-    express: [
-      "Delivery in 7 business days",
-      "State fee is not included",
-      "Our service fee is 125$"
-    ],
-  };
+// const PACKAGE_FEATURES = {
+//     normal: [
+//       "Delivery in 14 business days",
+//       "State fee is not included",
+//       "Our service fee is 125$"
+//     ],
+//     express: [
+//       "Delivery in 7 business days",
+//       "State fee is not included",
+//       "Our service fee is 125$"
+//     ],
+//   };
 
 export function FilingArticlesOfAmendmentsForm() {
   const [loading, setLoading] = useState(false);
@@ -39,7 +40,7 @@ export function FilingArticlesOfAmendmentsForm() {
    ownerAddress: "",
    contactNumber: "",
    businessAddress: "",
-   packageType: "",
+  //  packageType: "",
   });
 
   const router = useRouter();
@@ -71,16 +72,16 @@ export function FilingArticlesOfAmendmentsForm() {
   }, [user]);
 
 
-  const [price, setPrice] = useState(0);
-  useEffect(()=>{
-    if(formData.packageType === "normal"){
-      const selectedPrice = 125;
-      setPrice(selectedPrice);
-    } else if(formData.packageType === "express"){
-      const selectedPrice = 125;
-      setPrice(selectedPrice);
-    }
-  }, [formData.packageType]);
+  // const [price, setPrice] = useState(0);
+  // useEffect(()=>{
+  //   if(formData.packageType === "normal"){
+  //     const selectedPrice = 125;
+  //     setPrice(selectedPrice);
+  //   } else if(formData.packageType === "express"){
+  //     const selectedPrice = 125;
+  //     setPrice(selectedPrice);
+  //   }
+  // }, [formData.packageType]);
 
 
 
@@ -92,7 +93,7 @@ export function FilingArticlesOfAmendmentsForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);
@@ -104,7 +105,7 @@ export function FilingArticlesOfAmendmentsForm() {
 
       const submissionData = {
         ...formData,
-        price,
+        price : 125,
         payment_status: "pending",
         payment_id: "",
       };
@@ -121,7 +122,7 @@ export function FilingArticlesOfAmendmentsForm() {
           form_data: submissionData,
           status: "pending",
           payment_status: "pending",
-          amount: price,
+          amount: 125,
           payment_id: "",
         },
       ]);
@@ -281,69 +282,78 @@ export function FilingArticlesOfAmendmentsForm() {
               required
             />
           </div>
-        </>
-      ),
-    },
-    {
-      title: "Package",
-      subtitle: "Review & submit",
-      icon: Package,
-      heading: "Select Package Type",
-      intro: "Choose your filing speed, review the price, and submit.",
-      validate: () => {
-        if (!formData.packageType) return "Please choose a package to continue.";
-        return "";
-      },
-      content: (
-        <>
-          <PackageCards
-            value={formData.packageType}
-            onChange={(value) =>
-              setFormData({ ...formData, packageType: value })
-            }
-            options={[
-              {
-                value: "normal",
-                label: "Normal",
-                delivery: "14 business days",
-                icon: Clock,
-                price: 125,
-                tooltip: (
-                  <PackageDetailsTooltip
-                    label="Normal"
-                    features={PACKAGE_FEATURES.normal}
-                  />
-                ),
-              },
-              {
-                value: "express",
-                label: "Express",
-                delivery: "7 business days",
-                icon: Zap,
-                badge: "Fastest",
-                price: 125,
-                tooltip: (
-                  <PackageDetailsTooltip
-                    label="Express"
-                    features={PACKAGE_FEATURES.express}
-                  />
-                ),
-              },
-            ]}
-          />
-
-          <PriceSummary
-            price={price}
+           <PriceSummary
+            price={125}
             rows={[
               {
                 label: `Filing Articles of Amendments (${formData.packageType || ""})`,
-                amount: price,
+                amount: 125,
               },
             ]}
           />
         </>
       ),
     },
+    // {
+    //   title: "Package",
+    //   subtitle: "Review & submit",
+    //   icon: Package,
+    //   heading: "Select Package Type",
+    //   intro: "Choose your filing speed, review the price, and submit.",
+    //   validate: () => {
+    //     if (!formData.packageType) return "Please choose a package to continue.";
+    //     return "";
+    //   },
+    //   content: (
+    //     <>
+    //       <PackageCards
+    //         value={formData.packageType}
+    //         onChange={(value) =>
+    //           setFormData({ ...formData, packageType: value })
+    //         }
+    //         options={[
+    //           {
+    //             value: "normal",
+    //             label: "Normal",
+    //             delivery: "14 business days",
+    //             icon: Clock,
+    //             price: 125,
+    //             tooltip: (
+    //               <PackageDetailsTooltip
+    //                 label="Normal"
+    //                 features={PACKAGE_FEATURES.normal}
+    //               />
+    //             ),
+    //           },
+    //           {
+    //             value: "express",
+    //             label: "Express",
+    //             delivery: "7 business days",
+    //             icon: Zap,
+    //             badge: "Fastest",
+    //             price: 125,
+    //             tooltip: (
+    //               <PackageDetailsTooltip
+    //                 label="Express"
+    //                 features={PACKAGE_FEATURES.express}
+    //               />
+    //             ),
+    //           },
+    //         ]}
+    //       />
+
+          // <PriceSummary
+          //   price={125}
+          //   rows={[
+          //     {
+          //       label: `Filing Articles of Amendments (${formData.packageType || ""})`,
+          //       amount: 125,
+          //     },
+          //   ]}
+          // />
+    //     </>
+    //   ),
+    // },
   ];
 
   return (
@@ -354,7 +364,7 @@ export function FilingArticlesOfAmendmentsForm() {
       onSubmit={handleSubmit}
       loading={loading}
       submitLabel="Start Filing Articles of Amendments"
-      price={price}
+      price={125}
     />
   );
 }

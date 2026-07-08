@@ -11,6 +11,7 @@ import {
   FormWizard,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 const VAT_RETURN_PRICE = 121;
@@ -62,7 +63,7 @@ export function VATReturnFilingForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);

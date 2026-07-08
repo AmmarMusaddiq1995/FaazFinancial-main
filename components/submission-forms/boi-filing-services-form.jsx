@@ -15,6 +15,7 @@ import {
   PackageCards,
   PriceSummary,
   inputStyles,
+  withTimeout,
 } from "@/components/submission-forms/form-wizard";
 
 export function BoiFilingServicesForm() {
@@ -69,35 +70,35 @@ export function BoiFilingServicesForm() {
     }
   }, [formData.packageType]);
 
+  const [uploadStatus, setUploadStatus] = useState({});
+
   const handleFileUpload = async (e, type) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
+    setUploadStatus((prev) => ({ ...prev, [type]: "uploading" }));
 
-    let fileUrl = null;
-    const fileName = `${userPersonalId}/${type}/${Date.now()}-${
-      e.target.files[0].name
-    }`;
-    const file = e.target.files[0];
-    const { error: uploadError } = await supabase.storage
-      .from("uploads")
-      .upload(fileName, file);
+    try {
+      const fileName = `${userPersonalId}/${type}/${Date.now()}-${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from("uploads")
+        .upload(fileName, file);
 
-    if (uploadError) {
-      console.error("Error uploading file:", uploadError);
-    } else {
-      console.log("File uploaded successfully");
+      if (uploadError) throw uploadError;
+
+      const { data: publicUrlData } = supabase.storage
+        .from("uploads")
+        .getPublicUrl(fileName);
+
+      setFormData((prev) => ({ ...prev, [type]: publicUrlData.publicUrl }));
+      setUploadStatus((prev) => ({ ...prev, [type]: "success" }));
+    } catch (err) {
+      console.error("Error uploading file:", err);
+      // Clear the input so `required` still blocks submit and the same file can be re-picked
+      e.target.value = "";
+      setFormData((prev) => ({ ...prev, [type]: null }));
+      setUploadStatus((prev) => ({ ...prev, [type]: "error" }));
     }
-
-    const { data: publicUrlData } = supabase.storage
-      .from("uploads")
-      .getPublicUrl(fileName);
-
-    fileUrl = publicUrlData.publicUrl;
-    console.log("fileUrl :", fileUrl);
-
-    setFormData({
-      ...formData,
-      [type]: fileUrl,
-    });
   };
 
   const handleSubmit = async (e) => {
@@ -108,7 +109,7 @@ export function BoiFilingServicesForm() {
       const {
         data: { user },
         error: userError,
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser());
 
       console.log("userPersonalId :", userPersonalId);
       console.log("user :", user);
@@ -353,6 +354,7 @@ export function BoiFilingServicesForm() {
               uploaded={!!formData.passport}
               placeholder="Scan of your passport copy"
               required
+              status={uploadStatus.passport}
               onChange={(e) => handleFileUpload(e, "passport")}
             />
           </div>
