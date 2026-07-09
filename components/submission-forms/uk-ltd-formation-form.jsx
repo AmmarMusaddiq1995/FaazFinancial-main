@@ -237,6 +237,15 @@ export function UKLTDFormationForm() {
                 <SelectItem value="Non-Profit">
                   Non-Profit
                 </SelectItem>
+                <SelectItem value="Marketing Agency">
+                  Marketing Agency
+                </SelectItem>
+                <SelectItem value="Shopify Store">
+                  Shopify Store
+                </SelectItem>
+                <SelectItem value="Other">
+                  Other
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -701,6 +710,15 @@ export function UKLTDFormationForm() {
                 </SelectItem>
                 <SelectItem value="RetailBusiness">
                   Retail Business
+                </SelectItem>
+                <SelectItem value="MarketingAgency">
+                  Marketing Agency
+                </SelectItem>
+                <SelectItem value="ShopifyStore">
+                  Shopify Store
+                </SelectItem>
+                <SelectItem value="Other">
+                  Other
                 </SelectItem>
                 <SelectItem value="Non-Profit">
                   Non-Profit

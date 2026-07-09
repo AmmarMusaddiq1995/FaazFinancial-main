@@ -341,6 +341,15 @@ export function DBATrademarkRegistrationServicesForm() {
                   <SelectItem value="Non-Profit">
                     Non-Profit
                   </SelectItem>
+                  <SelectItem value="Marketing-Agency">
+                    Marketing Agency
+                  </SelectItem>
+                  <SelectItem value="Shopify-Store">
+                    Shopify Store
+                  </SelectItem>
+                  <SelectItem value="Other">
+                    Other
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>

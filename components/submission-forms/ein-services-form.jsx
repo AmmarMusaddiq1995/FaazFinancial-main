@@ -196,6 +196,9 @@ export function EinServicesForm() {
                   <SelectItem value="S-Corp">S-Corp</SelectItem>
                   <SelectItem value="Partnership">Partnership</SelectItem>
                   <SelectItem value="Non-Profit">Non-Profit</SelectItem>
+                  <SelectItem value="Marketing-Agency">Marketing Agency</SelectItem>
+                  <SelectItem value="Shopify-Store">Shopify Store</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
             </div>

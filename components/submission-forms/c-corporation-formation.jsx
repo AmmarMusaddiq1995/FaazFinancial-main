@@ -816,6 +816,15 @@ export function CorporationFormationForm({ pricingData }) {
                 <SelectItem value="RetailBusiness">
                   Retail Business
                 </SelectItem>
+                <SelectItem value="MarketingAgency">
+                  Marketing Agency
+                </SelectItem>
+                <SelectItem value="ShopifyStore">
+                  Shopify Store
+                </SelectItem>
+                <SelectItem value="Other">
+                  Other
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

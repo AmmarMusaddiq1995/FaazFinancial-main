@@ -593,6 +593,9 @@ export function PayrollWithholdingServicesForm() {
                   <SelectItem value="TrusteeShip">TrusteeShip</SelectItem>
                   <SelectItem value="Joint-Venture">Joint Venture</SelectItem>
                   <SelectItem value="Co-Ownership">Co-Ownership</SelectItem>
+                  <SelectItem value="Marketing-Agency">Marketing Agency</SelectItem>
+                  <SelectItem value="Shopify-Store">Shopify Store</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
             </div>

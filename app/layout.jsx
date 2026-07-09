@@ -13,7 +13,7 @@ import WhatsappWrapper from "@/components/whatsappWrapper";
 
 export const metadata = {
   title: "Faaz Financial Group",
-  description: "Created with Next.js",
+  description: "US and UK company formation for international founders. LLC and Ltd registration, registered agent, EIN, bookkeeping, tax filing and ongoing compliance.",
   icons: {
     icon: "/favicon.png",
   },
