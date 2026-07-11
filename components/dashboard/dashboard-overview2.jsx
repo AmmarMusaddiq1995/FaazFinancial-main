@@ -411,7 +411,7 @@ export function DashboardOverview2({ user, profile }) {
                               </Badge>
                               {form.amount && (
                                 <Badge className="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1 font-medium tabular-nums">
-                                  Amount: ${form.amount}
+                                  Amount: ${form.amount + Math.ceil(form.amount * 0.045)}
                                 </Badge>
                               )}
                             </div>
@@ -575,49 +575,7 @@ export function DashboardOverview2({ user, profile }) {
         )}
       </div>
 
-      {/* <div className="w-full p-6 space-y-6">
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Common tasks to help you manage your business
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Link href="/start-business">
-                <Button
-                  variant="outline"
-                  className="w-full h-auto p-4 flex flex-col items-center space-y-2 bg-transparent"
-                >
-                  <Plus className="h-6 w-6" />
-                  <span>Start New Business</span>
-                </Button>
-              </Link>
-              <Link href="/dashboard/documents">
-                <Button
-                  variant="outline"
-                  className="w-full h-auto p-4 flex flex-col items-center space-y-2 bg-transparent"
-                >
-                  <FileText className="h-6 w-6" />
-                  <span>View Documents</span>
-                </Button>
-              </Link>
-              <Link href="/dashboard/support">
-                <Button
-                  variant="outline"
-                  className="w-full h-auto p-4 flex flex-col items-center space-y-2 bg-transparent"
-                >
-                  <AlertCircle className="h-6 w-6" />
-                  <span>Get Support</span>
-                </Button>
-              </Link>
-
-            </div>
-          </CardContent>
-        </Card>
-      </div> */}
     </div>
   );
 }

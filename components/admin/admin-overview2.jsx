@@ -534,7 +534,7 @@ export function AdminOverview2() {
                       )}
                     </td>
                     <td className="px-4 py-3 text-right font-semibold text-gray-900 tabular-nums whitespace-nowrap">
-                      ${submission.amount}
+                      ${submission.amount + Math.ceil(submission.amount * 0.045)}
                     </td>
                     <td className="px-4 py-3 text-center">
                       <Button
@@ -665,7 +665,7 @@ export function AdminOverview2() {
                 <StatusBadge status={selectedSubmission.payment_status} />
                 {selectedSubmission.amount && (
                   <Badge className="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1 font-medium tabular-nums">
-                    Amount: ${selectedSubmission.amount}
+                    Amount: ${selectedSubmission.amount + Math.ceil(selectedSubmission.amount * 0.045)}
                   </Badge>
                 )}
               </div>
