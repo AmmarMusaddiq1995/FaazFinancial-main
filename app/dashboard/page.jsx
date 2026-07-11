@@ -48,17 +48,6 @@ export default function DashboardPage() {
     fetchUserProfile();
   }, [loading, user, isAdmin, router]);
 
-  // const mockUser = {
-  //   id: "1",
-  //   email: "user@example.com",
-  //   name: "John Doe",
-  // };
-
-  // const mockProfile = {
-  //   first_name: "John",
-  //   last_name: "Doe",
-  //   company_name: "Example Corp",
-  // };
 
   const mockFormations = [
     {
