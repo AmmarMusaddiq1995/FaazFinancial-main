@@ -214,7 +214,7 @@ export default function GlobalReachSection() {
             Countries We&apos;ve <span className="text-orange-500">Served</span>
           </h2>
           <p className="text-lg text-gray-400">
-            From the US and UK to founders across {SERVED_COUNTRIES.length}+ countries — explore
+            From the US and UK to founders across 80+ countries — explore
             where FAAZ Financial has helped businesses form, file, and stay compliant.
           </p>
         </div>
