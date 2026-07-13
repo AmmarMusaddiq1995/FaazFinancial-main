@@ -10,7 +10,7 @@ export default function ContactPage() {
       icon: Phone,
       title: "Phone Support",
       details: "+1-307-400-1963",
-      description: "Monday - Saturday, 10am - 4pm EST",
+      description: "Monday - Friday, 9am - 5pm EST",
     },
     {
       icon: Mail,

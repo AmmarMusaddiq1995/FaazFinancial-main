@@ -96,8 +96,8 @@ const CONTACT_DETAILS = [
   {
     icon: Clock,
     title: "Business Hours",
-    detail: "Monday - Saturday",
-    description: "10:00 AM - 04:00 PM EST",
+    detail: "Monday - Friday",
+    description: "09:00 AM - 05:00 PM EST",
   },
 ];
 
