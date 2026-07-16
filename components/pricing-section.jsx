@@ -85,7 +85,7 @@ export function PricingSection() {
         "California": { Starter: { normal: 285, express: 355 }, Pro: { normal: 315, express: 385 }, Premium: { normal: 365, express: 435 } },
         "Colorado": { Starter: { normal: 250, express: 320 }, Pro: { normal: 280, express: 350 }, Premium: { normal: 330, express: 400 } },
         "Connecticut": { Starter: { normal: 335, express: 405 }, Pro: { normal: 365, express: 435 }, Premium: { normal: 415, express: 485 } },
-        "Delaware": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
+        "Delaware": { Starter: { normal: 430, express: 500 }, Pro: { normal: 480, express: 550 }, Premium: { normal: 530, express: 600 } },
         "Florida": { Starter: { normal: 300, express: 370 }, Pro: { normal: 330, express: 400 }, Premium: { normal: 380, express: 450 } },
         "Georgia": { Starter: { normal: 300, express: 370 }, Pro: { normal: 330, express: 400 }, Premium: { normal: 380, express: 450 } },
         "Hawaii": { Starter: { normal: 270, express: 340 }, Pro: { normal: 300, express: 370 }, Premium: { normal: 350, express: 420 } },
@@ -127,7 +127,7 @@ export function PricingSection() {
         "Washington": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
         "West_Virginia": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } },
         "Wisconsin": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } },
-        "Wyoming": { Starter: { normal: 320, express: 400 }, Pro: { normal: 350, express: 430 }, Premium: { normal: 400, express: 480 } }
+        "Wyoming": { Starter: { normal: 370, express: 430 }, Pro: { normal: 420, express: 475 }, Premium: { normal: 470, express: 520 } }
       },
       "C Corporation Formation": {
         "Alabama": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },
@@ -137,7 +137,7 @@ export function PricingSection() {
         "California": { Starter: { normal: 335, express: 405 }, Pro: { normal: 365, express: 435 }, Premium: { normal: 415, express: 485 } },
         "Colorado": { Starter: { normal: 300, express: 370 }, Pro: { normal: 330, express: 400 }, Premium: { normal: 380, express: 450 } },
         "Connecticut": { Starter: { normal: 385, express: 455 }, Pro: { normal: 415, express: 485 }, Premium: { normal: 465, express: 535 } },
-        "Delaware": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },
+        "Delaware": { Starter: { normal: 500, express: 570 }, Pro: { normal: 580, express: 650 }, Premium: { normal: 680, express: 750 } },
         "Florida": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } },
         "Georgia": { Starter: { normal: 350, express: 420 }, Pro: { normal: 380, express: 450 }, Premium: { normal: 430, express: 500 } },
         "Hawaii": { Starter: { normal: 320, express: 390 }, Pro: { normal: 350, express: 420 }, Premium: { normal: 400, express: 470 } },
@@ -179,7 +179,7 @@ export function PricingSection() {
         "Washington": { Starter: { normal: 470, express: 540 }, Pro: { normal: 500, express: 570 }, Premium: { normal: 550, express: 620 } },
         "West_Virginia": { Starter: { normal: 420, express: 490 }, Pro: { normal: 450, express: 520 }, Premium: { normal: 500, express: 570 } },
         "Wisconsin": { Starter: { normal: 400, express: 470 }, Pro: { normal: 430, express: 500 }, Premium: { normal: 480, express: 550 } },
-        "Wyoming": { Starter: { normal: 370, express: 440 }, Pro: { normal: 400, express: 470 }, Premium: { normal: 450, express: 520 } }
+        "Wyoming": { Starter: { normal: 390, express: 470 }, Pro: { normal: 420, express: 530 }, Premium: { normal: 470, express: 600 } }
       }
     };
 

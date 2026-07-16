@@ -58,7 +58,7 @@ const priceTableForCCorp = {
   New_Jersey: { normal: 480, express: 550},
   New_Mexico: { normal: 380, express: 450},
   Connecticut: { normal: 465, express: 535},
-  Delaware: { normal: 550, express: 620},
+  Delaware: { normal: 580, express: 680},
   Vermont: { normal: 415, express: 485},
   Idaho: { normal: 435, express: 505},
   Illinois: { normal: 500, express: 570},

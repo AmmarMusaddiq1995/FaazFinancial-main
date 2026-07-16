@@ -38,7 +38,7 @@ import {
 } from "lucide-react";
 
 const priceTableForLLC = {
-  Wyoming: { normal:475, express: 515},
+  Wyoming: { normal:450, express: 520},
   Alabama: { normal: 500, express: 570},
   Alaska: { normal: 550, express: 620},
   Arizona: { normal: 350, express: 420},
@@ -46,7 +46,7 @@ const priceTableForLLC = {
   California: { normal: 365, express: 435},
   Colorado: { normal: 330, express: 400},
   Connecticut: { normal: 415, express: 485},
-  Delaware: { normal: 550, express: 620},
+  Delaware: { normal: 500, express: 600},
   Florida: { normal: 380, express: 450},
   Georgia: { normal: 380, express: 450},
   Hawaii: { normal: 350, express: 420},
