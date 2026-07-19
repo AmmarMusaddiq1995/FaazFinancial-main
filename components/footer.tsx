@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SocialLinks } from "@/components/social-links";
 
 const linkClass =
   "text-sm text-gray-400 hover:text-white inline-block py-1 transition-all duration-200 hover:translate-x-0.5";
@@ -32,6 +33,7 @@ export function Footer() {
               Making business formation simple and affordable for entrepreneurs
               everywhere.
             </p>
+            <SocialLinks className="mt-6" />
           </div>
 
           {/* Services */}

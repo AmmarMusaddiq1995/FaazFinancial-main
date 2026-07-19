@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Globe, ShieldCheck, FileText } from "lucide-react";
+import { SocialLinks } from "@/components/social-links";
 import { useScrollReveal } from "@/components/ui/use-scroll-reveal";
 
 // Decorative floating chips — purely visual, hidden from AT and small screens.
@@ -102,6 +103,14 @@ export function FooterCTASection() {
                 </span>
               </Button>
             </Link>
+
+            {/* Social links */}
+            <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-center gap-4">
+              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Connect With Us
+              </span>
+              <SocialLinks />
+            </div>
           </div>
         </div>
       </div>
