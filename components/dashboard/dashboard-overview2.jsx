@@ -188,12 +188,6 @@ export function DashboardOverview2({ user, profile }) {
         amount: form.amount,
       });
 
-      const updatedStatus = await supabase
-        .from("form_submissions")
-        .update({ status: "in-progress" })
-        .eq("id", form.id);
-      console.log(updatedStatus);
-
       window.location.href = response.data.url;
     } catch (error) {
       console.error(error);

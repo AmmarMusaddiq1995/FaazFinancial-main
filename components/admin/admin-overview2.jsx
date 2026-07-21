@@ -43,6 +43,7 @@ import {
 } from "lucide-react";
 import LoadingSpinner from "../LoadingSpinner";
 import { FormDetails } from "@/components/form-details";
+import { getEffectiveStatus } from "@/lib/submission-status";
 import { toast } from "react-hot-toast";
 
 export function AdminOverview2() {
@@ -102,9 +103,15 @@ export function AdminOverview2() {
   };
 
   const calculateCounts = (data) => {
-    const pending = data.filter((s) => s.status === "pending").length;
-    const inProgress = data.filter((s) => s.status === "in-progress").length;
-    const completed = data.filter((s) => s.status === "completed").length;
+    const pending = data.filter(
+      (s) => getEffectiveStatus(s) === "pending"
+    ).length;
+    const inProgress = data.filter(
+      (s) => getEffectiveStatus(s) === "in-progress"
+    ).length;
+    const completed = data.filter(
+      (s) => getEffectiveStatus(s) === "completed"
+    ).length;
     setCounts({ pending, inProgress, completed });
   };
 
@@ -221,7 +228,7 @@ export function AdminOverview2() {
     let filtered = formSubmissionsData;
 
     if (statusFilter !== "all") {
-      filtered = filtered.filter((s) => s.status === statusFilter);
+      filtered = filtered.filter((s) => getEffectiveStatus(s) === statusFilter);
     }
 
     if (searchQuery) {
@@ -518,7 +525,7 @@ export function AdminOverview2() {
                       {submission.service_name}
                     </td>
                     <td className="px-4 py-3">
-                      <StatusBadge status={submission.status} />
+                      <StatusBadge status={getEffectiveStatus(submission)} />
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={submission.payment_status} />
@@ -661,7 +668,7 @@ export function AdminOverview2() {
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                <StatusBadge status={selectedSubmission.status} />
+                <StatusBadge status={getEffectiveStatus(selectedSubmission)} />
                 <StatusBadge status={selectedSubmission.payment_status} />
                 {selectedSubmission.amount && (
                   <Badge className="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1 font-medium tabular-nums">
