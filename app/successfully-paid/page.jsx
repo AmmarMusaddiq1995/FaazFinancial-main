@@ -60,7 +60,7 @@ function PaymentSuccessContent() {
             .update({
               payment_status: data.payment_status,
               payment_id: data.payment_intent_id || null,
-              ...(paid ? { status: "in-progress" } : {}),
+              ...(paid ? { status: "in-progress", payment_method: "stripe" } : {}),
             })
             .eq("id", data.form_id);
 

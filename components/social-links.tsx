@@ -1,9 +1,10 @@
-import { IconBrandFacebook, IconBrandInstagram } from "@tabler/icons-react";
+import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
 
 // Placeholder hrefs — swap in the real profile URLs when the client provides them.
 const socials = [
   { name: "Facebook", href: "https://www.facebook.com/faazfinancialgroup", Icon: IconBrandFacebook },
   { name: "Instagram", href: "https://www.instagram.com/faaz_financial_group_llc", Icon: IconBrandInstagram },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/faaz-financial-group-llc", Icon: IconBrandLinkedin },
 ];
 
 // Designed for dark (slate-950) surfaces: Footer and FooterCTASection.

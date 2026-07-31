@@ -36,12 +36,16 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FormDetails } from "@/components/form-details";
+import { PayPalButton } from "@/components/payments/paypal-button";
 import axios from "axios";
 
 export function DashboardOverview2({ user, profile }) {
   const [userForms, setUserForms] = useState([]);
   const [loadingForms, setLoadingForms] = useState(true);
   const [payingFormId, setPayingFormId] = useState(null);
+  // Tracks whether any details modal is open, so the card's PayPal iframe can be
+  // unmounted while it is (iframes ignore z-index and bleed over the overlay).
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -346,7 +350,7 @@ export function DashboardOverview2({ user, profile }) {
                     {/* Actions pinned to the bottom of the card */}
                     <div className="mt-auto flex flex-col gap-2 pt-2">
                       {/* View Details Modal */}
-                      <Dialog>
+                      <Dialog onOpenChange={setIsDetailsOpen}>
                         <DialogTrigger asChild>
                           <Button variant="outline" className="w-full">
                             View Details
@@ -482,61 +486,47 @@ export function DashboardOverview2({ user, profile }) {
                             </div>
                           )}
 
-                          {/* Pay directly from the modal when payment is pending */}
-                          {form.payment_status === "pending" && (
-                            <div className="mt-4 flex justify-end border-t border-gray-100 pt-4">
-                              <Button
-                                className="bg-orange-500 hover:bg-orange-600 text-white"
-                                onClick={() => handlePay(form)}
-                                disabled={isPaying}
-                              >
-                                {isPaying ? (
-                                  <>
-                                    <Loader2
-                                      className="mr-2 h-4 w-4 animate-spin"
-                                      aria-hidden="true"
-                                    />
-                                    Redirecting…
-                                  </>
-                                ) : (
-                                  <>
-                                    Pay Now
-                                    <ArrowRight
-                                      className="ml-2 h-4 w-4"
-                                      aria-hidden="true"
-                                    />
-                                  </>
-                                )}
-                              </Button>
-                            </div>
-                          )}
                         </DialogContent>
                       </Dialog>
 
                       {form.payment_status === "pending" && (
-                        <Button
-                          className="w-full bg-orange-500 hover:bg-orange-600 text-white"
-                          onClick={() => handlePay(form)}
-                          disabled={isPaying}
-                        >
-                          {isPaying ? (
+                        <div className="space-y-2">
+                          <Button
+                            className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                            onClick={() => handlePay(form)}
+                            disabled={isPaying}
+                          >
+                            {isPaying ? (
+                              <>
+                                <Loader2
+                                  className="mr-2 h-4 w-4 animate-spin"
+                                  aria-hidden="true"
+                                />
+                                Redirecting…
+                              </>
+                            ) : (
+                              <>
+                                Pay by Card
+                                <ArrowRight
+                                  className="ml-2 h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </Button>
+                          {/* Unmount the PayPal iframe while any details modal is open —
+                              a hidden iframe still paints over the overlay. */}
+                          {/* {!isDetailsOpen && (
                             <>
-                              <Loader2
-                                className="mr-2 h-4 w-4 animate-spin"
-                                aria-hidden="true"
-                              />
-                              Redirecting…
+                              <div className="flex items-center gap-2 text-xs text-gray-400">
+                                <span className="h-px flex-1 bg-gray-200" />
+                                or
+                                <span className="h-px flex-1 bg-gray-200" />
+                              </div>
+                              <PayPalButton formId={form.id} amount={form.amount} />
                             </>
-                          ) : (
-                            <>
-                              Pay Now
-                              <ArrowRight
-                                className="ml-2 h-4 w-4"
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </Button>
+                          )} */}
+                        </div>
                       )}
                     </div>
                   </CardContent>

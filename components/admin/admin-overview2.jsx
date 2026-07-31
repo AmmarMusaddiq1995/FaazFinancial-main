@@ -78,6 +78,7 @@ export function AdminOverview2() {
           form_data,
           status,
           payment_status,
+          payment_method,
           payment_id,
           amount,
           admin_uploaded_file,
@@ -465,6 +466,7 @@ export function AdminOverview2() {
                 <th className="px-4 py-3 border-b font-semibold">Service</th>
                 <th className="px-4 py-3 border-b font-semibold">Status</th>
                 <th className="px-4 py-3 border-b font-semibold">Payment</th>
+                <th className="px-4 py-3 border-b font-semibold">Method</th>
                 <th className="px-4 py-3 border-b font-semibold">Payment ID</th>
                 <th className="px-4 py-3 border-b font-semibold text-right">Amount</th>
                 <th className="px-4 py-3 border-b font-semibold text-center">Actions</th>
@@ -473,7 +475,7 @@ export function AdminOverview2() {
             <tbody>
               {paginatedData.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="px-4 py-14">
+                  <td colSpan={11} className="px-4 py-14">
                     <div className="flex flex-col items-center text-center">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-400 mb-3">
                         <Inbox className="h-6 w-6" aria-hidden="true" />
@@ -529,6 +531,9 @@ export function AdminOverview2() {
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={submission.payment_status} />
+                    </td>
+                    <td className="px-4 py-3 text-gray-600 capitalize">
+                      {submission.payment_method || "—"}
                     </td>
                     <td className="px-4 py-3">
                       {submission.payment_id ? (

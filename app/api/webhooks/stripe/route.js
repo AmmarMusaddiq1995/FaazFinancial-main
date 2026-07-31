@@ -146,6 +146,7 @@ export async function POST(req) {
             payment_id,
             amount: amount / 100,
             currency,
+            payment_method: "stripe",
           })
           .eq("id", form_id);
 
