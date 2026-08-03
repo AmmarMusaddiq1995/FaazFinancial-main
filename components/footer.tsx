@@ -106,6 +106,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/partners" className={linkClass}>
+                  Partner Program
+                </Link>
+              </li>
+              <li>
                 <Link href="/legal/privacy" className={linkClass}>
                   Privacy Policy
                 </Link>
