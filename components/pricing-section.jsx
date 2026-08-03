@@ -60,8 +60,8 @@ const US_STATES = [
   "Utah",
   "Vermont",
   "Virginia",
-  "Washington",
   "West_Virginia",
+  "Washington",
   "Wisconsin",
   "Wyoming",
 ];
